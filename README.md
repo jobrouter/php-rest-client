@@ -1,5 +1,7 @@
 # JobRouter Client
 
+[![Build Status](https://travis-ci.org/brotkrueml/jobrouter-client.svg?branch=master)](https://travis-ci.org/brotkrueml/jobrouter-client)
+
 ## Introduction
 
 [JobRouter](https://www.jobrouter.com/) is a scalable digitization platform which links

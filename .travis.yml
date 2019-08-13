@@ -1,0 +1,24 @@
+dist: bionic
+
+language: php
+php:
+    - "7.2"
+    - "7.3"
+    - "7.4snapshot"
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_install:
+  - composer self-update
+  - composer --version
+
+before_script:
+    - composer install
+
+script:
+  - find . -name \*.php  ! -path "./vendor/*" -exec php -d display_errors=stderr -l {} > /dev/null \;
+  - vendor/bin/phpunit -c tests/phpunit.xml.dist --log-junit logs/phpunit.xml --coverage-text --coverage-clover logs/clover.xml
