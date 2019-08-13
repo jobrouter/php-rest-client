@@ -3,3 +3,4 @@
 /.gitattributes export-ignore
 /.gitignore export-ignore
 /.php_cs export-ignore
+/sonar-project.properties export-ignore
