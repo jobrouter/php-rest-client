@@ -1,0 +1,41 @@
+{
+    "name": "brotkrueml/jobrouter-client",
+    "description": "Rest client for the JobRouter digitisation platform",
+    "type": "library",
+    "keywords": [
+        "jobrouter",
+        "rest client"
+    ],
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Chris Müller",
+            "role": "Developer",
+            "homepage": "https://github.com/brotkrueml"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "symfony/http-client": "^4.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3.4"
+    },
+    "suggest": {
+        "ext-curl": "Improves the performance of the HTTPClient component"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Brotkrueml\\JobrouterClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Brotkrueml\\JobrouterClient\\Tests\\": "tests/"
+        }
+    }
+}
