@@ -32,8 +32,8 @@ table. Assuming this PHP script is in the root directory of your project:
 
     <?php
     
-    use Brotkrueml\JobrouterClient\Client\RestClient;
-    use Brotkrueml\JobrouterClient\Configuration\ClientConfiguration;
+    use Brotkrueml\JobRouterClient\Client\RestClient;
+    use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
     use Symfony\Component\HttpClient\Exception;
 
     require_once 'vendor/autoload.php';
