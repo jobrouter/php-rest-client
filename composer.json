@@ -30,12 +30,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Brotkrueml\\JobrouterClient\\": "src/"
+            "Brotkrueml\\JobRouterClient\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Brotkrueml\\JobrouterClient\\Tests\\": "tests/"
+            "Brotkrueml\\JobRouterClient\\Tests\\": "tests/"
         }
     }
 }

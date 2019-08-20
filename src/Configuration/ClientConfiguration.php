@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Brotkrueml\JobrouterClient\Configuration;
+namespace Brotkrueml\JobRouterClient\Configuration;
 
 final class ClientConfiguration
 {

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types = 1);
 
-namespace Brotkrueml\JobrouterClient\Client;
+namespace Brotkrueml\JobRouterClient\Client;
 
-use Brotkrueml\JobrouterClient\Configuration\ClientConfiguration;
-use Brotkrueml\JobrouterClient\Exception\RestException;
+use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
+use Brotkrueml\JobRouterClient\Exception\RestException;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;

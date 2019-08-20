@@ -1,8 +1,8 @@
 <?php
 
-namespace Brotkrueml\JobrouterClient\Tests\Unit\Configuration;
+namespace Brotkrueml\JobRouterClient\Tests\Unit\Configuration;
 
-use Brotkrueml\JobrouterClient\Configuration\ClientConfiguration;
+use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use PHPUnit\Framework\TestCase;
 
 class ClientConfigurationTest extends TestCase

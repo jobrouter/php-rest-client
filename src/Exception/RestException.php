@@ -1,6 +1,6 @@
 <?php
 
-namespace Brotkrueml\JobrouterClient\Exception;
+namespace Brotkrueml\JobRouterClient\Exception;
 
 class RestException extends \RuntimeException
 {

@@ -2,9 +2,9 @@
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
 
-use Brotkrueml\JobrouterClient\Client\RestClient;
-use Brotkrueml\JobrouterClient\Configuration\ClientConfiguration;
-use Brotkrueml\JobrouterClient\Exception\RestException;
+use Brotkrueml\JobRouterClient\Client\RestClient;
+use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
+use Brotkrueml\JobRouterClient\Exception\RestException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Component\HttpClient\MockHttpClient;
