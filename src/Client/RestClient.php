@@ -7,7 +7,7 @@ use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use Brotkrueml\JobRouterClient\Exception\RestException;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\MockHttpClient;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -58,7 +58,7 @@ class RestClient
         try {
             $content = $response->toArray();
         } catch (\Throwable $e) {
-            throw new RestException($e->getMessage(), 1565710927, $e);
+            throw new RestException($e);
         }
 
         $this->jwToken = $content['tokens'][0];
@@ -84,8 +84,8 @@ class RestClient
 
         try {
             return $this->client->request($method, $route, $options);
-        } catch (TransportExceptionInterface $e) {
-            throw new RestException($e->getMessage(), 1565710963, $e);
+        } catch (ExceptionInterface $e) {
+            throw new RestException($e);
         }
     }
 }

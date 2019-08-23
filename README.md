@@ -31,33 +31,32 @@ Let's start with an example, where you want to retrieve some information out of 
 table. Assuming this PHP script is in the root directory of your project:
 
     <?php
-    
+    use Brotkrueml\JobRouterClient\Client\RestClient;
     use Brotkrueml\JobRouterClient\Client\RestClient;
     use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-    use Symfony\Component\HttpClient\Exception;
 
     require_once 'vendor/autoload.php';
 
     $configuration = new ClientConfiguration(
         'https://example.org/jobrouter/',
-        'technical_user',
+        'the_user',
         'the_password'
     );
     $configuration->setLifetime(30);
 
-    $client = new RestClient($configuration);
-    
-    $response = $client->request(
-        'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E5/datasets',
-        'GET'
-    );
-
     try {
+        $client = new RestClient($configuration);
+    
+        $response = $client->request(
+            'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E4/datasets',
+            'GET'
+        );
+    
         echo $response->getStatusCode() . "\n";
         var_dump($response->getContent());
-    } catch (ClientException $e) {
-        echo $e->getMessage() . "\n";
-        echo $e->getResponse()->getContent(false) . "\n\n";
+    } catch (RestException $e) {
+        echo $e->getCode() . "\n";
+        echo $e->getMessage();
     }
 
 First, you have to instantiate a configuration class, which holds the base URI of
@@ -77,4 +76,4 @@ happens, you can call at any time the authenticate method of the rest client:
 
     $restClient->authenticate();
 
-You can do this also in advance.
+You can do this also in advance to omit a timeout.

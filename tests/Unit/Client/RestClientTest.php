@@ -84,7 +84,6 @@ class RestClientTest extends TestCase
     public function authenticateThrowsExceptionOnErroneousResponse(): void
     {
         $this->expectException(RestException::class);
-        $this->expectExceptionCode(1565710927);
 
         $responses = [
             new MockResponse('', ['error' => 'Some error occurred!']),
@@ -132,7 +131,6 @@ class RestClientTest extends TestCase
     public function requestThrowsRestExceptionOnError(): void
     {
         $this->expectException(RestException::class);
-        $this->expectExceptionCode(1565710963);
 
         $authenticateBody = json_encode(
             [
