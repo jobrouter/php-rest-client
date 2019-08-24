@@ -3,13 +3,17 @@ declare(strict_types = 1);
 
 namespace Brotkrueml\JobRouterClient\Exception;
 
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
-class RestException extends \RuntimeException
+final class RestException extends \RuntimeException
 {
     public function __construct(\Exception $e)
     {
-        if ($e instanceof HttpExceptionInterface) {
+        if ($e instanceof ClientExceptionInterface) {
+            // Use message, not the HTML document
+            $message = $e->getMessage();
+        } elseif ($e instanceof HttpExceptionInterface) {
             /** @noinspection PhpUnhandledExceptionInspection */
             $message = $e->getResponse()->getContent(false);
 
