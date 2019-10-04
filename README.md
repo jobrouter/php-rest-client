@@ -54,7 +54,7 @@ table. Assuming this PHP script is in the root directory of your project:
     
         echo $response->getStatusCode() . "\n";
         var_dump($response->getContent());
-    } catch (RestException $e) {
+    } catch (RestClientException $e) {
         echo $e->getCode() . "\n";
         echo $e->getMessage();
     }
