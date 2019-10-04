@@ -1,158 +1,156 @@
 <?php
+declare(strict_types = 1);
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
 
 use Brotkrueml\JobRouterClient\Client\RestClient;
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-use Brotkrueml\JobRouterClient\Exception\RestException;
+use Brotkrueml\JobRouterClient\Exception\RestClientException;
+use donatj\MockWebServer\MockWebServer;
+use donatj\MockWebServer\Response;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\HttpClient\Exception\TransportException;
-use Symfony\Component\HttpClient\MockHttpClient;
-use Symfony\Component\HttpClient\Response\MockResponse;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class RestClientTest extends TestCase
 {
-    /** @var ClientConfiguration */
-    private $configuration;
+    private const TEST_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqYXQiOjE1NzAyMjAwNzIsImp0aSI6IjhWMGtaSzJ5RzRxdGlhbjdGbGZTNUhPTGZaeGtZXC9obG1SVEV2VXIxVmwwPSIsImlzcyI6IkpvYlJvdXRlciIsIm5iZiI6MTU3MDIyMDA3MiwiZXhwIjoxNTcwMjIwMTAyLCJkYXRhIjp7InVzZXJuYW1lIjoicmVzdCJ9fQ.cbAyj36f9MhAwOMzlTEheRkHhuuIEOeb1Uy8i0KfUhU';
 
-    public function setUp(): void
+    /** @var ClientConfiguration */
+    private static $configuration;
+
+    /** @var MockWebServer */
+    private static $server;
+
+    public static function setUpBeforeClass(): void
     {
-        $this->configuration = new ClientConfiguration(
-            'http://example.org/jobrouter/',
+        self::$server = new MockWebServer;
+        self::$server->start();
+
+        self::$configuration = new ClientConfiguration(
+            self::$server->getServerRoot(),
             'fake_username',
             'fake_password'
         );
     }
 
-    /**
-     * @test
-     */
-    public function httpClientIsCreatedUponInitialization(): void
+    public static function tearDownAfterClass(): void
     {
-        $restClientMock = new class($this->configuration) extends RestClient {
-            public function authenticate(): void
-            {
-            }
-
-            public function getClient()
-            {
-                return $this->client;
-            }
-        };
-
-        $actual = $restClientMock->getClient();
-
-        $this->assertInstanceOf(HttpClientInterface::class, $actual);
+        self::$server->stop();
     }
 
     /**
      * @test
      */
-    public function authenticateIsCalledUponInitialisationOfRestClientAndStoresTheTokenInternally(): void
+    public function testTokensRouteIsCorrectlyCalled(): void
     {
-        $usedToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ey...';
+        $this->setResponseOfTokensPath();
 
-        $responseBody = json_encode(
-            [
-                'tokens' => [
-                    $usedToken,
-                ],
-            ]
+        $restClient = new RestClient(self::$configuration);
+
+        $this->assertInstanceOf(RestClient::class, $restClient);
+    }
+
+    private function setResponseOfTokensPath(): void
+    {
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/application/tokens',
+            new Response(
+                \sprintf('{"tokens":["%s"]}', self::TEST_TOKEN),
+                ['content-type' => 'application/json'],
+                201
+            )
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function wrongTokensRouteThrowsException(): void
+    {
+        $this->expectException(RestClientException::class);
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/application/tokens',
+            new Response('not found', [], 404)
         );
 
-        $responses = [
-            new MockResponse($responseBody),
-        ];
-
-        $httpClient = new MockHttpClient($responses, 'http://example.net/jobrouter/rest/api/v2/');
-
-        $reflector = new \ReflectionClass(RestClient::class);
-
-        /** @noinspection PhpUnhandledExceptionInspection */
-        $jwToken = $reflector->getProperty('jwToken');
-        $jwToken->setAccessible(true);
-
-        $subject = new RestClient($this->configuration, $httpClient);
-
-        $this->assertSame($usedToken, $jwToken->getValue($subject));
+        new RestClient(self::$configuration);
     }
 
     /**
      * @test
      */
-    public function authenticateThrowsExceptionOnErroneousResponse(): void
+    public function requestIsCalledCorrectly(): void
     {
-        $this->expectException(RestException::class);
+        $this->setResponseOfTokensPath();
 
-        $responses = [
-            new MockResponse('', ['error' => 'Some error occurred!']),
-        ];
+        $restClient = new RestClient(self::$configuration);
 
-        $httpClient = new MockHttpClient($responses, 'http://example.net/jobrouter/rest/api/v2/');
-
-        new RestClient($this->configuration, $httpClient);
-    }
-
-    /**
-     * @test
-     */
-    public function requestGivesResponseBack(): void
-    {
-        $authenticateBody = json_encode(
-            [
-                'tokens' => [
-                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ey...',
-                ],
-            ]
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/some/route',
+            new Response('The response of some/route')
         );
 
-        $callback = function ($method, $url, $options) use ($authenticateBody) {
-            if ($url === 'http://example.net/jobrouter/rest/api/v2/application/tokens') {
-                return new MockResponse($authenticateBody);
-            }
+        $response = $restClient->request('some/route');
 
-            if ($url === 'http://example.net/jobrouter/rest/api/v2/some/route') {
-                return new MockResponse('The response of the request');
-            }
-        };
+        $responseContent = $response->getContent();
+        $requestHeaders = self::$server->getLastRequest()->getHeaders();
 
-        $httpClient = new MockHttpClient($callback, 'http://example.net/jobrouter/rest/api/v2/');
-
-        $subject = new RestClient($this->configuration, $httpClient);
-        $actual = $subject->request('some/route');
-
-        $this->assertSame('The response of the request', $actual->getContent());
+        $this->assertSame('The response of some/route', $responseContent);
+        $this->assertArrayHasKey('X-Jobrouter-Authorization', $requestHeaders);
+        $this->assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['X-Jobrouter-Authorization']);
     }
 
     /**
      * @test
      */
-    public function requestThrowsRestExceptionOnError(): void
+    public function serverIsNotAvailable(): void
     {
-        $this->expectException(RestException::class);
+        $this->expectException(RestClientException::class);
 
-        $authenticateBody = json_encode(
-            [
-                'tokens' => [
-                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.ey...',
-                ],
-            ]
+        $configuration = new ClientConfiguration(
+            'http://' . self::$server->getHost() . ':' . (self::$server->getPort() - 1) . '/',
+            'fake_username',
+            'fake_password'
         );
 
-        $callback = function ($method, $url, $options) use ($authenticateBody) {
-            if ($url === 'http://example.net/jobrouter/rest/api/v2/application/tokens') {
-                return new MockResponse($authenticateBody);
-            }
+        new RestClient($configuration);
+    }
 
-            if ($url === 'http://example.net/jobrouter/rest/api/v2/some/route') {
-                throw new TransportException();
-            }
-        };
+    /**
+     * @test
+     */
+    public function unknownOptionPassingToRequestThrowsRestClientException(): void
+    {
+        $this->expectException(RestClientException::class);
 
-        $httpClient = new MockHttpClient($callback, 'http://example.net/jobrouter/rest/api/v2/');
+        $this->setResponseOfTokensPath();
 
-        $subject = new RestClient($this->configuration, $httpClient);
-        $subject->request('some/route');
+        $restClient = new RestClient(self::$configuration);
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/some/route',
+            new Response('The response of some/route')
+        );
+
+        $restClient->request('some/route', 'GET', ['unknown_option' => '']);
+    }
+
+    /**
+     * @test
+     */
+    public function noTokenIsReturnedThrowsRestClientException(): void
+    {
+        $this->expectException(RestClientException::class);
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/application/tokens',
+            new Response(
+                '{}',
+                ['content-type' => 'application/json'],
+                201
+            )
+        );
+
+        new RestClient(self::$configuration);
     }
 }

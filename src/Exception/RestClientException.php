@@ -6,7 +6,7 @@ namespace Brotkrueml\JobRouterClient\Exception;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
-final class RestException extends \RuntimeException
+final class RestClientException extends \RuntimeException
 {
     public function __construct(\Exception $e)
     {

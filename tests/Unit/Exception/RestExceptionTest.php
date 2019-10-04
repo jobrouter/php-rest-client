@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Unit\Exception;
 
-use Brotkrueml\JobRouterClient\Exception\RestException;
+use Brotkrueml\JobRouterClient\Exception\RestClientException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\Exception\ClientException;
@@ -20,7 +20,7 @@ class RestExceptionTest extends TestCase
     {
         $exception = new \Exception('standard exception message', 1234);
 
-        $subject = new RestException($exception);
+        $subject = new RestClientException($exception);
 
         $this->assertSame('standard exception message', $subject->getMessage());
         $this->assertSame(1234, $subject->getCode());
@@ -37,7 +37,7 @@ class RestExceptionTest extends TestCase
             500
         );
 
-        $subject = new RestException($transportException);
+        $subject = new RestClientException($transportException);
 
         $this->assertSame('HTTP/2 500 Internal Server Error', $subject->getMessage());
         $this->assertSame(500, $subject->getCode());
@@ -71,7 +71,7 @@ class RestExceptionTest extends TestCase
 
         $clientException = new ClientException($responseMock);
 
-        $subject = new RestException($clientException);
+        $subject = new RestClientException($clientException);
 
         $this->assertSame($clientException, $subject->getPrevious());
     }
@@ -95,7 +95,7 @@ class RestExceptionTest extends TestCase
             ->method('getResponse')
             ->willReturn($responseMock);
 
-        $subject = new RestException($httpExceptionMock);
+        $subject = new RestClientException($httpExceptionMock);
 
         $this->assertSame('Authentication failed. Please provide valid credentials and check if the user is not blocked.', $subject->getMessage());
         $this->assertSame(0, $subject->getCode());
@@ -121,7 +121,7 @@ class RestExceptionTest extends TestCase
             ->method('getResponse')
             ->willReturn($responseMock);
 
-        $subject = new RestException($httpExceptionMock);
+        $subject = new RestClientException($httpExceptionMock);
 
         $this->assertSame('First error. / Second error.', $subject->getMessage());
         $this->assertSame(0, $subject->getCode());

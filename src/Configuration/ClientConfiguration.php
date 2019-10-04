@@ -3,64 +3,102 @@ declare(strict_types = 1);
 
 namespace Brotkrueml\JobRouterClient\Configuration;
 
+use Brotkrueml\JobRouterClient\Exception\InvalidConfigurationException;
+
+/**
+ * Value object that represents the configuration for a RestClient
+ */
 final class ClientConfiguration
 {
-    public const API_ENDPOINT = 'api/rest/v2/';
     public const DEFAULT_TOKEN_LIFETIME_IN_SECONDS = 600;
     public const MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS = 0;
     public const MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS = 3600;
 
-    private $restBaseUri;
+    private $baseUrl;
     private $username;
     private $password;
     private $lifetime = self::DEFAULT_TOKEN_LIFETIME_IN_SECONDS;
 
-    public function __construct(string $baseUri, string $username, string $password)
+    /**
+     * Creates a configuration instance for use in RestClient
+     *
+     * @param string $baseUrl The valid base URL of the JobRouter installation
+     * @param string $username The username, must not be empty
+     * @param string $password The password, must not be empty
+     *
+     * @throws InvalidConfigurationException A given parameter is not valid
+     */
+    public function __construct(string $baseUrl, string $username, string $password)
     {
-        $baseUri = \filter_var($baseUri, FILTER_VALIDATE_URL);
+        $filteredBaseUrl = \filter_var($baseUrl, FILTER_VALIDATE_URL);
 
-        if ($baseUri === false) {
-            throw new \InvalidArgumentException(
-                sprintf('Given baseUri "%s" is not a valid URL!', $baseUri),
+        if ($filteredBaseUrl === false) {
+            throw new InvalidConfigurationException(
+                sprintf('Given baseUrl "%s" is not a valid URL!', $baseUrl),
                 1565710531
             );
         }
 
         if (empty($username)) {
-            throw new \InvalidArgumentException('Empty username is not allowed!', 1565710532);
+            throw new InvalidConfigurationException('Username must not be empty!', 1565710532);
         }
 
         if (empty($password)) {
-            throw new \InvalidArgumentException('Empty password is not allowed!', 1565710533);
+            throw new InvalidConfigurationException('Password must not be empty!', 1565710533);
         }
 
-        $this->restBaseUri = \rtrim($baseUri, '/') . '/' . self::API_ENDPOINT;
+        $this->baseUrl = $baseUrl;
         $this->username = $username;
         $this->password = $password;
     }
 
-    public function getRestApiUri(): string
+    /**
+     * Gets the base url of the JobRouter installation
+     *
+     * @return string
+     */
+    public function getBaseUrl(): string
     {
-        return $this->restBaseUri;
+        return $this->baseUrl;
     }
 
+    /**
+     * Gets the username
+     *
+     * @return string
+     */
     public function getUsername(): string
     {
         return $this->username;
     }
 
+    /**
+     * Gets the password
+     *
+     * @return string
+     */
     public function getPassword(): string
     {
         return $this->password;
     }
 
+    /**
+     * Sets the lifetime of a session in seconds
+     * Must be between 0 (ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS)
+     * and 3600 (ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS).
+     * Default value is 600 (ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS)
+     *
+     * @param int $lifetime
+     *
+     * @throws InvalidConfigurationException The given lifetime is not between 0 and 3600
+     */
     public function setLifetime(int $lifetime): void
     {
         if (
             $lifetime < self::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS
             || $lifetime > self::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS
         ) {
-            throw new \InvalidArgumentException(
+            throw new InvalidConfigurationException(
                 sprintf(
                     'Lifetime value "%d" is not allowed! It has to be between "%d" and "%d"',
                     $lifetime,
@@ -74,6 +112,11 @@ final class ClientConfiguration
         $this->lifetime = $lifetime;
     }
 
+    /**
+     * Gets the lifetime
+     *
+     * @return int
+     */
     public function getLifetime(): int
     {
         return $this->lifetime;

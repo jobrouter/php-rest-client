@@ -1,8 +1,10 @@
 <?php
+declare(strict_types = 1);
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Configuration;
 
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
+use Brotkrueml\JobRouterClient\Exception\InvalidConfigurationException;
 use PHPUnit\Framework\TestCase;
 
 class ClientConfigurationTest extends TestCase
@@ -24,7 +26,7 @@ class ClientConfigurationTest extends TestCase
      */
     public function constructThrowsExceptionOnInvalidBaseUri(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionCode(1565710531);
 
         new ClientConfiguration(
@@ -39,7 +41,7 @@ class ClientConfigurationTest extends TestCase
      */
     public function constructThrowsExceptionOnEmptyUsername(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionCode(1565710532);
 
         new ClientConfiguration(
@@ -54,7 +56,7 @@ class ClientConfigurationTest extends TestCase
      */
     public function constructThrowsExceptionOnEmptyPassword(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionCode(1565710533);
 
         new ClientConfiguration(
@@ -67,29 +69,10 @@ class ClientConfigurationTest extends TestCase
     /**
      * @test
      */
-    public function getRestApiUriWithBaseUriWithTrailingSlashReturnCorrectUri(): void
+    public function getBaseUrlReturnsPreviouslySetBaseUrl(): void
     {
-        $actual = $this->subject->getRestApiUri();
-        $expected = 'http://example.org/jobrouter/' . ClientConfiguration::API_ENDPOINT;
-
-        $this->assertSame($expected, $actual);
-    }
-
-    /**
-     * @test
-     */
-    public function getRestApiUriWithBaseUriWithoutTrailingSlashReturnsCorrectUri(): void
-    {
-        $baseUri = 'https://example.org/jobrouter';
-
-        $subject = new ClientConfiguration(
-            $baseUri,
-            'fake_username',
-            'fake_password'
-        );
-
-        $actual = $subject->getRestApiUri();
-        $expected = $baseUri . '/' . ClientConfiguration::API_ENDPOINT;
+        $actual = $this->subject->getBaseUrl();
+        $expected = 'http://example.org/jobrouter/';
 
         $this->assertSame($expected, $actual);
     }
@@ -129,7 +112,7 @@ class ClientConfigurationTest extends TestCase
      */
     public function setLifetimeThrowsExceptionOnUnderrunMinimumAllowedLifetime(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionCode(1565710534);
 
         $this->subject->setLifetime(ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS - 1);
@@ -140,7 +123,7 @@ class ClientConfigurationTest extends TestCase
      */
     public function setLifetimeThrowsExceptionOnOverrunMaximumAllowedLifetime(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionCode(1565710534);
 
         $this->subject->setLifetime(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS + 1);

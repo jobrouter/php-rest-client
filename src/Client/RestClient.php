@@ -4,40 +4,47 @@ declare(strict_types = 1);
 namespace Brotkrueml\JobRouterClient\Client;
 
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-use Brotkrueml\JobRouterClient\Exception\RestException;
+use Brotkrueml\JobRouterClient\Exception\RestClientException;
 use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-class RestClient
+/**
+ * RestClient for handling HTTP requests
+ */
+final class RestClient
 {
+    private const API_ENDPOINT = '/api/rest/v2/';
+
     /** @var ClientConfiguration */
-    protected $configuration;
+    private $configuration;
 
     /** @var HttpClientInterface */
-    protected $client;
+    private $client;
 
     private $jwToken = '';
 
     /**
-     * @param ClientConfiguration $configuration
-     * @param MockHttpClient|null $client (only for testing purposes!)
+     * Creates a RestClient instance, already authenticated against the JobRouter system
+     *
+     * @param ClientConfiguration $configuration The configuration
      */
-    public function __construct(ClientConfiguration $configuration, MockHttpClient $client = null)
+    public function __construct(ClientConfiguration $configuration)
     {
         $this->configuration = $configuration;
 
-        if ($client) {
-            $this->client = $client;
-        } else {
-            $this->client = HttpClient::create([
-                'base_uri' => $this->configuration->getRestApiUri(),
-            ]);
-        }
+        $this->client = HttpClient::create([
+            'base_uri' => $this->getRestApiUrl(),
+        ]);
 
         $this->authenticate();
+    }
+
+    private function getRestApiUrl(): string
+    {
+        return \rtrim($this->configuration->getBaseUrl(), '/') . self::API_ENDPOINT;
     }
 
     /**
@@ -57,8 +64,14 @@ class RestClient
 
         try {
             $content = $response->toArray();
-        } catch (\Throwable $e) {
-            throw new RestException($e);
+        } catch (ExceptionInterface $e) {
+            throw new RestClientException($e);
+        }
+
+        if (!isset($content['tokens'][0])) {
+            throw new RestClientException(
+                new \RuntimeException('Token unavailable!', 1570222016)
+            );
         }
 
         $this->jwToken = $content['tokens'][0];
@@ -72,6 +85,8 @@ class RestClient
      * @param array $options Additional options for the request (the JobRouter authorization header is added automatically)
      * @return ResponseInterface
      *
+     * @throws RestClientException
+     *
      * @see https://github.com/symfony/contracts/blob/master/HttpClient/HttpClientInterface.php Overview of options
      */
     public function request(string $route, string $method = 'GET', array $options = []): ResponseInterface
@@ -84,8 +99,8 @@ class RestClient
 
         try {
             return $this->client->request($method, $route, $options);
-        } catch (ExceptionInterface $e) {
-            throw new RestException($e);
+        } catch (TransportExceptionInterface $e) {
+            throw new RestClientException($e);
         }
     }
 }
