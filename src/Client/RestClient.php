@@ -18,12 +18,16 @@ final class RestClient
 {
     private const API_ENDPOINT = '/api/rest/v2/';
 
-    /** @var ClientConfiguration */
+    /**
+     * @var ClientConfiguration
+     * @readonly
+     */
     private $configuration;
 
     /** @var HttpClientInterface */
     private $client;
 
+    /** @var string */
     private $jwToken = '';
 
     /**
@@ -52,7 +56,7 @@ final class RestClient
      */
     public function authenticate(): void
     {
-        $this->jwToken = null;
+        $this->jwToken = '';
 
         $json = [
             'username' => $this->configuration->getUsername(),

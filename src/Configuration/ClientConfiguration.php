@@ -14,9 +14,27 @@ final class ClientConfiguration
     public const MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS = 0;
     public const MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS = 3600;
 
+    /**
+     * @var string
+     * @readonly
+     */
     private $baseUrl;
+
+    /**
+     * @var string
+     * @readonly
+     */
     private $username;
+
+    /**
+     * @var string
+     * @readonly
+     */
     private $password;
+
+    /**
+     * @var int
+     */
     private $lifetime = self::DEFAULT_TOKEN_LIFETIME_IN_SECONDS;
 
     /**

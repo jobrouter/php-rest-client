@@ -20,7 +20,8 @@
     },
     "require-dev": {
         "donatj/mock-webserver": "^2.0",
-        "phpunit/phpunit": "^8.4"
+        "phpunit/phpunit": "^8.4",
+        "vimeo/psalm": "^3.6"
     },
     "suggest": {
         "ext-curl": "Improves the performance of the HTTPClient component"

@@ -30,4 +30,5 @@ before_script:
 script:
   - find . -name \*.php  ! -path "./vendor/*" -exec php -d display_errors=stderr -l {} > /dev/null \;
   - vendor/bin/phpunit -c tests/phpunit.xml.dist --log-junit logs/phpunit.xml --coverage-text --coverage-clover logs/clover.xml
+  - vendor/bin/psalm
   - if [[ $RUN_SONAR_SCANNER == "1" ]]; then sonar-scanner -Dsonar.projectVersion=$TRAVIS_TAG; fi

@@ -8,7 +8,7 @@ use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
 final class RestClientException extends \RuntimeException
 {
-    public function __construct(\Exception $e)
+    public function __construct(\Throwable $e)
     {
         if ($e instanceof ClientExceptionInterface) {
             // Use message, not the HTML document
@@ -29,6 +29,6 @@ final class RestClientException extends \RuntimeException
             $message = $e->getMessage();
         }
 
-        parent::__construct($message, $e->getCode(), $e);
+        parent::__construct($message, (int)$e->getCode(), $e);
     }
 }
