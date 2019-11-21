@@ -27,11 +27,12 @@ The preferred way to install this library is with composer:
 
 ## Usage
 
+### Retrieve JobData table content
+
 Let's start with an example, where you want to retrieve some information out of a JobData
 table. Assuming this PHP script is in the root directory of your project:
 
     <?php
-    use Brotkrueml\JobRouterClient\Client\RestClient;
     use Brotkrueml\JobRouterClient\Client\RestClient;
     use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 
@@ -77,3 +78,33 @@ happens, you can call at any time the authenticate method of the rest client:
     $restClient->authenticate();
 
 You can do this also in advance to omit a timeout.
+
+### Post a dataset to a JobData table
+
+With the following request you can post a dataset to a JobData table:
+
+    $response = $restClient->request(
+        'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E4/datasets',
+        'POST', 
+        [
+            'json' => [
+                'dataset' => [
+                    'column1' => 'content of column 1',
+                    'column2' => 'content of column 2',
+                ],
+            ],
+        ]
+    );
+    
+    $statusCode = $response->getStatusCode();
+    if ($statusCode === 201) {
+        // Success
+    } else {
+        echo $statusCode . "\n";
+        echo $response->getContent(false);
+    }
+
+Please keep in mind: You have to send all columns of a table for which
+the user has the right to. Otherwise you will receive an error with
+status code 422 (Unprocessable entity).
+
