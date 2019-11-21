@@ -16,7 +16,7 @@
     "require": {
         "php": "^7.2",
         "ext-json": "*",
-        "symfony/http-client": "^4.3"
+        "symfony/http-client": "^4.4 || ^5.0"
     },
     "require-dev": {
         "donatj/mock-webserver": "^2.0",
@@ -24,7 +24,7 @@
         "vimeo/psalm": "^3.6"
     },
     "suggest": {
-        "ext-curl": "Improves the performance of the HTTPClient component"
+        "ext-curl": "Improves the performance of the symfony/http-client component"
     },
     "config": {
         "sort-packages": true
