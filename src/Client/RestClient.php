@@ -17,7 +17,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 final class RestClient
 {
     private const API_ENDPOINT = '/api/rest/v2/';
-    private const VERSION = '0.4.0';
+    private const VERSION = '0.5.0';
 
     /**
      * @var ClientConfiguration
