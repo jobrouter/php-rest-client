@@ -17,6 +17,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 final class RestClient
 {
     private const API_ENDPOINT = '/api/rest/v2/';
+    private const VERSION = '0.4.0';
 
     /**
      * @var ClientConfiguration
@@ -41,9 +42,21 @@ final class RestClient
 
         $this->client = HttpClient::create([
             'base_uri' => $this->getRestApiUrl(),
+            'headers' => ['User-Agent' => $this->getUserAgent()],
         ]);
 
         $this->authenticate();
+    }
+
+    private function getUserAgent(): string
+    {
+        return \rtrim(
+            \sprintf(
+                'JobRouterClient/%s (https://github.com/brotkrueml/jobrouter-client) %s',
+                static::VERSION,
+                $this->configuration->getUserAgentAddition()
+            )
+        );
     }
 
     private function getRestApiUrl(): string

@@ -164,4 +164,26 @@ class ClientConfigurationTest extends TestCase
 
         $this->assertSame(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS, $actual);
     }
+
+    /**
+     * @test
+     */
+    public function getUserAgentAdditionReturnsEmptyString(): void
+    {
+        $actual = $this->subject->getUserAgentAddition();
+
+        $this->assertSame('', $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function setUserAgentAdditionWorksCorrectly(): void
+    {
+        $this->subject->setUserAgentAddition('SomeUserAgentAddition');
+
+        $actual = $this->subject->getUserAgentAddition();
+
+        $this->assertSame('SomeUserAgentAddition', $actual);
+    }
 }

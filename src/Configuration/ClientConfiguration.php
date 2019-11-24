@@ -38,6 +38,11 @@ final class ClientConfiguration
     private $lifetime = self::DEFAULT_TOKEN_LIFETIME_IN_SECONDS;
 
     /**
+     * @var string
+     */
+    private $userAgentAddition = '';
+
+    /**
      * Creates a configuration instance for use in RestClient
      *
      * @param string $baseUrl The valid base URL of the JobRouter installation
@@ -138,5 +143,25 @@ final class ClientConfiguration
     public function getLifetime(): int
     {
         return $this->lifetime;
+    }
+
+    /**
+     * Set the user agent addition which will be appended to the original one
+     *
+     * @param string $userAgentAddition
+     */
+    public function setUserAgentAddition(string $userAgentAddition): void
+    {
+        $this->userAgentAddition = $userAgentAddition;
+    }
+
+    /**
+     * Gets the user agent addition
+     *
+     * @return string
+     */
+    public function getUserAgentAddition(): string
+    {
+        return $this->userAgentAddition;
     }
 }

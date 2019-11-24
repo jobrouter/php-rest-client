@@ -92,6 +92,7 @@ class RestClientTest extends TestCase
 
         $response = $restClient->request('some/route');
 
+        /** @noinspection PhpUnhandledExceptionInspection */
         $responseContent = $response->getContent();
         $requestHeaders = self::$server->getLastRequest()->getHeaders();
 
@@ -152,5 +153,50 @@ class RestClientTest extends TestCase
         );
 
         new RestClient(self::$configuration);
+    }
+
+    /**
+     * @test
+     */
+    public function defaultUserAgentIsSendCorrectly(): void
+    {
+        $this->setResponseOfTokensPath();
+
+        $restClient = new RestClient(self::$configuration);
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/some/route',
+            new Response('The response of some/route')
+        );
+
+        $restClient->request('some/route');
+        $requestHeaders = self::$server->getLastRequest()->getHeaders();
+
+        $this->assertArrayHasKey('User-Agent', $requestHeaders);
+        $this->assertStringStartsWith('JobRouterClient/', $requestHeaders['User-Agent']);
+        $this->assertStringEndsWith(' (https://github.com/brotkrueml/jobrouter-client)', $requestHeaders['User-Agent']);
+    }
+
+    /**
+     * @test
+     */
+    public function appendedUserAgentIsSendCorrectly(): void
+    {
+        $this->setResponseOfTokensPath();
+
+        self::$configuration->setUserAgentAddition('AdditionToUserAgent');
+        $restClient = new RestClient(self::$configuration);
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/some/route',
+            new Response('The response of some/route')
+        );
+
+        $restClient->request('some/route');
+        $requestHeaders = self::$server->getLastRequest()->getHeaders();
+
+        $this->assertArrayHasKey('User-Agent', $requestHeaders);
+        $this->assertStringStartsWith('JobRouterClient/', $requestHeaders['User-Agent']);
+        $this->assertStringEndsWith(') AdditionToUserAgent', $requestHeaders['User-Agent']);
     }
 }
