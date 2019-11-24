@@ -46,7 +46,7 @@ class RestClientTest extends TestCase
 
         $restClient = new RestClient(self::$configuration);
 
-        $this->assertInstanceOf(RestClient::class, $restClient);
+        self::assertInstanceOf(RestClient::class, $restClient);
     }
 
     private function setResponseOfTokensPath(): void
@@ -96,9 +96,9 @@ class RestClientTest extends TestCase
         $responseContent = $response->getContent();
         $requestHeaders = self::$server->getLastRequest()->getHeaders();
 
-        $this->assertSame('The response of some/route', $responseContent);
-        $this->assertArrayHasKey('X-Jobrouter-Authorization', $requestHeaders);
-        $this->assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['X-Jobrouter-Authorization']);
+        self::assertSame('The response of some/route', $responseContent);
+        self::assertArrayHasKey('X-Jobrouter-Authorization', $requestHeaders);
+        self::assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['X-Jobrouter-Authorization']);
     }
 
     /**
@@ -172,9 +172,9 @@ class RestClientTest extends TestCase
         $restClient->request('some/route');
         $requestHeaders = self::$server->getLastRequest()->getHeaders();
 
-        $this->assertArrayHasKey('User-Agent', $requestHeaders);
-        $this->assertStringStartsWith('JobRouterClient/', $requestHeaders['User-Agent']);
-        $this->assertStringEndsWith(' (https://github.com/brotkrueml/jobrouter-client)', $requestHeaders['User-Agent']);
+        self::assertArrayHasKey('User-Agent', $requestHeaders);
+        self::assertStringStartsWith('JobRouterClient/', $requestHeaders['User-Agent']);
+        self::assertStringEndsWith(' (https://github.com/brotkrueml/jobrouter-client)', $requestHeaders['User-Agent']);
     }
 
     /**
@@ -195,8 +195,8 @@ class RestClientTest extends TestCase
         $restClient->request('some/route');
         $requestHeaders = self::$server->getLastRequest()->getHeaders();
 
-        $this->assertArrayHasKey('User-Agent', $requestHeaders);
-        $this->assertStringStartsWith('JobRouterClient/', $requestHeaders['User-Agent']);
-        $this->assertStringEndsWith(') AdditionToUserAgent', $requestHeaders['User-Agent']);
+        self::assertArrayHasKey('User-Agent', $requestHeaders);
+        self::assertStringStartsWith('JobRouterClient/', $requestHeaders['User-Agent']);
+        self::assertStringEndsWith(') AdditionToUserAgent', $requestHeaders['User-Agent']);
     }
 }

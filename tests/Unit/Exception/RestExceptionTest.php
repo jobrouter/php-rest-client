@@ -22,9 +22,9 @@ class RestExceptionTest extends TestCase
 
         $subject = new RestClientException($exception);
 
-        $this->assertSame('standard exception message', $subject->getMessage());
-        $this->assertSame(1234, $subject->getCode());
-        $this->assertSame($exception, $subject->getPrevious());
+        self::assertSame('standard exception message', $subject->getMessage());
+        self::assertSame(1234, $subject->getCode());
+        self::assertSame($exception, $subject->getPrevious());
     }
 
     /**
@@ -39,9 +39,9 @@ class RestExceptionTest extends TestCase
 
         $subject = new RestClientException($transportException);
 
-        $this->assertSame('HTTP/2 500 Internal Server Error', $subject->getMessage());
-        $this->assertSame(500, $subject->getCode());
-        $this->assertSame($transportException, $subject->getPrevious());
+        self::assertSame('HTTP/2 500 Internal Server Error', $subject->getMessage());
+        self::assertSame(500, $subject->getCode());
+        self::assertSame($transportException, $subject->getPrevious());
     }
 
     /**
@@ -51,20 +51,20 @@ class RestExceptionTest extends TestCase
     {
         $responseMock = $this->createMock(ResponseInterface::class);
         $responseMock
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('getContent');
         $responseMock
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('getInfo')
             ->with('http_code')
             ->willReturn(404);
         $responseMock
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('getInfo')
             ->with('url')
             ->willReturn('http://example.org/notfound');
         $responseMock
-            ->expects($this->at(2))
+            ->expects(self::at(2))
             ->method('getInfo')
             ->with('response_headers')
             ->willReturn([]);
@@ -73,7 +73,7 @@ class RestExceptionTest extends TestCase
 
         $subject = new RestClientException($clientException);
 
-        $this->assertSame($clientException, $subject->getPrevious());
+        self::assertSame($clientException, $subject->getPrevious());
     }
 
     /**
@@ -83,7 +83,7 @@ class RestExceptionTest extends TestCase
     {
         $responseMock = $this->createMock(ResponseInterface::class);
         $responseMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getContent')
             ->with(false)
             ->willReturn('{"errors":{"-":["Authentication failed. Please provide valid credentials and check if the user is not blocked."]}}');
@@ -91,15 +91,15 @@ class RestExceptionTest extends TestCase
         /** @var MockObject|\Exception $httpExceptionMock */
         $httpExceptionMock = $this->createMock(HttpExceptionInterface::class);
         $httpExceptionMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getResponse')
             ->willReturn($responseMock);
 
         $subject = new RestClientException($httpExceptionMock);
 
-        $this->assertSame('Authentication failed. Please provide valid credentials and check if the user is not blocked.', $subject->getMessage());
-        $this->assertSame(0, $subject->getCode());
-        $this->assertSame($httpExceptionMock, $subject->getPrevious());
+        self::assertSame('Authentication failed. Please provide valid credentials and check if the user is not blocked.', $subject->getMessage());
+        self::assertSame(0, $subject->getCode());
+        self::assertSame($httpExceptionMock, $subject->getPrevious());
     }
 
     /**
@@ -109,7 +109,7 @@ class RestExceptionTest extends TestCase
     {
         $responseMock = $this->createMock(ResponseInterface::class);
         $responseMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getContent')
             ->with(false)
             ->willReturn('{"errors":{"-":["First error.", "Second error."]}}');
@@ -117,14 +117,14 @@ class RestExceptionTest extends TestCase
         /** @var MockObject|\Exception $httpExceptionMock */
         $httpExceptionMock = $this->createMock(HttpExceptionInterface::class);
         $httpExceptionMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getResponse')
             ->willReturn($responseMock);
 
         $subject = new RestClientException($httpExceptionMock);
 
-        $this->assertSame('First error. / Second error.', $subject->getMessage());
-        $this->assertSame(0, $subject->getCode());
-        $this->assertSame($httpExceptionMock, $subject->getPrevious());
+        self::assertSame('First error. / Second error.', $subject->getMessage());
+        self::assertSame(0, $subject->getCode());
+        self::assertSame($httpExceptionMock, $subject->getPrevious());
     }
 }

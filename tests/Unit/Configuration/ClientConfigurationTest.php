@@ -12,7 +12,7 @@ class ClientConfigurationTest extends TestCase
     /** @var ClientConfiguration */
     private $subject;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->subject = new ClientConfiguration(
             'http://example.org/jobrouter/',
@@ -74,7 +74,7 @@ class ClientConfigurationTest extends TestCase
         $actual = $this->subject->getBaseUrl();
         $expected = 'http://example.org/jobrouter/';
 
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
 
     /**
@@ -84,7 +84,7 @@ class ClientConfigurationTest extends TestCase
     {
         $actual = $this->subject->getUsername();
 
-        $this->assertSame('fake_username', $actual);
+        self::assertSame('fake_username', $actual);
     }
 
     /**
@@ -94,7 +94,7 @@ class ClientConfigurationTest extends TestCase
     {
         $actual = $this->subject->getPassword();
 
-        $this->assertSame('fake_password', $actual);
+        self::assertSame('fake_password', $actual);
     }
 
     /**
@@ -104,7 +104,7 @@ class ClientConfigurationTest extends TestCase
     {
         $actual = $this->subject->getLifetime();
 
-        $this->assertSame(ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS, $actual);
+        self::assertSame(ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS, $actual);
     }
 
     /**
@@ -138,7 +138,7 @@ class ClientConfigurationTest extends TestCase
 
         $actual = $this->subject->getLifetime();
 
-        $this->assertSame(ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS, $actual);
+        self::assertSame(ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS, $actual);
     }
 
     /**
@@ -150,7 +150,7 @@ class ClientConfigurationTest extends TestCase
 
         $actual = $this->subject->getLifetime();
 
-        $this->assertSame(42, $actual);
+        self::assertSame(42, $actual);
     }
 
     /**
@@ -162,7 +162,7 @@ class ClientConfigurationTest extends TestCase
 
         $actual = $this->subject->getLifetime();
 
-        $this->assertSame(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS, $actual);
+        self::assertSame(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS, $actual);
     }
 
     /**
@@ -172,7 +172,7 @@ class ClientConfigurationTest extends TestCase
     {
         $actual = $this->subject->getUserAgentAddition();
 
-        $this->assertSame('', $actual);
+        self::assertSame('', $actual);
     }
 
     /**
@@ -184,6 +184,6 @@ class ClientConfigurationTest extends TestCase
 
         $actual = $this->subject->getUserAgentAddition();
 
-        $this->assertSame('SomeUserAgentAddition', $actual);
+        self::assertSame('SomeUserAgentAddition', $actual);
     }
 }
