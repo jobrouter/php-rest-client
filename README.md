@@ -1,6 +1,6 @@
 # JobRouter Client
 
-[![Build Status](https://travis-ci.org/brotkrueml/jobrouter-client.svg?branch=master)](https://travis-ci.org/brotkrueml/jobrouter-client)
+[![CI Status](https://github.com/brotkrueml/jobrouter-client/workflows/CI/badge.svg?branch=master)](https://github.com/brotkrueml/jobrouter-client/actions?query=workflow%3ACI)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=jobrouter-client&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=jobrouter-client)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=jobrouter-client&metric=coverage)](https://sonarcloud.io/dashboard?id=jobrouter-client)
 
@@ -11,13 +11,13 @@ processes, data and documents. This JobRouter client eases the access to the RES
 The library supports JobRouter version 4.2 and up, as the token authentication is used.
 
 At the current stage the authentication is done in the background so you concentrate on
-the your business domain. Only JSON-related requests and responses are currently supported. 
+the your business domain. Only JSON-related requests and responses are currently supported.
 
 For the requests the [Symfony HTTP Client](https://symfony.com/doc/current/components/http_client.html)
 is used where multiple requests can be done simultaneously.
 
 The library can be used to automate tasks in PHP scripts like importing or synchronising
-data in the JobData module or working with archive documents. 
+data in the JobData module or working with archive documents.
 
 ## Installation
 
@@ -47,12 +47,12 @@ table. Assuming this PHP script is in the root directory of your project:
 
     try {
         $client = new RestClient($configuration);
-    
+
         $response = $client->request(
             'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E4/datasets',
             'GET'
         );
-    
+
         echo $response->getStatusCode() . "\n";
         var_dump($response->getContent());
     } catch (RestClientException $e) {
@@ -85,7 +85,7 @@ With the following request you can post a dataset to a JobData table:
 
     $response = $restClient->request(
         'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E4/datasets',
-        'POST', 
+        'POST',
         [
             'json' => [
                 'dataset' => [
@@ -95,7 +95,7 @@ With the following request you can post a dataset to a JobData table:
             ],
         ]
     );
-    
+
     $statusCode = $response->getStatusCode();
     if ($statusCode === 201) {
         // Success

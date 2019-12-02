@@ -1,8 +1,8 @@
 /tests/ export-ignore
 /.editorconfig export-ignore
 /.gitattributes export-ignore
+/.github export-ignore
 /.gitignore export-ignore
 /.php_cs export-ignore
-/.travis.yml export-ignore
 /psalm.xml export-ignore
 /sonar-project.properties export-ignore
