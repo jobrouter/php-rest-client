@@ -20,6 +20,7 @@
     },
     "require-dev": {
         "donatj/mock-webserver": "^2.0",
+        "php-coveralls/php-coveralls": "^2.2",
         "phpunit/phpunit": "^8.4",
         "vimeo/psalm": "^3.6"
     },

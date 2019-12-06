@@ -2,7 +2,7 @@
 
 [![CI Status](https://github.com/brotkrueml/jobrouter-client/workflows/CI/badge.svg?branch=master)](https://github.com/brotkrueml/jobrouter-client/actions?query=workflow%3ACI)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=jobrouter-client&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=jobrouter-client)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=jobrouter-client&metric=coverage)](https://sonarcloud.io/dashboard?id=jobrouter-client)
+[![Coverage Status](https://coveralls.io/repos/github/brotkrueml/jobrouter-client/badge.svg?branch=master)](https://coveralls.io/github/brotkrueml/jobrouter-client?branch=master)
 
 ## Introduction
 
