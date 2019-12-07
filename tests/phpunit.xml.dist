@@ -1,10 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-        bootstrap="../vendor/autoload.php"
-        failOnRisky="true"
-        failOnWarning="true"
+    bootstrap="../vendor/autoload.php"
+    beStrictAboutOutputDuringTests="true"
+    beStrictAboutTodoAnnotatedTests="true"
+    failOnRisky="true"
+    failOnWarning="true"
+    testdox="true"
 >
     <testsuites>
-        <testsuite name="JobRouter Client Unit Tests">
+        <testsuite name="unit">
             <directory>./Unit</directory>
         </testsuite>
     </testsuites>
@@ -13,4 +17,8 @@
             <directory>../src</directory>
         </whitelist>
     </filter>
+    <logging>
+        <log type="coverage-clover" target="../logs/clover.xml"/>
+        <log type="junit" target="../logs/phpunit.xml"/>
+    </logging>
 </phpunit>

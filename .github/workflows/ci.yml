@@ -73,7 +73,7 @@ jobs:
           composer install
       - name: Run unit tests
         run: |
-          vendor/bin/phpunit -c tests/phpunit.xml.dist --log-junit logs/phpunit.xml --coverage-text --coverage-clover logs/clover.xml
+          vendor/bin/phpunit -c tests/phpunit.xml.dist
       - name: Send code coverage report to coveralls.io
         run: vendor/bin/php-coveralls -v
         env:
