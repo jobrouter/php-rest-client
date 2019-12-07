@@ -20,6 +20,7 @@
     },
     "require-dev": {
         "donatj/mock-webserver": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "php-coveralls/php-coveralls": "^2.2",
         "phpunit/phpunit": "^8.4",
         "vimeo/psalm": "^3.6"
@@ -39,5 +40,8 @@
         "psr-4": {
             "Brotkrueml\\JobRouterClient\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "fix-cs": "vendor/bin/php-cs-fixer fix"
     }
 }
