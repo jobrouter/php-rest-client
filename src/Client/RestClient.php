@@ -4,12 +4,13 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Client;
 
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-use Brotkrueml\JobRouterClient\Exception\RestClientException;
+use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
+use Brotkrueml\JobRouterClient\Exception\HttpException;
+use Nyholm\Psr7\Stream;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
+use Symfony\Component\HttpClient\Psr18Client;
 
 /**
  * RestClient for handling HTTP requests
@@ -17,7 +18,7 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 final class RestClient
 {
     private const API_ENDPOINT = '/api/rest/v2/';
-    private const VERSION = '0.5.0';
+    private const VERSION = '0.6.0-dev';
 
     /**
      * @var ClientConfiguration
@@ -25,8 +26,8 @@ final class RestClient
      */
     private $configuration;
 
-    /** @var HttpClientInterface */
-    private $client;
+    /** @var Psr18Client */
+    private $psr18Client;
 
     /** @var string */
     private $jwToken = '';
@@ -35,15 +36,20 @@ final class RestClient
      * Creates a RestClient instance, already authenticated against the JobRouter system
      *
      * @param ClientConfiguration $configuration The configuration
+     *
+     * @throws AuthenticationException
+     * @throws HttpException
      */
     public function __construct(ClientConfiguration $configuration)
     {
         $this->configuration = $configuration;
 
-        $this->client = HttpClient::create([
+        $client = HttpClient::create([
             'base_uri' => $this->getRestApiUrl(),
             'headers' => ['User-Agent' => $this->getUserAgent()],
         ]);
+
+        $this->psr18Client = new Psr18Client($client);
 
         $this->authenticate();
     }
@@ -66,29 +72,39 @@ final class RestClient
 
     /**
      * Authenticate against the configured JobRouter system
+     *
+     * @throws AuthenticationException
      */
     public function authenticate(): void
     {
         $this->jwToken = '';
 
-        $json = [
-            'username' => $this->configuration->getUsername(),
-            'password' => $this->configuration->getPassword(),
-            'lifetime' => $this->configuration->getLifetime(),
+        $options = [
+            'json' => [
+                'username' => $this->configuration->getUsername(),
+                'password' => $this->configuration->getPassword(),
+                'lifetime' => $this->configuration->getLifetime(),
+            ],
         ];
 
-        $response = $this->request('application/tokens', 'POST', ['json' => $json]);
-
         try {
-            $content = $response->toArray();
-        } catch (ExceptionInterface $e) {
-            throw new RestClientException($e);
+            $response = $this->request('POST', 'application/tokens', $options);
+        } catch (HttpException $e) {
+            throw new AuthenticationException(
+                \sprintf(
+                    'Authentication failed for user "%s" on JobRouter base URL "%s',
+                    $this->configuration->getUsername(),
+                    $this->configuration->getBaseUrl()
+                ),
+                1577818398,
+                $e
+            );
         }
 
+        $content = \json_decode($response->getBody()->getContents(), true);
+
         if (!isset($content['tokens'][0])) {
-            throw new RestClientException(
-                new \RuntimeException('Token unavailable!', 1570222016)
-            );
+            throw new AuthenticationException('Token is unavailable', 1570222016);
         }
 
         $this->jwToken = $content['tokens'][0];
@@ -97,27 +113,57 @@ final class RestClient
     /**
      * Send a request to the configured JobRouter system
      *
-     * @param string $route The route
      * @param string $method The method
+     * @param string $route The route
      * @param array $options Additional options for the request (the JobRouter authorization header is added automatically)
+     *
      * @return ResponseInterface
      *
-     * @throws RestClientException
-     *
-     * @see https://github.com/symfony/contracts/blob/master/HttpClient/HttpClientInterface.php Overview of options
+     * @throws HttpException
      */
-    public function request(string $route, string $method = 'GET', array $options = []): ResponseInterface
+    public function request(string $method, string $route, array $options = []): ResponseInterface
     {
         $route = \ltrim($route, '/');
 
+        $request = $this->psr18Client->createRequest($method, $route);
+
         if ($this->jwToken) {
-            $options['headers'][] = 'X-Jobrouter-Authorization: Bearer ' . $this->jwToken;
+            $request = $request->withHeader('x-jobrouter-authorization', 'Bearer ' . $this->jwToken);
         }
 
-        try {
-            return $this->client->request($method, $route, $options);
-        } catch (TransportExceptionInterface $e) {
-            throw new RestClientException($e);
+        foreach ($options['headers'] ?? [] as $key => $value) {
+            $request = $request->withHeader($key, $value);
         }
+
+        if (isset($options['json'])) {
+            $request = $request->withHeader('content-type', 'application/json');
+
+            if (\is_array($options['json'])) {
+                $options['json'] = \json_encode($options['json']);
+            }
+
+            if (\is_string($options['json'])) {
+                $request = $request->withBody(Stream::create($options['json']));
+            }
+        }
+
+        $errorMessage = 'Error fetching route ' . $route;
+        try {
+            $response = $this->psr18Client->sendRequest($request);
+        } catch (ClientExceptionInterface $e) {
+            throw new HttpException($errorMessage, 0, $e);
+        }
+
+        $statusCode = $response->getStatusCode();
+        if ($statusCode >= 400) {
+            $content = \json_decode($response->getBody()->getContents(), true);
+            if (isset($content['errors']['-'][0])) {
+                $errorMessage .= ': ' . $content['errors']['-'][0];
+            }
+
+            throw new HttpException($errorMessage, $statusCode);
+        }
+
+        return $response;
     }
 }

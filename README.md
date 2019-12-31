@@ -13,8 +13,8 @@ The library supports JobRouter version 4.2 and up, as the token authentication i
 At the current stage the authentication is done in the background so you concentrate on
 the your business domain. Only JSON-related requests and responses are currently supported.
 
-For the requests the [Symfony HTTP Client](https://symfony.com/doc/current/components/http_client.html)
-is used where multiple requests can be done simultaneously.
+The [PSR-7 standard](https://www.php-fig.org/psr/psr-7/) is used, so you'll get a objects
+which implements the ResponseInterface back.
 
 The library can be used to automate tasks in PHP scripts like importing or synchronising
 data in the JobData module or working with archive documents.
@@ -35,6 +35,8 @@ table. Assuming this PHP script is in the root directory of your project:
     <?php
     use Brotkrueml\JobRouterClient\Client\RestClient;
     use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
+    use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
+    use Brotkrueml\JobRouterClient\Exception\HttpException;
 
     require_once 'vendor/autoload.php';
 
@@ -49,24 +51,28 @@ table. Assuming this PHP script is in the root directory of your project:
         $client = new RestClient($configuration);
 
         $response = $client->request(
-            'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E4/datasets',
-            'GET'
+            'GET',
+            'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E4/datasets'
         );
 
         echo $response->getStatusCode() . "\n";
-        var_dump($response->getContent());
-    } catch (RestClientException $e) {
+        var_dump($response->getBody()->getContents());
+    } catch (AuthenticationException|HttpException $e) {
         echo $e->getCode() . "\n";
         echo $e->getMessage();
+
+        if ($e->getPrevious()) {
+            var_dump($e->getPrevious());
+        }
     }
 
-First, you have to instantiate a configuration class, which holds the base URI of
-the JobRouter installation and the credentials for signing-in. Additionally, you can
+First, you have to instantiate a configuration class, which holds the base URL of
+the JobRouter installation and the credentials for signing in. Additionally, you can
 define a lifetime of the JSON Web Token in seconds. If you don't define the lifetime,
 a default value of 600 seconds will be used.
 
 Second, create the REST client, you pass the configuration object for initialisation.
-The authentication is done immediately, so you will get an exception if there is
+The authentication is done immediately, so you will get an AuthenticationEception if there is
 something wrong with the credentials.
 
 After the initialisation part you can now request the needed data or
@@ -79,13 +85,19 @@ happens, you can call at any time the authenticate method of the rest client:
 
 You can do this also in advance to omit a timeout.
 
+You'll receive an object the implements Psr\Http\Message\ResponseInterface and can use
+the methods of this object to query the status code or the body content.
+
+If an error occurs, e.g. a route or the passed data is not correct, you'll get a
+HttpException.
+
 ### Post a dataset to a JobData table
 
 With the following request you can post a dataset to a JobData table:
 
-    $response = $restClient->request(
-        'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E4/datasets',
+    $response = $client->request(
         'POST',
+        'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E4/datasets',
         [
             'json' => [
                 'dataset' => [
@@ -101,10 +113,10 @@ With the following request you can post a dataset to a JobData table:
         // Success
     } else {
         echo $statusCode . "\n";
-        echo $response->getContent(false);
+        echo $response->getBody()->getContents();
     }
 
 Please keep in mind: You have to send all columns of a table for which
 the user has the right to. Otherwise you will receive an error with
-status code 422 (Unprocessable entity).
+status code 422 (Unprocessable entity)!
 

@@ -5,7 +5,8 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
 
 use Brotkrueml\JobRouterClient\Client\RestClient;
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-use Brotkrueml\JobRouterClient\Exception\RestClientException;
+use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
+use Brotkrueml\JobRouterClient\Exception\HttpException;
 use donatj\MockWebServer\MockWebServer;
 use donatj\MockWebServer\Response;
 use PHPUnit\Framework\TestCase;
@@ -66,7 +67,7 @@ class RestClientTest extends TestCase
      */
     public function wrongTokensRouteThrowsException(): void
     {
-        $this->expectException(RestClientException::class);
+        $this->expectException(AuthenticationException::class);
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/application/tokens',
@@ -90,15 +91,42 @@ class RestClientTest extends TestCase
             new Response('The response of some/route')
         );
 
-        $response = $restClient->request('some/route');
+        $response = $restClient->request('GET', 'some/route');
 
-        /** @noinspection PhpUnhandledExceptionInspection */
-        $responseContent = $response->getContent();
+        $responseContent = $response->getBody()->getContents();
         $requestHeaders = self::$server->getLastRequest()->getHeaders();
 
         self::assertSame('The response of some/route', $responseContent);
-        self::assertArrayHasKey('X-Jobrouter-Authorization', $requestHeaders);
-        self::assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['X-Jobrouter-Authorization']);
+        self::assertArrayHasKey('x-jobrouter-authorization', $requestHeaders);
+        self::assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['x-jobrouter-authorization']);
+    }
+
+    /**
+     * @test
+     */
+    public function requestWithHeaderOptionsIsCalledWithThem(): void
+    {
+        $this->setResponseOfTokensPath();
+
+        $restClient = new RestClient(self::$configuration);
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/some/route',
+            new Response('The response of some/route')
+        );
+
+        $options = [
+            'headers' => [
+                'some-test-header' => 'some-test-value',
+            ],
+        ];
+
+        $restClient->request('GET', 'some/route', $options);
+
+        $requestHeaders = self::$server->getLastRequest()->getHeaders();
+
+        self::assertArrayHasKey('some-test-header', $requestHeaders);
+        self::assertSame('some-test-value', $requestHeaders['some-test-header']);
     }
 
     /**
@@ -106,7 +134,7 @@ class RestClientTest extends TestCase
      */
     public function serverIsNotAvailable(): void
     {
-        $this->expectException(RestClientException::class);
+        $this->expectException(AuthenticationException::class);
 
         $configuration = new ClientConfiguration(
             'http://' . self::$server->getHost() . ':' . (self::$server->getPort() - 1) . '/',
@@ -122,7 +150,7 @@ class RestClientTest extends TestCase
      */
     public function unknownOptionPassingToRequestThrowsRestClientException(): void
     {
-        $this->expectException(RestClientException::class);
+        $this->expectException(HttpException::class);
 
         $this->setResponseOfTokensPath();
 
@@ -141,7 +169,7 @@ class RestClientTest extends TestCase
      */
     public function noTokenIsReturnedThrowsRestClientException(): void
     {
-        $this->expectException(RestClientException::class);
+        $this->expectException(AuthenticationException::class);
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/application/tokens',
@@ -169,7 +197,7 @@ class RestClientTest extends TestCase
             new Response('The response of some/route')
         );
 
-        $restClient->request('some/route');
+        $restClient->request('GET', 'some/route');
         $requestHeaders = self::$server->getLastRequest()->getHeaders();
 
         self::assertArrayHasKey('User-Agent', $requestHeaders);
@@ -192,11 +220,34 @@ class RestClientTest extends TestCase
             new Response('The response of some/route')
         );
 
-        $restClient->request('some/route');
+        $restClient->request('GET', 'some/route');
         $requestHeaders = self::$server->getLastRequest()->getHeaders();
 
         self::assertArrayHasKey('User-Agent', $requestHeaders);
         self::assertStringStartsWith('JobRouterClient/', $requestHeaders['User-Agent']);
         self::assertStringEndsWith(') AdditionToUserAgent', $requestHeaders['User-Agent']);
+    }
+
+    /**
+     * @test
+     */
+    public function errorMessageIsCorrectGivenWhenAuthenticationError(): void
+    {
+        $this->expectException(AuthenticationException::class);
+        $this->expectExceptionMessageMatches('/^Authentication failed for user "fake_username" on JobRouter base URL "/');
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/application/tokens',
+            new Response(
+                \sprintf(
+                    '{"errors":["-": ["%s"]]}',
+                    'Authentication failed. Please provide valid credentials and check if the user is not blocked.'
+                ),
+                ['content-type' => 'application/json'],
+                401
+            )
+        );
+
+        new RestClient(self::$configuration);
     }
 }
