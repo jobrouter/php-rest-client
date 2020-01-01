@@ -145,6 +145,7 @@ final class RestClient
 
     private function sendForm(string $method, string $resource, array $multipart): ResponseInterface
     {
+        $headers = [];
         if ($this->jwToken) {
             $headers['X-Jobrouter-Authorization'] = 'Bearer ' . $this->jwToken;
         }
@@ -157,7 +158,13 @@ final class RestClient
         );
     }
 
-    private function sendJson(string $method, string $resource, array $jsonPayload): ResponseInterface
+    /**
+     * @param string $method
+     * @param string $resource
+     * @param string|array $jsonPayload
+     * @return ResponseInterface
+     */
+    private function sendJson(string $method, string $resource, $jsonPayload): ResponseInterface
     {
         $request = $this->buildRequest($method, $resource);
         $request = $request->withHeader('content-type', 'application/json');

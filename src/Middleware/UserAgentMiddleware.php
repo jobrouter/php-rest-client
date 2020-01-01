@@ -12,6 +12,10 @@ class UserAgentMiddleware implements MiddlewareInterface
 {
     private const USER_AGENT_TEMPLATE = 'JobRouterClient/%s (https://github.com/brotkrueml/jobrouter-client) %s';
 
+    /**
+     * @var string
+     * @readonly
+     */
     private $userAgent;
 
     public function __construct(string $userAgentAddition = '')
@@ -25,14 +29,14 @@ class UserAgentMiddleware implements MiddlewareInterface
         );
     }
 
-    public function handleRequest(RequestInterface $request, callable $next)
+    public function handleRequest(RequestInterface $request, callable $next): ?RequestInterface
     {
         $request = $request->withHeader('User-Agent', $this->userAgent);
 
         return $next($request);
     }
 
-    public function handleResponse(RequestInterface $request, ResponseInterface $response, callable $next)
+    public function handleResponse(RequestInterface $request, ResponseInterface $response, callable $next): ?ResponseInterface
     {
         return $next($request, $response);
     }
