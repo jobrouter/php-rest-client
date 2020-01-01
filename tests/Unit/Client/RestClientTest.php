@@ -9,6 +9,7 @@ use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
 use Brotkrueml\JobRouterClient\Exception\HttpException;
 use donatj\MockWebServer\MockWebServer;
 use donatj\MockWebServer\Response;
+use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 
 class RestClientTest extends TestCase
@@ -20,6 +21,9 @@ class RestClientTest extends TestCase
 
     /** @var MockWebServer */
     private static $server;
+
+    /** @var \org\bovigo\vfs\vfsStreamDirectory */
+    private $root;
 
     public static function setUpBeforeClass(): void
     {
@@ -36,6 +40,11 @@ class RestClientTest extends TestCase
     public static function tearDownAfterClass(): void
     {
         self::$server->stop();
+    }
+
+    protected function setUp(): void
+    {
+        $this->root = vfsStream::setup();
     }
 
     /**
@@ -99,34 +108,6 @@ class RestClientTest extends TestCase
         self::assertSame('The response of some/route', $responseContent);
         self::assertArrayHasKey('X-Jobrouter-Authorization', $requestHeaders);
         self::assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['X-Jobrouter-Authorization']);
-    }
-
-    /**
-     * @test
-     */
-    public function requestWithHeaderOptionsIsCalledWithThem(): void
-    {
-        $this->setResponseOfTokensPath();
-
-        $restClient = new RestClient(self::$configuration);
-
-        self::$server->setResponseOfPath(
-            '/api/rest/v2/some/route',
-            new Response('The response of some/route')
-        );
-
-        $options = [
-            'headers' => [
-                'some-test-header' => 'some-test-value',
-            ],
-        ];
-
-        $restClient->request('GET', 'some/route', $options);
-
-        $requestHeaders = self::$server->getLastRequest()->getHeaders();
-
-        self::assertArrayHasKey('some-test-header', $requestHeaders);
-        self::assertSame('some-test-value', $requestHeaders['some-test-header']);
     }
 
     /**
@@ -249,5 +230,69 @@ class RestClientTest extends TestCase
         );
 
         new RestClient(self::$configuration);
+    }
+
+    /**
+     * @test
+     */
+    public function formDataIsCorrectlySend(): void
+    {
+        $this->setResponseOfTokensPath();
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/application/incidents/test',
+            new Response(
+                '{"incidents":[{"workflowId":"8c520dd91b59c62c9ec30c7310bb9fc60000000313","stepId":"8c520dd91b59c62c9ec30c7310bb9fc60000000347","processId":"8c520dd91b59c62c9ec30c7310bb9fc60000000237","incidentnumber":17,"jobfunction":"Admin","username":"rest"}]}',
+                ['content-type' => 'application/json'],
+                200
+            )
+        );
+
+        $restClient = new RestClient(self::$configuration);
+
+        $filePath = $this->root->url() . '/some-file.txt';
+        \file_put_contents($filePath, 'foo');
+
+        $formData = [
+            'step' => '1',
+            'summary' => 'RestClientTest',
+            'processtable[fields][0][name]' => 'textbox',
+            'processtable[fields][0][value]' => 'value for a textbox',
+            'processtable[fields][1][name]' => 'file',
+            'processtable[fields][1][value]' => [
+                'path' => $filePath,
+                'filename' => 'bar.txt',
+            ],
+        ];
+
+        $response = $restClient->request(
+            'POST',
+            'application/incidents/test',
+            ['multipart' => $formData]
+        );
+
+        self::assertSame(200, $response->getStatusCode());
+
+        $lastRequest = self::$server->getLastRequest();
+
+        $requestHeaders = $lastRequest->getHeaders();
+        self::assertArrayHasKey('X-Jobrouter-Authorization', $requestHeaders);
+        self::assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['X-Jobrouter-Authorization']);
+        self::assertArrayHasKey('Content-Type', $requestHeaders);
+        self::assertStringStartsWith('multipart/form-data; boundary="', $requestHeaders['Content-Type']);
+
+        $post = $lastRequest->getPost();
+        self::assertArrayHasKey('step', $post);
+        self::assertSame('1', $post['step']);
+        self::assertArrayHasKey('summary', $post);
+        self::assertSame('RestClientTest', $post['summary']);
+        self::assertArrayHasKey('processtable', $post);
+        self::assertSame('textbox', $post['processtable']['fields'][0]['name']);
+        self::assertSame('value for a textbox', $post['processtable']['fields'][0]['value']);
+        self::assertSame('file', $post['processtable']['fields'][1]['name']);
+
+        $files = $lastRequest->getFiles();
+        self::assertArrayHasKey('processtable', $files);
+        self::assertSame('bar.txt', $files['processtable']['name']['fields'][1]['value']);
     }
 }

@@ -10,6 +10,7 @@ use Buzz\Browser;
 use Buzz\Client\Curl;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -117,40 +118,24 @@ final class RestClient
      *
      * @param string $method The method
      * @param string $resource The resource path
-     * @param array $options Additional options for the request (the JobRouter authorization header is added automatically)
+     * @param array $data Data for the request with key 'json' for json data or key 'multipart' for multipart/form-data
      *
      * @return ResponseInterface
      *
      * @throws HttpException
      */
-    public function request(string $method, string $resource, array $options = []): ResponseInterface
+    public function request(string $method, string $resource, array $data = []): ResponseInterface
     {
-        $request = $this->psr17factory->createRequest($method, $this->getFullResourceUrl($resource));
-        $request = $request->withHeader('User-Agent', $this->getUserAgent());
-
-        if ($this->jwToken) {
-            $request = $request->withHeader('X-Jobrouter-Authorization', 'Bearer ' . $this->jwToken);
-        }
-
-        foreach ($options['headers'] ?? [] as $key => $value) {
-            $request = $request->withHeader($key, $value);
-        }
-
-        if (isset($options['json'])) {
-            $request = $request->withHeader('Content-Type', 'application/json');
-
-            if (\is_array($options['json'])) {
-                $options['json'] = \json_encode($options['json']);
-            }
-
-            if (\is_string($options['json'])) {
-                $request = $request->withBody($this->psr17factory->createStream($options['json']));
-            }
-        }
-
         $errorMessage = 'Error fetching route ' . $resource;
+
         try {
-            $response = $this->browser->sendRequest($request);
+            if (isset($data['multipart'])) {
+                $response = $this->sendForm($method, $resource, $data['multipart']);
+            } elseif (isset($data['json'])) {
+                $response = $this->sendJson($method, $resource, $data['json']);
+            } else {
+                $response = $this->browser->sendRequest($this->buildRequest($method, $resource));
+            }
         } catch (ClientExceptionInterface $e) {
             throw new HttpException($errorMessage, 0, $e);
         }
@@ -166,5 +151,49 @@ final class RestClient
         }
 
         return $response;
+    }
+
+    private function sendForm(string $method, string $resource, array $multipart): ResponseInterface
+    {
+        $headers = ['User-Agent' => $this->getUserAgent()];
+
+        if ($this->jwToken) {
+            $headers['X-Jobrouter-Authorization'] = 'Bearer ' . $this->jwToken;
+        }
+
+        return $this->browser->submitForm(
+            $this->getFullResourceUrl($resource),
+            $multipart,
+            $method,
+            $headers
+        );
+    }
+
+    private function sendJson(string $method, string $resource, array $jsonPayload): ResponseInterface
+    {
+        $request = $this->buildRequest($method, $resource);
+        $request = $request->withHeader('content-type', 'application/json');
+
+        if (\is_array($jsonPayload)) {
+            $jsonPayload = \json_encode($jsonPayload);
+        }
+
+        if (\is_string($jsonPayload) && !empty($jsonPayload)) {
+            $request = $request->withBody($this->psr17factory->createStream($jsonPayload));
+        }
+
+        return $this->browser->sendRequest($request);
+    }
+
+    private function buildRequest(string $method, string $resource): RequestInterface
+    {
+        $request = $this->psr17factory->createRequest($method, $this->getFullResourceUrl($resource));
+        $request = $request->withHeader('User-Agent', $this->getUserAgent());
+
+        if ($this->jwToken) {
+            $request = $request->withHeader('X-Jobrouter-Authorization', 'Bearer ' . $this->jwToken);
+        }
+
+        return $request;
     }
 }

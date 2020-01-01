@@ -95,28 +95,63 @@ HttpException.
 
 With the following request you can post a dataset to a JobData table:
 
-    $response = $client->request(
-        'POST',
-        'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E4/datasets',
-        [
-            'json' => [
-                'dataset' => [
-                    'column1' => 'content of column 1',
-                    'column2' => 'content of column 2',
+    try {
+        $response = $client->request(
+            'POST',
+            'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E4/datasets',
+            [
+                'json' => [
+                    'dataset' => [
+                        'column1' => 'content of column 1',
+                        'column2' => 'content of column 2',
+                    ],
                 ],
-            ],
-        ]
-    );
+            ]
+        );
+   } catch (HttpException $e) {
+        echo $e->getCode() . "\n";
+        echo $e->getMessage();
 
-    $statusCode = $response->getStatusCode();
-    if ($statusCode === 201) {
-        // Success
-    } else {
-        echo $statusCode . "\n";
-        echo $response->getBody()->getContents();
+        if ($e->getPrevious()) {
+            var_dump($e->getPrevious());
+        }
     }
 
 Please keep in mind: You have to send all columns of a table for which
 the user has the right to. Otherwise you will receive an error with
 status code 422 (Unprocessable entity)!
 
+### Start a process
+
+To start a new instance you have to send the data as multipart/form-data
+instead of JSON like the previous examples:
+
+    // Define instance data
+    $multipart = [
+        'step' => '1',
+        'summary' => 'Instance started via JobRouter Client',
+        'processtable[fields][0][name]' => 'INVOICENR',
+        'processtable[fields][0][value]' => 'IN02984',
+        'processtable[fields][1][name]' => 'INVOICE_FILE',
+        'processtable[fields][1][value]' => [
+            'path'=>'/path/to/invoice/file.pdf',
+            'filename' => 'in02984.png',
+            // The content type is optional
+            'contentType' => 'application/pdf',
+        ],
+    ];
+
+    try {
+        $response = $client->request(
+            'POST',
+            'application/incidents/invoice',
+            ['multipart' => $multipart]
+        );
+    } catch (HttpException $e) {
+        echo $e->getCode() . "\n";
+        echo $e->getMessage();
+
+        if ($e->getPrevious()) {
+            var_dump($e->getPrevious());
+        }
+    }
