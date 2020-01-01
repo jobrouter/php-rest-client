@@ -135,7 +135,7 @@ instead of JSON like the previous examples:
         'processtable[fields][1][name]' => 'INVOICE_FILE',
         'processtable[fields][1][value]' => [
             'path'=>'/path/to/invoice/file.pdf',
-            'filename' => 'in02984.png',
+            'filename' => 'in02984.pdf',
             // The content type is optional
             'contentType' => 'application/pdf',
         ],
