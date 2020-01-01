@@ -6,6 +6,7 @@ namespace Brotkrueml\JobRouterClient\Client;
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
 use Brotkrueml\JobRouterClient\Exception\HttpException;
+use Brotkrueml\JobRouterClient\Middleware\UserAgentMiddleware;
 use Buzz\Browser;
 use Buzz\Client\Curl;
 use Nyholm\Psr7\Factory\Psr17Factory;
@@ -19,7 +20,6 @@ use Psr\Http\Message\ResponseInterface;
 final class RestClient
 {
     private const API_ENDPOINT = '/api/rest/v2/';
-    private const VERSION = '0.6.0-dev';
 
     /**
      * @var ClientConfiguration
@@ -51,19 +51,9 @@ final class RestClient
 
         $client = new Curl($this->psr17factory);
         $this->browser = new Browser($client, $this->psr17factory);
+        $this->browser->addMiddleware(new UserAgentMiddleware($this->configuration->getUserAgentAddition()));
 
         $this->authenticate();
-    }
-
-    private function getUserAgent(): string
-    {
-        return \rtrim(
-            \sprintf(
-                'JobRouterClient/%s (https://github.com/brotkrueml/jobrouter-client) %s',
-                static::VERSION,
-                $this->configuration->getUserAgentAddition()
-            )
-        );
     }
 
     private function getFullResourceUrl(string $resource): string
@@ -155,8 +145,6 @@ final class RestClient
 
     private function sendForm(string $method, string $resource, array $multipart): ResponseInterface
     {
-        $headers = ['User-Agent' => $this->getUserAgent()];
-
         if ($this->jwToken) {
             $headers['X-Jobrouter-Authorization'] = 'Bearer ' . $this->jwToken;
         }
@@ -188,7 +176,6 @@ final class RestClient
     private function buildRequest(string $method, string $resource): RequestInterface
     {
         $request = $this->psr17factory->createRequest($method, $this->getFullResourceUrl($resource));
-        $request = $request->withHeader('User-Agent', $this->getUserAgent());
 
         if ($this->jwToken) {
             $request = $request->withHeader('X-Jobrouter-Authorization', 'Bearer ' . $this->jwToken);
