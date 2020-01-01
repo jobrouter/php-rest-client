@@ -36,7 +36,7 @@ jobs:
           extension-csv: mbstring
       - name: Install composer dependencies
         run: |
-          composer --version && composer install
+          composer --version && composer install --no-progress
       - name: Run PHP linter
         run: |
           find . -name \*.php  ! -path "./vendor/*" -exec php -l {} \;
@@ -70,7 +70,7 @@ jobs:
       - name: Install composer dependencies
         run: |
           composer --version
-          composer install
+          composer install --no-progress
       - name: Run unit tests
         run: |
           vendor/bin/phpunit -c tests/phpunit.xml.dist
