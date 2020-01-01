@@ -97,8 +97,8 @@ class RestClientTest extends TestCase
         $requestHeaders = self::$server->getLastRequest()->getHeaders();
 
         self::assertSame('The response of some/route', $responseContent);
-        self::assertArrayHasKey('x-jobrouter-authorization', $requestHeaders);
-        self::assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['x-jobrouter-authorization']);
+        self::assertArrayHasKey('X-Jobrouter-Authorization', $requestHeaders);
+        self::assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['X-Jobrouter-Authorization']);
     }
 
     /**

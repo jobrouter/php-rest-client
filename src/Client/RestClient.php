@@ -6,11 +6,11 @@ namespace Brotkrueml\JobRouterClient\Client;
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
 use Brotkrueml\JobRouterClient\Exception\HttpException;
-use Nyholm\Psr7\Stream;
+use Buzz\Browser;
+use Buzz\Client\Curl;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpClient\Psr18Client;
 
 /**
  * RestClient for handling HTTP requests
@@ -26,8 +26,11 @@ final class RestClient
      */
     private $configuration;
 
-    /** @var Psr18Client */
-    private $psr18Client;
+    /** @var Psr17Factory */
+    private $psr17factory;
+
+    /** @var Browser */
+    private $browser;
 
     /** @var string */
     private $jwToken = '';
@@ -43,13 +46,10 @@ final class RestClient
     public function __construct(ClientConfiguration $configuration)
     {
         $this->configuration = $configuration;
+        $this->psr17factory = new Psr17Factory();
 
-        $client = HttpClient::create([
-            'base_uri' => $this->getRestApiUrl(),
-            'headers' => ['User-Agent' => $this->getUserAgent()],
-        ]);
-
-        $this->psr18Client = new Psr18Client($client);
+        $client = new Curl($this->psr17factory);
+        $this->browser = new Browser($client, $this->psr17factory);
 
         $this->authenticate();
     }
@@ -65,9 +65,11 @@ final class RestClient
         );
     }
 
-    private function getRestApiUrl(): string
+    private function getFullResourceUrl(string $resource): string
     {
-        return \rtrim($this->configuration->getBaseUrl(), '/') . self::API_ENDPOINT;
+        return \rtrim($this->configuration->getBaseUrl(), '/')
+            . self::API_ENDPOINT
+            . \ltrim($resource, '/');
     }
 
     /**
@@ -114,21 +116,20 @@ final class RestClient
      * Send a request to the configured JobRouter system
      *
      * @param string $method The method
-     * @param string $route The route
+     * @param string $resource The resource path
      * @param array $options Additional options for the request (the JobRouter authorization header is added automatically)
      *
      * @return ResponseInterface
      *
      * @throws HttpException
      */
-    public function request(string $method, string $route, array $options = []): ResponseInterface
+    public function request(string $method, string $resource, array $options = []): ResponseInterface
     {
-        $route = \ltrim($route, '/');
-
-        $request = $this->psr18Client->createRequest($method, $route);
+        $request = $this->psr17factory->createRequest($method, $this->getFullResourceUrl($resource));
+        $request = $request->withHeader('User-Agent', $this->getUserAgent());
 
         if ($this->jwToken) {
-            $request = $request->withHeader('x-jobrouter-authorization', 'Bearer ' . $this->jwToken);
+            $request = $request->withHeader('X-Jobrouter-Authorization', 'Bearer ' . $this->jwToken);
         }
 
         foreach ($options['headers'] ?? [] as $key => $value) {
@@ -136,20 +137,20 @@ final class RestClient
         }
 
         if (isset($options['json'])) {
-            $request = $request->withHeader('content-type', 'application/json');
+            $request = $request->withHeader('Content-Type', 'application/json');
 
             if (\is_array($options['json'])) {
                 $options['json'] = \json_encode($options['json']);
             }
 
             if (\is_string($options['json'])) {
-                $request = $request->withBody(Stream::create($options['json']));
+                $request = $request->withBody($this->psr17factory->createStream($options['json']));
             }
         }
 
-        $errorMessage = 'Error fetching route ' . $route;
+        $errorMessage = 'Error fetching route ' . $resource;
         try {
-            $response = $this->psr18Client->sendRequest($request);
+            $response = $this->browser->sendRequest($request);
         } catch (ClientExceptionInterface $e) {
             throw new HttpException($errorMessage, 0, $e);
         }

@@ -88,7 +88,7 @@ You can do this also in advance to omit a timeout.
 You'll receive an object the implements Psr\Http\Message\ResponseInterface and can use
 the methods of this object to query the status code or the body content.
 
-If an error occurs, e.g. a route or the passed data is not correct, you'll get a
+If an error occurs, e.g. a resource or the passed data is not correct, you'll get a
 HttpException.
 
 ### Post a dataset to a JobData table
