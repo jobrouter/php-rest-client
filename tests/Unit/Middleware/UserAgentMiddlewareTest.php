@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Unit\Middleware;
+namespace Brotkrueml\JobRouterClient\Tests\Unit\Middleware;
 
 use Brotkrueml\JobRouterClient\Environment\Version;
 use Brotkrueml\JobRouterClient\Middleware\UserAgentMiddleware;
