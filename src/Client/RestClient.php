@@ -6,6 +6,7 @@ namespace Brotkrueml\JobRouterClient\Client;
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
 use Brotkrueml\JobRouterClient\Exception\HttpException;
+use Brotkrueml\JobRouterClient\Middleware\AuthorisationMiddleware;
 use Brotkrueml\JobRouterClient\Middleware\UserAgentMiddleware;
 use Buzz\Browser;
 use Buzz\Client\Curl;
@@ -33,8 +34,8 @@ final class RestClient
     /** @var Browser */
     private $browser;
 
-    /** @var string */
-    private $jwToken = '';
+    /** @var AuthorisationMiddleware */
+    private $authorisationMiddleware;
 
     /**
      * Creates a RestClient instance, already authenticated against the JobRouter system
@@ -52,15 +53,10 @@ final class RestClient
         $client = new Curl($this->psr17factory);
         $this->browser = new Browser($client, $this->psr17factory);
         $this->browser->addMiddleware(new UserAgentMiddleware($this->configuration->getUserAgentAddition()));
+        $this->authorisationMiddleware = new AuthorisationMiddleware();
+        $this->browser->addMiddleware($this->authorisationMiddleware);
 
         $this->authenticate();
-    }
-
-    private function getFullResourceUrl(string $resource): string
-    {
-        return \rtrim($this->configuration->getBaseUrl(), '/')
-            . self::API_ENDPOINT
-            . \ltrim($resource, '/');
     }
 
     /**
@@ -70,7 +66,7 @@ final class RestClient
      */
     public function authenticate(): void
     {
-        $this->jwToken = '';
+        $this->authorisationMiddleware->resetToken();
 
         $options = [
             'json' => [
@@ -100,7 +96,7 @@ final class RestClient
             throw new AuthenticationException('Token is unavailable', 1570222016);
         }
 
-        $this->jwToken = $content['tokens'][0];
+        $this->authorisationMiddleware->setToken($content['tokens'][0]);
     }
 
     /**
@@ -145,17 +141,18 @@ final class RestClient
 
     private function sendForm(string $method, string $resource, array $multipart): ResponseInterface
     {
-        $headers = [];
-        if ($this->jwToken) {
-            $headers['X-Jobrouter-Authorization'] = 'Bearer ' . $this->jwToken;
-        }
-
         return $this->browser->submitForm(
             $this->getFullResourceUrl($resource),
             $multipart,
-            $method,
-            $headers
+            $method
         );
+    }
+
+    private function getFullResourceUrl(string $resource): string
+    {
+        return \rtrim($this->configuration->getBaseUrl(), '/')
+            . self::API_ENDPOINT
+            . \ltrim($resource, '/');
     }
 
     /**
@@ -182,12 +179,6 @@ final class RestClient
 
     private function buildRequest(string $method, string $resource): RequestInterface
     {
-        $request = $this->psr17factory->createRequest($method, $this->getFullResourceUrl($resource));
-
-        if ($this->jwToken) {
-            $request = $request->withHeader('X-Jobrouter-Authorization', 'Bearer ' . $this->jwToken);
-        }
-
-        return $request;
+        return $this->psr17factory->createRequest($method, $this->getFullResourceUrl($resource));
     }
 }
