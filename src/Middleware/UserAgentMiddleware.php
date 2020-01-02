@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Middleware;
 
-use Brotkrueml\JobRouterClient\Environment\Version;
+use Brotkrueml\JobRouterClient\Version;
 use Buzz\Middleware\MiddlewareInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;

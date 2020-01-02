@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Middleware;
 
-use Brotkrueml\JobRouterClient\Environment\Version;
+use Brotkrueml\JobRouterClient\Version;
 use Brotkrueml\JobRouterClient\Middleware\UserAgentMiddleware;
 use Nyholm\Psr7\Request;
 use PHPUnit\Framework\TestCase;

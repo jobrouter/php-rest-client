@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Brotkrueml\JobRouterClient\Environment;
+namespace Brotkrueml\JobRouterClient;
 
 class Version
 {
