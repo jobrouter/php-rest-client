@@ -5,5 +5,5 @@ namespace Brotkrueml\JobRouterClient;
 
 class Version
 {
-    public const VERSION = '0.6.0-dev';
+    public const VERSION = '0.6.0';
 }
