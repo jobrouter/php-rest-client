@@ -1,5 +1,5 @@
 /tests/ export-ignore
-/.coveralls.yml
+/.coveralls.yml export-ignore
 /.editorconfig export-ignore
 /.gitattributes export-ignore
 /.github export-ignore
@@ -7,3 +7,4 @@
 /.php_cs export-ignore
 /psalm.xml export-ignore
 /sonar-project.properties export-ignore
+/README.md export-ignore
