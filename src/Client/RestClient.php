@@ -6,6 +6,7 @@ namespace Brotkrueml\JobRouterClient\Client;
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
 use Brotkrueml\JobRouterClient\Exception\HttpException;
+use Brotkrueml\JobRouterClient\Exception\RestClientException;
 use Brotkrueml\JobRouterClient\Middleware\AuthorisationMiddleware;
 use Brotkrueml\JobRouterClient\Middleware\UserAgentMiddleware;
 use Buzz\Browser;
@@ -18,7 +19,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * RestClient for handling HTTP requests
  */
-final class RestClient
+final class RestClient implements ClientInterface
 {
     private const API_ENDPOINT = '/api/rest/v2/';
 
@@ -109,9 +110,22 @@ final class RestClient
      * @return ResponseInterface
      *
      * @throws HttpException
+     *
+     * @psalm-suppress MoreSpecificImplementedParamType
+     * @psalm-suppress DocblockTypeContradiction
      */
-    public function request(string $method, string $resource, array $data = []): ResponseInterface
+    public function request(string $method, string $resource, $data = []): ResponseInterface
     {
+        if (!\is_array($data)) {
+            throw new RestClientException(
+                \sprintf(
+                    'data must be an array, "%s" given',
+                    gettype($data)
+                ),
+                1578233543
+            );
+        }
+
         $errorMessage = 'Error fetching route ' . $resource;
 
         try {

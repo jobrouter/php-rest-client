@@ -7,6 +7,7 @@ use Brotkrueml\JobRouterClient\Client\RestClient;
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
 use Brotkrueml\JobRouterClient\Exception\HttpException;
+use Brotkrueml\JobRouterClient\Exception\RestClientException;
 use donatj\MockWebServer\MockWebServer;
 use donatj\MockWebServer\Response;
 use org\bovigo\vfs\vfsStream;
@@ -129,7 +130,7 @@ class RestClientTest extends TestCase
     /**
      * @test
      */
-    public function unknownOptionPassingToRequestThrowsRestClientException(): void
+    public function unknownOptionPassingToRequestThrowsException(): void
     {
         $this->expectException(HttpException::class);
 
@@ -148,7 +149,7 @@ class RestClientTest extends TestCase
     /**
      * @test
      */
-    public function noTokenIsReturnedThrowsRestClientException(): void
+    public function noTokenIsReturnedThrowsAuthenticationException(): void
     {
         $this->expectException(AuthenticationException::class);
 
@@ -294,5 +295,19 @@ class RestClientTest extends TestCase
         $files = $lastRequest->getFiles();
         self::assertArrayHasKey('processtable', $files);
         self::assertSame('bar.txt', $files['processtable']['name']['fields'][1]['value']);
+    }
+
+    /**
+     * @test
+     */
+    public function requestWhenDataIsNotAnArrayAnExceptionIsThrown(): void
+    {
+        $this->expectException(RestClientException::class);
+        $this->expectExceptionCode(1578233543);
+
+        $this->setResponseOfTokensPath();
+        $restClient = new RestClient(self::$configuration);
+
+        $restClient->request('POST', 'some/route', false);
     }
 }

@@ -249,3 +249,53 @@ To start a new instance of a process you have to send the data as
 
 #. Lines 20-24: Send the data as ``multipart/form-data`` with the key
    :php:`multipart` in the array of the third argument.
+
+But instead of having the hassle with the complex ``processtable`` and
+``subtable`` structure just use the :php:`IncidentsClient` which gives you an
+API to handle all the process table and sub table stuff:
+
+::
+
+   <?php
+   use Brotkrueml\JobRouterClient\Client\IncidentsClient;
+   use Brotkrueml\JobRouterClient\Model\Incident;
+
+   // The JobRouter Client is already initialised
+
+   $incident = (new Incident())
+      ->setStep(1)
+      ->setSummary('Instance started via IncidentsClient')
+      ->setProcessTableField('INVOICENR', 'IN02984')
+      ->setProcessTableField(
+         'INVOICE_FILE',
+         [
+            'path'=>'/path/to/invoice/file.pdf',
+            'filename' => 'in02984.pdf',
+            // The content type is optional
+            'contentType' => 'application/pdf',
+         ]
+      )
+   ;
+
+   $incidentsClient = new IncidentsClient($client);
+
+   $response = $incidentsClient->request(
+      'POST',
+      'application/incidents/invoice',
+      $incident
+   );
+
+This is much more intuitive. So, let's have a look:
+
+#. Lines 7-20: Create an object instance of the :php:`Incident` model and use the
+   available setters to assign the necessary data.
+
+#. Line 22: Create the :php:`IncidentsClient`. As an argument it gets an
+   already initialised :php:`RestClient` instance. It is a decorator for the
+   Rest Client, so you can also use it to authenticate or make other requests,
+   e.g. to the JobData module.
+
+#. Line 24: Use the :php:`Incident` model as third argument for the
+   :php:`request()` method. As usual you'll get a :php:`ResponseInterface`
+   object back with the response of the HTTP request. If you would pass an array
+   the request is passed unaltered to the Rest Client.
