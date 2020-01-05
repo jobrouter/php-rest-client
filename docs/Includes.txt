@@ -1,0 +1,11 @@
+.. This is 'Includes.txt'. It is included at the very top of each and
+   every ReST source file in THIS documentation project (= manual).
+
+.. role:: aspect(strong)
+.. role:: php(code)
+   :language: php
+
+
+.. default-role:: code
+.. highlight:: php
+   :linenothreshold: 5

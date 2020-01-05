@@ -3,5 +3,6 @@
 .phpunit.result.cache
 .scannerwork
 composer.lock
+docs/_build/
 logs/
 vendor/
