@@ -3,8 +3,11 @@
 [![CI Status](https://github.com/brotkrueml/jobrouter-client/workflows/CI/badge.svg?branch=master)](https://github.com/brotkrueml/jobrouter-client/actions?query=workflow%3ACI)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=jobrouter-client&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=jobrouter-client)
 [![Coverage Status](https://coveralls.io/repos/github/brotkrueml/jobrouter-client/badge.svg?branch=master)](https://coveralls.io/github/brotkrueml/jobrouter-client?branch=master)
+[![Documentation Status](https://readthedocs.org/projects/jobrouter-client/badge/?version=latest)](https://jobrouter-client.readthedocs.io/en/latest/?badge=latest)
 
 [JobRouter](https://www.jobrouter.com/) is a scalable digitization
 platform which links processes, data and documents. This JobRouter
 Client eases the access to the REST API. The library supports JobRouter
 version 4.2 and up.
+
+[Documentation](https://jobrouter-client.readthedocs.io/)
