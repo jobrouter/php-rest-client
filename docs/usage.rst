@@ -17,8 +17,7 @@ Initialisation of the JobRouter Client
    <?php
    use Brotkrueml\JobRouterClient\Client\RestClient;
    use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-   use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
-   use Brotkrueml\JobRouterClient\Exception\HttpException;
+   use Brotkrueml\JobRouterClient\Exception\ExceptionInterface;
 
    require_once 'vendor/autoload.php';
 
@@ -31,7 +30,7 @@ Initialisation of the JobRouter Client
 
    try {
       $client = new RestClient($configuration);
-   } catch (AuthenticationException|HttpException $e) {
+   } catch (ExceptionInterface $e) {
       echo $e->getCode() . "\n";
       echo $e->getMessage() . "\n";
 
@@ -42,28 +41,29 @@ Initialisation of the JobRouter Client
 
 Let's dig into the piece of code:
 
-#. Lines 2-5: The JobRouter client library uses the namespace
-   :php:`Brotkrueml\JobRouterClient`, the :php:`uses` ease the writing of the
+#. Lines 2-4: The JobRouter client library uses the namespace
+   :php:`Brotkrueml\JobRouterClient`, the :php:`uses` ease the using of the
    following classes.
 
-#. Line 7: Require the autoloading file, so the classes are found and can be
+#. Line 6: Require the autoloading file, so the classes are found and can be
    used.
 
-#. Lines 9-12: Define a :php:`ClientConfiguration` object with the base URL, the
+#. Lines 8-11: Define a :php:`ClientConfiguration` object with the base URL, the
    username and the password for your JobRouter installation.
 
-#. Line 14: Set the lifetime in seconds of the JSON Web Token. The default
+#. Line 13: Set the lifetime of the JSON Web Token in seconds. The default
    value is 600 seconds - if you are fine with this, you can omit this setter.
 
-#. Line 17: Now initialise the RestClient with the configuration object. During
-   the initialisation the client will authenticate against the JobRouter
+#. Line 16: Now instantiate the RestClient with the configuration object. During
+   the instantiation the client will authenticate against the JobRouter
    installation.
 
-#. Line 18: As there can be errors during the initialisation - like a typo in
-   the base URL (throws an :php:`HttpException`) or wrong credentials (throws an
-   :php:`AuthenticationException`)- embed the initialisation into a
-   :php:`try`/:php:`catch` block. The thrown exception can embed another
-   exception, you'll get it with :php:`->getPrevious()`.
+#. Line 17: As there can be errors during the initialisation - like a typo in
+   the base URL or wrong credentials embed the initialisation into a
+   :php:`try`/:php:`catch` block. The thrown exception is by default an
+   implementation of the :php:`ExceptionInterface`. It encapsulates sometimes
+   another exception, you'll get it with :php:`->getPrevious()`. Of course, you
+   can also catch by :php:`\Exception` or :php:`\Throwable`.
 
 After the initialisation part you can now request the needed data or store some
 data. You can make as many requests as you want, but keep in mind: When the
@@ -145,7 +145,7 @@ assume the client is already initialised, like in the
 
       echo $response->getStatusCode() . "\n";
       var_dump($response->getBody()->getContents());
-   } catch (AuthenticationException|HttpException $e) {
+   } catch (ExceptionInterface $e) {
       // Error handling
    }
 
@@ -189,7 +189,7 @@ With the following request you can post a dataset to a JobData table:
             ],
          ]
       );
-   } catch (AuthenticationException|HttpException $e) {
+   } catch (ExceptionInterface $e) {
       // Error handling
    }
 
@@ -239,7 +239,7 @@ To start a new instance of a process you have to send the data as
          'application/incidents/invoice',
          ['multipart' => $multipart]
       );
-   } catch (AuthenticationException|HttpException $e) {
+   } catch (ExceptionInterface $e) {
       // Error handling
    }
 
@@ -257,6 +257,7 @@ API to handle all the process table and sub table stuff:
 ::
 
    <?php
+   // Additional uses
    use Brotkrueml\JobRouterClient\Client\IncidentsClient;
    use Brotkrueml\JobRouterClient\Model\Incident;
 
@@ -277,25 +278,29 @@ API to handle all the process table and sub table stuff:
       )
    ;
 
-   $incidentsClient = new IncidentsClient($client);
+   try {
+      $incidentsClient = new IncidentsClient($client);
 
-   $response = $incidentsClient->request(
-      'POST',
-      'application/incidents/invoice',
-      $incident
-   );
+      $response = $incidentsClient->request(
+         'POST',
+         'application/incidents/invoice',
+         $incident
+      );
+   } catch (ExceptionInterface $e) {
+      // Error handling
+   }
 
 This is much more intuitive. So, let's have a look:
 
-#. Lines 7-20: Create an object instance of the :php:`Incident` model and use the
+#. Lines 8-21: Create an object instance of the :php:`Incident` model and use the
    available setters to assign the necessary data.
 
-#. Line 22: Create the :php:`IncidentsClient`. As an argument it gets an
+#. Line 24: Create the :php:`IncidentsClient`. As an argument it gets an
    already initialised :php:`RestClient` instance. It is a decorator for the
    Rest Client, so you can also use it to authenticate or make other requests,
    e.g. to the JobData module.
 
-#. Line 24: Use the :php:`Incident` model as third argument for the
+#. Lines 26-30: Use the :php:`Incident` model as third argument for the
    :php:`request()` method. As usual you'll get a :php:`ResponseInterface`
    object back with the response of the HTTP request. If you would pass an array
    the request is passed unaltered to the Rest Client.
