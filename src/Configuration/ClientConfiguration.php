@@ -57,7 +57,7 @@ final class ClientConfiguration
 
         if ($filteredBaseUrl === false) {
             throw new InvalidConfigurationException(
-                sprintf('Given baseUrl "%s" is not a valid URL!', $baseUrl),
+                \sprintf('Given baseUrl "%s" is not a valid URL!', $baseUrl),
                 1565710531
             );
         }
@@ -122,7 +122,7 @@ final class ClientConfiguration
             || $lifetime > self::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS
         ) {
             throw new InvalidConfigurationException(
-                sprintf(
+                \sprintf(
                     'Lifetime value "%d" is not allowed! It has to be between "%d" and "%d"',
                     $lifetime,
                     self::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS,
