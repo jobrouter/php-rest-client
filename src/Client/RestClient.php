@@ -80,15 +80,7 @@ final class RestClient implements ClientInterface
         try {
             $response = $this->request('POST', 'application/tokens', $options);
         } catch (HttpException $e) {
-            throw new AuthenticationException(
-                \sprintf(
-                    'Authentication failed for user "%s" on JobRouter base URL "%s',
-                    $this->configuration->getUsername(),
-                    $this->configuration->getBaseUrl()
-                ),
-                1577818398,
-                $e
-            );
+            throw AuthenticationException::fromFailedAuthentication($this->configuration, 1577818398, $e);
         }
 
         $content = \json_decode($response->getBody()->getContents(), true);
