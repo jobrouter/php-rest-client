@@ -153,8 +153,8 @@ assume the client is already initialised, like in the
    JobRouter installation. In this example, the method is ``GET`` as we want to
    retrieve data. The second parameter is the resource to the Jobdata module
    with the GUID of the table. The :php:`$response` is an object which
-   implements the `Psr\Http\Message\ResponseInterface <https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface>`_
-   which itself extends the `Psr\Http\Message\MessageInterface <https://www.php-fig.org/psr/psr-7/#31-psrhttpmessagemessageinterface>`_
+   implements the `Psr\\Http\\Message\\ResponseInterface <https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface>`_
+   which itself extends the `Psr\\Http\\Message\\MessageInterface <https://www.php-fig.org/psr/psr-7/#31-psrhttpmessagemessageinterface>`_
 
 #. Line 10: The :php:`ResponseInterface` object exposes some methods. One is to
    get the status code.
