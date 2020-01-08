@@ -129,7 +129,7 @@ final class RestClient implements ClientInterface
                 $response = $this->browser->sendRequest($this->buildRequest($method, $resource));
             }
         } catch (ClientExceptionInterface $e) {
-            throw new HttpException($errorMessage, 0, $e);
+            throw new HttpException($errorMessage, $e->getCode(), $e);
         }
 
         $statusCode = $response->getStatusCode();
