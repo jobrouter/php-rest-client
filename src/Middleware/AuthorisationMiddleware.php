@@ -7,6 +7,9 @@ use Buzz\Middleware\MiddlewareInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @internal
+ */
 class AuthorisationMiddleware implements MiddlewareInterface
 {
     /**

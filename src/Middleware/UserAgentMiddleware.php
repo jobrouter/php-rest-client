@@ -8,6 +8,9 @@ use Buzz\Middleware\MiddlewareInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @internal
+ */
 class UserAgentMiddleware implements MiddlewareInterface
 {
     private const USER_AGENT_TEMPLATE = 'JobRouterClient/%s (https://github.com/brotkrueml/jobrouter-client) %s';
