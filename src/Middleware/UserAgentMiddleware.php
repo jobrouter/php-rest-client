@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Middleware;
 
-use Brotkrueml\JobRouterClient\Version;
+use Brotkrueml\JobRouterClient\Information\Version;
 use Buzz\Middleware\MiddlewareInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -23,7 +23,7 @@ class UserAgentMiddleware implements MiddlewareInterface
         $this->userAgent = \rtrim(
             \sprintf(
                 static::USER_AGENT_TEMPLATE,
-                Version::VERSION,
+                (new Version())->getVersion(),
                 $userAgentAddition
             )
         );

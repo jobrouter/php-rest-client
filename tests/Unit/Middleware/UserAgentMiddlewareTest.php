@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Middleware;
 
+use Brotkrueml\JobRouterClient\Information\Version;
 use Brotkrueml\JobRouterClient\Middleware\UserAgentMiddleware;
-use Brotkrueml\JobRouterClient\Version;
 use Nyholm\Psr7\Request;
 use PHPUnit\Framework\TestCase;
 
@@ -27,7 +27,7 @@ class UserAgentMiddlewareTest extends TestCase
         self::assertSame(
             \sprintf(
                 'JobRouterClient/%s (https://github.com/brotkrueml/jobrouter-client)',
-                Version::VERSION
+                (new Version())->getVersion()
             ),
             $newRequest->getHeaderLine('User-Agent')
         );
@@ -50,7 +50,7 @@ class UserAgentMiddlewareTest extends TestCase
         self::assertSame(
             \sprintf(
                 'JobRouterClient/%s (https://github.com/brotkrueml/jobrouter-client) SomeConnector/1.2.3',
-                Version::VERSION
+                (new Version())->getVersion()
             ),
             $newRequest->getHeaderLine('User-Agent')
         );
