@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
 
-use Brotkrueml\JobRouterClient\Client\IncidentsClient;
+use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
 use Brotkrueml\JobRouterClient\Client\RestClient;
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use Brotkrueml\JobRouterClient\Model\Incident;
@@ -12,7 +12,7 @@ use donatj\MockWebServer\Response;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 
-class IncidentsClientTest extends TestCase
+class IncidentsDecoratorTest extends TestCase
 {
     private const TEST_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqYXQiOjE1NzAyMjAwNzIsImp0aSI6IjhWMGtaSzJ5RzRxdGlhbjdGbGZTNUhPTGZaeGtZXC9obG1SVEV2VXIxVmwwPSIsImlzcyI6IkpvYlJvdXRlciIsIm5iZiI6MTU3MDIyMDA3MiwiZXhwIjoxNTcwMjIwMTAyLCJkYXRhIjp7InVzZXJuYW1lIjoicmVzdCJ9fQ.cbAyj36f9MhAwOMzlTEheRkHhuuIEOeb1Uy8i0KfUhU';
 
@@ -25,7 +25,7 @@ class IncidentsClientTest extends TestCase
     /** @var \org\bovigo\vfs\vfsStreamDirectory */
     private $root;
 
-    /** @var IncidentsClient */
+    /** @var IncidentsClientDecorator */
     private $subject;
 
     public static function setUpBeforeClass(): void
@@ -51,7 +51,7 @@ class IncidentsClientTest extends TestCase
 
         $this->setResponseOfTokensPath();
         $restClient = new RestClient(self::$configuration);
-        $this->subject = new IncidentsClient($restClient);
+        $this->subject = new IncidentsClientDecorator($restClient);
     }
 
     private function setResponseOfTokensPath(): void
@@ -64,27 +64,6 @@ class IncidentsClientTest extends TestCase
                 201
             )
         );
-    }
-
-    /**
-     * @test
-     */
-    public function authenticateIsPassedToRestClient(): void
-    {
-        // Send another request in between ...
-        self::$server->setResponseOfPath(
-            '/api/rest/v2/some/route',
-            new Response('The response of some/route')
-        );
-
-        $this->subject->request('GET', 'some/route');
-
-        $this->subject->authenticate();
-
-        // ... to get really the last request uri
-        $lastRequestUri = self::$server->getLastRequest()->getRequestUri();
-
-        self::assertSame('/api/rest/v2/application/tokens', $lastRequestUri);
     }
 
     /**

@@ -6,33 +6,15 @@ namespace Brotkrueml\JobRouterClient\Client;
 use Brotkrueml\JobRouterClient\Model\Incident;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * RestClient for handling HTTP requests
- */
-final class IncidentsClient implements ClientInterface
+final class IncidentsClientDecorator extends ClientDecorator
 {
-    /**
-     * @var RestClient
-     */
-    private $client;
-
-    public function __construct(RestClient $client)
-    {
-        $this->client = $client;
-    }
-
-    public function authenticate(): void
-    {
-        $this->client->authenticate();
-    }
-
     public function request(string $method, string $resource, $data = []): ResponseInterface
     {
-        if (!$data instanceof Incident) {
-            return $this->client->request($method, $resource, $data);
+        if ($data instanceof Incident) {
+            return $this->client->request($method, $resource, ['multipart' => $this->buildMultipart($data)]);
         }
 
-        return $this->client->request($method, $resource, ['multipart' => $this->buildMultipart($data)]);
+        return $this->client->request($method, $resource, $data);
     }
 
     private function buildMultipart(Incident $incident): array

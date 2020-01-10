@@ -251,21 +251,21 @@ To start a new instance of a process you have to send the data as
    :php:`multipart` in the array of the third argument.
 
 But instead of having the hassle with the complex ``processtable`` and
-``subtable`` structure just use the :php:`IncidentsClient` which gives you an
+``subtable`` structure just use the :php:`IncidentsClientDecorator` which gives you an
 API to handle all the process table and sub table stuff:
 
 ::
 
    <?php
    // Additional uses
-   use Brotkrueml\JobRouterClient\Client\IncidentsClient;
+   use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
    use Brotkrueml\JobRouterClient\Model\Incident;
 
    // The JobRouter Client is already initialised
 
    $incident = (new Incident())
       ->setStep(1)
-      ->setSummary('Instance started via IncidentsClient')
+      ->setSummary('Instance started via IncidentsClientDecorator')
       ->setProcessTableField('INVOICENR', 'IN02984')
       ->setProcessTableField(
          'INVOICE_FILE',
@@ -279,7 +279,7 @@ API to handle all the process table and sub table stuff:
    ;
 
    try {
-      $incidentsClient = new IncidentsClient($client);
+      $incidentsClient = new IncidentsClientDecorator($client);
 
       $response = $incidentsClient->request(
          'POST',
@@ -295,7 +295,7 @@ This is much more intuitive. So, let's have a look:
 #. Lines 8-21: Create an object instance of the :php:`Incident` model and use the
    available setters to assign the necessary data.
 
-#. Line 24: Create the :php:`IncidentsClient`. As an argument it gets an
+#. Line 24: Create the :php:`IncidentsClientDecorator`. As an argument it gets an
    already initialised :php:`RestClient` instance. It is a decorator for the
    Rest Client, so you can also use it to authenticate or make other requests,
    e.g. to the JobData module.
