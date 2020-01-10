@@ -22,7 +22,7 @@ class ClientDecoratorTest extends TestCase
      */
     private $subject;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->client = $this->createMock(ClientInterface::class);
         $this->subject = $this->getMockForAbstractClass(
