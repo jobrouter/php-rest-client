@@ -93,9 +93,7 @@ final class IncidentsClient implements ClientInterface
             $incident->getSubtables()
         );
 
-        $multipart = \array_merge($multipart, $multipartProcessTableFields, $multipartSubTables);
-
-        return $multipart;
+        return \array_merge($multipart, $multipartProcessTableFields, $multipartSubTables);
     }
 
     private function buildProcessTableFieldsForMultipart(array $processTableFields): array
