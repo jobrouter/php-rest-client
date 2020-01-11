@@ -236,6 +236,32 @@ class RestClientTest extends TestCase
     /**
      * @test
      */
+    public function errorMessageIsCorrectGivenWhenRequestError(): void
+    {
+        $this->expectException(HttpException::class);
+        $this->expectExceptionCode(404);
+        $this->expectExceptionMessage('Error fetching route some/route: Some error occured.');
+
+        $this->setResponseOfTokensPath();
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/some/route',
+            new Response(
+                \sprintf(
+                    '{"errors":{"-": ["%s"]}}',
+                    'Some error occured.'
+                ),
+                ['content-type' => 'application/json'],
+                404
+            )
+        );
+
+        (new RestClient(self::$configuration))->request('GET', 'some/route');
+    }
+
+    /**
+     * @test
+     */
     public function formDataIsCorrectlySend(): void
     {
         $this->setResponseOfTokensPath();
