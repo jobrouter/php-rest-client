@@ -7,6 +7,7 @@ use Brotkrueml\JobRouterClient\Exception\InvalidConfigurationException;
 
 /**
  * Value object that represents the configuration for a RestClient
+ * @psalm-immutable
  */
 final class ClientConfiguration
 {
@@ -16,19 +17,16 @@ final class ClientConfiguration
 
     /**
      * @var string
-     * @readonly
      */
     private $baseUrl;
 
     /**
      * @var string
-     * @readonly
      */
     private $username;
 
     /**
      * @var string
-     * @readonly
      */
     private $password;
 
@@ -106,17 +104,21 @@ final class ClientConfiguration
     }
 
     /**
-     * Sets the lifetime of a session in seconds
-     * Must be between 0 (ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS)
-     * and 3600 (ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS).
-     * Default value is 600 (ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS)
+     * Return an instance with the specified lifetime
      *
-     * @param int $lifetime
+     * @param int $lifetime A lifetime between 0 (ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS)
+     *                      and 3600 (ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS).
+     *                      The default value is 600 (ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS).
+     * @return self
      *
      * @throws InvalidConfigurationException The given lifetime is not between 0 and 3600
      */
-    public function setLifetime(int $lifetime): void
+    public function withLifetime(int $lifetime): self
     {
+        if ($lifetime === $this->lifetime) {
+            return $this;
+        }
+
         if (
             $lifetime < self::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS
             || $lifetime > self::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS
@@ -132,7 +134,10 @@ final class ClientConfiguration
             );
         }
 
-        $this->lifetime = $lifetime;
+        $new = clone $this;
+        $new->lifetime = $lifetime;
+
+        return $new;
     }
 
     /**
@@ -146,13 +151,21 @@ final class ClientConfiguration
     }
 
     /**
-     * Set the user agent addition which will be appended to the original one
+     * Returns an instance with the specified user agent addition which will be appended to the original one
      *
-     * @param string $userAgentAddition
+     * @param string $userAgentAddition User agent addition
+     * @return self
      */
-    public function setUserAgentAddition(string $userAgentAddition): void
+    public function withUserAgentAddition(string $userAgentAddition): self
     {
-        $this->userAgentAddition = $userAgentAddition;
+        if ($userAgentAddition === $this->userAgentAddition) {
+            return $this;
+        }
+
+        $new = clone $this;
+        $new->userAgentAddition = $userAgentAddition;
+
+        return $new;
     }
 
     /**

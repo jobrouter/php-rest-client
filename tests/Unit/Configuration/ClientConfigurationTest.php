@@ -110,33 +110,46 @@ class ClientConfigurationTest extends TestCase
     /**
      * @test
      */
-    public function setLifetimeThrowsExceptionOnUnderrunMinimumAllowedLifetime(): void
+    public function withLifetimeGivesSameObjectBackWhenDefinedLifetimeIsIdentical(): void
     {
-        $this->expectException(InvalidConfigurationException::class);
-        $this->expectExceptionCode(1565710534);
+        $subject = $this->subject->withLifetime(42);
+        self::assertInstanceOf(ClientConfiguration::class, $subject);
+        self::assertNotSame($subject, $this->subject);
 
-        $this->subject->setLifetime(ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS - 1);
+        $newSubject = $subject->withLifetime(42);
+        self::assertSame($subject, $newSubject);
     }
 
     /**
      * @test
      */
-    public function setLifetimeThrowsExceptionOnOverrunMaximumAllowedLifetime(): void
+    public function withLifetimeThrowsExceptionOnUnderrunMinimumAllowedLifetime(): void
     {
         $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionCode(1565710534);
 
-        $this->subject->setLifetime(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS + 1);
+        $this->subject->withLifetime(ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS - 1);
     }
 
     /**
      * @test
      */
-    public function setMinimumAllowedLifetimeIsOkay(): void
+    public function withLifetimeThrowsExceptionOnOverrunMaximumAllowedLifetime(): void
     {
-        $this->subject->setLifetime(ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS);
+        $this->expectException(InvalidConfigurationException::class);
+        $this->expectExceptionCode(1565710534);
 
-        $actual = $this->subject->getLifetime();
+        $this->subject->withLifetime(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS + 1);
+    }
+
+    /**
+     * @test
+     */
+    public function withMinimumAllowedLifetimeIsOkay(): void
+    {
+        $configuration = $this->subject->withLifetime(ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS);
+
+        $actual = $configuration->getLifetime();
 
         self::assertSame(ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS, $actual);
     }
@@ -144,11 +157,11 @@ class ClientConfigurationTest extends TestCase
     /**
      * @test
      */
-    public function setLifetimeInAllowedBoundsIsOkay(): void
+    public function withLifetimeInAllowedBoundsIsOkay(): void
     {
-        $this->subject->setLifetime(42);
+        $configuration = $this->subject->withLifetime(42);
 
-        $actual = $this->subject->getLifetime();
+        $actual = $configuration->getLifetime();
 
         self::assertSame(42, $actual);
     }
@@ -156,13 +169,26 @@ class ClientConfigurationTest extends TestCase
     /**
      * @test
      */
-    public function setMaximumAllowedLifetimeIsOkay(): void
+    public function withMaximumAllowedLifetimeIsOkay(): void
     {
-        $this->subject->setLifetime(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS);
+        $configuration = $this->subject->withLifetime(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS);
 
-        $actual = $this->subject->getLifetime();
+        $actual = $configuration->getLifetime();
 
         self::assertSame(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS, $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function withUserAgentAdditionReturnsCorrectInstances(): void
+    {
+        $subject = $this->subject->withUserAgentAddition('AdditionToUserAgent');
+        self::assertInstanceOf(ClientConfiguration::class, $subject);
+        self::assertNotSame($subject, $this->subject);
+
+        $newSubject = $subject->withUserAgentAddition('AdditionToUserAgent');
+        self::assertSame($subject, $newSubject);
     }
 
     /**
@@ -180,9 +206,9 @@ class ClientConfigurationTest extends TestCase
      */
     public function setUserAgentAdditionWorksCorrectly(): void
     {
-        $this->subject->setUserAgentAddition('SomeUserAgentAddition');
+        $subject = $this->subject->withUserAgentAddition('SomeUserAgentAddition');
 
-        $actual = $this->subject->getUserAgentAddition();
+        $actual = $subject->getUserAgentAddition();
 
         self::assertSame('SomeUserAgentAddition', $actual);
     }

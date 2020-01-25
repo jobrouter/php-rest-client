@@ -26,7 +26,7 @@ Initialisation of the JobRouter Client
       'the_user', // The username
       'the_password' // The password
    );
-   $configuration->setLifetime(30);
+   $configuration = $configuration->withLifetime(30);
 
    try {
       $client = new RestClient($configuration);
@@ -51,8 +51,10 @@ Let's dig into the piece of code:
 #. Lines 8-11: Define a :php:`ClientConfiguration` object with the base URL, the
    username and the password for your JobRouter installation.
 
-#. Line 13: Set the lifetime of the JSON Web Token in seconds. The default
-   value is 600 seconds - if you are fine with this, you can omit this setter.
+#. Line 13: Overrides the default lifetime of the JSON Web Token in seconds.
+   The default value is 600 seconds - if you are fine with this, you can omit
+   this. As the configuration object is immutable, a new instance of the
+   configuration is returned.
 
 #. Line 16: Now instantiate the RestClient with the configuration object. During
    the instantiation the client will authenticate against the JobRouter

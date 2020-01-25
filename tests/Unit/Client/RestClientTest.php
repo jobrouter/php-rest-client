@@ -194,8 +194,8 @@ class RestClientTest extends TestCase
     {
         $this->setResponseOfTokensPath();
 
-        self::$configuration->setUserAgentAddition('AdditionToUserAgent');
-        $restClient = new RestClient(self::$configuration);
+        $configuration = self::$configuration->withUserAgentAddition('AdditionToUserAgent');
+        $restClient = new RestClient($configuration);
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/some/route',
