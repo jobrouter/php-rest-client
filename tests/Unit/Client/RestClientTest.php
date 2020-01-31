@@ -223,10 +223,10 @@ class RestClientTest extends TestCase
             new Response(
                 \sprintf(
                     '{"errors":["-": ["%s"]]}',
-                    'Authentication failed. Please provide valid credentials and check if the user is not blocked.'
+                    'Some bad request'
                 ),
                 ['content-type' => 'application/json'],
-                401
+                400
             )
         );
 

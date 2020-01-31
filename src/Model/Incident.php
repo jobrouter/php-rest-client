@@ -297,7 +297,7 @@ final class Incident
                 \sprintf(
                     'The following value keys for the process table field "%s" are required: %s',
                     $name,
-                    \implode(', ', \array_keys($missingRequiredKeys))
+                    \implode(', ', $missingRequiredKeys)
                 ),
                 1578226363
             );
@@ -306,24 +306,13 @@ final class Incident
 
     public function setRowsForSubTable(string $subTableName, array $data): self
     {
-        $this->addSubTableName($subTableName);
         $this->subTables[$subTableName] = $data;
-
-        return $this;
-    }
-
-    private function addSubTableName(string $name): self
-    {
-        if (!\array_key_exists($name, $this->subTables)) {
-            $this->subTables[$name] = [];
-        }
 
         return $this;
     }
 
     public function addRowToSubTable(string $subTableName, array $rowData): self
     {
-        $this->addSubtableName($subTableName);
         $this->subTables[$subTableName][] = $rowData;
 
         return $this;

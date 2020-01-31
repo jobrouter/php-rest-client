@@ -183,6 +183,22 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
+    public function setPriorityAcceptsOnlyAllowedRange(): void
+    {
+        $exception = null;
+        try {
+            $this->subject->setPriority(1);
+            $this->subject->setPriority(2);
+            $this->subject->setPriority(3);
+        } catch (\InvalidArgumentException $exception) {
+        }
+
+        self::assertNull($exception, 'Unexpected InvalidArgumentException');
+    }
+
+    /**
+     * @test
+     */
     public function setPriorityThrowsExceptionWhenTooLow(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -216,12 +232,26 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
-    public function setPriorityThrowsExceptionWhenNotAPositiveInteger(): void
+    public function setPoolThrowsExceptionWhenZero(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionCode(1578228017);
 
         $this->subject->setPool(0);
+    }
+
+    /**
+     * @test
+     */
+    public function setPoolAcceptsOne(): void
+    {
+        $exception = null;
+        try {
+            $this->subject->setPool(1);
+        } catch (\InvalidArgumentException $exception) {
+        }
+
+        self::assertNull($exception, 'Unexpected InvalidArgumentException');
     }
 
     /**
@@ -316,6 +346,7 @@ class IncidentTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionCode(1578226362);
+        $this->expectExceptionMessage('The following value keys for the process table field "some name" are not allowed: wrong');
 
         $this->subject->setProcessTableField(
             'some name',
@@ -330,6 +361,7 @@ class IncidentTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionCode(1578226363);
+        $this->expectExceptionMessage('The following value keys for the process table field "some name" are required: path, filename');
 
         $this->subject->setProcessTableField(
             'some name',

@@ -6,6 +6,7 @@
 /.github export-ignore
 /.gitignore export-ignore
 /.php_cs export-ignore
+/infection.json.dist export-ignore
 /psalm.xml export-ignore
 /sonar-project.properties export-ignore
 /README.md export-ignore

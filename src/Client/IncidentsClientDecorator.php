@@ -54,7 +54,7 @@ final class IncidentsClientDecorator extends ClientDecorator
         }
 
         if (!empty($incident->getSimulation())) {
-            $multipart['simulation'] = (bool)$incident->getPool();
+            $multipart['simulation'] = (string)$incident->getSimulation();
         }
 
         if ($incident->getStepEscalationDate() instanceof \DateTime) {

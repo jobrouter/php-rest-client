@@ -12,7 +12,7 @@ class AuthenticationExceptionTest extends TestCase
     /**
      * @test
      */
-    public function fromRestClientReturnsInstantiatedExceptionCorrectly(): void
+    public function fromRestClientReturnsInstantiatedWithAllArgumentsCorrectly(): void
     {
         $configuration = new ClientConfiguration(
             'http://example.org/',
@@ -31,5 +31,27 @@ class AuthenticationExceptionTest extends TestCase
         );
         self::assertSame(12345, $actual->getCode());
         self::assertSame($previous, $actual->getPrevious());
+    }
+
+    /**
+     * @test
+     */
+    public function fromRestClientReturnsInstantiatedWithOnlyRequiredArgumentsCorrectly(): void
+    {
+        $configuration = new ClientConfiguration(
+            'http://example.org/',
+            'fake_user',
+            'fake_pass'
+        );
+
+        $actual = AuthenticationException::fromFailedAuthentication($configuration);
+
+        self::assertInstanceOf(AuthenticationException::class, $actual);
+        self::assertSame(
+            'Authentication failed for user "fake_user" on JobRouter base URL "http://example.org/',
+            $actual->getMessage()
+        );
+        self::assertSame(0, $actual->getCode());
+        self::assertNull($actual->getPrevious());
     }
 }

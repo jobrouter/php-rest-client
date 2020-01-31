@@ -23,6 +23,7 @@
     "require-dev": {
         "donatj/mock-webserver": "^2.1",
         "friendsofphp/php-cs-fixer": "^2.16",
+        "infection/infection": "^0.15",
         "mikey179/vfsstream": "^1.6",
         "php-coveralls/php-coveralls": "^2.2",
         "phpunit/phpunit": "^8.5",
