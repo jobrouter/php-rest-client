@@ -8,5 +8,6 @@
 /.php_cs export-ignore
 /infection.json.dist export-ignore
 /psalm.xml export-ignore
+/rector.yml export-ignore
 /sonar-project.properties export-ignore
 /README.md export-ignore

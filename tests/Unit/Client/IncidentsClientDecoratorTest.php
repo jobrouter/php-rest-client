@@ -10,7 +10,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
-class IncidentsDecoratorTest extends TestCase
+class IncidentsClientDecoratorTest extends TestCase
 {
     /** @var ClientInterface|MockObject */
     private $clientMock;

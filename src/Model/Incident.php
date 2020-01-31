@@ -243,7 +243,7 @@ final class Incident
      */
     public function setProcessTableField(string $name, $value): self
     {
-        if (!(\is_string($value) || \is_array($value))) {
+        if (!\is_string($value) && !\is_array($value)) {
             throw new \InvalidArgumentException(
                 \sprintf(
                     'value has to be either a string or an array, "%s" given',
@@ -269,7 +269,7 @@ final class Incident
      */
     private function checkArrayKeysOfFileValue(string $name, array $value): void
     {
-        $disallowedKeys = \array_filter($value, function (string $key) {
+        $disallowedKeys = \array_filter($value, function (string $key): bool {
             return !\in_array($key, self::ALLOWED_FILE_VALUE_KEYS);
         }, \ARRAY_FILTER_USE_KEY);
 

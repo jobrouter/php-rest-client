@@ -13,7 +13,7 @@ class UserAgentMiddlewareTest extends TestCase
     /**
      * @test
      */
-    public function userAgentIsCorrectlyAddedToRequestHeader()
+    public function userAgentIsCorrectlyAddedToRequestHeader(): void
     {
         $request = new Request('GET', '/');
         /** @var Request|null $newRequest */
@@ -36,7 +36,7 @@ class UserAgentMiddlewareTest extends TestCase
     /**
      * @test
      */
-    public function userAgentIsCorrectlyAddedToRequestHeaderWithAdditionGiven()
+    public function userAgentIsCorrectlyAddedToRequestHeaderWithAdditionGiven(): void
     {
         $request = new Request('GET', '/');
         /** @var Request|null $newRequest */

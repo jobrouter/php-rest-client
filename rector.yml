@@ -1,0 +1,21 @@
+parameters:
+  php_version_features: '7.2'
+  paths:
+    - 'src/'
+    - 'tests/'
+  sets:
+    - 'code-quality'
+    - 'dead-classes'
+    - 'dead-code'
+    - 'early-return'
+    - 'php52'
+    - 'php53'
+    - 'php54'
+    - 'php55'
+    - 'php56'
+    - 'php70'
+    - 'php71'
+    - 'php72'
+    - 'type-declaration'
+  exclude_rectors:
+    - 'Rector\TypeDeclaration\Rector\ClassMethod\AddArrayReturnDocTypeRector'

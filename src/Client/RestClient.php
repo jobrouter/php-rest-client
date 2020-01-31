@@ -105,6 +105,7 @@ final class RestClient implements ClientInterface
      *
      * @psalm-suppress MoreSpecificImplementedParamType
      * @psalm-suppress DocblockTypeContradiction
+     * @noRector \Rector\TypeDeclaration\Rector\FunctionLike\ParamTypeDeclarationRector
      */
     public function request(string $method, string $resource, $data = []): ResponseInterface
     {
