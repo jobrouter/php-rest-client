@@ -8,7 +8,6 @@ use Brotkrueml\JobRouterClient\Client\ClientInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 
 class ClientDecoratorTest extends TestCase
 {
@@ -48,77 +47,16 @@ class ClientDecoratorTest extends TestCase
      */
     public function requestIsPassedToClient(): void
     {
-        $response = $this->getImplementedResponse();
+        $responseStub = $this->createStub(ResponseInterface::class);
 
         $this->client
             ->expects(self::once())
             ->method('request')
             ->with('some method', 'some resource', 'some data')
-            ->willReturn($response);
+            ->willReturn($responseStub);
 
         $actual = $this->subject->request('some method', 'some resource', 'some data');
 
-        self::assertSame($response, $actual);
-    }
-
-    private function getImplementedResponse()
-    {
-        return new class implements ResponseInterface {
-            public function getProtocolVersion()
-            {
-            }
-
-            public function withProtocolVersion($version)
-            {
-            }
-
-            public function getHeaders()
-            {
-            }
-
-            public function hasHeader($name)
-            {
-            }
-
-            public function getHeader($name)
-            {
-            }
-
-            public function getHeaderLine($name)
-            {
-            }
-
-            public function withHeader($name, $value)
-            {
-            }
-
-            public function withAddedHeader($name, $value)
-            {
-            }
-
-            public function withoutHeader($name)
-            {
-            }
-
-            public function getBody()
-            {
-            }
-
-            public function withBody(StreamInterface $body)
-            {
-            }
-
-            public function getStatusCode()
-            {
-            }
-
-            public function withStatus($code, $reasonPhrase = '')
-            {
-            }
-
-            public function getReasonPhrase()
-            {
-            }
-        };
+        self::assertSame($responseStub, $actual);
     }
 }
