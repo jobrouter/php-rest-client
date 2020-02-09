@@ -14,7 +14,7 @@ the token authentication is used.
 The library can be used to automate tasks in PHP scripts like importing or
 synchronising data in the JobData module, start processes or working with
 archive documents. The authentication is done in the background so you
-concentrate on the your business domain.
+concentrate on your business domain.
 
 The `PSR-7 standard <https://www.php-fig.org/psr/psr-7/>`_ is used, so you'll
 get in touch with objects which implements the :php:`ResponseInterface`.
