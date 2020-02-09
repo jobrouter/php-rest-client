@@ -102,12 +102,6 @@ html_theme = 'sphinx_rtd_theme'
 # If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
 html_show_sphinx = False
 
-html_context = {
-    "display_github": True,
-    "github_user": "brotkrueml",
-    "github_repo": "jobrouter-client",
-    "github_version": version,
-}
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
