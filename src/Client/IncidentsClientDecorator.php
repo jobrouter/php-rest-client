@@ -87,7 +87,7 @@ final class IncidentsClientDecorator extends ClientDecorator
             $multipartProcessTableFields[$this->getProcessTableFieldKey($index, 'name')]
                 = $name;
             $multipartProcessTableFields[$this->getProcessTableFieldKey($index, 'value')]
-                = $value;
+                = \is_array($value) ? $value : (string)$value;
             $index++;
         }
 
@@ -114,8 +114,10 @@ final class IncidentsClientDecorator extends ClientDecorator
             foreach ($subTableRows as $row) {
                 $columnIndex = 0;
                 foreach ($row as $columnName => $columnValue) {
-                    $multipartSubTables[$this->getSubTableFieldKey($subTableIndex, $rowIndex, $columnIndex, 'name')] = $columnName;
-                    $multipartSubTables[$this->getSubTableFieldKey($subTableIndex, $rowIndex, $columnIndex, 'value')] = $columnValue;
+                    $multipartSubTables[$this->getSubTableFieldKey($subTableIndex, $rowIndex, $columnIndex, 'name')]
+                        = $columnName;
+                    $multipartSubTables[$this->getSubTableFieldKey($subTableIndex, $rowIndex, $columnIndex, 'value')]
+                        = $columnValue;
                     $columnIndex++;
                 }
                 $rowIndex++;

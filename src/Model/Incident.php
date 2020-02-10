@@ -243,10 +243,10 @@ final class Incident
      */
     public function setProcessTableField(string $name, $value): self
     {
-        if (!\is_string($value) && !\is_array($value)) {
+        if (!\is_string($value) && !\is_int($value) && !\is_array($value)) {
             throw new \InvalidArgumentException(
                 \sprintf(
-                    'value has to be either a string or an array, "%s" given',
+                    'value has to be either a string, an integer or an array, "%s" given',
                     gettype($value)
                 ),
                 1578225863

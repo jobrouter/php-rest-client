@@ -298,12 +298,31 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
-    public function setAndGetProcessTableFieldAreCorrectImplementedForAStringValue(): void
+    public function setProcessTableFieldReturnsInstanceOfItself(): void
     {
         $actual = $this->subject->setProcessTableField('some name', 'some value');
 
         self::assertSame($this->subject, $actual);
-        self::assertSame('some value', $this->subject->getProcessTableField('some name'));
+    }
+
+    /**
+     * @test
+     */
+    public function setAndGetProcessTableFieldAreCorrectImplementedForAStringValue(): void
+    {
+        $this->subject->setProcessTableField('some string', 'some value');
+
+        self::assertSame('some value', $this->subject->getProcessTableField('some string'));
+    }
+
+    /**
+     * @test
+     */
+    public function setAndGetProcessTableFieldAreCorrectImplementedForAnIntegerValue(): void
+    {
+        $this->subject->setProcessTableField('some integer', 42);
+
+        self::assertSame(42, $this->subject->getProcessTableField('some integer'));
     }
 
     /**

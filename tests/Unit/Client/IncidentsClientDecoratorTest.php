@@ -134,14 +134,26 @@ class IncidentsClientDecoratorTest extends TestCase
             (new Incident())
                 ->setProcessTableField('some field', 'some value')
                 ->setProcessTableField('another field', 'another value')
-                ->setProcessTableField('different field', 'different value'),
+                ->setProcessTableField('different field', 'different value')
+                ->setProcessTableField('integer field', 123)
+                ->setProcessTableField('file field', [
+                    'path' => '/path/to/file.pdf',
+                    'filename' => 'the-file.pdf',
+                ]),
             [
                 'processtable[fields][0][name]' => 'some field',
                 'processtable[fields][0][value]' => 'some value',
                 'processtable[fields][1][name]' => 'another field',
                 'processtable[fields][1][value]' => 'another value',
                 'processtable[fields][2][name]' => 'different field',
-                'processtable[fields][2][value]' => 'different value'
+                'processtable[fields][2][value]' => 'different value',
+                'processtable[fields][3][name]' => 'integer field',
+                'processtable[fields][3][value]' => '123',
+                'processtable[fields][4][name]' => 'file field',
+                'processtable[fields][4][value]' => [
+                    'path' => '/path/to/file.pdf',
+                    'filename' => 'the-file.pdf'
+                ],
             ]
         ];
 
