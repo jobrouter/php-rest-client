@@ -12,7 +12,7 @@ final class IncidentsClientDecorator extends ClientDecorator
     public function request(string $method, string $resource, $data = []): ResponseInterface
     {
         if ($data instanceof Incident) {
-            return $this->client->request($method, $resource, ['multipart' => $this->buildMultipart($data)]);
+            return $this->client->request($method, $resource, $this->buildMultipart($data));
         }
 
         return $this->client->request($method, $resource, $data);

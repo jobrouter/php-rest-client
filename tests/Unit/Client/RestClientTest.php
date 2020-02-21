@@ -296,7 +296,7 @@ class RestClientTest extends TestCase
         $response = $restClient->request(
             'POST',
             'application/incidents/test',
-            ['multipart' => $formData]
+            $formData
         );
 
         self::assertSame(200, $response->getStatusCode());
@@ -378,7 +378,7 @@ class RestClientTest extends TestCase
         $response = $restClient->request(
             'POST',
             'application/incidents/test',
-            ['multipart' => $formData]
+            $formData
         );
 
         self::assertSame(200, $response->getStatusCode());
@@ -392,6 +392,5 @@ class RestClientTest extends TestCase
         $files = $lastRequest->getFiles();
         self::assertArrayHasKey('processtable', $files);
         self::assertSame('foo.txt', $files['processtable']['name']['fields'][0]['value']);
-
     }
 }

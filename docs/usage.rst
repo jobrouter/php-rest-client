@@ -114,10 +114,8 @@ to the JobRouter REST API:
 
 :aspect:`data`
 
-   The third parameter is optional. This is an array which can has one of two
-   keys: :php:`json` for requests with the content type ``application/json`` and
-   :php:`multipart` for the content type ``multipart/form-data``. In the
-   sections above we will see how the array will be populated.
+   The third parameter is optional. This is an array which holds the data to be
+   send along with the request.
 
 
 .. _usage.examples:
@@ -183,11 +181,9 @@ With the following request you can post a dataset to a JobData table:
          'POST',
          'application/jobdata/tables/FB6E9F2F-8486-8CD7-5FA5-640ACB9019E4/datasets',
          [
-            'json' => [
-               'dataset' => [
-                  'column1' => 'content of column 1',
-                  'column2' => 'content of column 2',
-               ],
+            'dataset' => [
+               'column1' => 'content of column 1',
+               'column2' => 'content of column 2',
             ],
          ]
       );
@@ -196,15 +192,14 @@ With the following request you can post a dataset to a JobData table:
    }
 
 #. Line 6: As we add a new dataset we have to use the ``POST`` method.
-#. Lines 8-15: As third parameter of the :php:`request()` method the data is
-   expected. As we will sent JSON-encoded data we use the :php:`json` key of
-   the array. The sub array then holds the data expected by the resource.
+#. Lines 8-13: As third parameter of the :php:`request()` method the data is
+   defines to sent with the request.
 
 .. important::
 
-   You have to send all columns of a table for which the user has access rights.
-   Otherwise you will receive an error with status code 422 (Unprocessable
-   entity)!
+   Prior to JobRouter 5.0.8 you have to send all columns of a table for which
+   the user has access rights. Otherwise you will receive an error with status
+   code 422 (Unprocessable entity).
 
 
 .. _usage.starting-new-instance:
@@ -240,7 +235,7 @@ To start a new instance of a process you have to send the data as
       $response = $client->request(
          'POST',
          'application/incidents/invoice',
-         ['multipart' => $multipart]
+         $multipart
       );
    } catch (ExceptionInterface $e) {
       // Error handling
@@ -252,8 +247,7 @@ To start a new instance of a process you have to send the data as
    receives the full path to the file, the other two are optional: You can
    overwrite the file name and specify a content type.
 
-#. Lines 21-25: Send the data as ``multipart/form-data`` with the key
-   :php:`multipart` in the array of the third argument.
+#. Lines 21-25: Send the data.
 
 But instead of having the hassle with the complex ``processtable`` and
 ``subtable`` structure just use the :php:`IncidentsClientDecorator` which gives you an

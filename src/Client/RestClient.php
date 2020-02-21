@@ -7,6 +7,7 @@ use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
 use Brotkrueml\JobRouterClient\Exception\HttpException;
 use Brotkrueml\JobRouterClient\Exception\RestClientException;
+use Brotkrueml\JobRouterClient\Mapper\RouteContentTypeMapper;
 use Brotkrueml\JobRouterClient\Middleware\AuthorisationMiddleware;
 use Brotkrueml\JobRouterClient\Middleware\UserAgentMiddleware;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
@@ -39,6 +40,9 @@ final class RestClient implements ClientInterface
     /** @var AuthorisationMiddleware */
     private $authorisationMiddleware;
 
+    /** @var RouteContentTypeMapper */
+    private $routeContentTypeMapper;
+
     /**
      * Creates a RestClient instance, already authenticated against the JobRouter system
      *
@@ -58,6 +62,8 @@ final class RestClient implements ClientInterface
         $this->authorisationMiddleware = new AuthorisationMiddleware();
         $this->browser->addMiddleware($this->authorisationMiddleware);
 
+        $this->routeContentTypeMapper = new RouteContentTypeMapper();
+
         $this->authenticate();
     }
 
@@ -71,11 +77,9 @@ final class RestClient implements ClientInterface
         $this->authorisationMiddleware->resetToken();
 
         $options = [
-            'json' => [
-                'username' => $this->configuration->getUsername(),
-                'password' => $this->configuration->getPassword(),
-                'lifetime' => $this->configuration->getLifetime(),
-            ],
+            'username' => $this->configuration->getUsername(),
+            'password' => $this->configuration->getPassword(),
+            'lifetime' => $this->configuration->getLifetime(),
         ];
 
         try {
@@ -98,7 +102,7 @@ final class RestClient implements ClientInterface
      *
      * @param string $method The method
      * @param string $resource The resource path
-     * @param array $data Data for the request with key 'json' for json data or key 'multipart' for multipart/form-data
+     * @param array $data Data for the request
      *
      * @return ResponseInterface
      *
@@ -122,11 +126,13 @@ final class RestClient implements ClientInterface
 
         $errorMessage = 'Error fetching route ' . $resource;
 
+        $contentType = $this->routeContentTypeMapper->getRequestContentTypeForRoute($method, $resource);
+
         try {
-            if (isset($data['multipart'])) {
-                $response = $this->sendForm($method, $resource, $data['multipart']);
-            } elseif (isset($data['json'])) {
-                $response = $this->sendJson($method, $resource, $data['json']);
+            if ($contentType === 'multipart/form-data') {
+                $response = $this->sendForm($method, $resource, $data);
+            } elseif ($contentType === 'application/json') {
+                $response = $this->sendJson($method, $resource, $data);
             } else {
                 $response = $this->browser->sendRequest($this->buildRequest($method, $resource));
             }
@@ -150,7 +156,7 @@ final class RestClient implements ClientInterface
     private function sendForm(string $method, string $resource, array $multipart): ResponseInterface
     {
         /** @psalm-suppress MissingClosureParamType */
-        \array_walk($multipart, function(&$value): void {
+        \array_walk($multipart, function (&$value): void {
             if ($value instanceof FileInterface) {
                 $value = $value->toArray();
             }

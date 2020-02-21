@@ -57,7 +57,7 @@ class IncidentsClientDecoratorTest extends TestCase
         $this->clientMock
             ->expects(self::once())
             ->method('request')
-            ->with('POST', 'some/route', ['multipart' => $withMultipart]);
+            ->with('POST', 'some/route', $withMultipart);
 
         $this->subject->request('POST', 'some/route', $incident);
     }
