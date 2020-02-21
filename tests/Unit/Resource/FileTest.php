@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Unit\Resource;
+namespace Brotkrueml\JobRouterClient\Tests\Unit\Resource;
 
 use Brotkrueml\JobRouterClient\Exception\InvalidResourceException;
 use Brotkrueml\JobRouterClient\Resource\File;
