@@ -218,6 +218,8 @@ To start a new instance of a process you have to send the data as
 ::
 
    <?php
+   use Brotkrueml\JobRouterClient\Resource\File;
+
    // The JobRouter Client is already initialised
 
    // Define instance data
@@ -227,12 +229,11 @@ To start a new instance of a process you have to send the data as
       'processtable[fields][0][name]' => 'INVOICENR',
       'processtable[fields][0][value]' => 'IN02984',
       'processtable[fields][1][name]' => 'INVOICE_FILE',
-      'processtable[fields][1][value]' => [
-         'path'=>'/path/to/invoice/file.pdf',
-         'filename' => 'in02984.pdf',
-         // The content type is optional
-         'contentType' => 'application/pdf',
-      ],
+      'processtable[fields][1][value]' => new File(
+         '/path/to/invoice/file.pdf', // Full path to the file
+         'in02984.pdf' // Optional: Use another file name for storing in JobRouter
+         'contentType' => 'application/pdf', // Optional: The content type
+      ),
    ];
 
    try {
@@ -245,11 +246,13 @@ To start a new instance of a process you have to send the data as
       // Error handling
    }
 
-#. Lines 5-17: Preparing the data to send as an array according to the JobRouter
-   REST API documentation. To add a file set an array with the keys :php:`path`,
-   :php:`filename` and :php:`contentType`. The last one is optional.
+#. Lines 5-18: Preparing the data to send as an array according to the JobRouter
+   REST API documentation. To add a file instantiate a
+   :php:`Brotkrueml\JobRouterClient\Resource\File` object. The first argument
+   receives the full path to the file, the other two are optional: You can
+   overwrite the file name and specify a content type.
 
-#. Lines 20-24: Send the data as ``multipart/form-data`` with the key
+#. Lines 21-25: Send the data as ``multipart/form-data`` with the key
    :php:`multipart` in the array of the third argument.
 
 But instead of having the hassle with the complex ``processtable`` and
@@ -262,6 +265,7 @@ API to handle all the process table and sub table stuff:
    // Additional uses
    use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
    use Brotkrueml\JobRouterClient\Model\Incident;
+   use Brotkrueml\JobRouterClient\Resource\File;
 
    // The JobRouter Client is already initialised
 
@@ -271,12 +275,11 @@ API to handle all the process table and sub table stuff:
       ->setProcessTableField('INVOICENR', 'IN02984')
       ->setProcessTableField(
          'INVOICE_FILE',
-         [
-            'path'=>'/path/to/invoice/file.pdf',
-            'filename' => 'in02984.pdf',
-            // The content type is optional
-            'contentType' => 'application/pdf',
-         ]
+         new File(
+            '/path/to/invoice/file.pdf', // Full path to the file
+            'in02984.pdf' // Optional: Use another file name for storing in JobRouter
+            'contentType' => 'application/pdf', // Optional: The content type
+         )
       )
    ;
 
@@ -294,7 +297,7 @@ API to handle all the process table and sub table stuff:
 
 This is much more intuitive. So, let's have a look:
 
-#. Lines 8-21: Create an object instance of the :php:`Incident` model and use the
+#. Lines 9-21: Create an object instance of the :php:`Incident` model and use the
    available setters to assign the necessary data.
 
 #. Line 24: Create the :php:`IncidentsClientDecorator`. As an argument it gets an

@@ -8,6 +8,7 @@ use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
 use Brotkrueml\JobRouterClient\Exception\HttpException;
 use Brotkrueml\JobRouterClient\Exception\RestClientException;
+use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use donatj\MockWebServer\MockWebServer;
 use donatj\MockWebServer\Response;
 use org\bovigo\vfs\vfsStream;
@@ -335,5 +336,62 @@ class RestClientTest extends TestCase
         $restClient = new RestClient(self::$configuration);
 
         $restClient->request('POST', 'some/route', false);
+    }
+
+    /**
+     * @test
+     */
+    public function requestUsingFileInterfaceIsHandledCorrectly(): void
+    {
+        $this->setResponseOfTokensPath();
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/application/incidents/test',
+            new Response(
+                '{"incidents":[{"workflowId":"8c520dd91b59c62c9ec30c7310bb9fc60000000313","stepId":"8c520dd91b59c62c9ec30c7310bb9fc60000000347","processId":"8c520dd91b59c62c9ec30c7310bb9fc60000000237","incidentnumber":17,"jobfunction":"Admin","username":"rest"}]}',
+                ['content-type' => 'application/json'],
+                200
+            )
+        );
+
+        $restClient = new RestClient(self::$configuration);
+
+        $filePath = $this->root->url() . '/some-file.txt';
+        \file_put_contents($filePath, 'foo');
+
+        $fileMock = $this->createMock(FileInterface::class);
+
+        $fileMock
+            ->expects(self::once())
+            ->method('toArray')
+            ->willReturn([
+                'path' => $filePath,
+                'filename' => 'foo.txt',
+            ]);
+
+        $formData = [
+            'step' => '1',
+            'processtable[fields][0][name]' => 'file',
+            'processtable[fields][0][value]' => $fileMock,
+        ];
+
+        $response = $restClient->request(
+            'POST',
+            'application/incidents/test',
+            ['multipart' => $formData]
+        );
+
+        self::assertSame(200, $response->getStatusCode());
+
+        $lastRequest = self::$server->getLastRequest();
+
+        $post = $lastRequest->getPost();
+        self::assertArrayHasKey('processtable', $post);
+        self::assertSame('file', $post['processtable']['fields'][0]['name']);
+
+        $files = $lastRequest->getFiles();
+        self::assertArrayHasKey('processtable', $files);
+        self::assertSame('foo.txt', $files['processtable']['name']['fields'][0]['value']);
+
     }
 }

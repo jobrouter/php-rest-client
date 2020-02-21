@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Model;
 
 use Brotkrueml\JobRouterClient\Model\Incident;
+use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use PHPUnit\Framework\TestCase;
 
 class IncidentTest extends TestCase
@@ -328,64 +329,14 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
-    public function setAndGetProcessTableFieldAreCorrectImplementedForAnArrayValueWithRequiredKeysGiven(): void
+    public function setAndGetProcessTableFieldAreImplementedCorrectlyForAFile(): void
     {
-        $value = [
-            'path' => '/some/path/to/file.pdf',
-            'filename' => 'file.pdf',
-        ];
+        $fileStub = $this->createStub(FileInterface::class);
 
-        $actual = $this->subject->setProcessTableField('some name', $value);
+        $actual = $this->subject->setProcessTableField('some name', $fileStub);
 
         self::assertSame($this->subject, $actual);
-        self::assertSame($value, $this->subject->getProcessTableField('some name'));
-    }
-
-    /**
-     * @test
-     */
-    public function setAndGetProcessTableFieldAreCorrectImplementedForAnArrayValueWithAllAllowedKeysGiven(): void
-    {
-        $value = [
-            'path' => '/some/path/to/file.pdf',
-            'filename' => 'file.pdf',
-            'contentType' => 'application/pdf',
-        ];
-
-        $actual = $this->subject->setProcessTableField('some name', $value);
-
-        self::assertSame($this->subject, $actual);
-        self::assertSame($value, $this->subject->getProcessTableField('some name'));
-    }
-
-    /**
-     * @test
-     */
-    public function setProcessTableFieldThrowsExceptionOnInvalidArrayKeyValueGiven(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionCode(1578226362);
-        $this->expectExceptionMessage('The following value keys for the process table field "some name" are not allowed: wrong');
-
-        $this->subject->setProcessTableField(
-            'some name',
-            ['wrong' => 'not allowed']
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setProcessTableFieldThrowsExceptionWhenNoRequiredKeysForArrayValueGiven(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionCode(1578226363);
-        $this->expectExceptionMessage('The following value keys for the process table field "some name" are required: path, filename');
-
-        $this->subject->setProcessTableField(
-            'some name',
-            []
-        );
+        self::assertSame($fileStub, $this->subject->getProcessTableField('some name'));
     }
 
     /**

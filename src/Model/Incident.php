@@ -3,14 +3,13 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Model;
 
+use Brotkrueml\JobRouterClient\Resource\FileInterface;
+
 final class Incident
 {
     public const PRIORITY_LOW = 1;
     public const PRIORITY_NORMAL = 2;
     public const PRIORITY_HIGH = 3;
-
-    private const ALLOWED_FILE_VALUE_KEYS = ['path', 'filename', 'contentType'];
-    private const REQUIRED_FILE_VALUE_KEYS = ['path', 'filename'];
 
     /**
      * @var int|null
@@ -243,65 +242,20 @@ final class Incident
      */
     public function setProcessTableField(string $name, $value): self
     {
-        if (!\is_string($value) && !\is_int($value) && !\is_array($value)) {
+        if (!\is_string($value) && !\is_int($value) && !$value instanceof FileInterface) {
             throw new \InvalidArgumentException(
                 \sprintf(
-                    'value has to be either a string, an integer or an array, "%s" given',
+                    'value has to be either a string, an integer or an instance of %s, "%s" given',
+                    FileInterface::class,
                     gettype($value)
                 ),
                 1578225863
             );
         }
 
-        if (\is_array($value)) {
-            $this->checkArrayKeysOfFileValue($name, $value);
-        }
-
         $this->processTableFields[$name] = $value;
 
         return $this;
-    }
-
-    /**
-     * @param string $name
-     * @param array $value
-     * @throws \InvalidArgumentException
-     */
-    private function checkArrayKeysOfFileValue(string $name, array $value): void
-    {
-        $disallowedKeys = \array_filter($value, function (string $key): bool {
-            return !\in_array($key, self::ALLOWED_FILE_VALUE_KEYS);
-        }, \ARRAY_FILTER_USE_KEY);
-
-        if (!empty($disallowedKeys)) {
-            throw new \InvalidArgumentException(
-                \sprintf(
-                    'The following value keys for the process table field "%s" are not allowed: %s',
-                    $name,
-                    \implode(', ', \array_keys($disallowedKeys))
-                ),
-                1578226362
-            );
-        }
-
-        $missingRequiredKeys = [];
-        $valueKeys = \array_keys($value);
-        foreach (self::REQUIRED_FILE_VALUE_KEYS as $requiredKey) {
-            if (!\in_array($requiredKey, $valueKeys)) {
-                $missingRequiredKeys[] = $requiredKey;
-            }
-        }
-
-        if (!empty($missingRequiredKeys)) {
-            throw new \InvalidArgumentException(
-                \sprintf(
-                    'The following value keys for the process table field "%s" are required: %s',
-                    $name,
-                    \implode(', ', $missingRequiredKeys)
-                ),
-                1578226363
-            );
-        }
     }
 
     public function setRowsForSubTable(string $subTableName, array $data): self

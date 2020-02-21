@@ -6,6 +6,7 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
 use Brotkrueml\JobRouterClient\Client\ClientInterface;
 use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
 use Brotkrueml\JobRouterClient\Model\Incident;
+use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -48,8 +49,6 @@ class IncidentsClientDecoratorTest extends TestCase
      * @dataProvider dataProvider
      * @param Incident $incident
      * @param array $withMultipart
-     * @param string $keyToCheck
-     * @param string $typeToCheck
      */
     public function requestWithIncidentIsProcessedAsMultipartAndPassedToClient(
         Incident $incident,
@@ -130,16 +129,14 @@ class IncidentsClientDecoratorTest extends TestCase
             ['incident_escalation_date' => '2020-01-31T01:23:45+01:00']
         ];
 
+        $fileStub = $this->createStub(FileInterface::class);
         yield 'Given process table fields' => [
             (new Incident())
                 ->setProcessTableField('some field', 'some value')
                 ->setProcessTableField('another field', 'another value')
                 ->setProcessTableField('different field', 'different value')
                 ->setProcessTableField('integer field', 123)
-                ->setProcessTableField('file field', [
-                    'path' => '/path/to/file.pdf',
-                    'filename' => 'the-file.pdf',
-                ]),
+                ->setProcessTableField('file field', $fileStub),
             [
                 'processtable[fields][0][name]' => 'some field',
                 'processtable[fields][0][value]' => 'some value',
@@ -150,10 +147,7 @@ class IncidentsClientDecoratorTest extends TestCase
                 'processtable[fields][3][name]' => 'integer field',
                 'processtable[fields][3][value]' => '123',
                 'processtable[fields][4][name]' => 'file field',
-                'processtable[fields][4][value]' => [
-                    'path' => '/path/to/file.pdf',
-                    'filename' => 'the-file.pdf'
-                ],
+                'processtable[fields][4][value]' => $fileStub,
             ]
         ];
 

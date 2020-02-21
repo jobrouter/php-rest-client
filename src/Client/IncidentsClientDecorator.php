@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Client;
 
 use Brotkrueml\JobRouterClient\Model\Incident;
+use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use Psr\Http\Message\ResponseInterface;
 
 final class IncidentsClientDecorator extends ClientDecorator
@@ -87,7 +88,7 @@ final class IncidentsClientDecorator extends ClientDecorator
             $multipartProcessTableFields[$this->getProcessTableFieldKey($index, 'name')]
                 = $name;
             $multipartProcessTableFields[$this->getProcessTableFieldKey($index, 'value')]
-                = \is_array($value) ? $value : (string)$value;
+                = $value instanceof FileInterface ? $value : (string)$value;
             $index++;
         }
 

@@ -9,6 +9,7 @@ use Brotkrueml\JobRouterClient\Exception\HttpException;
 use Brotkrueml\JobRouterClient\Exception\RestClientException;
 use Brotkrueml\JobRouterClient\Middleware\AuthorisationMiddleware;
 use Brotkrueml\JobRouterClient\Middleware\UserAgentMiddleware;
+use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use Buzz\Browser;
 use Buzz\Client\Curl;
 use Nyholm\Psr7\Factory\Psr17Factory;
@@ -148,6 +149,13 @@ final class RestClient implements ClientInterface
 
     private function sendForm(string $method, string $resource, array $multipart): ResponseInterface
     {
+        /** @psalm-suppress MissingClosureParamType */
+        \array_walk($multipart, function(&$value): void {
+            if ($value instanceof FileInterface) {
+                $value = $value->toArray();
+            }
+        });
+
         return $this->browser->submitForm(
             $this->getFullResourceUrl($resource),
             $multipart,
