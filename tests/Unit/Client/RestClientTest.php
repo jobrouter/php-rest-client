@@ -102,7 +102,7 @@ class RestClientTest extends TestCase
             new Response('The response of some/route')
         );
 
-        $response = $restClient->request('GET', 'some/route');
+        $response = $restClient->request('GET', '//some/route');
 
         $responseContent = $response->getBody()->getContents();
         $requestHeaders = self::$server->getLastRequest()->getHeaders();
@@ -110,6 +110,26 @@ class RestClientTest extends TestCase
         self::assertSame('The response of some/route', $responseContent);
         self::assertArrayHasKey('X-Jobrouter-Authorization', $requestHeaders);
         self::assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['X-Jobrouter-Authorization']);
+    }
+
+    /**
+     * @test
+     */
+    public function startingSlashFromGivenResourceIsTrimmed(): void
+    {
+        $this->setResponseOfTokensPath();
+
+        $restClient = new RestClient(self::$configuration);
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/some/route',
+            new Response('The response of some/route')
+        );
+
+        $restClient->request('GET', '/some/route');
+        $requestResource = self::$server->getLastRequest()->getParsedUri()['path'];
+
+        self::assertSame('/api/rest/v2/some/route', $requestResource);
     }
 
     /**

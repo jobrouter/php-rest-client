@@ -134,9 +134,11 @@ final class RestClient implements ClientInterface
             );
         }
 
+        $resource = \ltrim($resource, '/');
+        $contentType = $this->routeContentTypeMapper->getRequestContentTypeForRoute($method, $resource);
+
         $errorMessage = 'Error fetching route ' . $resource;
 
-        $contentType = $this->routeContentTypeMapper->getRequestContentTypeForRoute($method, $resource);
 
         try {
             if ($contentType === 'multipart/form-data') {
@@ -181,9 +183,7 @@ final class RestClient implements ClientInterface
 
     private function getFullResourceUrl(string $resource): string
     {
-        return \rtrim($this->configuration->getBaseUrl(), '/')
-            . self::API_ENDPOINT
-            . \ltrim($resource, '/');
+        return \rtrim($this->configuration->getBaseUrl(), '/') . self::API_ENDPOINT . $resource;
     }
 
     /**
