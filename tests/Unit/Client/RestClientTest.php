@@ -152,25 +152,6 @@ class RestClientTest extends TestCase
     /**
      * @test
      */
-    public function unknownOptionPassingToRequestThrowsException(): void
-    {
-        $this->expectException(HttpException::class);
-
-        $this->setResponseOfTokensPath();
-
-        $restClient = new RestClient(self::$configuration);
-
-        self::$server->setResponseOfPath(
-            '/api/rest/v2/some/route',
-            new Response('The response of some/route')
-        );
-
-        $restClient->request('some/route', 'GET', ['unknown_option' => '']);
-    }
-
-    /**
-     * @test
-     */
     public function noTokenIsReturnedThrowsAuthenticationException(): void
     {
         $this->expectException(AuthenticationException::class);
