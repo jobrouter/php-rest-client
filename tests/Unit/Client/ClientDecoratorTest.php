@@ -59,4 +59,16 @@ class ClientDecoratorTest extends TestCase
 
         self::assertSame($responseStub, $actual);
     }
+
+    /**
+     * @test
+     */
+    public function getJobRouterVersionIsPassedToClient(): void
+    {
+        $this->client
+            ->expects(self::once())
+            ->method('getJobRouterVersion');
+
+        $this->subject->getJobRouterVersion();
+    }
 }

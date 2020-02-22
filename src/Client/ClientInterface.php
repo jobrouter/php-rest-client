@@ -17,4 +17,6 @@ interface ClientInterface
      * @return ResponseInterface
      */
     public function request(string $method, string $resource, $data = []): ResponseInterface;
+
+    public function getJobRouterVersion(): string;
 }

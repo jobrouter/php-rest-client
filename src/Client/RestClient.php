@@ -43,6 +43,9 @@ final class RestClient implements ClientInterface
     /** @var RouteContentTypeMapper */
     private $routeContentTypeMapper;
 
+    /** @var string */
+    private $jobRouterVersion = '';
+
     /**
      * Creates a RestClient instance, already authenticated against the JobRouter system
      *
@@ -88,6 +91,8 @@ final class RestClient implements ClientInterface
             throw AuthenticationException::fromFailedAuthentication($this->configuration, 1577818398, $e);
         }
 
+        $this->detectJobRouterVersionFromResponse($response);
+
         $content = \json_decode($response->getBody()->getContents(), true);
 
         if (!isset($content['tokens'][0])) {
@@ -95,6 +100,11 @@ final class RestClient implements ClientInterface
         }
 
         $this->authorisationMiddleware->setToken($content['tokens'][0]);
+    }
+
+    private function detectJobRouterVersionFromResponse(ResponseInterface $response): void
+    {
+        $this->jobRouterVersion = $response->getHeaderLine('x-jobrouter-version');
     }
 
     /**
@@ -201,5 +211,15 @@ final class RestClient implements ClientInterface
     private function buildRequest(string $method, string $resource): RequestInterface
     {
         return $this->psr17factory->createRequest($method, $this->getFullResourceUrl($resource));
+    }
+
+    /**
+     * Get the version number of the JobRouter installation
+     *
+     * @return string
+     */
+    public function getJobRouterVersion(): string
+    {
+        return $this->jobRouterVersion;
     }
 }

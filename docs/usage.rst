@@ -83,6 +83,22 @@ at any time the :php:`authenticate()` method of the rest client:
 Call this also in advance to omit a timeout.
 
 
+.. _usage.get-jobrouter-version:
+
+Retrieve the JobRouter version
+==============================
+
+Sometimes it can be handy to know the JobRouter version. The version number
+can be retrieved with a :php:`RestClient` method:
+
+::
+
+   <?php
+   // The JobRouter Client is already initialised
+
+   $client->getJobRouterVersion();
+
+
 .. _usage.sending-requests:
 
 Sending Requests

@@ -115,6 +115,27 @@ class RestClientTest extends TestCase
     /**
      * @test
      */
+    public function jobRouterVersionIsDetected(): void
+    {
+        $version = '5.0.9';
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/application/tokens',
+            new Response(
+                \sprintf('{"tokens":["%s"]}', self::TEST_TOKEN),
+                ['x-jobrouter-version' => $version],
+                201
+            )
+        );
+
+        $restClient = new RestClient(self::$configuration);
+
+        self::assertSame($version, $restClient->getJobRouterVersion());
+    }
+
+    /**
+     * @test
+     */
     public function serverIsNotAvailable(): void
     {
         $this->expectException(AuthenticationException::class);

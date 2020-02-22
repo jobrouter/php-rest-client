@@ -26,4 +26,9 @@ abstract class ClientDecorator implements ClientInterface
     {
         return $this->client->request($method, $resource, $data);
     }
+
+    public function getJobRouterVersion(): string
+    {
+        return $this->client->getJobRouterVersion();
+    }
 }
