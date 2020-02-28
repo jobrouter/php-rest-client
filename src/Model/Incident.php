@@ -8,6 +8,7 @@ use Brotkrueml\JobRouterClient\Resource\FileInterface;
 final class Incident
 {
     public const PRIORITY_LOW = 1;
+    /** @noRector \Rector\DeadCode\Rector\ClassConst\RemoveUnusedClassConstantRector */
     public const PRIORITY_NORMAL = 2;
     public const PRIORITY_HIGH = 3;
 

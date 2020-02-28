@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class RouteContentTypeMapperTest extends TestCase
 {
+    /** @var RouteContentTypeMapper */
     private $subject;
 
     protected function setUp(): void
