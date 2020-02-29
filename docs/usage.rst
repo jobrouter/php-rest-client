@@ -6,6 +6,9 @@
 Usage
 =====
 
+.. contents:: Table of Contents
+   :depth: 2
+   :local:
 
 .. _usage.initialisation:
 
@@ -83,7 +86,7 @@ Call this also in advance to omit a timeout.
 
 .. _usage.get-jobrouter-version:
 
-Retrieve the JobRouter version
+Retrieve the JobRouter Version
 ==============================
 
 Sometimes it can be handy to know the JobRouter version. The version number
@@ -210,7 +213,7 @@ With the following request you can post a dataset to a JobData table::
 
 .. _usage.starting-new-instance:
 
-Starting a new instance of a process
+Starting a new Instance of a Process
 ------------------------------------
 
 To start a new instance of a process you have to send the data as
@@ -305,3 +308,35 @@ This is much more intuitive. So, let's have a look:
    :php:`request()` method. As usual you'll get a :php:`ResponseInterface`
    object back with the response of the HTTP request. If you would pass an array
    the request is passed unaltered to the Rest Client.
+
+
+.. _usage.archive-document:
+
+Archiving a Document
+--------------------
+
+Archiving a document is as easy as :ref:`starting an instance
+<usage.starting-new-instance>`::
+
+   <?php
+   use Brotkrueml\JobRouterClient\Resource\File;
+
+   // The JobRouter Client is already initialised
+
+   // Define document data
+   $documentContentAndMetaData = [
+      'indexFields[0][name]' => 'INVOICENR',
+      'indexFields[0][value]' => 'IN02984',
+      'files[0]' => new File('/path/to/invoice/in02984.pdf'),
+   ];
+
+   try {
+      $response = $client->request(
+         'POST',
+         sprintf('application/jobarchive/archives/%s/documents', 'INVOICES'),
+         $documentContentAndMetaData
+      );
+   } catch (ExceptionInterface $e) {
+      // Error handling
+   }
+
