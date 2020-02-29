@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Client;
 
+use Brotkrueml\JobRouterClient\Model\Document;
 use Brotkrueml\JobRouterClient\Model\Incident;
 use Psr\Http\Message\ResponseInterface;
 
@@ -13,7 +14,7 @@ interface ClientInterface
     /**
      * @param string $method
      * @param string $resource
-     * @param array|Incident $data
+     * @param array|Incident|Document $data
      * @return ResponseInterface
      */
     public function request(string $method, string $resource, $data = []): ResponseInterface;

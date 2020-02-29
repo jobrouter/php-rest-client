@@ -340,3 +340,30 @@ Archiving a document is as easy as :ref:`starting an instance
       // Error handling
    }
 
+You can also use the :php:`DocumentsClientDecorator` which eases the handling
+of the multipart array::
+
+   <?php
+   // Additional uses
+   use Brotkrueml\JobRouterClient\Client\DocumentsClientDecorator;
+   use Brotkrueml\JobRouterClient\Model\Document;
+   use Brotkrueml\JobRouterClient\Resource\File;
+
+   // The JobRouter Client is already initialised
+
+   $document = (new Document())
+      ->setIndexField('INVOICENR', 'IN02984')
+      ->addFile(new File('/path/to/invoice/in02984.pdf'));
+
+   try {
+      $documentsClient = new DocumentsClientDecorator($client);
+
+      $response = $documentsClient->request(
+         'POST',
+         sprintf('application/jobarchive/archives/%s/documents', 'INVOICES'),
+         $document
+      );
+   } catch (ExceptionInterface $e) {
+      // Error handling
+   }
+
