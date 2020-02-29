@@ -5,9 +5,9 @@
 [![Coverage Status](https://coveralls.io/repos/github/brotkrueml/jobrouter-client/badge.svg?branch=master)](https://coveralls.io/github/brotkrueml/jobrouter-client?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/jobrouter-client/badge/?version=latest)](https://jobrouter-client.readthedocs.io/en/latest/?badge=latest)
 
-[JobRouter](https://www.jobrouter.com/) is a scalable digitization
+[JobRouter](https://www.jobrouter.com/) is a scalable digitisation
 platform which links processes, data and documents. This JobRouter
 Client eases the access to the REST API. The library supports JobRouter
-version 4.2 and up.
+versions 4.2-5.0.
 
 [Documentation](https://jobrouter-client.readthedocs.io/)
