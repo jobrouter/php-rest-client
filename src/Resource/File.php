@@ -52,6 +52,9 @@ final class File implements FileInterface
         return $this->contentType;
     }
 
+    /**
+     * @internal
+     */
     public function toArray(): array
     {
         $result = [

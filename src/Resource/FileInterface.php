@@ -5,7 +5,8 @@ namespace Brotkrueml\JobRouterClient\Resource;
 
 interface FileInterface
 {
-    public function __construct(string $path, string $fileName = '', string $contentType = '');
-
+    /**
+     * @internal
+     */
     public function toArray(): array;
 }
