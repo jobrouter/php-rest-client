@@ -227,7 +227,7 @@ final class Incident
 
     /**
      * @param string $name
-     * @return string|array|null
+     * @return string|FileInterface|null
      */
     public function getProcessTableField(string $name)
     {
@@ -236,7 +236,7 @@ final class Incident
 
     /**
      * @param string $name
-     * @param string|array $value
+     * @param string|FileInterface $value
      * @return $this
      * @throws \InvalidArgumentException
      * @psalm-suppress DocblockTypeContradiction
