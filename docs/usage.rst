@@ -71,9 +71,7 @@ After the initialisation part you can now request the needed data or store some
 data. You can make as many requests as you want, but keep in mind: When the
 lifetime of the token is exceeded you will get an authentication error.
 For now, you have to handle it on your own. If this happens, you can call
-at any time the :php:`authenticate()` method of the rest client:
-
-::
+at any time the :php:`authenticate()` method of the rest client::
 
    <?php
    // The JobRouter Client is already initialised
@@ -89,9 +87,7 @@ Retrieve the JobRouter version
 ==============================
 
 Sometimes it can be handy to know the JobRouter version. The version number
-can be retrieved with a :php:`RestClient` method:
-
-::
+can be retrieved with a :php:`RestClient` method::
 
    <?php
    // The JobRouter Client is already initialised
@@ -105,9 +101,7 @@ Sending Requests
 ================
 
 The :php:`RestClient` object exposes a :php:`request()` method to send a request
-to the JobRouter REST API:
-
-::
+to the JobRouter REST API::
 
    <?php
    // The JobRouter Client is already initialised
@@ -146,9 +140,7 @@ Retrieving a JobData Dataset
 
 Let's start with an example to retrieve some data out of a JobData table. We
 assume the client is already initialised, like in the
-:ref:`introduction above <usage.initialisation>`.
-
-::
+:ref:`introduction above <usage.initialisation>`::
 
    <?php
    // The JobRouter Client is already initialised
@@ -185,9 +177,7 @@ assume the client is already initialised, like in the
 Posting a JobData Dataset
 -------------------------
 
-With the following request you can post a dataset to a JobData table:
-
-::
+With the following request you can post a dataset to a JobData table::
 
    <?php
    // The JobRouter Client is already initialised
@@ -224,9 +214,7 @@ Starting a new instance of a process
 ------------------------------------
 
 To start a new instance of a process you have to send the data as
-``multipart/form-data`` instead of JSON like the previous examples:
-
-::
+``multipart/form-data`` instead of JSON like the previous examples::
 
    <?php
    use Brotkrueml\JobRouterClient\Resource\File;
@@ -267,9 +255,7 @@ To start a new instance of a process you have to send the data as
 
 But instead of having the hassle with the complex ``processtable`` and
 ``subtable`` structure just use the :php:`IncidentsClientDecorator` which gives you an
-API to handle all the process table and sub table stuff:
-
-::
+API to handle all the process table and sub table stuff::
 
    <?php
    // Additional uses

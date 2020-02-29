@@ -1,5 +1,7 @@
 .. include:: Includes.txt
 
+.. highlight:: shell
+
 .. _installation:
 
 ============
@@ -25,9 +27,7 @@ Composer
 
 Simply add a dependency on ``brotkrueml/jobrouter-client`` to your project's
 :file:`composer.json` file if you use `Composer <https://getcomposer.org/>`_ to
-manage the dependencies of your project:
-
-.. code-block:: shell
+manage the dependencies of your project::
 
    composer require brotkrueml/jobrouter-client
 
