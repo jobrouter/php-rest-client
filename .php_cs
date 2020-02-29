@@ -10,6 +10,7 @@ return PhpCsFixer\Config::create()
     ->setRules([
         '@DoctrineAnnotation' => true,
         '@PSR2' => true,
+        'array_indentation' => true,
         'array_syntax' => ['syntax' => 'short'],
         'cast_spaces' => ['space' => 'none'],
         'concat_space' => ['spacing' => 'one'],
