@@ -236,7 +236,7 @@ final class Incident
 
     /**
      * @param string $name
-     * @param string|FileInterface $value
+     * @param string|int|FileInterface $value
      * @return $this
      * @throws \InvalidArgumentException
      * @psalm-suppress DocblockTypeContradiction
