@@ -17,7 +17,7 @@
         "php": "^7.2",
         "ext-curl": "*",
         "ext-json": "*",
-        "kriswallsmith/buzz": "^1.0",
+        "kriswallsmith/buzz": "^1.1",
         "nyholm/psr7": "^1.2"
     },
     "require-dev": {
@@ -28,7 +28,7 @@
         "php-coveralls/php-coveralls": "^2.2",
         "phpunit/phpunit": "^8.5 || ^9.0",
         "rector/rector": "^0.7",
-        "vimeo/psalm": "^3.8"
+        "vimeo/psalm": "^3.9"
     },
     "config": {
         "sort-packages": true
