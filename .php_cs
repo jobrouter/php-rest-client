@@ -5,6 +5,17 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__ . '/tests')
 ;
 
+$header = <<<EOF
+This file is part of the JobRouter Client.
+
+Copyright (c) 2019-2020 Chris Müller
+
+For the full copyright and license information, please view the
+LICENSE.txt file that was distributed with this source code.
+
+@see https://github.com/brotkrueml/jobrouter-client
+EOF;
+
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
@@ -18,6 +29,7 @@ return PhpCsFixer\Config::create()
         'dir_constant' => true,
         'function_typehint_space' => true,
         'hash_to_slash_comment' => true,
+        'header_comment' => ['commentType' => 'PHPDoc', 'header' => $header, 'separate' => 'both'],
         'lowercase_cast' => true,
         'modernize_types_casting' => true,
         'native_function_casing' => true,
