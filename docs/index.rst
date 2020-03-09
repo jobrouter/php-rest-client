@@ -17,10 +17,15 @@ Contents
 ========
 
 .. toctree::
-   :maxdepth: 3
-   :numbered: 1
+   :maxdepth: 1
+   :caption: User Documentation
 
    introduction
    installation
    usage
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Project Information
+
    copyright
