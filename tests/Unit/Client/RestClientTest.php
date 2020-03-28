@@ -90,6 +90,7 @@ class RestClientTest extends TestCase
     public function wrongTokensRouteThrowsException(): void
     {
         $this->expectException(AuthenticationException::class);
+        $this->expectExceptionCode(1577818398);
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/application/tokens',
@@ -170,6 +171,7 @@ class RestClientTest extends TestCase
     public function serverIsNotAvailable(): void
     {
         $this->expectException(AuthenticationException::class);
+        $this->expectExceptionCode(1577818398);
 
         $configuration = new ClientConfiguration(
             'http://' . self::$server->getHost() . ':' . (self::$server->getPort() - 1) . '/',
@@ -186,6 +188,7 @@ class RestClientTest extends TestCase
     public function noTokenIsReturnedThrowsAuthenticationException(): void
     {
         $this->expectException(AuthenticationException::class);
+        $this->expectExceptionCode(1570222016);
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/application/tokens',

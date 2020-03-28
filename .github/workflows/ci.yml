@@ -84,6 +84,6 @@ jobs:
           vendor/bin/psalm --no-progress
       - name: Run infection
         run: |
-          vendor/bin/infection --no-progress --min-msi=89 --threads=4
+          vendor/bin/infection --no-progress --min-msi=93 --threads=4
         env:
           STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
