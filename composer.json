@@ -21,6 +21,7 @@
         "nyholm/psr7": "^1.2"
     },
     "require-dev": {
+        "captainhook/captainhook": "^5.1",
         "donatj/mock-webserver": "^2.1",
         "friendsofphp/php-cs-fixer": "^2.16",
         "infection/infection": "^0.15",
