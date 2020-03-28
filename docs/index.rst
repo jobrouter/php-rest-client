@@ -13,9 +13,6 @@ Chris Müller <`https://github.com/brotkrueml <https://github.com/brotkrueml>`_>
 This documentation is published under the `CC BY-NC-SA 4.0 (Creative Commons)
 license <https://creativecommons.org/licenses/by-nc-sa/4.0/>`_.
 
-Contents
-========
-
 .. toctree::
    :maxdepth: 1
    :caption: User Documentation
