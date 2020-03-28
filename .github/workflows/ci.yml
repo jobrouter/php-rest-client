@@ -65,7 +65,7 @@ jobs:
       - name: Setup PHP version
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.2
+          php-version: 7.3
           extensions: curl json mbstring
       - name: Install composer dependencies
         run: |
@@ -85,3 +85,5 @@ jobs:
       - name: Run infection
         run: |
           vendor/bin/infection --no-progress --min-msi=89 --threads=4
+        env:
+          STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}

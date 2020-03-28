@@ -9,6 +9,9 @@
         "configDir": "tests"
     },
     "logs": {
+        "badge": {
+            "branch": "master"
+        },
         "text": "logs\/infection.log"
     },
     "mutators": {
