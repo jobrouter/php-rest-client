@@ -51,24 +51,25 @@ Let's dig into the piece of code:
 #. Line 6: Require the autoloading file, so the classes are found and can be
    used.
 
-#. Lines 8-11: Define a :php:`ClientConfiguration` object with the base URL, the
-   username and the password for your JobRouter installation.
+#. Lines 8-11: Define a :ref:`ClientConfiguration <api-clientconfiguration>`
+   object with the base URL, the username and the password for your JobRouter
+   installation.
 
 #. Line 13: Overrides the default lifetime of the JSON Web Token in seconds.
    The default value is 600 seconds - if you are fine with this, you can omit
-   this. As the configuration object is immutable, a new instance of the
-   configuration is returned.
+   calling the method. As the configuration object is immutable, a new instance
+   of the configuration is returned.
 
-#. Line 16: Now instantiate the RestClient with the configuration object. During
-   the instantiation the client will authenticate against the JobRouter
-   installation.
+#. Line 16: Now instantiate the :ref:`RestClient <api-restclient>` with the
+   configuration object. During the instantiation the client will authenticate
+   against the JobRouter installation.
 
 #. Line 17: As there can be errors during the initialisation - like a typo in
    the base URL or wrong credentials embed the initialisation into a
    :php:`try`/:php:`catch` block. The thrown exception is by default an
-   implementation of the :php:`ExceptionInterface`. It encapsulates sometimes
-   another exception, you'll get it with :php:`->getPrevious()`. Of course, you
-   can also catch by :php:`\Exception` or :php:`\Throwable`.
+   implementation of the :php:`ExceptionInterface`. The exception encapsulates
+   sometimes another exception, you'll get it with :php:`->getPrevious()`. Of
+   course, you can also catch by :php:`\Exception` or :php:`\Throwable`.
 
 After the initialisation part you can now request the needed data or store some
 data. You can make as many requests as you want, but keep in mind: When the
@@ -103,8 +104,8 @@ can be retrieved with a :php:`RestClient` method::
 Sending Requests
 ================
 
-The :php:`RestClient` object exposes a :php:`request()` method to send a request
-to the JobRouter REST API::
+The :ref:`RestClient <api-restclient>` object exposes a :php:`request()` method
+to send a request to the JobRouter REST API::
 
    <?php
    // The JobRouter Client is already initialised
@@ -250,15 +251,16 @@ To start a new instance of a process you have to send the data as
 
 #. Lines 5-18: Preparing the data to send as an array according to the JobRouter
    REST API documentation. To add a file instantiate a
-   :php:`Brotkrueml\JobRouterClient\Resource\File` object. The first argument
-   receives the full path to the file, the other two are optional: You can
-   overwrite the file name and specify a content type.
+   :ref:`Brotkrueml\\JobRouterClient\\Resource\\File <api-file>` object. The
+   first argument receives the full path to the file, the other two are
+   optional: You can overwrite the file name and specify a content type.
 
 #. Lines 21-25: Send the data.
 
 But instead of having the hassle with the complex ``processtable`` and
-``subtable`` structure just use the :php:`IncidentsClientDecorator` which gives you an
-API to handle all the process table and sub table stuff::
+``subtable`` structure just use the :ref:`IncidentsClientDecorator
+<api-incidentsclientdecorator>` which gives you an API to handle all the process
+table and sub table stuff::
 
    <?php
    // Additional uses
@@ -340,8 +342,9 @@ Archiving a document is as easy as :ref:`starting an instance
       // Error handling
    }
 
-You can also use the :php:`DocumentsClientDecorator` which eases the handling
-of the multipart array::
+You can also use the :ref:`DocumentsClientDecorator
+<api-documentsclientdecorator>` which eases the handling of the multipart
+array::
 
    <?php
    // Additional uses
@@ -366,4 +369,33 @@ of the multipart array::
    } catch (ExceptionInterface $e) {
       // Error handling
    }
+
+
+
+Nesting of Client Decorators
+----------------------------
+
+The decorators can be nested. This can be useful when, e.g., posting to a
+JobData table, then archiving a document and at last starting an instance::
+
+   <?php
+   use Brotkrueml\JobRouterClient\Client\DocumentsClientDecorator;
+   use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
+   use Brotkrueml\JobRouterClient\Client\RestClient;
+   use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
+   use Brotkrueml\JobRouterClient\Exception\ExceptionInterface;
+
+   require_once 'vendor/autoload.php';
+
+   $configuration = new ClientConfiguration(
+      'https://example.org/jobrouter/',
+      'the_user',
+      'the_password'
+   );
+
+   $restClient = new RestClient($configuration);
+   $incidentsClient = new IncidentsClientDecorator($restClient);
+   $overallClient = new DocumentsClientDecorator($incidentsClient);
+
+   // Now you can define an Incident and add it to the overallClient
 

@@ -1,0 +1,33 @@
+.. _api:
+
+===
+API
+===
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Interfaces
+
+   clientinterface
+   exceptioninterface
+   fileinterface
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Classes
+
+   clientdecorator
+   documentsclientdecorator
+   incidentsclientdecorator
+   restclient
+   clientconfiguration
+   authenticationexception
+   httpexception
+   invalidconfigurationexception
+   invalidresourceexception
+   restclientexception
+   version
+   document
+   incident
+   file
+   filestorage

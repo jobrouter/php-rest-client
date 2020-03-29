@@ -192,7 +192,7 @@ final class Incident
         return $this;
     }
 
-    public function getSimulation(): ?bool
+    public function isSimulation(): ?bool
     {
         return $this->simulation;
     }
@@ -238,7 +238,7 @@ final class Incident
 
     /**
      * @param string $name
-     * @return string|FileInterface|null
+     * @return string|int|FileInterface|null
      */
     public function getProcessTableField(string $name)
     {
@@ -270,16 +270,16 @@ final class Incident
         return $this;
     }
 
-    public function setRowsForSubTable(string $subTableName, array $data): self
+    public function setRowsForSubTable(string $subTableName, array $rows): self
     {
-        $this->subTables[$subTableName] = $data;
+        $this->subTables[$subTableName] = $rows;
 
         return $this;
     }
 
-    public function addRowToSubTable(string $subTableName, array $rowData): self
+    public function addRowToSubTable(string $subTableName, array $row): self
     {
-        $this->subTables[$subTableName][] = $rowData;
+        $this->subTables[$subTableName][] = $row;
 
         return $this;
     }

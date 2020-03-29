@@ -18,6 +18,9 @@ use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 
 final class AuthenticationException extends \RuntimeException implements ExceptionInterface
 {
+    /**
+     * @internal
+     */
     public static function fromFailedAuthentication(
         ClientConfiguration $configuration,
         int $code = 0,

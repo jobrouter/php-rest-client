@@ -91,7 +91,7 @@ class IncidentTest extends TestCase
      */
     public function simulationIsNullWhenNotSet(): void
     {
-        self::assertNull($this->subject->getSimulation());
+        self::assertNull($this->subject->isSimulation());
     }
 
     /**
@@ -269,16 +269,16 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
-    public function setAndGetSimulationAreCorrectImplemented(): void
+    public function setAndIsSimulationAreCorrectImplemented(): void
     {
         $actual = $this->subject->setSimulation(true);
 
         self::assertSame($this->subject, $actual);
-        self::assertTrue($this->subject->getSimulation());
+        self::assertTrue($this->subject->isSimulation());
 
         $this->subject->setSimulation(false);
 
-        self::assertFalse($this->subject->getSimulation());
+        self::assertFalse($this->subject->isSimulation());
     }
 
     /**

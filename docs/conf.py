@@ -41,6 +41,7 @@ release = u'0.9.0'
 # ones.
 extensions = [
     'sphinx.ext.intersphinx',
+    'sphinxcontrib.phpdomain',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

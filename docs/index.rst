@@ -20,6 +20,7 @@ license <https://creativecommons.org/licenses/by-nc-sa/4.0/>`_.
    introduction
    installation
    usage
+   api/index
 
 .. toctree::
    :maxdepth: 1
