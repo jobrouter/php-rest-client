@@ -69,12 +69,12 @@ final class IncidentsClientDecorator extends ClientDecorator
             $multipart['simulation'] = (string)$incident->isSimulation();
         }
 
-        if ($incident->getStepEscalationDate() instanceof \DateTime) {
+        if ($incident->getStepEscalationDate() instanceof \DateTimeInterface) {
             /** @psalm-suppress PossiblyNullReference */
             $multipart['step_escalation_date'] = $incident->getStepEscalationDate()->format('c');
         }
 
-        if ($incident->getIncidentEscalationDate() instanceof \DateTime) {
+        if ($incident->getIncidentEscalationDate() instanceof \DateTimeInterface) {
             /** @psalm-suppress PossiblyNullReference */
             $multipart['incident_escalation_date'] = $incident->getIncidentEscalationDate()->format('c');
         }

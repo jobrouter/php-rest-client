@@ -286,7 +286,7 @@ class IncidentTest extends TestCase
      */
     public function setAndGetStepEscalationDateAreCorrectImplemented(): void
     {
-        $dateTime = new \DateTime('2020-01-05T13:45:17+01:00');
+        $dateTime = new \DateTimeImmutable('2020-01-05T13:45:17+01:00');
 
         $actual = $this->subject->setStepEscalationDate($dateTime);
 
@@ -299,7 +299,7 @@ class IncidentTest extends TestCase
      */
     public function setAndGetIncidentEscalationDateAreCorrectImplemented(): void
     {
-        $dateTime = new \DateTime('2020-01-05T13:46:43+01:00');
+        $dateTime = new \DateTimeImmutable('2020-01-05T13:46:43+01:00');
 
         $actual = $this->subject->setIncidentEscalationDate($dateTime);
 

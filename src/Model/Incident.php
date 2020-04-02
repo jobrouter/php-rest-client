@@ -64,12 +64,12 @@ final class Incident
     private $simulation;
 
     /**
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
     private $stepEscalationDate;
 
     /**
-     * @var \DateTime|null
+     * @var \DateTimeInterface|null
      */
     private $incidentEscalationDate;
 
@@ -204,24 +204,24 @@ final class Incident
         return $this;
     }
 
-    public function getStepEscalationDate(): ?\DateTime
+    public function getStepEscalationDate(): ?\DateTimeInterface
     {
         return $this->stepEscalationDate;
     }
 
-    public function setStepEscalationDate(\DateTime $stepEscalationDate): self
+    public function setStepEscalationDate(\DateTimeInterface $stepEscalationDate): self
     {
         $this->stepEscalationDate = $stepEscalationDate;
 
         return $this;
     }
 
-    public function getIncidentEscalationDate(): ?\DateTime
+    public function getIncidentEscalationDate(): ?\DateTimeInterface
     {
         return $this->incidentEscalationDate;
     }
 
-    public function setIncidentEscalationDate(\DateTime $incidentEscalationDate): self
+    public function setIncidentEscalationDate(\DateTimeInterface $incidentEscalationDate): self
     {
         $this->incidentEscalationDate = $incidentEscalationDate;
 

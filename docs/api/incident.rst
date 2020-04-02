@@ -34,7 +34,7 @@ Model\\Incident
 
       Retrieve the incident escalation date.
 
-      :returns ?\\DateTime: The date of the incident escalation, or :php:`null`, if not defined.
+      :returns ?\\DateTimeInterface: The date of the incident escalation, or :php:`null`, if not defined.
 
    .. php:method:: getInitiator()
 
@@ -84,7 +84,7 @@ Model\\Incident
 
       Retrieve the step escalation date.
 
-      :returns ?\\DateTime: The date of the step escalation, or :php:`null`, if not defined.
+      :returns ?\\DateTimeInterface: The date of the step escalation, or :php:`null`, if not defined.
 
    .. php:method:: getSummary()
 
@@ -108,7 +108,7 @@ Model\\Incident
 
       Sets the incident escalation date.
 
-      :param \\DateTime $incidentEscalationDate: The incident escalation date.
+      :param \\DateTimeInterface $incidentEscalationDate: The incident escalation date.
       :returns self: An instance of itself.
 
    .. php:method:: setInitiator($initiator)
@@ -174,7 +174,7 @@ Model\\Incident
 
       Sets the step escalation date.
 
-      :param \\DateTime $stepEscalationDate: The step escalation date.
+      :param \\DateTimeInterface $stepEscalationDate: The step escalation date.
       :returns self: An instance of itself.
 
    .. php:method:: setSummary($summary)

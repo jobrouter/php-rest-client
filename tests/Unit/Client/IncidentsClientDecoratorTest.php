@@ -122,7 +122,7 @@ class IncidentsClientDecoratorTest extends TestCase
 
         yield 'Given step escalation date' => [
             (new Incident())->setStepEscalationDate(
-                new \DateTime(
+                new \DateTimeImmutable(
                     '2020-01-30 12:34:56',
                     new \DateTimeZone('America/Chicago')
                 )
@@ -132,7 +132,7 @@ class IncidentsClientDecoratorTest extends TestCase
 
         yield 'Given incident escalation date' => [
             (new Incident())->setIncidentEscalationDate(
-                new \DateTime(
+                new \DateTimeImmutable(
                     '2020-01-31 01:23:45',
                     new \DateTimeZone('Europe/Berlin')
                 )
