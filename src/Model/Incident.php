@@ -238,7 +238,7 @@ final class Incident
 
     /**
      * @param string $name
-     * @return string|int|FileInterface|null
+     * @return string|int|bool|FileInterface|null
      */
     public function getProcessTableField(string $name)
     {
@@ -247,17 +247,17 @@ final class Incident
 
     /**
      * @param string $name
-     * @param string|int|FileInterface $value
+     * @param string|int|bool|FileInterface $value
      * @return $this
      * @throws \InvalidArgumentException
      * @psalm-suppress DocblockTypeContradiction
      */
     public function setProcessTableField(string $name, $value): self
     {
-        if (!\is_string($value) && !\is_int($value) && !$value instanceof FileInterface) {
+        if (!\is_string($value) && !\is_int($value) && !\is_bool($value) && !$value instanceof FileInterface) {
             throw new \InvalidArgumentException(
                 \sprintf(
-                    'value has to be either a string, an integer or an instance of %s, "%s" given',
+                    'value has to be either a string, an integer, a boolean or an instance of %s, "%s" given',
                     FileInterface::class,
                     gettype($value)
                 ),

@@ -147,6 +147,8 @@ class IncidentsClientDecoratorTest extends TestCase
                 ->setProcessTableField('another field', 'another value')
                 ->setProcessTableField('different field', 'different value')
                 ->setProcessTableField('integer field', 123)
+                ->setProcessTableField('boolean true field', true)
+                ->setProcessTableField('boolean false field', false)
                 ->setProcessTableField('file field', $fileStub),
             [
                 'processtable[fields][0][name]' => 'some field',
@@ -157,8 +159,12 @@ class IncidentsClientDecoratorTest extends TestCase
                 'processtable[fields][2][value]' => 'different value',
                 'processtable[fields][3][name]' => 'integer field',
                 'processtable[fields][3][value]' => '123',
-                'processtable[fields][4][name]' => 'file field',
-                'processtable[fields][4][value]' => $fileStub,
+                'processtable[fields][4][name]' => 'boolean true field',
+                'processtable[fields][4][value]' => '1',
+                'processtable[fields][5][name]' => 'boolean false field',
+                'processtable[fields][5][value]' => '0',
+                'processtable[fields][6][name]' => 'file field',
+                'processtable[fields][6][value]' => $fileStub,
             ]
         ];
 

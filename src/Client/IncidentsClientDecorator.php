@@ -96,8 +96,12 @@ final class IncidentsClientDecorator extends ClientDecorator
 
         $index = 0;
         foreach ($processTableFields as $name => $value) {
-            $multipartProcessTableFields[$this->getProcessTableFieldKey($index, 'name')]
-                = $name;
+            $multipartProcessTableFields[$this->getProcessTableFieldKey($index, 'name')] = $name;
+
+            if (\is_bool($value)) {
+                $value = (int)$value;
+            }
+
             $multipartProcessTableFields[$this->getProcessTableFieldKey($index, 'value')]
                 = $value instanceof FileInterface ? $value : (string)$value;
             $index++;

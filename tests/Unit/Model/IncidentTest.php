@@ -340,6 +340,26 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
+    public function setAndGetProcessTableFieldAreCorrectImplementedForABooleanTrueValue(): void
+    {
+        $this->subject->setProcessTableField('some boolean', true);
+
+        self::assertTrue($this->subject->getProcessTableField('some boolean'));
+    }
+
+    /**
+     * @test
+     */
+    public function setAndGetProcessTableFieldAreCorrectImplementedForABooleanFalseValue(): void
+    {
+        $this->subject->setProcessTableField('some boolean', false);
+
+        self::assertFalse($this->subject->getProcessTableField('some boolean'));
+    }
+
+    /**
+     * @test
+     */
     public function setAndGetProcessTableFieldAreImplementedCorrectlyForAFile(): void
     {
         $fileStub = $this->createStub(FileInterface::class);
@@ -358,7 +378,7 @@ class IncidentTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionCode(1578225863);
 
-        $this->subject->setProcessTableField('some name', false);
+        $this->subject->setProcessTableField('some name', new \stdClass());
     }
 
     /**

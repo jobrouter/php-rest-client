@@ -65,7 +65,7 @@ Model\\Incident
       Retrieve the value of a process table field.
 
       :param string $name: The name of the process table field
-      :returns string|int|Brotkrueml\\JobRouterClient\\Resource\\FileInterface|null: The value of a process table field, or :php:`null`, if not existing.
+      :returns string|int|bool|Brotkrueml\\JobRouterClient\\Resource\\FileInterface|null: The value of a process table field, or :php:`null`, if not existing.
 
    .. php:method:: getRowsForSubTable($subTableName)
 
@@ -145,7 +145,7 @@ Model\\Incident
       Sets the value of a process table field.
 
       :param string $name: The name of the process table field.
-      :param string|int|Brotkrueml\\JobRouterClient\\Resource\\FileInterface $value: The value of the process table field.
+      :param string|int|bool|Brotkrueml\\JobRouterClient\\Resource\\FileInterface $value: The value of the process table field.
       :returns self: An instance of itself.
 
    .. php:method:: setRowsForSubTable($subTableName, $rows)
