@@ -363,15 +363,31 @@ class RestClientTest extends TestCase
     /**
      * @test
      */
-    public function requestWhenDataIsNotAnArrayAnExceptionIsThrown(): void
+    public function requestWhenDataIsABooleanAnExceptionIsThrown(): void
     {
         $this->expectException(RestClientException::class);
         $this->expectExceptionCode(1578233543);
+        $this->expectExceptionMessage('data must be an array, "bool" given');
 
         $this->setResponseOfTokensPath();
         $restClient = new RestClient(self::$configuration);
 
         $restClient->request('POST', 'some/route', false);
+    }
+
+    /**
+     * @test
+     */
+    public function requestWhenDataIsAClassAnExceptionIsThrown(): void
+    {
+        $this->expectException(RestClientException::class);
+        $this->expectExceptionCode(1578233543);
+        $this->expectExceptionMessage('data must be an array, "stdClass" given');
+
+        $this->setResponseOfTokensPath();
+        $restClient = new RestClient(self::$configuration);
+
+        $restClient->request('POST', 'some/route', new \stdClass());
     }
 
     /**

@@ -139,7 +139,7 @@ final class RestClient implements ClientInterface
             throw new RestClientException(
                 \sprintf(
                     'data must be an array, "%s" given',
-                    gettype($data)
+                    \get_debug_type($data)
                 ),
                 1578233543
             );

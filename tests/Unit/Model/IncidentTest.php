@@ -373,12 +373,26 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
-    public function setProcessTableFieldThrowsExceptionWhenValueTypeIsNotAllowed(): void
+    public function setProcessTableFieldThrowsExceptionWhenValueTypeIsAClass(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionCode(1578225863);
+        $this->expectExceptionMessage('value has to be either a string, an integer, a boolean or an instance of Brotkrueml\JobRouterClient\Resource\FileInterface, "stdClass" given');
 
         $this->subject->setProcessTableField('some name', new \stdClass());
+    }
+
+    /**
+     * @test
+     */
+    public function setProcessTableFieldThrowsExceptionWhenValueTypeIsAnArray(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode(1578225863);
+        $this->expectExceptionMessage('value has to be either a string, an integer, a boolean or an instance of Brotkrueml\JobRouterClient\Resource\FileInterface, "array" given');
+
+        /** @noinspection PhpParamsInspection */
+        $this->subject->setProcessTableField('some name', ['invalid']);
     }
 
     /**

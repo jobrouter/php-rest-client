@@ -259,7 +259,7 @@ final class Incident
                 \sprintf(
                     'value has to be either a string, an integer, a boolean or an instance of %s, "%s" given',
                     FileInterface::class,
-                    gettype($value)
+                    \get_debug_type($value)
                 ),
                 1578225863
             );
