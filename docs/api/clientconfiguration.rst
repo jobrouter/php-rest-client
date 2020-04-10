@@ -34,36 +34,6 @@ Configuration\\ClientConfiguration
       :param string $username: The username, must not be empty.
       :param string $password: The password, must not be empty.
 
-   .. php:method:: getUserAgentAddition()
-
-      Retrieve the user agent addition.
-
-      :returns string: The user agent addition.
-
-   .. php:method:: getBaseUrl()
-
-      Retrieve the base URL.
-
-      :returns string: The base URL.
-
-   .. php:method:: getLifetime()
-
-      Retrieve the lifetime of the authentication token.
-
-      :returns int: The lifetime.
-
-   .. php:method:: getPassword()
-
-      Retrieve the password.
-
-      :returns string: The password.
-
-   .. php:method:: getUsername()
-
-      Retrieve the username.
-
-      :returns string: The username.
-
    .. php:method:: withUserAgentAddition($userAgentAddition)
 
       Set a user agent addition. By default, the user agent is set to the

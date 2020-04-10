@@ -35,21 +35,6 @@ class ClientConfigurationTest extends TestCase
     /**
      * @test
      */
-    public function constructThrowsExceptionOnInvalidBaseUri(): void
-    {
-        $this->expectException(InvalidConfigurationException::class);
-        $this->expectExceptionCode(1565710531);
-
-        new ClientConfiguration(
-            'invalidBaseUri',
-            'fake_username',
-            'fake_password'
-        );
-    }
-
-    /**
-     * @test
-     */
     public function constructThrowsExceptionOnEmptyUsername(): void
     {
         $this->expectException(InvalidConfigurationException::class);
@@ -82,10 +67,10 @@ class ClientConfigurationTest extends TestCase
      */
     public function getBaseUrlReturnsPreviouslySetBaseUrl(): void
     {
-        $actual = $this->subject->getBaseUrl();
+        $actual = $this->subject->getJobRouterInstallation();
         $expected = 'http://example.org/jobrouter/';
 
-        self::assertSame($expected, $actual);
+        self::assertSame($expected, (string)$actual);
     }
 
     /**

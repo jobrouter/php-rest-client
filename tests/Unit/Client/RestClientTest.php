@@ -44,7 +44,7 @@ class RestClientTest extends TestCase
         self::$server->start();
 
         self::$configuration = new ClientConfiguration(
-            self::$server->getServerRoot(),
+            self::$server->getServerRoot() . '/',
             'fake_username',
             'fake_password'
         );

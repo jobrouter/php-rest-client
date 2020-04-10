@@ -34,8 +34,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 final class RestClient implements ClientInterface
 {
-    private const API_ENDPOINT = '/api/rest/v2/';
-
     /**
      * @var ClientConfiguration
      * @readonly
@@ -185,15 +183,10 @@ final class RestClient implements ClientInterface
         });
 
         return $this->browser->submitForm(
-            $this->getFullResourceUrl($resource),
+            $this->configuration->getJobRouterInstallation()->getResourceUrl($resource),
             $multipart,
             $method
         );
-    }
-
-    private function getFullResourceUrl(string $resource): string
-    {
-        return \rtrim($this->configuration->getBaseUrl(), '/') . self::API_ENDPOINT . $resource;
     }
 
     /**
@@ -220,7 +213,10 @@ final class RestClient implements ClientInterface
 
     private function buildRequest(string $method, string $resource): RequestInterface
     {
-        return $this->psr17factory->createRequest($method, $this->getFullResourceUrl($resource));
+        return $this->psr17factory->createRequest(
+            $method,
+            $this->configuration->getJobRouterInstallation()->getResourceUrl($resource)
+        );
     }
 
     /**

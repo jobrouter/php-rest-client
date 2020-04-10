@@ -12,18 +12,8 @@ declare(strict_types=1);
  * @see https://github.com/brotkrueml/jobrouter-client
  */
 
-namespace Brotkrueml\JobRouterClient\Information;
+namespace Brotkrueml\JobRouterClient\Exception;
 
-/**
- * Value object that holds the current version of the library
- * @psalm-immutable
- */
-final class Version
+final class InvalidUrlException extends \RuntimeException implements ExceptionInterface
 {
-    private const VERSION = '0.9.3-dev';
-
-    public function getVersion(): string
-    {
-        return static::VERSION;
-    }
 }

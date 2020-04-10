@@ -15,6 +15,8 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Configuration;
 
 use Brotkrueml\JobRouterClient\Exception\InvalidConfigurationException;
+use Brotkrueml\JobRouterClient\Exception\InvalidUrlException;
+use Brotkrueml\JobRouterClient\Resource\JobRouterInstallation;
 
 /**
  * Value object that represents the configuration for a RestClient
@@ -27,9 +29,9 @@ final class ClientConfiguration
     public const MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS = 3600;
 
     /**
-     * @var string
+     * @var JobRouterInstallation
      */
-    private $baseUrl;
+    private $jobRouterInstallation;
 
     /**
      * @var string
@@ -59,45 +61,42 @@ final class ClientConfiguration
      * @param string $password The password, must not be empty
      *
      * @throws InvalidConfigurationException A given parameter is not valid
+     * @throws InvalidUrlException The base URL is not valid
      */
     public function __construct(string $baseUrl, string $username, string $password)
     {
-        $filteredBaseUrl = \filter_var($baseUrl, FILTER_VALIDATE_URL);
+        $this->mustNotHaveEmptyUsername($username);
+        $this->mustNotHaveEmptyPassword($password);
 
-        if ($filteredBaseUrl === false) {
-            throw new InvalidConfigurationException(
-                \sprintf('Given baseUrl "%s" is not a valid URL!', $baseUrl),
-                1565710531
-            );
-        }
-
-        if (empty($username)) {
-            throw new InvalidConfigurationException('Username must not be empty!', 1565710532);
-        }
-
-        if (empty($password)) {
-            throw new InvalidConfigurationException('Password must not be empty!', 1565710533);
-        }
-
-        $this->baseUrl = $baseUrl;
+        $this->jobRouterInstallation = new JobRouterInstallation($baseUrl);
         $this->username = $username;
         $this->password = $password;
     }
 
-    /**
-     * Gets the base url of the JobRouter installation
-     *
-     * @return string
-     */
-    public function getBaseUrl(): string
+    private function mustNotHaveEmptyUsername(string $password): void
     {
-        return $this->baseUrl;
+        if (empty($password)) {
+            throw new InvalidConfigurationException('Username must not be empty!', 1565710532);
+        }
+    }
+
+    private function mustNotHaveEmptyPassword(string $password): void
+    {
+        if (empty($password)) {
+            throw new InvalidConfigurationException('Password must not be empty!', 1565710533);
+        }
     }
 
     /**
-     * Gets the username
-     *
-     * @return string
+     * @internal
+     */
+    public function getJobRouterInstallation(): JobRouterInstallation
+    {
+        return $this->jobRouterInstallation;
+    }
+
+    /**
+     * @internal
      */
     public function getUsername(): string
     {
@@ -105,9 +104,7 @@ final class ClientConfiguration
     }
 
     /**
-     * Gets the password
-     *
-     * @return string
+     * @internal
      */
     public function getPassword(): string
     {
@@ -180,9 +177,7 @@ final class ClientConfiguration
     }
 
     /**
-     * Gets the user agent addition
-     *
-     * @return string
+     * @internal
      */
     public function getUserAgentAddition(): string
     {
