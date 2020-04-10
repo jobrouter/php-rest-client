@@ -84,7 +84,7 @@ final class IncidentsClientDecorator extends ClientDecorator
         );
 
         $multipartSubTables = $this->buildSubTablesForMultipart(
-            $incident->getSubtables()
+            $incident->getSubTables()
         );
 
         return \array_merge($multipart, $multipartProcessTableFields, $multipartSubTables);

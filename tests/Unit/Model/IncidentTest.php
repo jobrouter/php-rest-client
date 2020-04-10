@@ -123,7 +123,7 @@ class IncidentTest extends TestCase
      */
     public function subSubtableIsAnEmptyArrayWhenNotSet(): void
     {
-        self::assertSame([], $this->subject->getSubtables());
+        self::assertSame([], $this->subject->getSubTables());
     }
 
     /**
