@@ -42,7 +42,7 @@ Model\\Incident
 
       :returns string: The initiator.
 
-   .. php:method:: getJobfunction()
+   .. php:method:: getJobFunction()
 
       Retrieve the Job Function.
 
@@ -118,11 +118,11 @@ Model\\Incident
       :param string $initiator: The initiator.
       :returns self: An instance of itself.
 
-   .. php:method:: setJobfunction($jobfunction)
+   .. php:method:: setJobFunction($jobFunction)
 
       Sets the Job Function.
 
-      :param string $jobfunction: The Job Function.
+      :param string $jobFunction: The Job Function.
       :returns self: An instance of itself.
 
    .. php:method:: setPool($pool)

@@ -41,7 +41,7 @@ final class Incident
     /**
      * @var string
      */
-    private $jobfunction = '';
+    private $jobFunction = '';
 
     /**
      * @var string
@@ -119,14 +119,14 @@ final class Incident
         return $this;
     }
 
-    public function getJobfunction(): string
+    public function getJobFunction(): string
     {
-        return $this->jobfunction;
+        return $this->jobFunction;
     }
 
-    public function setJobfunction(string $jobfunction): self
+    public function setJobFunction(string $jobFunction): self
     {
-        $this->jobfunction = $jobfunction;
+        $this->jobFunction = $jobFunction;
 
         return $this;
     }

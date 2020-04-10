@@ -57,9 +57,9 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
-    public function jobfunctionIsAnEmptyStringWhenNotSet(): void
+    public function jobFunctionIsAnEmptyStringWhenNotSet(): void
     {
-        self::assertSame('', $this->subject->getJobfunction());
+        self::assertSame('', $this->subject->getJobFunction());
     }
 
     /**
@@ -162,12 +162,12 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
-    public function setAndGetJobfunctionAreCorrectImplemented(): void
+    public function setAndGetJobFunctionAreCorrectImplemented(): void
     {
-        $actual = $this->subject->setJobfunction('some jobfunction');
+        $actual = $this->subject->setJobFunction('some jobfunction');
 
         self::assertSame($this->subject, $actual);
-        self::assertSame('some jobfunction', $this->subject->getJobfunction());
+        self::assertSame('some jobfunction', $this->subject->getJobFunction());
     }
 
     /**

@@ -91,7 +91,7 @@ class IncidentsClientDecoratorTest extends TestCase
         ];
 
         yield 'Given jobfunction' => [
-            (new Incident())->setJobfunction('some jobfunction'),
+            (new Incident())->setJobFunction('some jobfunction'),
             ['jobfunction' => 'some jobfunction']
         ];
 

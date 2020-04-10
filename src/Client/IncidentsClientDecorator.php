@@ -45,12 +45,8 @@ final class IncidentsClientDecorator extends ClientDecorator
             $multipart['username'] = $incident->getUsername();
         }
 
-        if (!empty($incident->getJobfunction())) {
-            $multipart['jobfunction'] = $incident->getJobfunction();
-        }
-
-        if (!empty($incident->getJobfunction())) {
-            $multipart['jobfunction'] = $incident->getJobfunction();
+        if (!empty($incident->getJobFunction())) {
+            $multipart['jobfunction'] = $incident->getJobFunction();
         }
 
         if (!empty($incident->getSummary())) {
