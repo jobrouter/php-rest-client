@@ -16,7 +16,7 @@ namespace Brotkrueml\JobRouterClient\Configuration;
 
 use Brotkrueml\JobRouterClient\Exception\InvalidConfigurationException;
 use Brotkrueml\JobRouterClient\Exception\InvalidUrlException;
-use Brotkrueml\JobRouterClient\Resource\JobRouterInstallation;
+use Brotkrueml\JobRouterClient\Resource\JobRouterSystem;
 
 /**
  * Value object that represents the configuration for a RestClient
@@ -29,9 +29,9 @@ final class ClientConfiguration
     public const MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS = 3600;
 
     /**
-     * @var JobRouterInstallation
+     * @var JobRouterSystem
      */
-    private $jobRouterInstallation;
+    private $jobRouterSystem;
 
     /**
      * @var string
@@ -68,7 +68,7 @@ final class ClientConfiguration
         $this->mustNotHaveEmptyUsername($username);
         $this->mustNotHaveEmptyPassword($password);
 
-        $this->jobRouterInstallation = new JobRouterInstallation($baseUrl);
+        $this->jobRouterSystem = new JobRouterSystem($baseUrl);
         $this->username = $username;
         $this->password = $password;
     }
@@ -90,9 +90,9 @@ final class ClientConfiguration
     /**
      * @internal
      */
-    public function getJobRouterInstallation(): JobRouterInstallation
+    public function getJobRouterSystem(): JobRouterSystem
     {
-        return $this->jobRouterInstallation;
+        return $this->jobRouterSystem;
     }
 
     /**

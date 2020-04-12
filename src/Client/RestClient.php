@@ -183,7 +183,7 @@ final class RestClient implements ClientInterface
         });
 
         return $this->browser->submitForm(
-            $this->configuration->getJobRouterInstallation()->getResourceUrl($resource),
+            $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
             $multipart,
             $method
         );
@@ -215,7 +215,7 @@ final class RestClient implements ClientInterface
     {
         return $this->psr17factory->createRequest(
             $method,
-            $this->configuration->getJobRouterInstallation()->getResourceUrl($resource)
+            $this->configuration->getJobRouterSystem()->getResourceUrl($resource)
         );
     }
 

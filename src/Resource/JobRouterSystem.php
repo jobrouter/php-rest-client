@@ -17,10 +17,11 @@ namespace Brotkrueml\JobRouterClient\Resource;
 use Brotkrueml\JobRouterClient\Exception\InvalidUrlException;
 
 /**
- * Value object that represents the a JobRouter installation
+ * Value object that represents the a JobRouter system
+ * @internal
  * @psalm-immutable
  */
-final class JobRouterInstallation implements \Stringable
+final class JobRouterSystem implements \Stringable
 {
     private const API_ENDPOINT = 'api/rest/v2/';
 

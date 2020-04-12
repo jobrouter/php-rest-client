@@ -29,7 +29,7 @@ final class AuthenticationException extends \RuntimeException implements Excepti
         $message = \sprintf(
             'Authentication failed for user "%s" on JobRouter base URL "%s',
             $configuration->getUsername(),
-            (string)$configuration->getJobRouterInstallation()
+            (string)$configuration->getJobRouterSystem()
         );
 
         return new static($message, $code, $previous);

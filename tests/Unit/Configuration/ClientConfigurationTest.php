@@ -67,7 +67,7 @@ class ClientConfigurationTest extends TestCase
      */
     public function getBaseUrlReturnsPreviouslySetBaseUrl(): void
     {
-        $actual = $this->subject->getJobRouterInstallation();
+        $actual = $this->subject->getJobRouterSystem();
         $expected = 'http://example.org/jobrouter/';
 
         self::assertSame($expected, (string)$actual);

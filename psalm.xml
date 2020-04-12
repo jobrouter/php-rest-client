@@ -55,7 +55,7 @@
         <ImpureFunctionCall>
             <errorLevel type="suppress">
                 <!-- str_contains is a false positive -->
-                <file name="src/Resource/JobRouterInstallation.php"/>
+                <file name="src/Resource/JobRouterSystem.php"/>
             </errorLevel>
         </ImpureFunctionCall>
     </issueHandlers>

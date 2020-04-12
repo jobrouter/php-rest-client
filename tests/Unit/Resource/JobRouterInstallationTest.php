@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Resource;
 
 use Brotkrueml\JobRouterClient\Exception\InvalidUrlException;
-use Brotkrueml\JobRouterClient\Resource\JobRouterInstallation;
+use Brotkrueml\JobRouterClient\Resource\JobRouterSystem;
 use PHPUnit\Framework\TestCase;
 
 class JobRouterInstallationTest extends TestCase
@@ -28,7 +28,7 @@ class JobRouterInstallationTest extends TestCase
      */
     public function getBaseUrlReturnsBaseUrlCorrectly(string $urlToTest, string $expectedUrl): void
     {
-        $subject = new JobRouterInstallation($urlToTest);
+        $subject = new JobRouterSystem($urlToTest);
 
         self::assertSame($expectedUrl, $subject->getBaseUrl());
     }
@@ -54,7 +54,7 @@ class JobRouterInstallationTest extends TestCase
      */
     public function getApiUrlReturnsApiUrlCorrectly(string $urlToTest, string $expectedUrl): void
     {
-        $subject = new JobRouterInstallation($urlToTest);
+        $subject = new JobRouterSystem($urlToTest);
 
         self::assertSame($expectedUrl, $subject->getApiUrl());
     }
@@ -77,7 +77,7 @@ class JobRouterInstallationTest extends TestCase
      */
     public function toStringReturnsBaseUrl(): void
     {
-        $subject = new JobRouterInstallation('https://example.org/foo/');
+        $subject = new JobRouterSystem('https://example.org/foo/');
 
         self::assertSame('https://example.org/foo/', $subject->__toString());
     }
@@ -94,7 +94,7 @@ class JobRouterInstallationTest extends TestCase
         string $resourceToTest,
         string $expectedUrl
     ): void {
-        $subject = new JobRouterInstallation($givenUrl);
+        $subject = new JobRouterSystem($givenUrl);
 
         self::assertSame($expectedUrl, $subject->getResourceUrl($resourceToTest));
     }
@@ -130,7 +130,7 @@ class JobRouterInstallationTest extends TestCase
         $this->expectExceptionMessage($expectedExceptionMessage);
         $this->expectExceptionCode($expectedExceptionCode);
 
-        new JobRouterInstallation($url);
+        new JobRouterSystem($url);
     }
 
     public function dataProviderForInvalidUrls(): \Generator
