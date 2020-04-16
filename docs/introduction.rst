@@ -25,4 +25,22 @@ shouldn't bother you.
 .. admonition:: Work In Progress
 
    Currently, the JobRouter Client is in a development phase. As it can be used
-   already, the API is still subject to change.
+   already, the API is still subject to change. When the JobRouter Client
+   reaches version `1.0.0`, it is considered stable.
+
+
+Release Management
+==================
+
+This library uses `semantic versioning <https://semver.org/>`_ which basically
+means for you, that
+
+- Bugfix updates (e.g. `1.0.0` => `1.0.1`) just includes small bug fixes or
+  security relevant stuff without breaking changes.
+- Minor updates (e.g. `1.0.0` => `1.1.0`) includes new features and smaller
+  tasks without breaking changes.
+- Major updates (e.g. `1.0.0` => `2.0.0`) breaking changes which can be
+  refactorings, features or bug fixes.
+
+For the pre-releases version numbers starting with `0.` breaking changes
+are introduced in minor versions (e.g. `0.8.0` => `0.9.0`).
