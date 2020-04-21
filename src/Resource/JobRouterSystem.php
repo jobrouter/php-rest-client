@@ -80,7 +80,7 @@ final class JobRouterSystem implements \Stringable
         return \filter_var(
             $url,
             \FILTER_VALIDATE_URL,
-            \FILTER_FLAG_SCHEME_REQUIRED | \FILTER_FLAG_HOST_REQUIRED | \FILTER_FLAG_PATH_REQUIRED
+            \FILTER_FLAG_PATH_REQUIRED
         ) !== false;
     }
 
