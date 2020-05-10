@@ -17,6 +17,7 @@ API
    :caption: Classes
 
    clientdecorator
+   clientfactory
    documentsclientdecorator
    incidentsclientdecorator
    restclient

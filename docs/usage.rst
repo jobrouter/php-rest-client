@@ -399,3 +399,41 @@ JobData table, then archiving a document and at last starting an instance::
 
    // Now you can define an Incident and add it to the overallClient
 
+
+Using a Factory to Create a Client
+----------------------------------
+
+To simplify the instantiation of the different clients, you can use a
+:ref:`factory <api-clientfactory>` that creates them for you. The RestClient
+can be created with::
+
+   <?php
+   use Brotkrueml\JobRouterClient\Client\ClientFactory;
+
+   $client = ClientFactory::createRestClient(
+      'https://example.org/jobrouter/',
+      'the_user',
+      'the_password',
+      30
+   );
+
+The decorators can also be instantiated with factory methods. This is useful
+when client nesting is not required::
+
+   <?php
+   use Brotkrueml\JobRouterClient\Client\ClientFactory;
+
+   $incidentsClientDecorator = ClientFactory::createIncidentsClientDecorator(
+      'https://example.org/jobrouter/',
+      'the_user',
+      'the_password',
+      30
+   );
+
+   $documentsClientDecorator = ClientFactory::createDocumentsClientDecorator(
+      'https://example.org/jobrouter/',
+      'the_user',
+      'the_password',
+      30
+   );
+
