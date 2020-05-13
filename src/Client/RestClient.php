@@ -163,8 +163,8 @@ final class RestClient implements ClientInterface
         $statusCode = $response->getStatusCode();
         if ($statusCode >= 400) {
             $content = \json_decode($response->getBody()->getContents(), true);
-            if (isset($content['errors']['-'][0])) {
-                $errorMessage .= ': ' . $content['errors']['-'][0];
+            if (isset($content['errors'])) {
+                $errorMessage .= ': ' . \json_encode($content['errors'], \JSON_UNESCAPED_UNICODE);
             }
 
             throw new HttpException($errorMessage, $statusCode);

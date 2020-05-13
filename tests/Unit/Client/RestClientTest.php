@@ -277,7 +277,7 @@ class RestClientTest extends TestCase
     {
         $this->expectException(HttpException::class);
         $this->expectExceptionCode(404);
-        $this->expectExceptionMessage('Error fetching route some/route: Some error occured.');
+        $this->expectExceptionMessage('Error fetching route some/route: {"-":["Some error occured."]}');
 
         $this->setResponseOfTokensPath();
 
