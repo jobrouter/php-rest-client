@@ -176,7 +176,7 @@ final class RestClient implements ClientInterface
     private function sendForm(string $method, string $resource, array $multipart): ResponseInterface
     {
         /** @psalm-suppress MissingClosureParamType */
-        \array_walk($multipart, function (&$value): void {
+        \array_walk($multipart, static function (&$value): void {
             if ($value instanceof FileInterface) {
                 $value = $value->toArray();
             }
