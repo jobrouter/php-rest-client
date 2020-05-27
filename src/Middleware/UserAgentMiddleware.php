@@ -24,7 +24,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class UserAgentMiddleware implements MiddlewareInterface
 {
-    private const USER_AGENT_TEMPLATE = 'JobRouterClient/%s (https://github.com/brotkrueml/jobrouter-client) %s';
+    private const USER_AGENT_TEMPLATE = 'JobRouterClient/%s (https://jobrouter-client.rtfd.io/) %s';
 
     /**
      * @var string
