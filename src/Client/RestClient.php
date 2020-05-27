@@ -102,7 +102,7 @@ final class RestClient implements ClientInterface
 
         $this->detectJobRouterVersionFromResponse($response);
 
-        $content = \json_decode($response->getBody()->getContents(), true);
+        $content = (array)\json_decode($response->getBody()->getContents(), true);
 
         if (!isset($content['tokens'][0])) {
             throw new AuthenticationException('Token is unavailable', 1570222016);
@@ -162,7 +162,7 @@ final class RestClient implements ClientInterface
 
         $statusCode = $response->getStatusCode();
         if ($statusCode >= 400) {
-            $content = \json_decode($response->getBody()->getContents(), true);
+            $content = (array)\json_decode($response->getBody()->getContents(), true);
             if (isset($content['errors'])) {
                 $errorMessage .= ': ' . \json_encode($content['errors'], \JSON_UNESCAPED_UNICODE);
             }

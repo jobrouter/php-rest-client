@@ -74,12 +74,12 @@ final class Incident
     private $incidentEscalationDate;
 
     /**
-     * @var array
+     * @var array<string,string|int|bool|FileInterface>
      */
     private $processTableFields = [];
 
     /**
-     * @var array
+     * @var array<string,array>
      */
     private $subTables = [];
 
@@ -150,6 +150,7 @@ final class Incident
 
     /**
      * @param int $priority
+     * @psalm-param self::PRIORITY_LOW|self::PRIORITY_NORMAL|self::PRIORITY_HIGH $priority
      * @return $this
      * @throws \InvalidArgumentException
      */

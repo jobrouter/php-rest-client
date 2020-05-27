@@ -34,6 +34,7 @@ class UserAgentMiddleware implements MiddlewareInterface
 
     public function __construct(string $userAgentAddition = '')
     {
+        /** @psalm-suppress MixedArgument */
         $this->userAgent = \rtrim(
             \sprintf(
                 static::USER_AGENT_TEMPLATE,
@@ -43,6 +44,10 @@ class UserAgentMiddleware implements MiddlewareInterface
         );
     }
 
+    /**
+     * @psalm-suppress MixedInferredReturnType
+     * @psalm-suppress MixedReturnStatement
+     */
     public function handleRequest(RequestInterface $request, callable $next): ?RequestInterface
     {
         $request = $request->withHeader('User-Agent', $this->userAgent);
@@ -50,6 +55,10 @@ class UserAgentMiddleware implements MiddlewareInterface
         return $next($request);
     }
 
+    /**
+     * @psalm-suppress MixedInferredReturnType
+     * @psalm-suppress MixedReturnStatement
+     */
     public function handleResponse(RequestInterface $request, ResponseInterface $response, callable $next): ?ResponseInterface
     {
         return $next($request, $response);

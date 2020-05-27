@@ -17,7 +17,7 @@ namespace Brotkrueml\JobRouterClient\Resource;
 final class FileStorage implements \Countable, \Iterator
 {
     /**
-     * @var array
+     * @var array<string,FileInterface>
      */
     private $files = [];
 

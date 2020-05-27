@@ -20,12 +20,12 @@ use Brotkrueml\JobRouterClient\Resource\FileStorage;
 final class Document
 {
     /**
-     * @var array
+     * @var array<string,string>
      */
     private $indexFields = [];
 
     /**
-     * @var array
+     * @var array<string,string>
      */
     private $keywordFields = [];
 

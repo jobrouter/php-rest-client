@@ -86,6 +86,10 @@ final class IncidentsClientDecorator extends ClientDecorator
         return \array_merge($multipart, $multipartProcessTableFields, $multipartSubTables);
     }
 
+    /**
+     * @param array<string,mixed> $processTableFields
+     * @return array
+     */
     private function buildProcessTableFieldsForMultipart(array $processTableFields): array
     {
         $multipartProcessTableFields = [];

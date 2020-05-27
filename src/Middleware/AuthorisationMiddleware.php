@@ -38,6 +38,10 @@ class AuthorisationMiddleware implements MiddlewareInterface
         $this->token = null;
     }
 
+    /**
+     * @psalm-suppress MixedInferredReturnType
+     * @psalm-suppress MixedReturnStatement
+     */
     public function handleRequest(RequestInterface $request, callable $next): ?RequestInterface
     {
         if ($this->token) {
@@ -47,6 +51,10 @@ class AuthorisationMiddleware implements MiddlewareInterface
         return $next($request);
     }
 
+    /**
+     * @psalm-suppress MixedInferredReturnType
+     * @psalm-suppress MixedReturnStatement
+     */
     public function handleResponse(RequestInterface $request, ResponseInterface $response, callable $next): ?ResponseInterface
     {
         return $next($request, $response);
