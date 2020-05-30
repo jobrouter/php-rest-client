@@ -27,7 +27,7 @@ author = u'Chris Müller'
 # The short X.Y version
 version = u'0.9'
 # The full version, including alpha/beta/rc tags
-release = u'0.9.5-dev'
+release = u'0.9.5'
 
 
 # -- General configuration ---------------------------------------------------
