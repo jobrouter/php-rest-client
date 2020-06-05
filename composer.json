@@ -13,6 +13,11 @@
             "role": "Developer"
         }
     ],
+    "support": {
+        "docs": "https://jobrouter-client.readthedocs.io/",
+        "issues": "https://github.com/brotkrueml/jobrouter-client/issues",
+        "source": "https://github.com/brotkrueml/jobrouter-client"
+    },
     "require": {
         "php": ">=7.2",
         "ext-curl": "*",
