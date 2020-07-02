@@ -14,6 +14,40 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Exception;
 
+use Psr\Http\Client\ClientExceptionInterface;
+
 final class HttpException extends \RuntimeException implements ExceptionInterface
 {
+    /**
+     * @internal
+     */
+    public static function fromRedirect(int $statusCode, string $resourceUrl, string $redirectUrl): self
+    {
+        $message = \sprintf(
+            'Redirect "%d" from "%s" to "%s" occurred',
+            $statusCode,
+            $resourceUrl,
+            $redirectUrl
+        );
+
+        return new static($message, $statusCode);
+    }
+
+    /**
+     * @internal
+     */
+    public static function fromError(
+        int $statusCode,
+        string $resourceUrl,
+        string $error,
+        ClientExceptionInterface $e = null
+    ): self {
+        $message = \sprintf(
+            'Error fetching resource "%s": %s',
+            $resourceUrl,
+            $error
+        );
+
+        return new static($message, $statusCode, $e);
+    }
 }

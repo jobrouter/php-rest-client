@@ -87,14 +87,38 @@ class RestClientTest extends TestCase
     /**
      * @test
      */
-    public function wrongTokensRouteThrowsException(): void
+    public function wrongTokensRouteThrowsHttpException(): void
     {
-        $this->expectException(AuthenticationException::class);
-        $this->expectExceptionCode(1577818398);
+        $this->expectException(HttpException::class);
+        $this->expectExceptionCode(404);
+        $this->expectExceptionMessage(\sprintf(
+            'Error fetching resource "http://127.0.0.1:%d/api/rest/v2/application/tokens": not found',
+            self::$server->getPort()
+        ));
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/application/tokens',
             new Response('not found', [], 404)
+        );
+
+        new RestClient(self::$configuration);
+    }
+
+    /**
+     * @test
+     */
+    public function whenAuthenticationFailsAuthenticationExceptionIsThrown(): void
+    {
+        $this->expectException(AuthenticationException::class);
+        $this->expectExceptionCode(1577818398);
+        $this->expectExceptionMessage(\sprintf(
+            'Authentication failed for user "fake_username" on JobRouter base URL "http://127.0.0.1:%d/"',
+            self::$server->getPort()
+        ));
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/application/tokens',
+            new Response('invalid', [], 401)
         );
 
         new RestClient(self::$configuration);
@@ -168,13 +192,43 @@ class RestClientTest extends TestCase
     /**
      * @test
      */
-    public function serverIsNotAvailable(): void
+    public function redirectThrowsHttpException(): void
     {
-        $this->expectException(AuthenticationException::class);
-        $this->expectExceptionCode(1577818398);
+        $this->expectException(HttpException::class);
+        $this->expectExceptionCode(307);
+        $this->expectExceptionMessage(\sprintf(
+            'Redirect "307" from "http://127.0.0.1:%d/api/rest/v2/application/tokens" to "https://example.org/redirect-destination.html" occurred',
+            self::$server->getPort()
+        ));
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/application/tokens',
+            new Response(
+                '',
+                ['location' => 'https://example.org/redirect-destination.html'],
+                307
+            )
+        );
+
+        new RestClient(self::$configuration);
+    }
+
+    /**
+     * @test
+     */
+    public function serverIsNotAvailableThrowsHttpException(): void
+    {
+        $notConnectedPort = self::$server->getPort() - 1;
+
+        $this->expectException(HttpException::class);
+        $this->expectExceptionMessage(\sprintf(
+            'Error fetching resource "http://127.0.0.1:%d/api/rest/v2/application/tokens": Failed to connect to 127.0.0.1 port %d: Connection refused',
+            $notConnectedPort,
+            $notConnectedPort
+        ));
 
         $configuration = new ClientConfiguration(
-            'http://' . self::$server->getHost() . ':' . (self::$server->getPort() - 1) . '/',
+            'http://' . self::$server->getHost() . ':' . $notConnectedPort . '/',
             'fake_username',
             'fake_password'
         );
@@ -250,10 +304,13 @@ class RestClientTest extends TestCase
     /**
      * @test
      */
-    public function errorMessageIsCorrectGivenWhenAuthenticationError(): void
+    public function errorMessageIsCorrectGivenWhenStatusCodeIs400(): void
     {
-        $this->expectException(AuthenticationException::class);
-        $this->expectExceptionMessageMatches('/^Authentication failed for user "fake_username" on JobRouter base URL "/');
+        $this->expectException(HttpException::class);
+        $this->expectExceptionMessage(\sprintf(
+            'Error fetching resource "http://127.0.0.1:%d/api/rest/v2/application/tokens": {"errors":["-": ["Some bad request"]]}',
+            self::$server->getPort()
+        ));
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/application/tokens',
@@ -277,7 +334,10 @@ class RestClientTest extends TestCase
     {
         $this->expectException(HttpException::class);
         $this->expectExceptionCode(404);
-        $this->expectExceptionMessage('Error fetching route some/route: {"-":["Some error occured."]}');
+        $this->expectExceptionMessage(\sprintf(
+            'Error fetching resource "http://127.0.0.1:%d/api/rest/v2/some/route": {"errors":{"-": ["Some error occured."]}}',
+            self::$server->getPort()
+        ));
 
         $this->setResponseOfTokensPath();
 

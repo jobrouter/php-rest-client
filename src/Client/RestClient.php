@@ -83,6 +83,7 @@ final class RestClient implements ClientInterface
      * Authenticate against the configured JobRouter system
      *
      * @throws AuthenticationException
+     * @throws HttpException
      */
     public function authenticate(): void
     {
@@ -97,7 +98,11 @@ final class RestClient implements ClientInterface
         try {
             $response = $this->request('POST', 'application/tokens', $options);
         } catch (HttpException $e) {
-            throw AuthenticationException::fromFailedAuthentication($this->configuration, 1577818398, $e);
+            if ($e->getCode() === 401) {
+                throw AuthenticationException::fromFailedAuthentication($this->configuration, 1577818398, $e);
+            }
+
+            throw $e;
         }
 
         $this->detectJobRouterVersionFromResponse($response);
@@ -146,8 +151,6 @@ final class RestClient implements ClientInterface
         $resource = \ltrim($resource, '/');
         $contentType = $this->routeContentTypeMapper->getRequestContentTypeForRoute($method, $resource);
 
-        $errorMessage = 'Error fetching route ' . $resource;
-
         try {
             if ($contentType === 'multipart/form-data') {
                 $response = $this->sendForm($method, $resource, $data);
@@ -157,17 +160,28 @@ final class RestClient implements ClientInterface
                 $response = $this->browser->sendRequest($this->buildRequest($method, $resource));
             }
         } catch (ClientExceptionInterface $e) {
-            throw new HttpException($errorMessage, (int)$e->getCode(), $e);
+            throw HttpException::fromError(
+                (int)$e->getCode(),
+                $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
+                $e->getMessage(),
+                $e
+            );
         }
 
         $statusCode = $response->getStatusCode();
         if ($statusCode >= 400) {
-            $content = (array)\json_decode($response->getBody()->getContents(), true);
-            if (isset($content['errors'])) {
-                $errorMessage .= ': ' . \json_encode($content['errors'], \JSON_UNESCAPED_UNICODE);
-            }
-
-            throw new HttpException($errorMessage, $statusCode);
+            throw HttpException::fromError(
+                $statusCode,
+                $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
+                $response->getBody()->getContents()
+            );
+        }
+        if ($statusCode >= 300) {
+            throw HttpException::fromRedirect(
+                $statusCode,
+                $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
+                $response->getHeaderLine('location')
+            );
         }
 
         return $response;
