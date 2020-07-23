@@ -50,6 +50,11 @@
             "Brotkrueml\\JobRouterClient\\Tests\\": "tests/"
         }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
     "scripts": {
         "fix-cs": "vendor/bin/php-cs-fixer fix"
     }
