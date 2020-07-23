@@ -22,6 +22,13 @@ Currently, the JobRouter Client uses
 and `Buzz <https://github.com/kriswallsmith/buzz>`_ as HTTP client. But that
 shouldn't bother you.
 
+The library is available under the `GNU General Public License v2.0
+<https://github.com/brotkrueml/jobrouter-client/blob/master/LICENSE.txt>`_. You
+can also have a look into the `source code
+<https://github.com/brotkrueml/jobrouter-client>`_ on GitHub or `file an issue
+<https://github.com/brotkrueml/jobrouter-client/issues>`_.
+
+
 Release Management
 ==================
 
@@ -32,5 +39,5 @@ means for you, that
   security relevant stuff without breaking changes.
 - Minor updates (e.g. `1.0.0` => `1.1.0`) includes new features and smaller
   tasks without breaking changes.
-- Major updates (e.g. `1.0.0` => `2.0.0`) breaking changes which can be
+- Major updates (e.g. `1.0.0` => `2.0.0`) includes breaking changes which can be
   refactorings, features or bug fixes.
