@@ -52,7 +52,7 @@ Let's dig into the piece of code:
    used.
 
 #. Lines 8-11: Define a :ref:`ClientConfiguration <api-clientconfiguration>`
-   object with the base URL, the username and the password for your JobRouter
+   object with the base URL, the username and the password for your JobRouter®
    installation.
 
 #. Line 13: Overrides the default lifetime of the JSON Web Token in seconds.
@@ -62,7 +62,7 @@ Let's dig into the piece of code:
 
 #. Line 16: Now instantiate the :ref:`RestClient <api-restclient>` with the
    configuration object. During the instantiation the client will authenticate
-   against the JobRouter installation.
+   against the JobRouter® installation.
 
 #. Line 17: As there can be errors during the initialisation - like a typo in
    the base URL or wrong credentials embed the initialisation into a
@@ -90,7 +90,7 @@ Call this also in advance to omit a timeout.
 Retrieve the JobRouter Version
 ==============================
 
-Sometimes it can be handy to know the JobRouter version. The version number
+Sometimes it can be handy to know the JobRouter® version. The version number
 can be retrieved with a :php:`RestClient` method::
 
    <?php
@@ -105,7 +105,7 @@ Sending Requests
 ================
 
 The :ref:`RestClient <api-restclient>` object exposes a :php:`request()` method
-to send a request to the JobRouter REST API::
+to send a request to the JobRouter® REST API::
 
    <?php
    // The JobRouter Client is already initialised
@@ -162,7 +162,7 @@ assume the client is already initialised, like in the
    }
 
 #. Lines 5-8: With the :php:`request()` method we'll send a request to the
-   JobRouter installation. In this example, the method is ``GET`` as we want to
+   JobRouter® installation. In this example, the method is ``GET`` as we want to
    retrieve data. The second parameter is the resource to the Jobdata module
    with the GUID of the table. The :php:`$response` is an object which
    implements the `Psr\\Http\\Message\\ResponseInterface <https://www.php-fig.org/psr/psr-7/#33-psrhttpmessageresponseinterface>`_
@@ -207,7 +207,7 @@ With the following request you can post a dataset to a JobData table::
 
 .. important::
 
-   Prior to JobRouter 5.0.8 you have to send all columns of a table for which
+   Prior to JobRouter® 5.0.8 you have to send all columns of a table for which
    the user has access rights. Otherwise you will receive an error with status
    code 422 (Unprocessable entity).
 
@@ -249,8 +249,8 @@ To start a new instance of a process you have to send the data as
       // Error handling
    }
 
-#. Lines 5-18: Preparing the data to send as an array according to the JobRouter
-   REST API documentation. To add a file instantiate a
+#. Lines 5-18: Preparing the data to send as an array according to the
+   JobRouter® REST API documentation. To add a file instantiate a
    :ref:`Brotkrueml\\JobRouterClient\\Resource\\File <api-file>` object. The
    first argument receives the full path to the file, the other two are
    optional: You can overwrite the file name and specify a content type.
@@ -278,7 +278,7 @@ table and sub table stuff::
          'INVOICE_FILE',
          new File(
             '/path/to/invoice/file.pdf', // Full path to the file
-            'in02984.pdf' // Optional: Use another file name for storing in JobRouter
+            'in02984.pdf' // Optional: Use another file name for storing in JobRouter®
             'contentType' => 'application/pdf', // Optional: The content type
          )
       )

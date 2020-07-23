@@ -6,9 +6,9 @@
 Introduction
 ============
 
-`JobRouter <https://www.jobrouter.com/>`_ is a scalable digitisation platform
+`JobRouter® <https://www.jobrouter.com/>`_ is a scalable digitisation platform
 which links processes, data and documents. This JobRouter Client eases the
-access to the REST API. The library supports JobRouter versions 4.2-5.0.
+access to the REST API. The library supports JobRouter® versions 4.2-5.0.
 
 The library can be used to automate tasks in PHP scripts like importing or
 synchronising data in the JobData module, start processes or working with

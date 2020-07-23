@@ -6,9 +6,9 @@
 [![Infection MSI](https://badge.stryker-mutator.io/github.com/brotkrueml/jobrouter-client/master)](https://infection.github.io/)
 [![Documentation Status](https://readthedocs.org/projects/jobrouter-client/badge/?version=latest)](https://jobrouter-client.readthedocs.io/en/latest/?badge=latest)
 
-[JobRouter](https://www.jobrouter.com/) is a scalable digitisation
+[JobRouter®](https://www.jobrouter.com/) is a scalable digitisation
 platform which links processes, data and documents. This JobRouter
-Client eases the access to the REST API. The library supports JobRouter
+Client eases the access to the REST API. The library supports JobRouter®
 versions 4.2-5.0.
 
 [Documentation](https://jobrouter-client.readthedocs.io/)

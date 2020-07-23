@@ -1,6 +1,6 @@
 {
     "name": "brotkrueml/jobrouter-client",
-    "description": "Rest client for the JobRouter digitisation platform",
+    "description": "Rest client for the JobRouter® digitisation platform",
     "type": "library",
     "keywords": [
         "jobrouter",
