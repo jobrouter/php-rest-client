@@ -23,19 +23,19 @@
         "ext-curl": "*",
         "ext-json": "*",
         "kriswallsmith/buzz": "^1.1",
-        "nyholm/psr7": "^1.2",
-        "symfony/polyfill-php80": "^1.15"
+        "nyholm/psr7": "^1.3",
+        "symfony/polyfill-php80": "^1.18"
     },
     "require-dev": {
-        "captainhook/captainhook": "^5.1",
+        "captainhook/captainhook": "^5.3",
         "donatj/mock-webserver": "^2.1",
         "friendsofphp/php-cs-fixer": "^2.16",
         "infection/infection": "^0.15 || ^0.16",
         "mikey179/vfsstream": "^1.6",
         "php-coveralls/php-coveralls": "^2.2",
-        "phpunit/phpunit": "^8.5 || ^9.0",
+        "phpunit/phpunit": "^8.5 || ^9.2",
         "rector/rector": "^0.7",
-        "vimeo/psalm": "^3.9"
+        "vimeo/psalm": "^3.12"
     },
     "config": {
         "sort-packages": true
