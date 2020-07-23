@@ -22,13 +22,6 @@ Currently, the JobRouter Client uses
 and `Buzz <https://github.com/kriswallsmith/buzz>`_ as HTTP client. But that
 shouldn't bother you.
 
-.. admonition:: Work In Progress
-
-   Currently, the JobRouter Client is in a development phase. As it can be used
-   already, the API is still subject to change. When the JobRouter Client
-   reaches version `1.0.0`, it is considered stable.
-
-
 Release Management
 ==================
 
@@ -41,6 +34,3 @@ means for you, that
   tasks without breaking changes.
 - Major updates (e.g. `1.0.0` => `2.0.0`) breaking changes which can be
   refactorings, features or bug fixes.
-
-For the pre-releases version numbers starting with `0.` breaking changes
-are introduced in minor versions (e.g. `0.8.0` => `0.9.0`).
