@@ -20,6 +20,7 @@ final class ClientFactory
 {
     private function __construct()
     {
+        // Class must not be instantiated!
     }
 
     public static function createRestClient(
