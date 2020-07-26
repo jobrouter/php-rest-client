@@ -41,3 +41,6 @@ means for you, that
   tasks without breaking changes.
 - Major updates (e.g. `1.0.0` => `2.0.0`) includes breaking changes which can be
   refactorings, features or bug fixes.
+
+The changes are recorded in the `changelog
+<https://github.com/brotkrueml/jobrouter-client/blob/master/CHANGELOG.md>`_.
