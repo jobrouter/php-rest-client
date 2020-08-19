@@ -20,5 +20,12 @@
                 <file name="src/Resource/JobRouterSystem.php"/>
             </errorLevel>
         </ImpureFunctionCall>
+        <UnsafeInstantiation>
+            <errorLevel type="info">
+                <!-- false positive: classes are final, so they cannot be extended / https://github.com/vimeo/psalm/issues/4019 -->
+                <file name="src/Exception/AuthenticationException.php"/>
+                <file name="src/Exception/HttpException.php"/>
+            </errorLevel>
+        </UnsafeInstantiation>
     </issueHandlers>
 </psalm>
