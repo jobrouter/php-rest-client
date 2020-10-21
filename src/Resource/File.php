@@ -18,7 +18,6 @@ use Brotkrueml\JobRouterClient\Exception\InvalidResourceException;
 
 /**
  * Value object that represents a file
- * @psalm-immutable
  */
 final class File implements FileInterface
 {
