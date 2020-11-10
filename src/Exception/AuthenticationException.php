@@ -32,6 +32,6 @@ final class AuthenticationException extends \RuntimeException implements Excepti
             (string)$configuration->getJobRouterSystem()
         );
 
-        return new static($message, $code, $previous);
+        return new self($message, $code, $previous);
     }
 }

@@ -30,7 +30,7 @@ final class HttpException extends \RuntimeException implements ExceptionInterfac
             $redirectUrl
         );
 
-        return new static($message, $statusCode);
+        return new self($message, $statusCode);
     }
 
     /**
@@ -48,6 +48,6 @@ final class HttpException extends \RuntimeException implements ExceptionInterfac
             $error
         );
 
-        return new static($message, $statusCode, $e);
+        return new self($message, $statusCode, $e);
     }
 }
