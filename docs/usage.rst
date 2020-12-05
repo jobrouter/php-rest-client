@@ -234,8 +234,8 @@ To start a new instance of a process you have to send the data as
       'processtable[fields][1][name]' => 'INVOICE_FILE',
       'processtable[fields][1][value]' => new File(
          '/path/to/invoice/file.pdf', // Full path to the file
-         'in02984.pdf' // Optional: Use another file name for storing in JobRouter
-         'contentType' => 'application/pdf', // Optional: The content type
+         'in02984.pdf', // Optional: Use another file name for storing in JobRouter
+         'contentType' => 'application/pdf' // Optional: The content type
       ),
    ];
 
@@ -278,8 +278,8 @@ table and sub table stuff::
          'INVOICE_FILE',
          new File(
             '/path/to/invoice/file.pdf', // Full path to the file
-            'in02984.pdf' // Optional: Use another file name for storing in JobRouter®
-            'contentType' => 'application/pdf', // Optional: The content type
+            'in02984.pdf', // Optional: Use another file name for storing in JobRouter®
+            'contentType' => 'application/pdf' // Optional: The content type
          )
       )
    ;
