@@ -97,17 +97,25 @@ final class IncidentsClientDecorator extends ClientDecorator
         $index = 0;
         foreach ($processTableFields as $name => $value) {
             $multipartProcessTableFields[$this->getProcessTableFieldKey($index, 'name')] = $name;
-
-            if (\is_bool($value)) {
-                $value = (int)$value;
-            }
-
             $multipartProcessTableFields[$this->getProcessTableFieldKey($index, 'value')]
-                = $value instanceof FileInterface ? $value : (string)$value;
+                = $this->prepareFieldValue($value);
             $index++;
         }
 
         return $multipartProcessTableFields;
+    }
+
+    /**
+     * @param bool|int|string|FileInterface $value
+     * @return string|FileInterface
+     */
+    private function prepareFieldValue($value)
+    {
+        if (\is_bool($value)) {
+            $value = (int)$value;
+        }
+
+        return $value instanceof FileInterface ? $value : (string)$value;
     }
 
     private function getProcessTableFieldKey(int $index, string $part): string
@@ -133,7 +141,7 @@ final class IncidentsClientDecorator extends ClientDecorator
                     $multipartSubTables[$this->getSubTableFieldKey($subTableIndex, $rowIndex, $columnIndex, 'name')]
                         = $columnName;
                     $multipartSubTables[$this->getSubTableFieldKey($subTableIndex, $rowIndex, $columnIndex, 'value')]
-                        = $columnValue;
+                        = $this->prepareFieldValue($columnValue);
                     $columnIndex++;
                 }
                 $rowIndex++;
