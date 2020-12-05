@@ -20,7 +20,7 @@ namespace Brotkrueml\JobRouterClient\Information;
  */
 final class Version
 {
-    private const VERSION = '1.0.1-dev';
+    private const VERSION = '1.0.1';
 
     public function getVersion(): string
     {
