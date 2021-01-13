@@ -9,6 +9,7 @@
 /captainhook.json export-ignore
 /infection.json.dist export-ignore
 /psalm.xml export-ignore
-/rector.yml export-ignore
+/rector.php export-ignore
 /sonar-project.properties export-ignore
+/CHANGELOG.md export-ignore
 /README.md export-ignore
