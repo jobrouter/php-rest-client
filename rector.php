@@ -17,6 +17,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set(Option::SETS, [
         SetList::CODE_QUALITY,
+        SetList::CODE_QUALITY_STRICT,
         SetList::DEAD_CODE,
         SetList::EARLY_RETURN,
         SetList::PHP_52,
@@ -28,6 +29,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         SetList::PHP_71,
         SetList::PHP_72,
         SetList::PHP_73,
+        SetList::PHPUNIT_CODE_QUALITY,
+        SetList::PHPUNIT_EXCEPTION,
+        SetList::PHPUNIT_MOCK,
+        SetList::PHPUNIT_SPECIFIC_METHOD,
         SetList::PHPUNIT_YIELD_DATA_PROVIDER,
         SetList::TYPE_DECLARATION,
     ]);

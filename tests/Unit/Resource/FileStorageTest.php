@@ -42,7 +42,7 @@ class FileStorageTest extends TestCase
     public function fileStorageImplementsCountableInterface(): void
     {
         self::assertInstanceOf(\Countable::class, $this->subject);
-        self::assertSame(0, \count($this->subject));
+        self::assertCount(0, $this->subject);
     }
 
     /**
