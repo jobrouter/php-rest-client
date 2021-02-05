@@ -127,6 +127,23 @@ class RestClientTest extends TestCase
     /**
      * @test
      */
+    public function whenAuthenticationResponseIsMalformedAuthenticationExceptionIsThrown(): void
+    {
+        $this->expectException(AuthenticationException::class);
+        $this->expectExceptionCode(1612552955);
+        $this->expectExceptionMessage('Authorisation response is malformed');
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/application/tokens',
+            new Response('invalid', [], 200)
+        );
+
+        new RestClient(self::$configuration);
+    }
+
+    /**
+     * @test
+     */
     public function requestIsCalledCorrectly(): void
     {
         $this->setResponseOfTokensPath();

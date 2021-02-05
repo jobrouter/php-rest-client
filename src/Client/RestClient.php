@@ -107,7 +107,11 @@ final class RestClient implements ClientInterface
 
         $this->detectJobRouterVersionFromResponse($response);
 
-        $content = (array)\json_decode($response->getBody()->getContents(), true);
+        try {
+            $content = (array)\json_decode($response->getBody()->getContents(), true, 512, \JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            throw new AuthenticationException('Authorisation response is malformed', 1612552955, $e);
+        }
 
         if (!isset($content['tokens'][0])) {
             throw new AuthenticationException('Token is unavailable', 1570222016);
@@ -215,7 +219,7 @@ final class RestClient implements ClientInterface
         $request = $request->withHeader('content-type', 'application/json');
 
         if (\is_array($jsonPayload)) {
-            $jsonPayload = \json_encode($jsonPayload);
+            $jsonPayload = \json_encode($jsonPayload, \JSON_THROW_ON_ERROR);
         }
 
         if (\is_string($jsonPayload) && !empty($jsonPayload)) {
