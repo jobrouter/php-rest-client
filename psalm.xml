@@ -9,10 +9,6 @@
         <directory name="src"/>
     </projectFiles>
 
-    <plugins>
-        <plugin filename="vendor/vimeo/psalm/examples/plugins/FunctionCasingChecker.php"/>
-    </plugins>
-
     <issueHandlers>
         <ImpureFunctionCall>
             <errorLevel type="suppress">
