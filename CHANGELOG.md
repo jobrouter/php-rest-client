@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+- Support for PHP 7.2
+
 ## [1.0.1] - 2020-12-05
 
 ### Fixed

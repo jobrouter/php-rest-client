@@ -19,7 +19,7 @@
         "source": "https://github.com/brotkrueml/jobrouter-client"
     },
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.3",
         "ext-curl": "*",
         "ext-json": "*",
         "kriswallsmith/buzz": "^1.2",
@@ -30,12 +30,12 @@
         "captainhook/captainhook": "^5.4",
         "donatj/mock-webserver": "^2.1",
         "friendsofphp/php-cs-fixer": "^2.16",
-        "infection/infection": ">=0.15 <=0.19",
+        "infection/infection": ">=0.18 <=0.19",
         "mikey179/vfsstream": "^1.6",
         "php-coveralls/php-coveralls": "^2.2",
-        "phpunit/phpunit": "^8.5 || ^9.4",
+        "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.8",
-        "vimeo/psalm": "^3.18 || ^4.0"
+        "vimeo/psalm": "^4.0"
     },
     "config": {
         "sort-packages": true
