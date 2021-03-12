@@ -70,6 +70,12 @@ class RestClientTest extends TestCase
         $restClient = new RestClient(self::$configuration);
 
         self::assertInstanceOf(RestClient::class, $restClient);
+
+        $input = \json_decode(self::$server->getLastRequest()->getInput(), true);
+
+        self::assertSame('fake_username', $input['username']);
+        self::assertSame('fake_password', $input['password']);
+        self::assertSame(600, $input['lifetime']);
     }
 
     private function setResponseOfTokensPath(): void
