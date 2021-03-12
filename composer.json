@@ -30,7 +30,7 @@
         "captainhook/captainhook": "^5.4",
         "donatj/mock-webserver": "^2.1",
         "friendsofphp/php-cs-fixer": "^2.16",
-        "infection/infection": ">=0.18 <=0.19",
+        "infection/infection": "^0.18 || ^0.21",
         "mikey179/vfsstream": "^1.6",
         "php-coveralls/php-coveralls": "^2.2",
         "phpunit/phpunit": "^9.5",
