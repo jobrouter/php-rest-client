@@ -105,7 +105,7 @@ jobs:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       - name: Run psalm
         run: |
-          vendor/bin/psalm --no-progress
+          vendor/bin/psalm --no-progress --output-format=github
       - name: Run infection
         run: |
           vendor/bin/infection --no-progress --min-msi=94 --threads=4
