@@ -1,3 +1,5 @@
+.. include:: /_includes.rst.txt
+
 .. _api-restclientexception:
 
 ==============================

@@ -1,4 +1,4 @@
-.. include:: ../Includes.txt
+.. include:: /_includes.rst.txt
 
 .. _api-restclient:
 

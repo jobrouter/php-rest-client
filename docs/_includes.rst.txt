@@ -4,6 +4,8 @@
 .. role:: aspect(strong)
 .. role:: php(code)
    :language: php
+.. role:: shell(code)
+   :language: shell
 
 
 .. default-role:: code
