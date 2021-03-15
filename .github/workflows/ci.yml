@@ -106,6 +106,9 @@ jobs:
       - name: Run psalm
         run: |
           vendor/bin/psalm --no-progress --output-format=github
+      - name: Run rector
+        run: |
+          vendor/bin/rector process src --dry-run --no-progress-bar
       - name: Run infection
         run: |
           vendor/bin/infection --no-progress --min-msi=94 --threads=4
