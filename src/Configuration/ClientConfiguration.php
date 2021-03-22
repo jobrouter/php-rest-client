@@ -117,7 +117,6 @@ final class ClientConfiguration
      * @param int $lifetime A lifetime between 0 (ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS)
      *                      and 3600 (ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS).
      *                      The default value is 600 (ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS).
-     * @return self
      *
      * @throws InvalidConfigurationException The given lifetime is not between 0 and 3600
      */
@@ -150,8 +149,6 @@ final class ClientConfiguration
 
     /**
      * Gets the lifetime
-     *
-     * @return int
      */
     public function getLifetime(): int
     {
@@ -162,7 +159,6 @@ final class ClientConfiguration
      * Returns an instance with the specified user agent addition which will be appended to the original one
      *
      * @param string $userAgentAddition User agent addition
-     * @return self
      */
     public function withUserAgentAddition(string $userAgentAddition): self
     {

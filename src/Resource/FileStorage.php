@@ -71,8 +71,6 @@ final class FileStorage implements \Countable, \Iterator
 
     /**
      * Adds a file to the storage
-     *
-     * @param FileInterface $file
      */
     public function attach(FileInterface $file): void
     {
@@ -81,8 +79,6 @@ final class FileStorage implements \Countable, \Iterator
 
     /**
      * Removes a file from the storage
-     *
-     * @param FileInterface $file
      */
     public function detach(FileInterface $file): void
     {
@@ -91,9 +87,6 @@ final class FileStorage implements \Countable, \Iterator
 
     /**
      * Checks if the storage contains a specific file
-     *
-     * @param FileInterface $file
-     * @return bool
      */
     public function contains(FileInterface $file): bool
     {

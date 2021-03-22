@@ -23,8 +23,6 @@ class JobRouterInstallationTest extends TestCase
     /**
      * @test
      * @dataProvider dataProviderForGetBaseUrl
-     * @param string $urlToTest
-     * @param string $expectedUrl
      */
     public function getBaseUrlReturnsBaseUrlCorrectly(string $urlToTest, string $expectedUrl): void
     {
@@ -49,8 +47,6 @@ class JobRouterInstallationTest extends TestCase
     /**
      * @test
      * @dataProvider dataProviderForGetApiUrl
-     * @param string $urlToTest
-     * @param string $expectedUrl
      */
     public function getApiUrlReturnsApiUrlCorrectly(string $urlToTest, string $expectedUrl): void
     {
@@ -85,9 +81,6 @@ class JobRouterInstallationTest extends TestCase
     /**
      * @test
      * @dataProvider dataProviderForGetResourceUrl
-     * @param string $givenUrl
-     * @param string $resourceToTest
-     * @param string $expectedUrl
      */
     public function getResourceUrlReturnsApiUrlCorrectly(
         string $givenUrl,
@@ -117,9 +110,6 @@ class JobRouterInstallationTest extends TestCase
     /**
      * @test
      * @dataProvider dataProviderForInvalidUrls
-     * @param string $url
-     * @param string $expectedExceptionMessage
-     * @param int $expectedExceptionCode
      */
     public function constructThrowsExceptionOnInvalidUrl(
         string $url,

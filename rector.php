@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\PHPUnit\Sets\PHPUnitSetList;
 use Rector\Set\ValueObject\SetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddArrayReturnDocTypeRector;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -29,12 +30,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         SetList::PHP_71,
         SetList::PHP_72,
         SetList::PHP_73,
-        SetList::PHPUNIT_CODE_QUALITY,
-        SetList::PHPUNIT_EXCEPTION,
-        SetList::PHPUNIT_MOCK,
-        SetList::PHPUNIT_SPECIFIC_METHOD,
-        SetList::PHPUNIT_YIELD_DATA_PROVIDER,
         SetList::TYPE_DECLARATION,
+        PHPUnitSetList::PHPUNIT_CODE_QUALITY,
+        PHPUnitSetList::PHPUNIT_EXCEPTION,
+        PHPUnitSetList::PHPUNIT_MOCK,
+        PHPUnitSetList::PHPUNIT_SPECIFIC_METHOD,
+        PHPUnitSetList::PHPUNIT_YIELD_DATA_PROVIDER,
+        PHPUnitSetList::PHPUNIT_90,
+        PHPUnitSetList::PHPUNIT_91,
     ]);
 
     $parameters->set(Option::SKIP, [

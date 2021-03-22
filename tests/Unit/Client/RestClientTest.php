@@ -71,7 +71,7 @@ class RestClientTest extends TestCase
 
         self::assertInstanceOf(RestClient::class, $restClient);
 
-        $input = \json_decode(self::$server->getLastRequest()->getInput(), true);
+        $input = \json_decode(self::$server->getLastRequest()->getInput(), true, 512, \JSON_THROW_ON_ERROR);
 
         self::assertSame('fake_username', $input['username']);
         self::assertSame('fake_password', $input['password']);

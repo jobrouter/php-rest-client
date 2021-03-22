@@ -132,8 +132,6 @@ final class RestClient implements ClientInterface
      * @param string $resource The resource path
      * @param array $data Data for the request
      *
-     * @return ResponseInterface
-     *
      * @throws HttpException
      *
      * @psalm-suppress MoreSpecificImplementedParamType
@@ -208,10 +206,7 @@ final class RestClient implements ClientInterface
     }
 
     /**
-     * @param string $method
-     * @param string $resource
      * @param string|array $jsonPayload
-     * @return ResponseInterface
      */
     private function sendJson(string $method, string $resource, $jsonPayload): ResponseInterface
     {
@@ -239,8 +234,6 @@ final class RestClient implements ClientInterface
 
     /**
      * Get the version number of the JobRouter installation
-     *
-     * @return string
      */
     public function getJobRouterVersion(): string
     {

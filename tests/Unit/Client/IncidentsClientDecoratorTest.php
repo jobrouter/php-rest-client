@@ -58,8 +58,7 @@ class IncidentsClientDecoratorTest extends TestCase
     /**
      * @test
      * @dataProvider dataProvider
-     * @param Incident $incident
-     * @param array $withMultipart
+     * @param array<string, mixed> $withMultipart
      */
     public function requestWithIncidentIsProcessedAsMultipartAndPassedToClient(
         Incident $incident,

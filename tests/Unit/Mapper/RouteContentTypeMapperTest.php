@@ -29,9 +29,6 @@ class RouteContentTypeMapperTest extends TestCase
     /**
      * @test
      * @dataProvider dataProvider
-     * @param string $method
-     * @param string $resource
-     * @param string $expectedContentType
      */
     public function getRequestContentTypeForRouteReturnsCorrectContentType(
         string $method,
@@ -43,17 +40,16 @@ class RouteContentTypeMapperTest extends TestCase
         self::assertSame($expectedContentType, $actual);
     }
 
-    /**
-     * @return iterable
-     */
     public function dataProvider(): iterable
     {
         $handle = \fopen(__DIR__ . DIRECTORY_SEPARATOR . 'routes.txt', 'r');
 
         while (($line = \fgets($handle, 1024)) !== false) {
             $line = \trim($line);
-
-            if (empty($line) || \str_starts_with($line, '#')) {
+            if (empty($line)) {
+                continue;
+            }
+            if (\str_starts_with($line, '#')) {
                 continue;
             }
 

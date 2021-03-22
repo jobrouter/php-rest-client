@@ -149,9 +149,7 @@ final class Incident
     }
 
     /**
-     * @param int $priority
      * @psalm-param self::PRIORITY_LOW|self::PRIORITY_NORMAL|self::PRIORITY_HIGH $priority
-     * @return $this
      * @throws \InvalidArgumentException
      */
     public function setPriority(int $priority): self
@@ -238,7 +236,6 @@ final class Incident
     }
 
     /**
-     * @param string $name
      * @return string|int|bool|FileInterface|null
      */
     public function getProcessTableField(string $name)
@@ -247,9 +244,7 @@ final class Incident
     }
 
     /**
-     * @param string $name
      * @param string|int|bool|FileInterface $value
-     * @return $this
      * @throws \InvalidArgumentException
      * @psalm-suppress DocblockTypeContradiction
      */

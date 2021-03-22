@@ -41,9 +41,6 @@ final class Document
 
     /**
      * Get the value of an index field, null if not existing
-     *
-     * @param string $name
-     * @return string|null
      */
     public function getIndexField(string $name): ?string
     {
@@ -52,10 +49,6 @@ final class Document
 
     /**
      * Set the value of an index field
-     *
-     * @param string $name
-     * @param string $value
-     * @return $this
      */
     public function setIndexField(string $name, string $value): self
     {
@@ -66,9 +59,6 @@ final class Document
 
     /**
      * Get the values of keyword field, null if not existing
-     *
-     * @param string $name
-     * @return string|null
      */
     public function getKeywordField(string $name): ?string
     {
@@ -77,10 +67,6 @@ final class Document
 
     /**
      * Set the value of a keyword field
-     *
-     * @param string $name
-     * @param string $value
-     * @return $this
      */
     public function setKeywordField(string $name, string $value): self
     {

@@ -23,10 +23,7 @@ interface ClientInterface
     public function authenticate(): void;
 
     /**
-     * @param string $method
-     * @param string $resource
      * @param array|Incident|Document $data
-     * @return ResponseInterface
      */
     public function request(string $method, string $resource, $data = []): ResponseInterface;
 
