@@ -217,6 +217,7 @@ final class RestClient implements ClientInterface
             $jsonPayload = \json_encode($jsonPayload, \JSON_THROW_ON_ERROR);
         }
 
+        /** @psalm-suppress RedundantConditionGivenDocblockType */
         if (\is_string($jsonPayload) && !empty($jsonPayload)) {
             $request = $request->withBody($this->psr17factory->createStream($jsonPayload));
         }
