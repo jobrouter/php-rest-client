@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -32,7 +33,7 @@ final class ClientFactoryTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
-        self::$server = new MockWebServer;
+        self::$server = new MockWebServer();
         self::$server->start();
     }
 

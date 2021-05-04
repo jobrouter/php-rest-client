@@ -29,7 +29,7 @@
     "require-dev": {
         "captainhook/captainhook": "^5.8",
         "donatj/mock-webserver": "^2.2",
-        "friendsofphp/php-cs-fixer": "^2.18",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "infection/infection": "^0.22",
         "mikey179/vfsstream": "^1.6",
         "php-coveralls/php-coveralls": "^2.4",
