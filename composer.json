@@ -54,8 +54,5 @@
         "branch-alias": {
             "dev-master": "1.1.0-dev"
         }
-    },
-    "scripts": {
-        "fix-cs": "vendor/bin/php-cs-fixer fix"
     }
 }

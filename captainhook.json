@@ -25,17 +25,17 @@
                 "conditions": []
             },
             {
-                "action": "vendor/bin/phpunit -c tests/phpunit.xml.dist",
+                "action": "make tests",
                 "options": [],
                 "conditions": []
             },
             {
-                "action": "vendor/bin/psalm --no-progress",
+                "action": "make psalm",
                 "options": [],
                 "conditions": []
             },
             {
-                "action": "vendor/bin/php-cs-fixer fix",
+                "action": "make coding-standards",
                 "options": [],
                 "conditions": []
             }

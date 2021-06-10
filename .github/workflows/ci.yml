@@ -48,15 +48,13 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install composer dependencies
         run: |
-          composer self-update
-          composer --version
           composer remove --dev infection/infection --no-progress
       - name: Run PHP linter
         run: |
           find . -name \*.php  ! -path "./vendor/*" -exec php -l {} \;
       - name: Run unit tests
         run: |
-          vendor/bin/phpunit -c tests/phpunit.xml.dist
+          make tests
   sonar-cloud:
     name: SonarCloud Analysis
     runs-on: ubuntu-latest
@@ -92,25 +90,24 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install composer dependencies
         run: |
-          composer self-update
-          composer --version
           composer update --no-progress --prefer-dist --optimize-autoloader
       - name: Run unit tests
         run: |
-          vendor/bin/phpunit -c tests/phpunit.xml.dist
+          make tests
       - name: Send code coverage report to coveralls.io
-        run: vendor/bin/php-coveralls -v
+        run: |
+          make code-coverage
         env:
           COVERALLS_RUN_LOCALLY: 1
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-      - name: Run psalm
+      - name: Run mutation tests
         run: |
-          vendor/bin/psalm --no-progress --output-format=github
-      - name: Run rector
-        run: |
-          vendor/bin/rector --dry-run --no-progress-bar
-      - name: Run infection
-        run: |
-          vendor/bin/infection --no-progress --min-msi=94 --threads=4
+          make mutation-tests
         env:
           STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
+      - name: Run psalm
+        run: |
+          make psalm
+      - name: Run rector
+        run: |
+          make rector-dry
