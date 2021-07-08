@@ -1,7 +1,7 @@
 {
     "name": "brotkrueml/jobrouter-client",
-    "description": "Rest client for the JobRouter® digitisation platform",
     "type": "library",
+    "description": "Rest client for the JobRouter® digitisation platform",
     "keywords": [
         "jobrouter",
         "rest client"
@@ -13,11 +13,6 @@
             "role": "Developer"
         }
     ],
-    "support": {
-        "docs": "https://jobrouter-client.readthedocs.io/",
-        "issues": "https://github.com/brotkrueml/jobrouter-client/issues",
-        "source": "https://github.com/brotkrueml/jobrouter-client"
-    },
     "require": {
         "php": ">=7.3",
         "ext-curl": "*",
@@ -29,6 +24,7 @@
     "require-dev": {
         "captainhook/captainhook": "^5.8",
         "donatj/mock-webserver": "^2.2",
+        "ergebnis/composer-normalize": "^2.15",
         "friendsofphp/php-cs-fixer": "^3.0",
         "infection/infection": "^0.23",
         "mikey179/vfsstream": "^1.6",
@@ -40,6 +36,11 @@
     "config": {
         "sort-packages": true
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1.0-dev"
+        }
+    },
     "autoload": {
         "psr-4": {
             "Brotkrueml\\JobRouterClient\\": "src/"
@@ -50,9 +51,9 @@
             "Brotkrueml\\JobRouterClient\\Tests\\": "tests/"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.1.0-dev"
-        }
+    "support": {
+        "issues": "https://github.com/brotkrueml/jobrouter-client/issues",
+        "source": "https://github.com/brotkrueml/jobrouter-client",
+        "docs": "https://jobrouter-client.readthedocs.io/"
     }
 }

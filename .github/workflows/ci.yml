@@ -91,7 +91,10 @@ jobs:
       - name: Install composer dependencies
         run: |
           composer update --no-progress --prefer-dist --optimize-autoloader
-      - name: Run unit tests
+      - name: Normalize composer.json
+        run: |
+          composer normalize --dry-run
+      - name: Generate code coverage
         run: |
           make tests
       - name: Send code coverage report to coveralls.io
