@@ -7,8 +7,7 @@
                 "options": {
                     "subjectLength": 50,
                     "bodyLineLength": 72
-                },
-                "conditions": []
+                }
             }
         ]
     },
@@ -20,24 +19,19 @@
         "enabled": true,
         "actions": [
             {
-                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting",
-                "options": [],
-                "conditions": []
+                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting"
             },
             {
-                "action": "make tests",
-                "options": [],
-                "conditions": []
+                "action": "make coding-standards"
             },
             {
-                "action": "make psalm",
-                "options": [],
-                "conditions": []
+                "action": "make tests"
             },
             {
-                "action": "make coding-standards",
-                "options": [],
-                "conditions": []
+                "action": "make psalm"
+            },
+            {
+                "action": "make rector-dry"
             }
         ]
     },
