@@ -4,6 +4,7 @@
     xsi:noNamespaceSchemaLocation="../vendor/phpunit/phpunit/phpunit.xsd"
     bootstrap="../vendor/autoload.php"
     testdox="true"
+    executionOrder="random"
 >
     <coverage includeUncoveredFiles="false">
         <include>
