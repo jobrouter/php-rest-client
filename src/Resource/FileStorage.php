@@ -33,6 +33,7 @@ final class FileStorage implements \Countable, \Iterator
     /**
      * @inheritDoc
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return \current($this->files);

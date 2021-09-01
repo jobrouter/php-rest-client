@@ -23,11 +23,11 @@
     },
     "require-dev": {
         "captainhook/captainhook": "^5.8",
-        "donatj/mock-webserver": "^2.2",
+        "donatj/mock-webserver": "dev-php81",
         "ergebnis/composer-normalize": "^2.15",
         "friendsofphp/php-cs-fixer": "^3.0",
         "infection/infection": "^0.24",
-        "mikey179/vfsstream": "^1.6",
+        "mikey179/vfsstream": "^1.6.10-alpha.0",
         "php-coveralls/php-coveralls": "^2.4",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.11.42",
@@ -51,6 +51,12 @@
             "Brotkrueml\\JobRouterClient\\Tests\\": "tests/"
         }
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/brotkrueml/mock-webserver"
+        }
+    ],
     "support": {
         "issues": "https://github.com/brotkrueml/jobrouter-client/issues",
         "source": "https://github.com/brotkrueml/jobrouter-client",
