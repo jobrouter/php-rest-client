@@ -74,16 +74,16 @@ final class ClientConfiguration
         $this->password = $password;
     }
 
-    private function mustNotHaveEmptyUsername(string $password): void
+    private function mustNotHaveEmptyUsername(string $username): void
     {
-        if (empty($password)) {
+        if ($username === '') {
             throw new InvalidConfigurationException('Username must not be empty!', 1565710532);
         }
     }
 
     private function mustNotHaveEmptyPassword(string $password): void
     {
-        if (empty($password)) {
+        if ($password === '') {
             throw new InvalidConfigurationException('Password must not be empty!', 1565710533);
         }
     }

@@ -38,19 +38,19 @@ final class IncidentsClientDecorator extends ClientDecorator
             $multipart['step'] = (string)$incident->getStep();
         }
 
-        if (!empty($incident->getInitiator())) {
+        if ($incident->getInitiator() !== '') {
             $multipart['initiator'] = $incident->getInitiator();
         }
 
-        if (!empty($incident->getUsername())) {
+        if ($incident->getUsername() !== '') {
             $multipart['username'] = $incident->getUsername();
         }
 
-        if (!empty($incident->getJobFunction())) {
+        if ($incident->getJobFunction() !== '') {
             $multipart['jobfunction'] = $incident->getJobFunction();
         }
 
-        if (!empty($incident->getSummary())) {
+        if ($incident->getSummary() !== '') {
             $multipart['summary'] = $incident->getSummary();
         }
 

@@ -73,7 +73,7 @@ final class File implements FileInterface
             'filename' => $this->fileName,
         ];
 
-        if (!empty($this->contentType)) {
+        if ($this->contentType !== '') {
             $result['contentType'] = $this->contentType;
         }
 

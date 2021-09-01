@@ -219,7 +219,7 @@ final class RestClient implements ClientInterface
         }
 
         /** @psalm-suppress RedundantConditionGivenDocblockType */
-        if (\is_string($jsonPayload) && !empty($jsonPayload)) {
+        if (\is_string($jsonPayload) && $jsonPayload !== '') {
             $request = $request->withBody($this->psr17factory->createStream($jsonPayload));
         }
 
