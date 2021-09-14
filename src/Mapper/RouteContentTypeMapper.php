@@ -44,8 +44,6 @@ final class RouteContentTypeMapper
             'application/sessions/.+?' => '',
         ],
         'POST' => [
-            'application/dialogelement/steps/.+?/sqltables/.+?/rows' => '',
-            'application/dialogelement/steps/.+?/userslists/.+?/options' => '',
             'application/documenthub' => self::CONTENT_TYPE_MULTIPART_FORMDATA,
             'application/fileuploads' => self::CONTENT_TYPE_MULTIPART_FORMDATA,
             'application/incidents/.+?' => self::CONTENT_TYPE_MULTIPART_FORMDATA,

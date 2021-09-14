@@ -28,11 +28,11 @@ JobRouter Client JobRouter® PHP
 ================ ========== =========
 1.0              4.2 - 5.1  7.2 - 7.4
 ---------------- ---------- ---------
-1.1              4.2 - 5.1  7.3 - 8.1
+1.1              4.2 - 5.2  7.3 - 8.1
 ================ ========== =========
 
 You can use e.g. JobRouter Client version 1.0 on JobRouter® version 5.2 at
-your own risk. However, new REST API resources are not available.
+your own risk. However, new REST API resources may not be available.
 
 
 .. _installation.composer:
