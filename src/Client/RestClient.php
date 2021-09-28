@@ -199,6 +199,7 @@ final class RestClient implements ClientInterface
             }
         });
 
+        /** @psalm-suppress PossiblyInvalidArgument */
         return $this->browser->submitForm(
             $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
             $multipart,
