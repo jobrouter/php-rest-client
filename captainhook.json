@@ -25,7 +25,7 @@
                 "action": "composer normalize"
             },
             {
-                "action": "make coding-standards"
+                "action": "make cs"
             },
             {
                 "action": "make tests"

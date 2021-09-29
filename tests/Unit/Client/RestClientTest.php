@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-/**
+/*
  * This file is part of the JobRouter Client.
+ * https://github.com/brotkrueml/jobrouter-client
  *
  * Copyright (c) 2019-2021 Chris Müller
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
- *
- * @see https://github.com/brotkrueml/jobrouter-client
  */
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
@@ -30,13 +29,19 @@ class RestClientTest extends TestCase
 {
     private const TEST_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqYXQiOjE1NzAyMjAwNzIsImp0aSI6IjhWMGtaSzJ5RzRxdGlhbjdGbGZTNUhPTGZaeGtZXC9obG1SVEV2VXIxVmwwPSIsImlzcyI6IkpvYlJvdXRlciIsIm5iZiI6MTU3MDIyMDA3MiwiZXhwIjoxNTcwMjIwMTAyLCJkYXRhIjp7InVzZXJuYW1lIjoicmVzdCJ9fQ.cbAyj36f9MhAwOMzlTEheRkHhuuIEOeb1Uy8i0KfUhU';
 
-    /** @var ClientConfiguration */
+    /**
+     * @var ClientConfiguration
+     */
     private static $configuration;
 
-    /** @var MockWebServer */
+    /**
+     * @var MockWebServer
+     */
     private static $server;
 
-    /** @var \org\bovigo\vfs\vfsStreamDirectory */
+    /**
+     * @var \org\bovigo\vfs\vfsStreamDirectory
+     */
     private $root;
 
     public static function setUpBeforeClass(): void
@@ -85,7 +90,9 @@ class RestClientTest extends TestCase
             '/api/rest/v2/application/tokens',
             new Response(
                 \sprintf('{"tokens":["%s"]}', self::TEST_TOKEN),
-                ['content-type' => 'application/json'],
+                [
+                    'content-type' => 'application/json',
+                ],
                 201
             )
         );
@@ -203,7 +210,9 @@ class RestClientTest extends TestCase
             '/api/rest/v2/application/tokens',
             new Response(
                 \sprintf('{"tokens":["%s"]}', self::TEST_TOKEN),
-                ['x-jobrouter-version' => $version],
+                [
+                    'x-jobrouter-version' => $version,
+                ],
                 201
             )
         );
@@ -229,7 +238,9 @@ class RestClientTest extends TestCase
             '/api/rest/v2/application/tokens',
             new Response(
                 '',
-                ['location' => 'https://example.org/redirect-destination.html'],
+                [
+                    'location' => 'https://example.org/redirect-destination.html',
+                ],
                 307
             )
         );
@@ -272,7 +283,9 @@ class RestClientTest extends TestCase
             '/api/rest/v2/application/tokens',
             new Response(
                 '{}',
-                ['content-type' => 'application/json'],
+                [
+                    'content-type' => 'application/json',
+                ],
                 201
             )
         );
@@ -343,7 +356,9 @@ class RestClientTest extends TestCase
                     '{"errors":["-": ["%s"]]}',
                     'Some bad request'
                 ),
-                ['content-type' => 'application/json'],
+                [
+                    'content-type' => 'application/json',
+                ],
                 400
             )
         );
@@ -372,7 +387,9 @@ class RestClientTest extends TestCase
                     '{"errors":{"-": ["%s"]}}',
                     'Some error occured.'
                 ),
-                ['content-type' => 'application/json'],
+                [
+                    'content-type' => 'application/json',
+                ],
                 404
             )
         );
@@ -391,7 +408,9 @@ class RestClientTest extends TestCase
             '/api/rest/v2/application/incidents/test',
             new Response(
                 '{"incidents":[{"workflowId":"8c520dd91b59c62c9ec30c7310bb9fc60000000313","stepId":"8c520dd91b59c62c9ec30c7310bb9fc60000000347","processId":"8c520dd91b59c62c9ec30c7310bb9fc60000000237","incidentnumber":17,"jobfunction":"Admin","username":"rest"}]}',
-                ['content-type' => 'application/json'],
+                [
+                    'content-type' => 'application/json',
+                ],
                 200
             )
         );
@@ -485,7 +504,9 @@ class RestClientTest extends TestCase
             '/api/rest/v2/application/incidents/test',
             new Response(
                 '{"incidents":[{"workflowId":"8c520dd91b59c62c9ec30c7310bb9fc60000000313","stepId":"8c520dd91b59c62c9ec30c7310bb9fc60000000347","processId":"8c520dd91b59c62c9ec30c7310bb9fc60000000237","incidentnumber":17,"jobfunction":"Admin","username":"rest"}]}',
-                ['content-type' => 'application/json'],
+                [
+                    'content-type' => 'application/json',
+                ],
                 200
             )
         );

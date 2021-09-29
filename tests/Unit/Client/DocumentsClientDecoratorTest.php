@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-/**
+/*
  * This file is part of the JobRouter Client.
+ * https://github.com/brotkrueml/jobrouter-client
  *
  * Copyright (c) 2019-2021 Chris Müller
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
- *
- * @see https://github.com/brotkrueml/jobrouter-client
  */
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
@@ -25,10 +24,14 @@ use Psr\Http\Message\ResponseInterface;
 
 class DocumentsClientDecoratorTest extends TestCase
 {
-    /** @var ClientInterface|MockObject */
+    /**
+     * @var ClientInterface|MockObject
+     */
     private $clientMock;
 
-    /** @var DocumentsClientDecorator */
+    /**
+     * @var DocumentsClientDecorator
+     */
     private $subject;
 
     protected function setUp(): void
@@ -48,10 +51,14 @@ class DocumentsClientDecoratorTest extends TestCase
         $this->clientMock
             ->expects(self::once())
             ->method('request')
-            ->with('GET', 'some/route', ['some' => 'data'])
+            ->with('GET', 'some/route', [
+                'some' => 'data',
+            ])
             ->willReturn($responseStub);
 
-        $actual = $this->subject->request('GET', 'some/route', ['some' => 'data']);
+        $actual = $this->subject->request('GET', 'some/route', [
+            'some' => 'data',
+        ]);
 
         self::assertInstanceOf(ResponseInterface::class, $actual);
     }

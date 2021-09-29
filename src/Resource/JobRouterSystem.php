@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-/**
+/*
  * This file is part of the JobRouter Client.
+ * https://github.com/brotkrueml/jobrouter-client
  *
  * Copyright (c) 2019-2021 Chris Müller
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
- *
- * @see https://github.com/brotkrueml/jobrouter-client
  */
 
 namespace Brotkrueml\JobRouterClient\Resource;
@@ -40,14 +39,14 @@ final class JobRouterSystem implements \Stringable
 
     private function mustHaveValidBaseUrl(string $url): void
     {
-        if (!$this->isValidUrl($url)) {
+        if (! $this->isValidUrl($url)) {
             throw new InvalidUrlException(
                 \sprintf('Given baseUrl "%s" is not valid. It must consist of a scheme, the host and the path!', $url),
                 1565710531
             );
         }
 
-        if (!$this->urlHasHttpProtocolScheme($url)) {
+        if (! $this->urlHasHttpProtocolScheme($url)) {
             throw new InvalidUrlException(
                 \sprintf('Given baseUrl "%s" must have a HTTP protocol scheme!', $url),
                 1586538201

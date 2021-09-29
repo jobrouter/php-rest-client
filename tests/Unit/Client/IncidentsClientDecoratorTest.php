@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-/**
+/*
  * This file is part of the JobRouter Client.
+ * https://github.com/brotkrueml/jobrouter-client
  *
  * Copyright (c) 2019-2021 Chris Müller
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
- *
- * @see https://github.com/brotkrueml/jobrouter-client
  */
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
@@ -25,10 +24,14 @@ use Psr\Http\Message\ResponseInterface;
 
 class IncidentsClientDecoratorTest extends TestCase
 {
-    /** @var ClientInterface|MockObject */
+    /**
+     * @var ClientInterface|MockObject
+     */
     private $clientMock;
 
-    /** @var IncidentsClientDecorator */
+    /**
+     * @var IncidentsClientDecorator
+     */
     private $subject;
 
     protected function setUp(): void
@@ -48,10 +51,14 @@ class IncidentsClientDecoratorTest extends TestCase
         $this->clientMock
             ->expects(self::once())
             ->method('request')
-            ->with('GET', 'some/route', ['some' => 'data'])
+            ->with('GET', 'some/route', [
+                'some' => 'data',
+            ])
             ->willReturn($responseStub);
 
-        $actual = $this->subject->request('GET', 'some/route', ['some' => 'data']);
+        $actual = $this->subject->request('GET', 'some/route', [
+            'some' => 'data',
+        ]);
 
         self::assertInstanceOf(ResponseInterface::class, $actual);
     }
@@ -77,47 +84,63 @@ class IncidentsClientDecoratorTest extends TestCase
     {
         yield 'Given step' => [
             (new Incident())->setStep(1),
-            ['step' => '1']
+            [
+                'step' => '1',
+            ],
         ];
 
         yield 'Given initiator' => [
             (new Incident())->setInitiator('some initiator'),
-            ['initiator' => 'some initiator']
+            [
+                'initiator' => 'some initiator',
+            ],
         ];
 
         yield 'Given username' => [
             (new Incident())->setUsername('some username'),
-            ['username' => 'some username']
+            [
+                'username' => 'some username',
+            ],
         ];
 
         yield 'Given jobfunction' => [
             (new Incident())->setJobFunction('some jobfunction'),
-            ['jobfunction' => 'some jobfunction']
+            [
+                'jobfunction' => 'some jobfunction',
+            ],
         ];
 
         yield 'Given summary' => [
             (new Incident())->setSummary('some summary'),
-            ['summary' => 'some summary']
+            [
+                'summary' => 'some summary',
+            ],
         ];
 
         yield 'Given priority' => [
             (new Incident())->setPriority(2),
-            ['priority' => '2']
+            [
+                'priority' => '2',
+            ],
         ];
 
         yield 'Given pool' => [
             (new Incident())->setPool(42),
-            ['pool' => '42']
+            [
+                'pool' => '42',
+            ],
         ];
 
         yield 'Given simulation is true' => [
             (new Incident())->setSimulation(true),
-            ['simulation' => '1']
+            [
+                'simulation' => '1',
+            ],
         ];
 
         yield 'Given simulation is false' => [
             (new Incident())->setSimulation(false),
-            []
+            [],
         ];
 
         yield 'Given step escalation date' => [
@@ -127,7 +150,9 @@ class IncidentsClientDecoratorTest extends TestCase
                     new \DateTimeZone('America/Chicago')
                 )
             ),
-            ['step_escalation_date' => '2020-01-30T12:34:56-06:00']
+            [
+                'step_escalation_date' => '2020-01-30T12:34:56-06:00',
+            ],
         ];
 
         yield 'Given incident escalation date' => [
@@ -137,7 +162,9 @@ class IncidentsClientDecoratorTest extends TestCase
                     new \DateTimeZone('Europe/Berlin')
                 )
             ),
-            ['incident_escalation_date' => '2020-01-31T01:23:45+01:00']
+            [
+                'incident_escalation_date' => '2020-01-31T01:23:45+01:00',
+            ],
         ];
 
         $fileStub = $this->createStub(FileInterface::class);
@@ -165,7 +192,7 @@ class IncidentsClientDecoratorTest extends TestCase
                 'processtable[fields][5][value]' => '0',
                 'processtable[fields][6][name]' => 'file field',
                 'processtable[fields][6][value]' => $fileStub,
-            ]
+            ],
         ];
 
         yield 'Given sub table fields' => [
@@ -213,7 +240,7 @@ class IncidentsClientDecoratorTest extends TestCase
                 'subtables[1][rows][0][fields][0][value]' => 'other value 1/1',
                 'subtables[1][rows][0][fields][1][name]' => 'other name 1/2',
                 'subtables[1][rows][0][fields][1][value]' => 'other value 1/2',
-            ]
+            ],
         ];
     }
 

@@ -22,10 +22,10 @@
         "symfony/polyfill-php80": "^1.18"
     },
     "require-dev": {
+        "brotkrueml/coding-standards": "^1.0",
         "captainhook/captainhook": "^5.8",
         "donatj/mock-webserver": "dev-php81",
         "ergebnis/composer-normalize": "^2.15",
-        "friendsofphp/php-cs-fixer": "^3.0",
         "infection/infection": "^0.24",
         "mikey179/vfsstream": "^1.6.10-alpha.0",
         "php-coveralls/php-coveralls": "^2.4",

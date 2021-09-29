@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-/**
+/*
  * This file is part of the JobRouter Client.
+ * https://github.com/brotkrueml/jobrouter-client
  *
  * Copyright (c) 2019-2021 Chris Müller
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
- *
- * @see https://github.com/brotkrueml/jobrouter-client
  */
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Resource;
@@ -24,7 +23,9 @@ use PHPUnit\Framework\TestCase;
 
 class FileTest extends TestCase
 {
-    /** @var vfsStreamDirectory */
+    /**
+     * @var vfsStreamDirectory
+     */
     private $root;
 
     protected function setUp(): void
@@ -100,7 +101,7 @@ class FileTest extends TestCase
         self::assertSame(
             [
                 'path' => 'vfs://root/some-file.txt',
-                'filename' => 'some-file.txt'
+                'filename' => 'some-file.txt',
             ],
             $subject->toArray()
         );
@@ -120,7 +121,7 @@ class FileTest extends TestCase
             [
                 'path' => 'vfs://root/some-file.txt',
                 'filename' => 'other-filename.txt',
-                'contentType' => 'foo/bar'
+                'contentType' => 'foo/bar',
             ],
             $subject->toArray()
         );

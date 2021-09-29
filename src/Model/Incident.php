@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-/**
+/*
  * This file is part of the JobRouter Client.
+ * https://github.com/brotkrueml/jobrouter-client
  *
  * Copyright (c) 2019-2021 Chris Müller
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
- *
- * @see https://github.com/brotkrueml/jobrouter-client
  */
 
 namespace Brotkrueml\JobRouterClient\Model;
@@ -20,7 +19,9 @@ use Brotkrueml\JobRouterClient\Resource\FileInterface;
 final class Incident
 {
     public const PRIORITY_LOW = 1;
-    /** @noRector \Rector\DeadCode\Rector\ClassConst\RemoveUnusedClassConstantRector */
+    /**
+     * @noRector \Rector\DeadCode\Rector\ClassConst\RemoveUnusedClassConstantRector
+     */
     public const PRIORITY_NORMAL = 2;
     public const PRIORITY_HIGH = 3;
 
@@ -251,7 +252,7 @@ final class Incident
      */
     public function setProcessTableField(string $name, $value): self
     {
-        if (!\is_string($value) && !\is_int($value) && !\is_bool($value) && !$value instanceof FileInterface) {
+        if (! \is_string($value) && ! \is_int($value) && ! \is_bool($value) && ! $value instanceof FileInterface) {
             throw new \InvalidArgumentException(
                 \sprintf(
                     'value has to be either a string, an integer, a boolean or an instance of %s, "%s" given',

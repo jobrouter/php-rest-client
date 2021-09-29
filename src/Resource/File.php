@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-/**
+/*
  * This file is part of the JobRouter Client.
+ * https://github.com/brotkrueml/jobrouter-client
  *
  * Copyright (c) 2019-2021 Chris Müller
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
- *
- * @see https://github.com/brotkrueml/jobrouter-client
  */
 
 namespace Brotkrueml\JobRouterClient\Resource;
@@ -22,18 +21,24 @@ use Brotkrueml\JobRouterClient\Exception\InvalidResourceException;
  */
 final class File implements FileInterface
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     private $path;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $fileName;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $contentType;
 
     public function __construct(string $path, string $fileName = '', string $contentType = '')
     {
-        if (!\file_exists($path)) {
+        if (! \file_exists($path)) {
             throw new InvalidResourceException(
                 \sprintf(
                     'The file "%s" does not exist or is not readable',
@@ -69,7 +74,7 @@ final class File implements FileInterface
     public function toArray(): array
     {
         $result = [
-            'path'=> $this->path,
+            'path' => $this->path,
             'filename' => $this->fileName,
         ];
 

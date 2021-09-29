@@ -5,8 +5,8 @@
 /.gitattributes export-ignore
 /.github export-ignore
 /.gitignore export-ignore
-/.php-cs-fixer.php export-ignore
 /captainhook.json export-ignore
+/ecs.php export-ignore
 /infection.json.dist export-ignore
 /psalm.xml export-ignore
 /rector.php export-ignore

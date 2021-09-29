@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-/**
+/*
  * This file is part of the JobRouter Client.
+ * https://github.com/brotkrueml/jobrouter-client
  *
  * Copyright (c) 2019-2021 Chris Müller
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
- *
- * @see https://github.com/brotkrueml/jobrouter-client
  */
 
 namespace Brotkrueml\JobRouterClient\Client;
@@ -34,7 +33,7 @@ final class IncidentsClientDecorator extends ClientDecorator
     {
         $multipart = [];
 
-        if (!empty($incident->getStep())) {
+        if (! empty($incident->getStep())) {
             $multipart['step'] = (string)$incident->getStep();
         }
 
@@ -54,15 +53,15 @@ final class IncidentsClientDecorator extends ClientDecorator
             $multipart['summary'] = $incident->getSummary();
         }
 
-        if (!empty($incident->getPriority())) {
+        if (! empty($incident->getPriority())) {
             $multipart['priority'] = (string)$incident->getPriority();
         }
 
-        if (!empty($incident->getPool())) {
+        if (! empty($incident->getPool())) {
             $multipart['pool'] = (string)$incident->getPool();
         }
 
-        if (!empty($incident->isSimulation())) {
+        if (! empty($incident->isSimulation())) {
             $multipart['simulation'] = (string)$incident->isSimulation();
         }
 

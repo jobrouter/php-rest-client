@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-/**
+/*
  * This file is part of the JobRouter Client.
+ * https://github.com/brotkrueml/jobrouter-client
  *
  * Copyright (c) 2019-2021 Chris Müller
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
- *
- * @see https://github.com/brotkrueml/jobrouter-client
  */
 
 namespace Brotkrueml\JobRouterClient\Client;
@@ -41,19 +40,29 @@ final class RestClient implements ClientInterface
      */
     private $configuration;
 
-    /** @var Psr17Factory */
+    /**
+     * @var Psr17Factory
+     */
     private $psr17factory;
 
-    /** @var Browser */
+    /**
+     * @var Browser
+     */
     private $browser;
 
-    /** @var AuthorisationMiddleware */
+    /**
+     * @var AuthorisationMiddleware
+     */
     private $authorisationMiddleware;
 
-    /** @var RouteContentTypeMapper */
+    /**
+     * @var RouteContentTypeMapper
+     */
     private $routeContentTypeMapper;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $jobRouterVersion = '';
 
     /**
@@ -114,7 +123,7 @@ final class RestClient implements ClientInterface
             throw new AuthenticationException('Authorisation response is malformed', 1612552955, $e);
         }
 
-        if (!isset($content['tokens'][0])) {
+        if (! isset($content['tokens'][0])) {
             throw new AuthenticationException('Token is unavailable', 1570222016);
         }
 
@@ -141,7 +150,7 @@ final class RestClient implements ClientInterface
      */
     public function request(string $method, string $resource, $data = []): ResponseInterface
     {
-        if (!\is_array($data)) {
+        if (! \is_array($data)) {
             throw new RestClientException(
                 \sprintf(
                     'data must be an array, "%s" given',

@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-/**
+/*
  * This file is part of the JobRouter Client.
+ * https://github.com/brotkrueml/jobrouter-client
  *
  * Copyright (c) 2019-2021 Chris Müller
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
- *
- * @see https://github.com/brotkrueml/jobrouter-client
  */
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
@@ -28,7 +27,9 @@ final class ClientFactoryTest extends TestCase
 {
     private const TEST_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqYXQiOjE1NzAyMjAwNzIsImp0aSI6IjhWMGtaSzJ5RzRxdGlhbjdGbGZTNUhPTGZaeGtZXC9obG1SVEV2VXIxVmwwPSIsImlzcyI6IkpvYlJvdXRlciIsIm5iZiI6MTU3MDIyMDA3MiwiZXhwIjoxNTcwMjIwMTAyLCJkYXRhIjp7InVzZXJuYW1lIjoicmVzdCJ9fQ.cbAyj36f9MhAwOMzlTEheRkHhuuIEOeb1Uy8i0KfUhU';
 
-    /** @var MockWebServer */
+    /**
+     * @var MockWebServer
+     */
     private static $server;
 
     public static function setUpBeforeClass(): void
@@ -48,7 +49,9 @@ final class ClientFactoryTest extends TestCase
             '/api/rest/v2/application/tokens',
             new Response(
                 \sprintf('{"tokens":["%s"]}', self::TEST_TOKEN),
-                ['content-type' => 'application/json'],
+                [
+                    'content-type' => 'application/json',
+                ],
                 201
             )
         );
