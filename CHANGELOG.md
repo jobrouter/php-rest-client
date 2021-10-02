@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2021-10-02
+
 ### Added
 - Compatibility with PHP 8.0 and 8.1
 - Compatibility with JobRouter® 5.2
@@ -23,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 First stable release
 
 
-[Unreleased]: https://github.com/brotkrueml/jobrouter-client/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/brotkrueml/jobrouter-client/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/brotkrueml/jobrouter-client/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/brotkrueml/jobrouter-client/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/brotkrueml/jobrouter-client/releases/tag/v1.0.0
