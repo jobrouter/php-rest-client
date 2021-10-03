@@ -19,22 +19,52 @@
         "enabled": true,
         "actions": [
             {
-                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting"
+                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting",
+                "conditions": [
+                    {
+                        "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                        "args": [
+                            "php"
+                        ]
+                    }
+                ]
             },
             {
-                "action": "composer normalize"
+                "action": "make tests",
+                "conditions": [
+                    {
+                        "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\Any",
+                        "args": [
+                            [
+                                "*.php",
+                                "composer.json",
+                                "phpunit.xml.dist"
+                            ]
+                        ]
+                    }
+                ]
             },
             {
-                "action": "make cs"
+                "action": "make psalm",
+                "conditions": [
+                    {
+                        "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                        "args": [
+                            "php"
+                        ]
+                    }
+                ]
             },
             {
-                "action": "make tests"
-            },
-            {
-                "action": "make psalm"
-            },
-            {
-                "action": "make rector-dry"
+                "action": "make rector-dry",
+                "conditions": [
+                    {
+                        "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+                        "args": [
+                            "php"
+                        ]
+                    }
+                ]
             }
         ]
     },
