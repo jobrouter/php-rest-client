@@ -14,6 +14,6 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Exception;
 
-interface ExceptionInterface
+interface ExceptionInterface extends \Throwable
 {
 }
