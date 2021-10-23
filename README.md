@@ -12,4 +12,5 @@
 This JobRouter Client eases the access to the REST API. The library supports JobRouter® versions 4.2-5.2.
 
 [Documentation](https://jobrouter-client.readthedocs.io/) |
-[Changelog](https://github.com/brotkrueml/jobrouter-client/blob/master/CHANGELOG.md)
+[Changelog](https://github.com/brotkrueml/jobrouter-client/blob/master/CHANGELOG.md) |
+[JobRouter® Marketplace](https://marketplace.jobrouter.com/en/product/jobrouter-client/)
