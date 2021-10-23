@@ -1,5 +1,5 @@
 .PHONY: qa
-qa: cs tests mutation-tests psalm rector-dry
+qa: cs tests mutation-tests phpstan rector-dry
 
 .PHONY: code-coverage
 code-coverage: vendor
@@ -13,9 +13,9 @@ cs: vendor
 mutation-tests: vendor
 	XDEBUG_MODE=coverage vendor/bin/infection --min-msi=94 --threads=4 --no-ansi
 
-.PHONY: psalm
-psalm: vendor
-	vendor/bin/psalm
+.PHONY: phpstan
+phpstan: vendor
+	vendor/bin/phpstan analyse
 
 .PHONY: rector
 rector: vendor

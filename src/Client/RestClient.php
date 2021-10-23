@@ -144,8 +144,6 @@ final class RestClient implements ClientInterface
      *
      * @throws HttpException
      *
-     * @psalm-suppress MoreSpecificImplementedParamType
-     * @psalm-suppress DocblockTypeContradiction
      * @noRector \Rector\TypeDeclaration\Rector\FunctionLike\ParamTypeDeclarationRector
      */
     public function request(string $method, string $resource, $data = []): ResponseInterface
@@ -201,14 +199,12 @@ final class RestClient implements ClientInterface
 
     private function sendForm(string $method, string $resource, array $multipart): ResponseInterface
     {
-        /** @psalm-suppress MissingClosureParamType */
         \array_walk($multipart, static function (&$value): void {
             if ($value instanceof FileInterface) {
                 $value = $value->toArray();
             }
         });
 
-        /** @psalm-suppress PossiblyInvalidArgument */
         return $this->browser->submitForm(
             $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
             $multipart,
@@ -228,7 +224,6 @@ final class RestClient implements ClientInterface
             $jsonPayload = \json_encode($jsonPayload, \JSON_THROW_ON_ERROR);
         }
 
-        /** @psalm-suppress RedundantConditionGivenDocblockType */
         if (\is_string($jsonPayload) && $jsonPayload !== '') {
             $request = $request->withBody($this->psr17factory->createStream($jsonPayload));
         }

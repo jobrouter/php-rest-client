@@ -20,7 +20,6 @@ use Brotkrueml\JobRouterClient\Resource\JobRouterSystem;
 
 /**
  * Value object that represents the configuration for a RestClient
- * @psalm-immutable
  */
 final class ClientConfiguration
 {

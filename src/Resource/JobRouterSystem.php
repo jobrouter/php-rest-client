@@ -17,9 +17,8 @@ namespace Brotkrueml\JobRouterClient\Resource;
 use Brotkrueml\JobRouterClient\Exception\InvalidUrlException;
 
 /**
- * Value object that represents the a JobRouter system
+ * Value object that represents a JobRouter system
  * @internal
- * @psalm-immutable
  */
 final class JobRouterSystem implements \Stringable
 {

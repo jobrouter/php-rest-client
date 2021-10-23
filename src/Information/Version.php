@@ -16,7 +16,6 @@ namespace Brotkrueml\JobRouterClient\Information;
 
 /**
  * Value object that holds the current version of the library
- * @psalm-immutable
  */
 final class Version
 {

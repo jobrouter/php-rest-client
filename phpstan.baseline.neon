@@ -1,0 +1,202 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\ClientDecorator\\:\\:request\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/ClientDecorator.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\ClientInterface\\:\\:request\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/ClientInterface.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\DocumentsClientDecorator\\:\\:buildFieldsForMultipart\\(\\) has parameter \\$fields with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/DocumentsClientDecorator.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\DocumentsClientDecorator\\:\\:buildFieldsForMultipart\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/DocumentsClientDecorator.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\DocumentsClientDecorator\\:\\:buildFilesForMultipart\\(\\) has parameter \\$files with no value type specified in iterable type Brotkrueml\\\\JobRouterClient\\\\Resource\\\\FileStorage\\.$#"
+			count: 1
+			path: src/Client/DocumentsClientDecorator.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\DocumentsClientDecorator\\:\\:buildFilesForMultipart\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/DocumentsClientDecorator.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\DocumentsClientDecorator\\:\\:buildMultipart\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/DocumentsClientDecorator.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\DocumentsClientDecorator\\:\\:request\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/DocumentsClientDecorator.php
+
+		-
+			message: "#^\"empty\\(\\$incident\\-\\>getPool\\(\\)\\)\" is forbidden to use$#"
+			count: 1
+			path: src/Client/IncidentsClientDecorator.php
+
+		-
+			message: "#^\"empty\\(\\$incident\\-\\>getPriority\\(\\)\\)\" is forbidden to use$#"
+			count: 1
+			path: src/Client/IncidentsClientDecorator.php
+
+		-
+			message: "#^\"empty\\(\\$incident\\-\\>getStep\\(\\)\\)\" is forbidden to use$#"
+			count: 1
+			path: src/Client/IncidentsClientDecorator.php
+
+		-
+			message: "#^\"empty\\(\\$incident\\-\\>isSimulation\\(\\)\\)\" is forbidden to use$#"
+			count: 1
+			path: src/Client/IncidentsClientDecorator.php
+
+		-
+			message: "#^Class cognitive complexity is 20, keep it under 10$#"
+			count: 1
+			path: src/Client/IncidentsClientDecorator.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\IncidentsClientDecorator\\:\\:buildMultipart\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/IncidentsClientDecorator.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\IncidentsClientDecorator\\:\\:buildProcessTableFieldsForMultipart\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/IncidentsClientDecorator.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\IncidentsClientDecorator\\:\\:buildSubTablesForMultipart\\(\\) has parameter \\$subTables with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/IncidentsClientDecorator.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\IncidentsClientDecorator\\:\\:buildSubTablesForMultipart\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/IncidentsClientDecorator.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\IncidentsClientDecorator\\:\\:request\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/IncidentsClientDecorator.php
+
+		-
+			message: "#^Array with keys is not allowed\\. Use value object to pass data instead$#"
+			count: 1
+			path: src/Client/RestClient.php
+
+		-
+			message: "#^Class cognitive complexity is 17, keep it under 10$#"
+			count: 1
+			path: src/Client/RestClient.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\RestClient\\:\\:request\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/RestClient.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\RestClient\\:\\:sendForm\\(\\) has parameter \\$multipart with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/RestClient.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\RestClient\\:\\:sendJson\\(\\) has parameter \\$jsonPayload with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Client/RestClient.php
+
+		-
+			message: "#^Array with keys is not allowed\\. Use value object to pass data instead$#"
+			count: 5
+			path: src/Mapper/RouteContentTypeMapper.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Document\\:\\:getFiles\\(\\) return type has no value type specified in iterable type Brotkrueml\\\\JobRouterClient\\\\Resource\\\\FileStorage\\.$#"
+			count: 1
+			path: src/Model/Document.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Document\\:\\:getIndexFields\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Document.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Document\\:\\:getKeywordFields\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Document.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Document\\:\\:setFiles\\(\\) has parameter \\$fileStorage with no value type specified in iterable type Brotkrueml\\\\JobRouterClient\\\\Resource\\\\FileStorage\\.$#"
+			count: 1
+			path: src/Model/Document.php
+
+		-
+			message: "#^Property Brotkrueml\\\\JobRouterClient\\\\Model\\\\Document\\:\\:\\$fileStorage type has no value type specified in iterable type Brotkrueml\\\\JobRouterClient\\\\Resource\\\\FileStorage\\.$#"
+			count: 1
+			path: src/Model/Document.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Incident\\:\\:addRowToSubTable\\(\\) has parameter \\$row with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Incident.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Incident\\:\\:getProcessTableFields\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Incident.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Incident\\:\\:getRowsForSubTable\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Incident.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Incident\\:\\:getSubTables\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Incident.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Incident\\:\\:setRowsForSubTable\\(\\) has parameter \\$rows with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Model/Incident.php
+
+		-
+			message: "#^Result of && is always false\\.$#"
+			count: 1
+			path: src/Model/Incident.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Resource\\\\File\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Resource/File.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Resource\\\\FileInterface\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Resource/FileInterface.php
+
+		-
+			message: "#^Class Brotkrueml\\\\JobRouterClient\\\\Resource\\\\FileStorage implements generic interface Iterator but does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: src/Resource/FileStorage.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Resource\\\\FileStorage\\:\\:current\\(\\) has no return typehint specified\\.$#"
+			count: 1
+			path: src/Resource/FileStorage.php
+
+		-
+			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Resource\\\\FileStorage\\:\\:key\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: src/Resource/FileStorage.php
+

@@ -45,7 +45,7 @@
                 ]
             },
             {
-                "action": "make psalm",
+                "action": "make phpstan",
                 "conditions": [
                     {
                         "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",

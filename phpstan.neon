@@ -1,0 +1,37 @@
+includes:
+    - phpstan.baseline.neon
+    - vendor/symplify/phpstan-rules/config/array-rules.neon
+    - vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
+    - vendor/symplify/phpstan-rules/config/regex-rules.neon
+    - vendor/symplify/phpstan-rules/config/size-rules.neon
+
+parameters:
+    phpVersion: 70400
+    level: 8
+    paths:
+        - src
+
+services:
+    -
+        class: Symplify\PHPStanRules\CognitiveComplexity\Rules\ClassLikeCognitiveComplexityRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            maxClassCognitiveComplexity: 10
+    -
+        class: Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            forbiddenFunctions:
+                - eval
+                - dump
+                - die
+                - compact
+                - var_dump
+    -
+        class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
+        tags: [phpstan.rules.rule]
+        arguments:
+            forbiddenNodes:
+                - PhpParser\Node\Expr\Empty_
+                - PhpParser\Node\Stmt\Switch_
+                - PhpParser\Node\Expr\ErrorSuppress

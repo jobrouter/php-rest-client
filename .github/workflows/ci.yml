@@ -118,9 +118,9 @@ jobs:
           make mutation-tests
         env:
           STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
-      - name: Run psalm
+      - name: Run phpstan
         run: |
-          make psalm
+          make phpstan
       - name: Run rector
         run: |
           make rector-dry
