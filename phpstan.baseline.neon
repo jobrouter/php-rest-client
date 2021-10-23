@@ -149,8 +149,3 @@ parameters:
 			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Incident\\:\\:setRowsForSubTable\\(\\) has parameter \\$rows with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Model/Incident.php
-
-		-
-			message: "#^Result of && is always false\\.$#"
-			count: 1
-			path: src/Model/Incident.php
