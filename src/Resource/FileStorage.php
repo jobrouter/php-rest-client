@@ -14,6 +14,9 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Resource;
 
+/**
+ * @implements \Iterator<FileInterface>
+ */
 final class FileStorage implements \Countable, \Iterator
 {
     /**
@@ -26,6 +29,9 @@ final class FileStorage implements \Countable, \Iterator
         return \count($this->files);
     }
 
+    /**
+     * @return FileInterface|false
+     */
     #[\ReturnTypeWillChange]
     public function current()
     {
@@ -37,7 +43,7 @@ final class FileStorage implements \Countable, \Iterator
         \next($this->files);
     }
 
-    public function key(): string
+    public function key(): ?string
     {
         return \key($this->files);
     }

@@ -69,6 +69,7 @@ final class File implements FileInterface
     }
 
     /**
+     * @return array{path:string, filename:string, contentType?:string}
      * @internal
      */
     public function toArray(): array

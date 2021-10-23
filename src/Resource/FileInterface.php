@@ -17,6 +17,7 @@ namespace Brotkrueml\JobRouterClient\Resource;
 interface FileInterface
 {
     /**
+     * @return array{path:string, filename:string, contentType?:string}
      * @internal
      */
     public function toArray(): array;
