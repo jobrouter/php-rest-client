@@ -31,7 +31,7 @@ class UserAgentMiddlewareTest extends TestCase
         $newRequest = null;
 
         $middleware = new UserAgentMiddleware();
-        $middleware->handleRequest($request, function ($request) use (&$newRequest): void {
+        $middleware->handleRequest($request, static function ($request) use (&$newRequest): void {
             $newRequest = $request;
         });
 
@@ -54,7 +54,7 @@ class UserAgentMiddlewareTest extends TestCase
         $newRequest = null;
 
         $middleware = new UserAgentMiddleware('SomeConnector/1.2.3');
-        $middleware->handleRequest($request, function ($request) use (&$newRequest): void {
+        $middleware->handleRequest($request, static function ($request) use (&$newRequest): void {
             $newRequest = $request;
         });
 

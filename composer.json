@@ -22,7 +22,7 @@
         "symfony/polyfill-php80": "^1.18"
     },
     "require-dev": {
-        "brotkrueml/coding-standards": "~1.0.0",
+        "brotkrueml/coding-standards": "~1.1.0",
         "captainhook/captainhook": "^5.10",
         "donatj/mock-webserver": "dev-php81",
         "ergebnis/composer-normalize": "^2.15",

@@ -30,7 +30,7 @@ class AuthorisationMiddlewareTest extends TestCase
         $newRequest = null;
 
         $middleware = new AuthorisationMiddleware();
-        $middleware->handleRequest($request, function ($request) use (&$newRequest): void {
+        $middleware->handleRequest($request, static function ($request) use (&$newRequest): void {
             $newRequest = $request;
         });
 
@@ -48,7 +48,7 @@ class AuthorisationMiddlewareTest extends TestCase
 
         $middleware = new AuthorisationMiddleware();
         $middleware->setToken('some-token');
-        $middleware->handleRequest($request, function ($request) use (&$newRequest): void {
+        $middleware->handleRequest($request, static function ($request) use (&$newRequest): void {
             $newRequest = $request;
         });
 
@@ -67,7 +67,7 @@ class AuthorisationMiddlewareTest extends TestCase
         $middleware = new AuthorisationMiddleware();
         $middleware->setToken('some-token');
         $middleware->resetToken();
-        $middleware->handleRequest($request, function ($request) use (&$newRequest): void {
+        $middleware->handleRequest($request, static function ($request) use (&$newRequest): void {
             $newRequest = $request;
         });
 
