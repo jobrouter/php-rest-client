@@ -7,7 +7,7 @@
 /.gitignore export-ignore
 /captainhook.json export-ignore
 /ecs.php export-ignore
-/infection.json.dist export-ignore
+/infection.json export-ignore
 /psalm.xml export-ignore
 /rector.php export-ignore
 /sonar-project.properties export-ignore
