@@ -124,28 +124,3 @@ parameters:
 			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Document\\:\\:getKeywordFields\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Model/Document.php
-
-		-
-			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Incident\\:\\:addRowToSubTable\\(\\) has parameter \\$row with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Model/Incident.php
-
-		-
-			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Incident\\:\\:getProcessTableFields\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Model/Incident.php
-
-		-
-			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Incident\\:\\:getRowsForSubTable\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Model/Incident.php
-
-		-
-			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Incident\\:\\:getSubTables\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Model/Incident.php
-
-		-
-			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Incident\\:\\:setRowsForSubTable\\(\\) has parameter \\$rows with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Model/Incident.php

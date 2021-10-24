@@ -51,12 +51,12 @@ final class Incident
     private $summary = '';
 
     /**
-     * @var int|null
+     * @var int<1,3>|null
      */
     private $priority;
 
     /**
-     * @var int|null
+     * @var positive-int|null
      */
     private $pool;
 
@@ -81,7 +81,7 @@ final class Incident
     private $processTableFields = [];
 
     /**
-     * @var array<string,array>
+     * @var array<string,list<array<string, string|int|bool|FileInterface>>>
      */
     private $subTables = [];
 
@@ -151,11 +151,12 @@ final class Incident
     }
 
     /**
+     * @param int<1,3> $priority
      * @throws \InvalidArgumentException
      */
     public function setPriority(int $priority): self
     {
-        if ($priority < self::PRIORITY_LOW || $priority > self::PRIORITY_HIGH) {
+        if ($priority < self::PRIORITY_LOW || $priority > self::PRIORITY_HIGH) { // @phpstan-ignore-line
             throw new \InvalidArgumentException(
                 \sprintf(
                     'proprity has to be an integer between 1 and 3, "%d" given',
@@ -175,9 +176,13 @@ final class Incident
         return $this->pool;
     }
 
+    /**
+     * @param positive-int $pool
+     * @throws \InvalidArgumentException
+     */
     public function setPool(int $pool): self
     {
-        if ($pool < 1) {
+        if ($pool < 1) { // @phpstan-ignore-line
             throw new \InvalidArgumentException(
                 \sprintf(
                     'pool must be a positive integer, "%d" given',
@@ -229,6 +234,7 @@ final class Incident
     }
 
     /**
+     * @return array<string,string|int|bool|FileInterface>
      * @internal
      */
     public function getProcessTableFields(): array
@@ -266,6 +272,9 @@ final class Incident
         return $this;
     }
 
+    /**
+     * @param list<array<string, string|int|bool|FileInterface>> $rows
+     */
     public function setRowsForSubTable(string $subTableName, array $rows): self
     {
         $this->subTables[$subTableName] = $rows;
@@ -273,6 +282,9 @@ final class Incident
         return $this;
     }
 
+    /**
+     * @param array<string, string|int|bool|FileInterface> $row
+     */
     public function addRowToSubTable(string $subTableName, array $row): self
     {
         $this->subTables[$subTableName][] = $row;
@@ -280,12 +292,16 @@ final class Incident
         return $this;
     }
 
+    /**
+     * @return list<array<string, string|int|bool|FileInterface>>
+     */
     public function getRowsForSubTable(string $subTableName): ?array
     {
         return $this->subTables[$subTableName] ?? null;
     }
 
     /**
+     * @return array<string, list<array<string, string|int|bool|FileInterface>>>
      * @internal
      */
     public function getSubTables(): array
