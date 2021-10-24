@@ -121,7 +121,7 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
-    public function subSubtableIsAnEmptyArrayWhenNotSet(): void
+    public function getSubtablesIsAnEmptyArrayWhenNotSet(): void
     {
         self::assertSame([], $this->subject->getSubTables());
     }
