@@ -99,6 +99,7 @@ final class RestClient implements ClientInterface
     {
         $this->authorisationMiddleware->resetToken();
 
+        // @phpstan-ignore-next-line
         $options = [
             'username' => $this->configuration->getUsername(),
             'password' => $this->configuration->getPassword(),
@@ -140,7 +141,7 @@ final class RestClient implements ClientInterface
      *
      * @param string $method The method
      * @param string $resource The resource path
-     * @param array $data Data for the request
+     * @param array<string,mixed> $data Data for the request
      *
      * @throws HttpException
      *
@@ -197,6 +198,9 @@ final class RestClient implements ClientInterface
         return $response;
     }
 
+    /**
+     * @param array<string, array<string|int|bool|FileInterface|array<string|int,mixed>>> $multipart
+     */
     private function sendForm(string $method, string $resource, array $multipart): ResponseInterface
     {
         \array_walk($multipart, static function (&$value): void {
@@ -213,7 +217,7 @@ final class RestClient implements ClientInterface
     }
 
     /**
-     * @param string|array $jsonPayload
+     * @param string|array<string, mixed> $jsonPayload
      */
     private function sendJson(string $method, string $resource, $jsonPayload): ResponseInterface
     {

@@ -86,26 +86,6 @@ parameters:
 			path: src/Client/IncidentsClientDecorator.php
 
 		-
-			message: "#^Array with keys is not allowed\\. Use value object to pass data instead$#"
-			count: 1
-			path: src/Client/RestClient.php
-
-		-
 			message: "#^Class cognitive complexity is 17, keep it under 10$#"
-			count: 1
-			path: src/Client/RestClient.php
-
-		-
-			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\RestClient\\:\\:request\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Client/RestClient.php
-
-		-
-			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\RestClient\\:\\:sendForm\\(\\) has parameter \\$multipart with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Client/RestClient.php
-
-		-
-			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\RestClient\\:\\:sendJson\\(\\) has parameter \\$jsonPayload with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Client/RestClient.php
