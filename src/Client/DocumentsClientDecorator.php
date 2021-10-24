@@ -14,12 +14,23 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Client;
 
+use Brotkrueml\JobRouterClient\Exception\HttpException;
 use Brotkrueml\JobRouterClient\Model\Document;
+use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use Brotkrueml\JobRouterClient\Resource\FileStorage;
 use Psr\Http\Message\ResponseInterface;
 
 final class DocumentsClientDecorator extends ClientDecorator
 {
+    /**
+     * Send a request to the configured JobRouter system
+     *
+     * @param string $method The method
+     * @param string $resource The resource path
+     * @param array<string,mixed>|Document $data Data for the request
+     *
+     * @throws HttpException
+     */
     public function request(string $method, string $resource, $data = []): ResponseInterface
     {
         if ($data instanceof Document) {
@@ -29,6 +40,9 @@ final class DocumentsClientDecorator extends ClientDecorator
         return $this->client->request($method, $resource, $data);
     }
 
+    /**
+     * @return array<string, string|int|FileInterface>
+     */
     private function buildMultipart(Document $document): array
     {
         $multipartIndexFields = $this->buildFieldsForMultipart('index', $document->getIndexFields());
@@ -38,6 +52,10 @@ final class DocumentsClientDecorator extends ClientDecorator
         return \array_merge($multipartIndexFields, $multipartKeywordFields, $multipartFiles);
     }
 
+    /**
+     * @param array<string, string|int> $fields
+     * @return array<string, string|int>
+     */
     private function buildFieldsForMultipart(string $type, array $fields): array
     {
         $multipartFields = [];
@@ -62,12 +80,16 @@ final class DocumentsClientDecorator extends ClientDecorator
         );
     }
 
+    /**
+     * @return array<string, FileInterface>
+     */
     private function buildFilesForMultipart(FileStorage $files): array
     {
         $multipartFiles = [];
 
         $index = 0;
         foreach ($files as $file) {
+            /** @var FileInterface $file */
             $multipartFiles[\sprintf('files[%d]', $index)] = $file;
             $index++;
         }
