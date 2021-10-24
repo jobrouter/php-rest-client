@@ -95,6 +95,7 @@ final class Document
     }
 
     /**
+     * @return array<string,string>
      * @internal
      */
     public function getIndexFields(): array
@@ -103,6 +104,7 @@ final class Document
     }
 
     /**
+     * @return array<string,string>
      * @internal
      */
     public function getKeywordFields(): array

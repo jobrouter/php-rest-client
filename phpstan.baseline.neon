@@ -114,13 +114,3 @@ parameters:
 			message: "#^Array with keys is not allowed\\. Use value object to pass data instead$#"
 			count: 5
 			path: src/Mapper/RouteContentTypeMapper.php
-
-		-
-			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Document\\:\\:getIndexFields\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Model/Document.php
-
-		-
-			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Model\\\\Document\\:\\:getKeywordFields\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Model/Document.php
