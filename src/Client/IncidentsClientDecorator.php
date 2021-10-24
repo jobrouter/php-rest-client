@@ -14,12 +14,22 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Client;
 
+use Brotkrueml\JobRouterClient\Exception\HttpException;
 use Brotkrueml\JobRouterClient\Model\Incident;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use Psr\Http\Message\ResponseInterface;
 
 final class IncidentsClientDecorator extends ClientDecorator
 {
+    /**
+     * Send a request to the configured JobRouter system
+     *
+     * @param string $method The method
+     * @param string $resource The resource path
+     * @param array<string,mixed>|Incident $data Data for the request
+     *
+     * @throws HttpException
+     */
     public function request(string $method, string $resource, $data = []): ResponseInterface
     {
         if ($data instanceof Incident) {
@@ -29,11 +39,14 @@ final class IncidentsClientDecorator extends ClientDecorator
         return $this->client->request($method, $resource, $data);
     }
 
+    /**
+     * @return array<string, string|array<string, mixed>>
+     */
     private function buildMultipart(Incident $incident): array
     {
         $multipart = [];
 
-        if (! empty($incident->getStep())) {
+        if ($incident->getStep() > 0) {
             $multipart['step'] = (string)$incident->getStep();
         }
 
@@ -53,15 +66,15 @@ final class IncidentsClientDecorator extends ClientDecorator
             $multipart['summary'] = $incident->getSummary();
         }
 
-        if (! empty($incident->getPriority())) {
+        if (\is_int($incident->getPriority())) {
             $multipart['priority'] = (string)$incident->getPriority();
         }
 
-        if (! empty($incident->getPool())) {
+        if (\is_int($incident->getPool())) {
             $multipart['pool'] = (string)$incident->getPool();
         }
 
-        if (! empty($incident->isSimulation())) {
+        if ($incident->isSimulation()) {
             $multipart['simulation'] = (string)$incident->isSimulation();
         }
 
@@ -86,6 +99,7 @@ final class IncidentsClientDecorator extends ClientDecorator
 
     /**
      * @param array<string, mixed> $processTableFields
+     * @return array<string, string|FileInterface>>
      */
     private function buildProcessTableFieldsForMultipart(array $processTableFields): array
     {
@@ -124,6 +138,10 @@ final class IncidentsClientDecorator extends ClientDecorator
         );
     }
 
+    /**
+     * @param array<string, list<array<string, mixed>>> $subTables
+     * @return array<string, mixed>
+     */
     private function buildSubTablesForMultipart(array $subTables): array
     {
         $multipartSubTables = [];
