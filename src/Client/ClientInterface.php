@@ -14,8 +14,6 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Client;
 
-use Brotkrueml\JobRouterClient\Model\Document;
-use Brotkrueml\JobRouterClient\Model\Incident;
 use Psr\Http\Message\ResponseInterface;
 
 interface ClientInterface
@@ -23,7 +21,7 @@ interface ClientInterface
     public function authenticate(): void;
 
     /**
-     * @param array|Incident|Document $data
+     * @param array<string,mixed>|ClientDecorator $data
      */
     public function request(string $method, string $resource, $data = []): ResponseInterface;
 
