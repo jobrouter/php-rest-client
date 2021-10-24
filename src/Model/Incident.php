@@ -26,7 +26,7 @@ final class Incident
     public const PRIORITY_HIGH = 3;
 
     /**
-     * @var int|null
+     * @var positive-int|null
      */
     private $step;
 
@@ -90,6 +90,9 @@ final class Incident
         return $this->step;
     }
 
+    /**
+     * @param positive-int $step
+     */
     public function setStep(int $step): self
     {
         $this->step = $step;
