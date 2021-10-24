@@ -109,8 +109,3 @@ parameters:
 			message: "#^Method Brotkrueml\\\\JobRouterClient\\\\Client\\\\RestClient\\:\\:sendJson\\(\\) has parameter \\$jsonPayload with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Client/RestClient.php
-
-		-
-			message: "#^Array with keys is not allowed\\. Use value object to pass data instead$#"
-			count: 5
-			path: src/Mapper/RouteContentTypeMapper.php
