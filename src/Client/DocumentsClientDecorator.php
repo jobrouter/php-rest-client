@@ -27,7 +27,7 @@ final class DocumentsClientDecorator extends ClientDecorator
      *
      * @param string $method The method
      * @param string $resource The resource path
-     * @param array<string,mixed>|ClientDecorator $data Data for the request
+     * @param array<string,mixed>|Document $data Data for the request
      *
      * @throws HttpException
      */
