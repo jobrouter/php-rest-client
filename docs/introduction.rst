@@ -6,7 +6,7 @@
 Introduction
 ============
 
-`JobRouter® <https://www.jobrouter.com/>`_ is a scalable digitisation platform
+`JobRouter® <https://www.jobrouter.com/>`_ is a scalable digitalisation platform
 which links processes, data and documents. This JobRouter Client eases the
 access to the REST API. The library supports JobRouter® versions 4.2-5.2.
 

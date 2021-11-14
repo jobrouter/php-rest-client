@@ -8,7 +8,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/brotkrueml/jobrouter-client.svg?label=stable)](https://packagist.org/packages/brotkrueml/jobrouter-client)
 [![Total Downloads](https://img.shields.io/packagist/dt/brotkrueml/jobrouter-client.svg)](https://packagist.org/packages/brotkrueml/jobrouter-client)
 
-[JobRouter®](https://www.jobrouter.com/) is a scalable digitisation platform which links processes, data and documents.
+[JobRouter®](https://www.jobrouter.com/) is a scalable digitalisation platform which links processes, data and documents.
 This JobRouter Client eases the access to the REST API. The library supports JobRouter® versions 4.2-5.2.
 
 [Documentation](https://jobrouter-client.readthedocs.io/) |
