@@ -36,7 +36,7 @@ class UserAgentMiddleware implements MiddlewareInterface
     {
         $this->userAgent = \rtrim(
             \sprintf(
-                static::USER_AGENT_TEMPLATE,
+                self::USER_AGENT_TEMPLATE,
                 (new Version())->getVersion(),
                 $userAgentAddition
             )

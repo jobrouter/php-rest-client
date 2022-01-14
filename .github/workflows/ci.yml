@@ -51,7 +51,7 @@ jobs:
       - name: Install composer dependencies for PHP <= 8.0
         if: matrix.php-versions <= '8.0'
         run: |
-          composer remove --dev infection/infection --no-progress
+          composer remove --dev infection/infection symplify/phpstan-rules --no-progress
       - name: Install composer dependencies for PHP 8.1
         if: matrix.php-versions == '8.1'
         run: |
@@ -82,7 +82,7 @@ jobs:
       - name: Setup PHP version
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.0
           coverage: xdebug
           extensions: curl json mbstring
       - name: Get Composer Cache Directory

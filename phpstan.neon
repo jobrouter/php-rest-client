@@ -11,6 +11,8 @@ parameters:
         - src
     # This can be removed once PHP 8.0 is minimum requirement and union types are added
     treatPhpDocTypesAsCertain: false
+    ignoreErrors:
+        - "#^Class has a static method must so must contains \"Static\" in its name$#"
 
 services:
     -

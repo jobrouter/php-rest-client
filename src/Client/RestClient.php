@@ -172,7 +172,7 @@ final class RestClient implements ClientInterface
             }
         } catch (ClientExceptionInterface $e) {
             throw HttpException::fromError(
-                (int)$e->getCode(),
+                $e->getCode(),
                 $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
                 $e->getMessage(),
                 $e
@@ -199,7 +199,7 @@ final class RestClient implements ClientInterface
     }
 
     /**
-     * @param array<string, array<string|int|bool|FileInterface|array<string|int,mixed>>> $multipart
+     * @param array<string, string|int|bool|FileInterface|array<string|int,mixed>> $multipart
      */
     private function sendForm(string $method, string $resource, array $multipart): ResponseInterface
     {
