@@ -27,10 +27,9 @@ class UserAgentMiddleware implements MiddlewareInterface
     private const USER_AGENT_TEMPLATE = 'JobRouterClient/%s (https://jobrouter-client.rtfd.io/) %s';
 
     /**
-     * @var string
      * @readonly
      */
-    private $userAgent;
+    private string $userAgent;
 
     public function __construct(string $userAgentAddition = '')
     {

@@ -20,10 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class ClientConfigurationTest extends TestCase
 {
-    /**
-     * @var ClientConfiguration
-     */
-    private $subject;
+    private ClientConfiguration $subject;
 
     protected function setUp(): void
     {

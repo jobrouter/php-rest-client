@@ -23,26 +23,16 @@ use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use donatj\MockWebServer\MockWebServer;
 use donatj\MockWebServer\Response;
 use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 
 class RestClientTest extends TestCase
 {
     private const TEST_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqYXQiOjE1NzAyMjAwNzIsImp0aSI6IjhWMGtaSzJ5RzRxdGlhbjdGbGZTNUhPTGZaeGtZXC9obG1SVEV2VXIxVmwwPSIsImlzcyI6IkpvYlJvdXRlciIsIm5iZiI6MTU3MDIyMDA3MiwiZXhwIjoxNTcwMjIwMTAyLCJkYXRhIjp7InVzZXJuYW1lIjoicmVzdCJ9fQ.cbAyj36f9MhAwOMzlTEheRkHhuuIEOeb1Uy8i0KfUhU';
 
-    /**
-     * @var ClientConfiguration
-     */
-    private static $configuration;
-
-    /**
-     * @var MockWebServer
-     */
-    private static $server;
-
-    /**
-     * @var \org\bovigo\vfs\vfsStreamDirectory
-     */
-    private $root;
+    private static ClientConfiguration $configuration;
+    private static MockWebServer $server;
+    private vfsStreamDirectory $root;
 
     public static function setUpBeforeClass(): void
     {

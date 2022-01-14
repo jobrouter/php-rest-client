@@ -28,11 +28,7 @@ class IncidentsClientDecoratorTest extends TestCase
      * @var ClientInterface|MockObject
      */
     private $clientMock;
-
-    /**
-     * @var IncidentsClientDecorator
-     */
-    private $subject;
+    private IncidentsClientDecorator $subject;
 
     protected function setUp(): void
     {

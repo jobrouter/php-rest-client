@@ -21,20 +21,9 @@ use Brotkrueml\JobRouterClient\Exception\InvalidResourceException;
  */
 final class File implements FileInterface
 {
-    /**
-     * @var string
-     */
-    private $path;
-
-    /**
-     * @var string
-     */
-    private $fileName;
-
-    /**
-     * @var string
-     */
-    private $contentType;
+    private string $path;
+    private string $fileName;
+    private string $contentType;
 
     public function __construct(string $path, string $fileName = '', string $contentType = '')
     {

@@ -22,17 +22,12 @@ final class Document
     /**
      * @var array<string,string>
      */
-    private $indexFields = [];
-
+    private array $indexFields = [];
     /**
      * @var array<string,string>
      */
-    private $keywordFields = [];
-
-    /**
-     * @var FileStorage
-     */
-    private $fileStorage;
+    private array $keywordFields = [];
+    private FileStorage $fileStorage;
 
     public function __construct()
     {

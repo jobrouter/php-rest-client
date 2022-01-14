@@ -23,10 +23,7 @@ use PHPUnit\Framework\TestCase;
 
 class FileTest extends TestCase
 {
-    /**
-     * @var vfsStreamDirectory
-     */
-    private $root;
+    private vfsStreamDirectory $root;
 
     protected function setUp(): void
     {

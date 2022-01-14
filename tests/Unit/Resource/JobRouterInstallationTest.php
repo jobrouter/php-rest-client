@@ -31,7 +31,7 @@ class JobRouterInstallationTest extends TestCase
         self::assertSame($expectedUrl, $subject->getBaseUrl());
     }
 
-    public function dataProviderForGetBaseUrl(): \Generator
+    public function dataProviderForGetBaseUrl(): \Iterator
     {
         yield 'Base URL with ending slash' => [
             'https://example.org/jobrouter/',
@@ -55,7 +55,7 @@ class JobRouterInstallationTest extends TestCase
         self::assertSame($expectedUrl, $subject->getApiUrl());
     }
 
-    public function dataProviderForGetApiUrl(): \Generator
+    public function dataProviderForGetApiUrl(): \Iterator
     {
         yield 'Base URL with ending slash' => [
             'https://example.org/jobrouter/',
@@ -92,7 +92,7 @@ class JobRouterInstallationTest extends TestCase
         self::assertSame($expectedUrl, $subject->getResourceUrl($resourceToTest));
     }
 
-    public function dataProviderForGetResourceUrl(): \Generator
+    public function dataProviderForGetResourceUrl(): \Iterator
     {
         yield 'Resource with leading slash' => [
             'https://example.org/',
@@ -123,7 +123,7 @@ class JobRouterInstallationTest extends TestCase
         new JobRouterSystem($url);
     }
 
-    public function dataProviderForInvalidUrls(): \Generator
+    public function dataProviderForInvalidUrls(): \Iterator
     {
         yield 'Random string' => [
             'some random string',

@@ -26,7 +26,7 @@ final class RouteContentTypeMapper
      * @var array<string, array<string, string>>
      * @phpstan-ignore-next-line
      */
-    private $routes = [
+    private array $routes = [
         // @phpstan-ignore-next-line
         'DELETE' => [
             'application/dashboards/.+?' => '',

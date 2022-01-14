@@ -28,11 +28,7 @@ class DocumentsClientDecoratorTest extends TestCase
      * @var ClientInterface|MockObject
      */
     private $clientMock;
-
-    /**
-     * @var DocumentsClientDecorator
-     */
-    private $subject;
+    private DocumentsClientDecorator $subject;
 
     protected function setUp(): void
     {

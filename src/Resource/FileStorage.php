@@ -22,7 +22,7 @@ final class FileStorage implements \Countable, \Iterator
     /**
      * @var array<string,FileInterface>
      */
-    private $files = [];
+    private array $files = [];
 
     public function count(): int
     {

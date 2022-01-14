@@ -28,62 +28,30 @@ final class Incident
     /**
      * @var positive-int|null
      */
-    private $step;
-
-    /**
-     * @var string
-     */
-    private $initiator = '';
-
-    /**
-     * @var string
-     */
-    private $username = '';
-
-    /**
-     * @var string
-     */
-    private $jobFunction = '';
-
-    /**
-     * @var string
-     */
-    private $summary = '';
-
+    private ?int $step = null;
+    private string $initiator = '';
+    private string $username = '';
+    private string $jobFunction = '';
+    private string $summary = '';
     /**
      * @var int<1,3>|null
      */
-    private $priority;
-
+    private ?int $priority = null;
     /**
      * @var positive-int|null
      */
-    private $pool;
-
-    /**
-     * @var bool|null
-     */
-    private $simulation;
-
-    /**
-     * @var \DateTimeInterface|null
-     */
-    private $stepEscalationDate;
-
-    /**
-     * @var \DateTimeInterface|null
-     */
-    private $incidentEscalationDate;
-
+    private ?int $pool = null;
+    private ?bool $simulation = null;
+    private ?\DateTimeInterface $stepEscalationDate = null;
+    private ?\DateTimeInterface $incidentEscalationDate = null;
     /**
      * @var array<string,string|int|bool|FileInterface>
      */
-    private $processTableFields = [];
-
+    private array $processTableFields = [];
     /**
      * @var array<string,list<array<string, string|int|bool|FileInterface>>>
      */
-    private $subTables = [];
+    private array $subTables = [];
 
     public function getStep(): ?int
     {

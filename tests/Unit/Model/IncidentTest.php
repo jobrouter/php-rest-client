@@ -20,10 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class IncidentTest extends TestCase
 {
-    /**
-     * @var Incident
-     */
-    private $subject;
+    private Incident $subject;
 
     protected function setUp(): void
     {
@@ -472,7 +469,10 @@ class IncidentTest extends TestCase
 
         $this->subject->addRowToSubTable('some subtable', $row);
 
-        $expected = \array_merge($rows, [$row]);
+        $expected = [
+            ...$rows,
+            $row,
+        ];
 
         self::assertSame($expected, $this->subject->getRowsForSubTable('some subtable'));
     }

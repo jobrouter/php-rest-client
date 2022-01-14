@@ -23,10 +23,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class AuthorisationMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var string|null
-     */
-    private $token;
+    private ?string $token = null;
 
     public function setToken(string $token): void
     {

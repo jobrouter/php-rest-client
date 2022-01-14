@@ -21,10 +21,7 @@ use PHPUnit\Framework\TestCase;
 
 class DocumentTest extends TestCase
 {
-    /**
-     * @var Document
-     */
-    private $subject;
+    private Document $subject;
 
     protected function setUp(): void
     {

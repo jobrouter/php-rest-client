@@ -35,35 +35,14 @@ use Psr\Http\Message\ResponseInterface;
 final class RestClient implements ClientInterface
 {
     /**
-     * @var ClientConfiguration
      * @readonly
      */
-    private $configuration;
-
-    /**
-     * @var Psr17Factory
-     */
-    private $psr17factory;
-
-    /**
-     * @var Browser
-     */
-    private $browser;
-
-    /**
-     * @var AuthorisationMiddleware
-     */
-    private $authorisationMiddleware;
-
-    /**
-     * @var RouteContentTypeMapper
-     */
-    private $routeContentTypeMapper;
-
-    /**
-     * @var string
-     */
-    private $jobRouterVersion = '';
+    private ClientConfiguration $configuration;
+    private Psr17Factory $psr17factory;
+    private Browser $browser;
+    private AuthorisationMiddleware $authorisationMiddleware;
+    private RouteContentTypeMapper $routeContentTypeMapper;
+    private string $jobRouterVersion = '';
 
     /**
      * Creates a RestClient instance, already authenticated against the JobRouter system

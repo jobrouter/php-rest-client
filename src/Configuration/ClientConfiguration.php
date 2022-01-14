@@ -27,30 +27,11 @@ final class ClientConfiguration
     public const MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS = 0;
     public const MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS = 3600;
 
-    /**
-     * @var JobRouterSystem
-     */
-    private $jobRouterSystem;
-
-    /**
-     * @var string
-     */
-    private $username;
-
-    /**
-     * @var string
-     */
-    private $password;
-
-    /**
-     * @var int
-     */
-    private $lifetime = self::DEFAULT_TOKEN_LIFETIME_IN_SECONDS;
-
-    /**
-     * @var string
-     */
-    private $userAgentAddition = '';
+    private JobRouterSystem $jobRouterSystem;
+    private string $username;
+    private string $password;
+    private int $lifetime = self::DEFAULT_TOKEN_LIFETIME_IN_SECONDS;
+    private string $userAgentAddition = '';
 
     /**
      * Creates a configuration instance for use in RestClient

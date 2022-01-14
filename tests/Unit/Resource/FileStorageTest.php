@@ -20,10 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 class FileStorageTest extends TestCase
 {
-    /**
-     * @var FileStorage
-     */
-    private $subject;
+    private FileStorage $subject;
 
     protected function setUp(): void
     {
