@@ -11,7 +11,7 @@
     },
     "logs": {
         "badge": {
-            "branch": "master"
+            "branch": "main"
         },
         "text": "logs\/infection.log"
     },

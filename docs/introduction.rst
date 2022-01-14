@@ -23,7 +23,7 @@ and `Buzz <https://github.com/kriswallsmith/buzz>`_ as HTTP client. But that
 shouldn't bother you.
 
 The library is available under the `GNU General Public License v2.0
-<https://github.com/brotkrueml/jobrouter-client/blob/master/LICENSE.txt>`_. You
+<https://github.com/brotkrueml/jobrouter-client/blob/main/LICENSE.txt>`_. You
 can also have a look into the `source code
 <https://github.com/brotkrueml/jobrouter-client>`_ on GitHub or `file an issue
 <https://github.com/brotkrueml/jobrouter-client/issues>`_.
@@ -43,4 +43,4 @@ means for you, that
   refactorings, features or bug fixes.
 
 The changes are recorded in the `changelog
-<https://github.com/brotkrueml/jobrouter-client/blob/master/CHANGELOG.md>`_.
+<https://github.com/brotkrueml/jobrouter-client/blob/main/CHANGELOG.md>`_.
