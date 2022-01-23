@@ -30,7 +30,7 @@
         "brotkrueml/coding-standards": "~1.2.0",
         "captainhook/captainhook": "^5.10",
         "donatj/mock-webserver": "^2.4.1",
-        "ergebnis/composer-normalize": "^2.15",
+        "ergebnis/composer-normalize": "~2.23.0",
         "infection/infection": "^0.25",
         "mikey179/vfsstream": "^1.6.10",
         "php-coveralls/php-coveralls": "^2.4",
@@ -52,9 +52,9 @@
     },
     "config": {
         "allow-plugins": {
-            "phpstan/extension-installer": true,
             "ergebnis/composer-normalize": true,
-            "infection/extension-installer": true
+            "infection/extension-installer": true,
+            "phpstan/extension-installer": true
         },
         "sort-packages": true
     },
