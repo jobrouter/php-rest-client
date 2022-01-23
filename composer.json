@@ -29,7 +29,7 @@
     "require-dev": {
         "brotkrueml/coding-standards": "~1.2.0",
         "captainhook/captainhook": "^5.10",
-        "donatj/mock-webserver": "dev-php81",
+        "donatj/mock-webserver": "^2.4.1",
         "ergebnis/composer-normalize": "^2.15",
         "infection/infection": "^0.25",
         "mikey179/vfsstream": "^1.6.10",
@@ -40,12 +40,6 @@
         "rector/rector": "0.12.12",
         "symplify/phpstan-rules": "^10.0"
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/brotkrueml/mock-webserver"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Brotkrueml\\JobRouterClient\\": "src/"
