@@ -10,10 +10,11 @@
         "configDir": "tests"
     },
     "logs": {
-        "badge": {
-            "branch": "main"
+        "stryker": {
+            "badge": "main"
         },
-        "text": "logs\/infection.log"
+        "html": "logs/infection.html",
+        "text": "logs/infection.log"
     },
     "mutators": {
         "@default": true,
