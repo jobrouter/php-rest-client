@@ -1,5 +1,5 @@
 .PHONY: qa
-qa: cs tests mutation-tests phpstan rector-dry changelog
+qa: cs tests mutation phpstan rector-dry changelog
 
 # See: https://github.com/crossnox/m2r2
 .PHONY: changelog
@@ -17,8 +17,8 @@ code-coverage: vendor
 cs: vendor
 	vendor/bin/ecs check --fix
 
-.PHONY: mutation-tests
-mutation-tests: vendor
+.PHONY: mutation
+mutation: vendor
 	XDEBUG_MODE=coverage vendor/bin/infection --min-msi=95 --threads=4 --no-ansi
 
 .PHONY: phpstan

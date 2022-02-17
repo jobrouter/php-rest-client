@@ -11,7 +11,7 @@
     },
     "logs": {
         "stryker": {
-            "badge": "main"
+            "report": "main"
         },
         "html": "logs/infection.html",
         "text": "logs/infection.log"
