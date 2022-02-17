@@ -1,5 +1,13 @@
 .PHONY: qa
-qa: cs tests mutation-tests phpstan rector-dry
+qa: cs tests mutation-tests phpstan rector-dry changelog
+
+# See: https://github.com/crossnox/m2r2
+.PHONY: changelog
+changelog:
+	m2r2 CHANGELOG.md && \
+	echo ".. _changelog:" | cat - CHANGELOG.rst > /tmp/CHANGELOG.rst && \
+	mv /tmp/CHANGELOG.rst docs/changelog.rst && \
+	rm CHANGELOG.rst
 
 .PHONY: code-coverage
 code-coverage: vendor

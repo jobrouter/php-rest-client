@@ -21,6 +21,7 @@ license <https://creativecommons.org/licenses/by-nc-sa/4.0/>`_.
    installation
    usage
    api/index
+   changelog
 
 .. toctree::
    :maxdepth: 1
