@@ -1,4 +1,4 @@
-# Routes available in JobRouter 4.2-5.2
+# Routes available in JobRouter 4.2-5.2 / 2022.1
 # Format: <route> <method> <expected content type>
 /application/attachments/:workflowId/:dialogField GET -
 /application/attachments/:workflowId/:id GET -
@@ -97,7 +97,7 @@
 /configuration/settings/:settingNames PATCH application/json
 /configuration/users GET -
 /configuration/users/:username GET -
-/designer/designer/process/:processName/:version/processmessages POST application/json
-/designer/designer/process/:processName/:version/processmessages/:processMessage PATCH application/json
-/designer/designer/process/:processName/:version/processmessages/:processMessage PUT application/json
+/designer/process/:processName/:version/processmessages POST application/json
+/designer/process/:processName/:version/processmessages/:processMessage PATCH application/json
+/designer/process/:processName/:version/processmessages/:processMessage PUT application/json
 /designer/systemactions GET -

@@ -11,6 +11,12 @@ to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 `Unreleased <https://github.com/brotkrueml/jobrouter-client/compare/v1.1.2...HEAD>`_
 ----------------------------------------------------------------------------------------
 
+Added
+^^^^^
+
+
+* Compatibility with JobRouter® 2022.1
+
 Removed
 ^^^^^^^
 

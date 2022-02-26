@@ -23,18 +23,18 @@ by default.
 Version matrix
 --------------
 
-================ ========== =========
-JobRouter Client JobRouter® PHP
-================ ========== =========
-1.0              4.2 - 5.1  7.2 - 7.4
----------------- ---------- ---------
-1.1              4.2 - 5.2  7.3 - 8.1
----------------- ---------- ---------
-1.2              4.2 - 5.2  7.4 - 8.1
-================ ========== =========
+================ ================== =========
+JobRouter Client JobRouter®         PHP
+================ ================== =========
+1.0              4.2 - 5.1          7.2 - 7.4
+---------------- ------------------ ---------
+1.1              4.2 - 5.2          7.3 - 8.1
+---------------- ------------------ ---------
+1.2              4.2 - 5.2 / 2022.1 7.4 - 8.1
+================ ================== =========
 
-You can use e.g. JobRouter Client version 1.0 on JobRouter® version 5.2 at
-your own risk. However, new REST API resources may not be available.
+You can use, for example, JobRouter Client version 1.0 on JobRouter® version 5.2
+at your own risk. However, new REST API resources may not be usable.
 
 
 .. _installation.composer:

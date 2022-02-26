@@ -7,20 +7,20 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Removed
+### Added
+- Compatibility with JobRouter® 2022.1
 
+### Removed
 - Compatibility with PHP 7.3
 
 ## [1.1.2] - 2021-10-30
 
 ### Fixed
-
 - Annotation for data argument in request method of decorators
 
 ## [1.1.1] - 2021-10-24
 
 ### Fixed
-
 - Return type of FileStorage::key()
 
 ## [1.1.0] - 2021-10-02
