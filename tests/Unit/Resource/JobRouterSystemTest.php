@@ -18,7 +18,7 @@ use Brotkrueml\JobRouterClient\Exception\InvalidUrlException;
 use Brotkrueml\JobRouterClient\Resource\JobRouterSystem;
 use PHPUnit\Framework\TestCase;
 
-class JobRouterInstallationTest extends TestCase
+class JobRouterSystemTest extends TestCase
 {
     /**
      * @test
