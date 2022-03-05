@@ -35,10 +35,10 @@
         "mikey179/vfsstream": "^1.6.10",
         "php-coveralls/php-coveralls": "^2.4",
         "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan": "1.4.0",
+        "phpstan/phpstan": "1.4.8",
         "phpunit/phpunit": "^9.5",
-        "rector/rector": "0.12.12",
-        "symplify/phpstan-rules": "^10.0"
+        "rector/rector": "0.12.17",
+        "symplify/phpstan-rules": "^10.1"
     },
     "autoload": {
         "psr-4": {

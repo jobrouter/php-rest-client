@@ -2,7 +2,6 @@ includes:
     - vendor/symplify/phpstan-rules/config/array-rules.neon
     - vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
     - vendor/symplify/phpstan-rules/config/regex-rules.neon
-    - vendor/symplify/phpstan-rules/config/size-rules.neon
 
 parameters:
     phpVersion: 70400
