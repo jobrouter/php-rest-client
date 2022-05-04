@@ -1,4 +1,3 @@
-/docs/ export-ignore
 /tests/ export-ignore
 /.coveralls.yml export-ignore
 /.editorconfig export-ignore
@@ -11,6 +10,4 @@
 /phpstan.neon export-ignore
 /rector.php export-ignore
 /sonar-project.properties export-ignore
-/CHANGELOG.md export-ignore
 /Makefile export-ignore
-/README.md export-ignore
