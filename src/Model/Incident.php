@@ -264,7 +264,7 @@ final class Incident
     }
 
     /**
-     * @return list<array<string, string|int|bool|FileInterface>>
+     * @return list<array<string, string|int|bool|FileInterface>>|null
      */
     public function getRowsForSubTable(string $subTableName): ?array
     {

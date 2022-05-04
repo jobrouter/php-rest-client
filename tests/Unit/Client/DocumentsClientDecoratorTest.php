@@ -25,7 +25,7 @@ use Psr\Http\Message\ResponseInterface;
 class DocumentsClientDecoratorTest extends TestCase
 {
     /**
-     * @var ClientInterface|MockObject
+     * @var ClientInterface&MockObject
      */
     private $clientMock;
     private DocumentsClientDecorator $subject;
