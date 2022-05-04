@@ -16,6 +16,7 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
 
 use Brotkrueml\JobRouterClient\Client\RestClient;
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
+use Brotkrueml\JobRouterClient\Configuration\ClientOptions;
 use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
 use Brotkrueml\JobRouterClient\Exception\HttpException;
 use Brotkrueml\JobRouterClient\Exception\RestClientException;
@@ -326,6 +327,29 @@ class RestClientTest extends TestCase
         self::assertArrayHasKey('User-Agent', $requestHeaders);
         self::assertStringStartsWith('JobRouterClient/', $requestHeaders['User-Agent']);
         self::assertStringEndsWith(') AdditionToUserAgent', $requestHeaders['User-Agent']);
+    }
+
+    /**
+     * @test
+     */
+    public function adjustedClientOptionsAreAssignedToClientCorrectly(): void
+    {
+        $this->expectException(HttpException::class);
+        $this->expectExceptionMessageMatches('/Could not resolve proxy: not\.existing\.proxy\.server/');
+
+        $this->setResponseOfTokensPath();
+
+        $clientOptions = new ClientOptions(
+            false,
+            5,
+            0,
+            true,
+            'http://not.existing.proxy.server/'
+        );
+        $configuration = self::$configuration->withClientOptions($clientOptions);
+        $restClient = new RestClient($configuration);
+
+        $restClient->request('GET', 'some/route');
     }
 
     /**

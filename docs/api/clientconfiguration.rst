@@ -6,7 +6,7 @@
 Configuration\\ClientConfiguration
 ==================================
 
-.. php:class:: final Brotkrueml\\JobRouterClient\\Configuration\\ClientConfiguration
+.. php:class:: final Brotkrueml\JobRouterClient\Configuration\ClientConfiguration
 
    Immutable value object that represents the configuration for a RestClient.
 
@@ -45,6 +45,11 @@ Configuration\\ClientConfiguration
    .. php:method:: withLifetime($lifetime)
 
       :param int $lifetime: The lifetime in seconds. It must be between 0 and 3600.
+      :returns self: A new instance of the configuration.
+
+   .. php:method:: withClientOptions($clientOptions)
+
+      :param Brotkrueml\\JobRouterClient\\Configuration\\ClientOptions $clientOptions: The :ref:`client options <api-clientoptions>` when different from the default options.
       :returns self: A new instance of the configuration.
 
 

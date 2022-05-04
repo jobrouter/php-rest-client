@@ -65,7 +65,7 @@ Let's dig into the piece of code:
    against the JobRouter® installation.
 
 #. Line 17: As there can be errors during the initialisation - like a typo in
-   the base URL or wrong credentials embed the initialisation into a
+   the base URL or wrong credentials, so embed the initialisation into a
    :php:`try`/:php:`catch` block. The thrown exception is by default an
    implementation of the :php:`ExceptionInterface`. The exception encapsulates
    sometimes another exception, you'll get it with :php:`->getPrevious()`. Of

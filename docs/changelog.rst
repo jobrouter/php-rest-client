@@ -11,6 +11,12 @@ to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 `Unreleased <https://github.com/brotkrueml/jobrouter-client/compare/v1.2.0...HEAD>`_
 ----------------------------------------------------------------------------------------
 
+Added
+^^^^^
+
+
+* Allow to customise client options (#3)
+
 `1.2.0 <https://github.com/brotkrueml/jobrouter-client/compare/v1.1.2...v1.2.0>`_ - 2022-03-05
 --------------------------------------------------------------------------------------------------
 

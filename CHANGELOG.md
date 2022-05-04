@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Allow to customise client options (#3)
+
 ## [1.2.0] - 2022-03-05
 
 ### Added

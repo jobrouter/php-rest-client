@@ -57,7 +57,7 @@ final class RestClient implements ClientInterface
         $this->configuration = $configuration;
         $this->psr17factory = new Psr17Factory();
 
-        $client = new Curl($this->psr17factory);
+        $client = new Curl($this->psr17factory, $this->configuration->getClientOptions()->toArray());
         $this->browser = new Browser($client, $this->psr17factory);
         $this->browser->addMiddleware(new UserAgentMiddleware($this->configuration->getUserAgentAddition()));
         $this->authorisationMiddleware = new AuthorisationMiddleware();

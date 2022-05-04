@@ -32,6 +32,7 @@ final class ClientConfiguration
     private string $password;
     private int $lifetime = self::DEFAULT_TOKEN_LIFETIME_IN_SECONDS;
     private string $userAgentAddition = '';
+    private ClientOptions $clientOptions;
 
     /**
      * Creates a configuration instance for use in RestClient
@@ -51,6 +52,7 @@ final class ClientConfiguration
         $this->jobRouterSystem = new JobRouterSystem($baseUrl);
         $this->username = $username;
         $this->password = $password;
+        $this->clientOptions = new ClientOptions();
     }
 
     private function mustNotHaveEmptyUsername(string $username): void
@@ -158,5 +160,21 @@ final class ClientConfiguration
     public function getUserAgentAddition(): string
     {
         return $this->userAgentAddition;
+    }
+
+    public function withClientOptions(ClientOptions $clientOptions): self
+    {
+        $new = clone $this;
+        $new->clientOptions = $clientOptions;
+
+        return $new;
+    }
+
+    /**
+     * @internal
+     */
+    public function getClientOptions(): ClientOptions
+    {
+        return $this->clientOptions;
     }
 }

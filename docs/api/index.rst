@@ -24,6 +24,7 @@ API
    incidentsclientdecorator
    restclient
    clientconfiguration
+   clientoptions
    authenticationexception
    httpexception
    invalidconfigurationexception

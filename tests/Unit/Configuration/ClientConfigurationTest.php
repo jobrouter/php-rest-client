@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Configuration;
 
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
+use Brotkrueml\JobRouterClient\Configuration\ClientOptions;
 use Brotkrueml\JobRouterClient\Exception\InvalidConfigurationException;
 use PHPUnit\Framework\TestCase;
 
@@ -189,7 +190,7 @@ class ClientConfigurationTest extends TestCase
     /**
      * @test
      */
-    public function getUserAgentAdditionReturnsEmptyString(): void
+    public function getUserAgentAdditionReturnsEmptyStringWhenNotConfigured(): void
     {
         $actual = $this->subject->getUserAgentAddition();
 
@@ -199,12 +200,44 @@ class ClientConfigurationTest extends TestCase
     /**
      * @test
      */
-    public function setUserAgentAdditionWorksCorrectly(): void
+    public function withUserAgentAdditionSetsAdditionalUserAgentCorrectly(): void
     {
         $subject = $this->subject->withUserAgentAddition('SomeUserAgentAddition');
 
         $actual = $subject->getUserAgentAddition();
 
         self::assertSame('SomeUserAgentAddition', $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function withClientOptionsReturnsNewInstanceOfSubject(): void
+    {
+        $subject = $this->subject->withClientOptions(new ClientOptions());
+        self::assertInstanceOf(ClientConfiguration::class, $subject);
+        self::assertNotSame($subject, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function getClientOptionsReturnsDefaultOptionsWhenNotConfigured(): void
+    {
+        $expectedOptions = (new ClientOptions())->toArray();
+
+        self::assertSame($expectedOptions, $this->subject->getClientOptions()->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function withClientOptionsSetClientOptionsCorrectly(): void
+    {
+        $newClientOptions = new ClientOptions();
+
+        $newSubject = $this->subject->withClientOptions($newClientOptions);
+
+        self::assertSame($newClientOptions, $newSubject->getClientOptions());
     }
 }
