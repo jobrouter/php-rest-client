@@ -61,17 +61,6 @@ jobs:
       - name: Run unit tests
         run: |
           make tests
-  sonar-cloud:
-    name: SonarCloud Analysis
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-      - name: SonarCloud scan
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   code-quality:
     name: Code Quality
     runs-on: ubuntu-latest

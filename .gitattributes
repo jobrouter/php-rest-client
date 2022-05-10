@@ -9,5 +9,4 @@
 /infection.json export-ignore
 /phpstan.neon export-ignore
 /rector.php export-ignore
-/sonar-project.properties export-ignore
 /Makefile export-ignore
