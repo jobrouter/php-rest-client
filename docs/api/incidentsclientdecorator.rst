@@ -6,7 +6,7 @@
 Client\\IncidentsClientDecorator
 ================================
 
-.. php:class:: final Brotkrueml\\JobRouterClient\\Exception\\IncidentsClientDecorator
+.. php:class:: final class Brotkrueml\JobRouterClient\Exception\IncidentsClientDecorator
 
    :extends: :ref:`Brotkrueml\\JobRouterClient\\Client\\ClientDecorator <api-clientdecorator>`
 

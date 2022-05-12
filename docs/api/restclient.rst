@@ -6,7 +6,7 @@
 Client\\RestClient
 ==================
 
-.. php:class:: final Brotkrueml\\JobRouterClient\\Client\\RestClient
+.. php:class:: final class Brotkrueml\JobRouterClient\Client\RestClient
 
    :implements: :ref:`Brotkrueml\\JobRouterClient\\Client\\ClientInterface <api-clientinterface>`
 

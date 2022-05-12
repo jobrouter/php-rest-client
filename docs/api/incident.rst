@@ -6,7 +6,7 @@
 Model\\Incident
 ===============
 
-.. php:class:: final Brotkrueml\\JobRouterClient\\Model\\Incident
+.. php:class:: final class Brotkrueml\JobRouterClient\Model\Incident
 
    Incident model class which collects the fields for a process instance start.
 

@@ -6,7 +6,7 @@
 Client\\DocumentsClientDecorator
 ================================
 
-.. php:class:: final Brotkrueml\\JobRouterClient\\Client\\DocumentsClientDecorator
+.. php:class:: final class Brotkrueml\JobRouterClient\Client\DocumentsClientDecorator
 
    :extends: :ref:`Brotkrueml\\JobRouterClient\\Client\\ClientDecorator <api-clientdecorator>`
 

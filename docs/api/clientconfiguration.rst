@@ -6,7 +6,7 @@
 Configuration\\ClientConfiguration
 ==================================
 
-.. php:class:: final Brotkrueml\JobRouterClient\Configuration\ClientConfiguration
+.. php:class:: final class Brotkrueml\JobRouterClient\Configuration\ClientConfiguration
 
    Immutable value object that represents the configuration for a RestClient.
 

@@ -6,7 +6,7 @@
 Resource\\File
 ==============
 
-.. php:class:: final Brotkrueml\\JobRouterClient\\Resource\\File
+.. php:class:: final class Brotkrueml\JobRouterClient\Resource\File
 
    Value object that represents a file.
 

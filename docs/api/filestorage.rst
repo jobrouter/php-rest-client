@@ -6,7 +6,7 @@
 Resource\\FileStorage
 =====================
 
-.. php:class:: final Brotkrueml\\JobRouterClient\\Resource\\FileStorage
+.. php:class:: final class Brotkrueml\JobRouterClient\Resource\FileStorage
 
    A storage for :ref:`Brotkrueml\\JobRouterClient\\Resource\\File <api-file>` objects.
 

@@ -6,7 +6,7 @@
 Exception\\ExceptionInterface
 =============================
 
-.. php:class:: Brotkrueml\\JobRouterClient\\Exception\\ExceptionInterface
+.. php:class:: interface Brotkrueml\JobRouterClient\Exception\ExceptionInterface
 
    Interface for a JobRouter Client exception. Every exception thrown inside
    this library implements this interface to simplify the catching of

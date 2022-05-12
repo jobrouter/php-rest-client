@@ -6,7 +6,7 @@
 Model\\Document
 ===============
 
-.. php:class:: final Brotkrueml\\JobRouterClient\\Model\\Document
+.. php:class:: final class Brotkrueml\JobRouterClient\Model\Document
 
    Document model class which collects the data for the an archive document.
 
