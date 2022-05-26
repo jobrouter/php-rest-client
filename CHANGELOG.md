@@ -9,6 +9,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 - Allow to customise client options (#3)
+- Compatibility with JobRouter® 2022.2
 
 ## [1.2.0] - 2022-03-05
 
