@@ -54,7 +54,7 @@ jobs:
       - name: Install composer dependencies for PHP 8.1
         if: matrix.php-versions == '8.1'
         run: |
-          composer config platform.php 8.0 && composer remove --dev infection/infection --no-progress
+          composer install --no-progress
       - name: Run PHP linter
         run: |
           find . -name \*.php  ! -path "./vendor/*" -exec php -l {} \;
