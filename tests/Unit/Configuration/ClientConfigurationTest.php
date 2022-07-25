@@ -124,7 +124,7 @@ class ClientConfigurationTest extends TestCase
         $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionCode(1565710534);
 
-        $this->subject->withLifetime(ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS - 1);
+        $this->subject->withLifetime(-1);
     }
 
     /**
