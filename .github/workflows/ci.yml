@@ -94,10 +94,10 @@ jobs:
           vendor/bin/ecs check --no-progress-bar
       - name: Generate code coverage
         run: |
-          make tests
+          make code-coverage
       - name: Send code coverage report to coveralls.io
         run: |
-          make code-coverage
+          vendor/bin/php-coveralls -v
         env:
           COVERALLS_RUN_LOCALLY: 1
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
