@@ -78,7 +78,6 @@ final class RestClient implements ClientInterface
     {
         $this->authorisationMiddleware->resetToken();
 
-        // @phpstan-ignore-next-line
         $options = [
             'username' => $this->configuration->getUsername(),
             'password' => $this->configuration->getPassword(),

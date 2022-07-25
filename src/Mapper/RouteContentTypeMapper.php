@@ -24,10 +24,8 @@ final class RouteContentTypeMapper
 
     /**
      * @var array<string, array<string, string>>
-     * @phpstan-ignore-next-line
      */
     private array $routes = [
-        // @phpstan-ignore-next-line
         'DELETE' => [
             'application/dashboards/.+?' => '',
             'application/documenthub/.+?' => '',
@@ -39,13 +37,11 @@ final class RouteContentTypeMapper
             // @deprecated, only available in JobRouter 4.2
             'configuration/sessions/.+?' => '',
         ],
-        // @phpstan-ignore-next-line
         'PATCH' => [
             'application/sessions' => '',
             // @deprecated, only available in JobRouter 4.2
             'application/sessions/.+?' => '',
         ],
-        // @phpstan-ignore-next-line
         'POST' => [
             'application/documenthub' => self::CONTENT_TYPE_MULTIPART_FORMDATA,
             'application/fileuploads' => self::CONTENT_TYPE_MULTIPART_FORMDATA,
@@ -54,7 +50,6 @@ final class RouteContentTypeMapper
             'application/jobarchive/archives/.+?/documents/.+?' => self::CONTENT_TYPE_MULTIPART_FORMDATA,
             'application/jobarchive/archives/.+?/documents/.+?/clippedfiles' => self::CONTENT_TYPE_MULTIPART_FORMDATA,
         ],
-        // @phpstan-ignore-next-line
         'PUT' => [
             'application/dashboards/.+?' => '',
             'application/incidents/.+?' => self::CONTENT_TYPE_MULTIPART_FORMDATA,
