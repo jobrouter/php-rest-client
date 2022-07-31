@@ -4,7 +4,6 @@
 /.gitattributes export-ignore
 /.github export-ignore
 /.gitignore export-ignore
-/captainhook.json export-ignore
 /ecs.php export-ignore
 /infection.json export-ignore
 /phpstan.neon export-ignore
