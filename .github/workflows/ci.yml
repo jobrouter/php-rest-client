@@ -27,6 +27,7 @@ jobs:
           - '7.4'
           - '8.0'
           - '8.1'
+          - '8.2'
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -47,14 +48,15 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
-      - name: Install composer dependencies for PHP <= 8.0
-        if: matrix.php-versions <= '8.0'
+      - name: Install composer dependencies for PHP <= 8.1
+        if: matrix.php-versions <= '8.1'
         run: |
-          composer remove --dev infection/infection symplify/phpstan-rules --no-progress
-      - name: Install composer dependencies for PHP 8.1
-        if: matrix.php-versions == '8.1'
+          composer remove --dev infection/infection symplify/phpstan-rules --no-update
+          composer install --prefer-dist --no-progress --no-suggest
+      - name: Install composer dependencies for PHP 8.2
+        if: matrix.php-versions == '8.2'
         run: |
-          composer install --no-progress
+          composer install --prefer-dist --no-progress --no-suggest --ignore-platform-req=php+
       - name: Run PHP linter
         run: |
           find . -name \*.php  ! -path "./vendor/*" -exec php -l {} \;
@@ -85,7 +87,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install composer dependencies
         run: |
-          composer update --no-progress --prefer-dist --optimize-autoloader
+          composer update --prefer-dist --no-progress --no-suggest
       - name: Normalize composer.json
         run: |
           composer normalize --dry-run

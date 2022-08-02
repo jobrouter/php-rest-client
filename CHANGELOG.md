@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Compatibility with PHP 8.2
+
 ## [1.3.0] - 2022-05-26
 
 ### Added
