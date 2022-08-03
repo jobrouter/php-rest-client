@@ -25,8 +25,10 @@ class AuthorisationMiddleware implements MiddlewareInterface
 {
     private ?string $token = null;
 
-    public function setToken(string $token): void
-    {
+    public function setToken(
+        #[\SensitiveParameter]
+        string $token
+    ): void {
         $this->token = $token;
     }
 

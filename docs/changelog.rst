@@ -16,6 +16,7 @@ Added
 
 
 * Compatibility with PHP 8.2
+* Hide sensitive parameters in back traces for PHP versions >= 8.2
 
 `1.3.0 <https://github.com/brotkrueml/jobrouter-client/compare/v1.2.0...v1.3.0>`_ - 2022-05-26
 --------------------------------------------------------------------------------------------------

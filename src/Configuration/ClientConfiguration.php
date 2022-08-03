@@ -44,8 +44,12 @@ final class ClientConfiguration
      * @throws InvalidConfigurationException A given parameter is not valid
      * @throws InvalidUrlException The base URL is not valid
      */
-    public function __construct(string $baseUrl, string $username, string $password)
-    {
+    public function __construct(
+        string $baseUrl,
+        string $username,
+        #[\SensitiveParameter]
+        string $password
+    ) {
         $this->mustNotHaveEmptyUsername($username);
         $this->mustNotHaveEmptyPassword($password);
 

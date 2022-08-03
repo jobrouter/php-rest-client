@@ -9,6 +9,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 - Compatibility with PHP 8.2
+- Hide sensitive parameters in back traces for PHP versions >= 8.2
 
 ## [1.3.0] - 2022-05-26
 
