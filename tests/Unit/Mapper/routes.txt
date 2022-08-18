@@ -1,4 +1,4 @@
-# Routes available in JobRouter 4.2-5.2 / 2022.1
+# Routes available in JobRouter 4.2-5.2 / 2022.1-2022.3
 # Format: <route> <method> <expected content type>
 /application/attachments/:workflowId/:dialogField GET -
 /application/attachments/:workflowId/:id GET -
@@ -97,7 +97,41 @@
 /configuration/settings/:settingNames PATCH application/json
 /configuration/users GET -
 /configuration/users/:username GET -
+/designer/process/:processName/:version/data GET -
+/designer/process/:processName/:version/data POST multipart/form-data
+/designer/process/:processName/:version/data PUT application/json
+/designer/process/:processName/:version/data/:encodedPath DELETE -
+/designer/process/:processName/:version/data/:encodedPath GET -
+/designer/process/:processName/:version/data/:encodedPath POST multipart/form-data
+/designer/process/:processName/:version/dialogscripts GET -
+/designer/process/:processName/:version/dialogscripts POST application/json
+/designer/process/:processName/:version/dialogscripts/:dialog/:id DELETE -
+/designer/process/:processName/:version/dialogscripts/:dialog/:id GET -
+/designer/process/:processName/:version/dialogscripts/:dialog/:id POST application/json
+/designer/process/:processName/:version/functions GET -
+/designer/process/:processName/:version/functions POST multipart/form-data
+/designer/process/:processName/:version/functions PUT application/json
+/designer/process/:processName/:version/functions/:encodedPath DELETE -
+/designer/process/:processName/:version/functions/:encodedPath GET -
+/designer/process/:processName/:version/functions/:encodedPath POST multipart/form-data
+/designer/process/:processName/:version/phpfunctions GET -
+/designer/process/:processName/:version/phpfunctions POST multipart/form-data
+/designer/process/:processName/:version/phpfunctions/:id DELETE -
+/designer/process/:processName/:version/phpfunctions/:id GET -
+/designer/process/:processName/:version/phpfunctions/:id POST multipart/form-data
 /designer/process/:processName/:version/processmessages POST application/json
 /designer/process/:processName/:version/processmessages/:processMessage PATCH application/json
 /designer/process/:processName/:version/processmessages/:processMessage PUT application/json
+/designer/process/:processName/data GET -
+/designer/process/:processName/data POST multipart/form-data
+/designer/process/:processName/data PUT application/json
+/designer/process/:processName/data/:encodedPath DELETE -
+/designer/process/:processName/data/:encodedPath GET -
+/designer/process/:processName/data/:encodedPath POST multipart/form-data
+/designer/process/:processName/functions GET -
+/designer/process/:processName/functions POST multipart/form-data
+/designer/process/:processName/functions PUT application/json
+/designer/process/:processName/functions/:encodedPath DELETE -
+/designer/process/:processName/functions/:encodedPath GET -
+/designer/process/:processName/functions/:encodedPath POST multipart/form-data
 /designer/systemactions GET -

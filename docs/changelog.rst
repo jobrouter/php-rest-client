@@ -15,6 +15,7 @@ Added
 ^^^^^
 
 
+* Compatibility with JobRouter® 2022.3
 * Compatibility with PHP 8.2
 * Hide sensitive parameters in back traces for PHP versions >= 8.2
 
