@@ -37,7 +37,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: curl json mbstring
+          extensions: curl filter json
       - name: Get Composer Cache Directory
         id: composer-cache
         run: |
@@ -50,7 +50,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install composer dependencies
         run: |
-          composer remove --dev infection/infection symplify/phpstan-rules --no-update
+          composer remove infection/infection maglnet/composer-require-checker symplify/phpstan-rules --dev --no-update
           composer install --prefer-dist --no-progress --no-suggest
       - name: Run PHP linter
         run: |
@@ -69,7 +69,7 @@ jobs:
         with:
           php-version: 8.0
           coverage: xdebug
-          extensions: curl json mbstring
+          extensions: curl filter json
       - name: Get Composer Cache Directory
         id: composer-cache
         run: |
@@ -82,10 +82,13 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install composer dependencies
         run: |
-          composer update --prefer-dist --no-progress --no-suggest
+          composer update --prefer-dist --no-progress
       - name: Normalize composer.json
         run: |
           composer normalize --dry-run
+      - name: Check composer require
+        run: |
+          vendor/bin/composer-require-checker check
       - name: Check coding standards
         run: |
           vendor/bin/ecs check --no-progress-bar

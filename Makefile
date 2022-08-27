@@ -41,3 +41,4 @@ vendor: composer.json composer.lock
 	composer validate
 	composer install
 	composer normalize
+	vendor/bin/composer-require-checker check

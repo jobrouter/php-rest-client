@@ -17,8 +17,8 @@ Requirements
 The JobRouter Client |version| requires at least PHP 7.4; using the latest
 version of PHP is highly recommended.
 
-The library requires the curl and json extensions, which are normally enabled
-by default.
+The library requires the curl, filter and json extensions, which are normally
+enabled by default.
 
 Version matrix
 --------------
