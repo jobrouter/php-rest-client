@@ -54,7 +54,7 @@ jobs:
           composer install --prefer-dist --no-progress --no-suggest
       - name: Run PHP linter
         run: |
-          find . -name \*.php  ! -path "./vendor/*" -exec php -l {} \;
+          find . -type f -name '*.php' ! -path "./.Build/*" -print0 | xargs -0 -n1 -P4 php -l -n | (! grep -v "No syntax errors detected" )
       - name: Run unit tests
         run: |
           make tests
