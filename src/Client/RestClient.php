@@ -122,8 +122,6 @@ final class RestClient implements ClientInterface
      * @param array<string,mixed> $data Data for the request
      *
      * @throws HttpException
-     *
-     * @noRector \Rector\TypeDeclaration\Rector\FunctionLike\ParamTypeDeclarationRector
      */
     public function request(string $method, string $resource, $data = []): ResponseInterface
     {

@@ -9,7 +9,7 @@ use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
-use Rector\TypeDeclaration\Rector\ClassMethod\AddArrayReturnDocTypeRector;
+use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromAssignsRector;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->phpVersion(PhpVersion::PHP_74);
@@ -36,10 +36,12 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__ . '/tests',
     ]);
     $rectorConfig->importNames();
-    $rectorConfig->disableImportShortClasses();
+    $rectorConfig->importShortClasses(false);
     $rectorConfig->skip([
-        AddArrayReturnDocTypeRector::class,
         AddLiteralSeparatorToNumberRector::class,
         RemoveUnusedPromotedPropertyRector::class, // Skip until compatibility with PHP >= 8.0
+        TypedPropertyFromAssignsRector::class => [
+            __DIR__ . '/tests',
+        ],
     ]);
 };
