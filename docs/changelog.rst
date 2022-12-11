@@ -11,6 +11,13 @@ to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 `Unreleased <https://github.com/brotkrueml/jobrouter-client/compare/v1.4.0...HEAD>`_
 ----------------------------------------------------------------------------------------
 
+Removed
+^^^^^^^
+
+
+* Compatibility with PHP < 8.1
+* Compatibility with JobRouter® < 2022.1
+
 `1.4.0 <https://github.com/brotkrueml/jobrouter-client/compare/v1.3.0...v1.4.0>`_ - 2022-08-21
 --------------------------------------------------------------------------------------------------
 

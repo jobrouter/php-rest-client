@@ -32,10 +32,7 @@ final class RouteContentTypeMapper
             'application/fileuploads/.+?' => '',
             'application/jobarchive/archives/.+?/documents/.+?' => '',
             'application/sessions' => '',
-            'application/sessions/.+?' => '',
             'application/steps/.+?/lock' => '',
-            // @deprecated, only available in JobRouter 4.2
-            'configuration/sessions/.+?' => '',
             'designer/process/.+?/.+?/data/.+?' => '',
             'designer/process/.+?/.+?/dialogscripts/:dialog/:id' => '',
             'designer/process/.+?/.+?/functions/.+?' => '',
@@ -45,8 +42,6 @@ final class RouteContentTypeMapper
         ],
         'PATCH' => [
             'application/sessions' => '',
-            // @deprecated, only available in JobRouter 4.2
-            'application/sessions/.+?' => '',
         ],
         'POST' => [
             'application/documenthub' => self::CONTENT_TYPE_MULTIPART_FORMDATA,
@@ -69,8 +64,6 @@ final class RouteContentTypeMapper
         'PUT' => [
             'application/dashboards/.+?' => '',
             'application/incidents/.+?' => self::CONTENT_TYPE_MULTIPART_FORMDATA,
-            // @deprecated, only available in JobRouter 4.2
-            'application/sessions/.+?' => '',
         ],
     ];
 

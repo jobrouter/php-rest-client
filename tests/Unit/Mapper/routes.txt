@@ -1,4 +1,4 @@
-# Routes available in JobRouter 4.2-5.2 / 2022.1-2022.4
+# Routes available in JobRouter 2022.1-2022.4
 # Format: <route> <method> <expected content type>
 /application/attachments/:workflowId/:dialogField GET -
 /application/attachments/:workflowId/:id GET -
@@ -54,10 +54,6 @@
 /application/sessions PATCH -
 /application/sessions POST application/json
 /application/sessions PUT application/json
-/application/sessions/:resourceId DELETE -
-/application/sessions/:sessionId GET -
-/application/sessions/:sessionId PATCH -
-/application/sessions/:sessionId PUT -
 /application/steps POST application/json
 /application/steps/:workflowId GET -
 /application/steps/:workflowId PUT application/json
@@ -88,9 +84,6 @@
 /configuration/languages GET -
 /configuration/languages/:language/:title GET -
 /configuration/sessions GET -
-/configuration/sessions/:sessionId DELETE -
-/configuration/sessions/:sessionId GET -
-/configuration/sessions/:sessionId PUT application/json
 /configuration/settings GET -
 /configuration/settings/:settingName GET -
 /configuration/settings/:settingName PUT application/json

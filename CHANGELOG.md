@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Removed
+- Compatibility with PHP < 8.1
+- Compatibility with JobRouter® < 2022.1
+
 ## [1.4.0] - 2022-08-21
 
 ### Added
