@@ -14,11 +14,11 @@ Installation
 Requirements
 ============
 
-The JobRouter Client |version| requires at least PHP 7.4; using the latest
+The JobRouter Client |version| requires at least PHP 8.1; using the latest
 version of PHP is highly recommended.
 
-The library requires the curl, filter and json extensions, which are normally
-enabled by default.
+The library requires the curl and filter extensions, which are normally enabled
+by default.
 
 Version matrix
 --------------
@@ -26,16 +26,18 @@ Version matrix
 ================ =========================== =========
 JobRouter Client JobRouter®                  PHP
 ================ =========================== =========
-1.0              4.2 - 5.1                   7.2 - 7.4
+2.0              2022.1 - 2022.4             8.1 - 8.2
 ---------------- --------------------------- ---------
-1.1              4.2 - 5.2                   7.3 - 8.1
+1.4              4.2 - 5.2 / 2022.1 - 2022.4 7.4 - 8.2
 ---------------- --------------------------- ---------
 1.2 / 1.3        4.2 - 5.2 / 2022.1 - 2022.2 7.4 - 8.1
 ---------------- --------------------------- ---------
-1.4              4.2 - 5.2 / 2022.1 - 2022.4 7.4 - 8.2
+1.1              4.2 - 5.2                   7.3 - 8.1
+---------------- --------------------------- ---------
+1.0              4.2 - 5.1                   7.2 - 7.4
 ================ =========================== =========
 
-You can use, for example, JobRouter Client version 1.0 on JobRouter® version 5.2
+You can use, for example, JobRouter Client version 2.0 on JobRouter® version 5.2
 at your own risk. However, new REST API resources may not be usable.
 
 
