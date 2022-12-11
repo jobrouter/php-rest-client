@@ -27,7 +27,7 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 
-class RestClientTest extends TestCase
+final class RestClientTest extends TestCase
 {
     private const TEST_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqYXQiOjE1NzAyMjAwNzIsImp0aSI6IjhWMGtaSzJ5RzRxdGlhbjdGbGZTNUhPTGZaeGtZXC9obG1SVEV2VXIxVmwwPSIsImlzcyI6IkpvYlJvdXRlciIsIm5iZiI6MTU3MDIyMDA3MiwiZXhwIjoxNTcwMjIwMTAyLCJkYXRhIjp7InVzZXJuYW1lIjoicmVzdCJ9fQ.cbAyj36f9MhAwOMzlTEheRkHhuuIEOeb1Uy8i0KfUhU';
 
@@ -247,8 +247,8 @@ class RestClientTest extends TestCase
         $notConnectedPort = self::$server->getPort() - 1;
 
         $this->expectException(HttpException::class);
-        $this->expectExceptionMessage(\sprintf(
-            'Error fetching resource "http://127.0.0.1:%d/api/rest/v2/application/tokens": Failed to connect to 127.0.0.1 port %d: Connection refused',
+        $this->expectExceptionMessageMatches(\sprintf(
+            '#Error fetching resource "http://127.0.0.1:%d/api/rest/v2/application/tokens": Failed to connect to 127.0.0.1 port %d#',
             $notConnectedPort,
             $notConnectedPort
         ));
