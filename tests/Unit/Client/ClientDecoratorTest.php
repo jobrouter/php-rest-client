@@ -22,10 +22,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class ClientDecoratorTest extends TestCase
 {
-    /**
-     * @var ClientInterface&MockObject
-     */
-    private $client;
+    private ClientInterface&MockObject $client;
     private ClientDecorator $subject;
 
     protected function setUp(): void

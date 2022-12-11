@@ -18,14 +18,9 @@ use Psr\Http\Message\ResponseInterface;
 
 abstract class ClientDecorator implements ClientInterface
 {
-    /**
-     * @var ClientInterface
-     */
-    protected $client;
-
-    public function __construct(ClientInterface $client)
-    {
-        $this->client = $client;
+    public function __construct(
+        protected readonly ClientInterface $client
+    ) {
     }
 
     public function authenticate(): void

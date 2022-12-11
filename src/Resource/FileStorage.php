@@ -29,11 +29,7 @@ final class FileStorage implements \Countable, \Iterator
         return \count($this->files);
     }
 
-    /**
-     * @return FileInterface|false
-     */
-    #[\ReturnTypeWillChange]
-    public function current()
+    public function current(): FileInterface|false
     {
         return \current($this->files);
     }

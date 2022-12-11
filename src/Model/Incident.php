@@ -218,23 +218,8 @@ final class Incident
         return $this->processTableFields[$name] ?? null;
     }
 
-    /**
-     * @param string|int|bool|FileInterface $value
-     * @throws \InvalidArgumentException
-     */
-    public function setProcessTableField(string $name, $value): self
+    public function setProcessTableField(string $name, string|int|bool|FileInterface $value): self
     {
-        if (! \is_string($value) && ! \is_int($value) && ! \is_bool($value) && ! $value instanceof FileInterface) {
-            throw new \InvalidArgumentException(
-                \sprintf(
-                    'value has to be either a string, an integer, a boolean or an instance of %s, "%s" given',
-                    FileInterface::class,
-                    \get_debug_type($value)
-                ),
-                1578225863
-            );
-        }
-
         $this->processTableFields[$name] = $value;
 
         return $this;

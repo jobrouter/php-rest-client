@@ -24,7 +24,7 @@ final class JobRouterSystem implements \Stringable
 {
     private const API_ENDPOINT = 'api/rest/v2/';
 
-    private string $baseUrl;
+    private readonly string $baseUrl;
 
     public function __construct(string $baseUrl)
     {
@@ -115,7 +115,7 @@ final class JobRouterSystem implements \Stringable
         return $this->getApiUrl() . \ltrim($resource, '/');
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getBaseUrl();
     }

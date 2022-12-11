@@ -27,9 +27,9 @@ final class ClientConfiguration
     public const MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS = 0;
     public const MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS = 3600;
 
-    private JobRouterSystem $jobRouterSystem;
-    private string $username;
-    private string $password;
+    private readonly JobRouterSystem $jobRouterSystem;
+    private readonly string $username;
+    private readonly string $password;
     private int $lifetime = self::DEFAULT_TOKEN_LIFETIME_IN_SECONDS;
     private string $userAgentAddition = '';
     private ClientOptions $clientOptions;

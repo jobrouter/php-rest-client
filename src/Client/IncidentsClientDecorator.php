@@ -116,11 +116,7 @@ final class IncidentsClientDecorator extends ClientDecorator
         return $multipartProcessTableFields;
     }
 
-    /**
-     * @param bool|int|string|FileInterface $value
-     * @return string|FileInterface
-     */
-    private function prepareFieldValue($value)
+    private function prepareFieldValue(bool|int|string|FileInterface $value): string|FileInterface
     {
         if (\is_bool($value)) {
             $value = (int)$value;

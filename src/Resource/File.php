@@ -21,12 +21,14 @@ use Brotkrueml\JobRouterClient\Exception\InvalidResourceException;
  */
 final class File implements FileInterface
 {
-    private string $path;
-    private string $fileName;
-    private string $contentType;
+    private readonly string $path;
+    private readonly string $fileName;
 
-    public function __construct(string $path, string $fileName = '', string $contentType = '')
-    {
+    public function __construct(
+        string $path,
+        string $fileName = '',
+        private readonly string $contentType = ''
+    ) {
         if (! \file_exists($path)) {
             throw new InvalidResourceException(
                 \sprintf(
@@ -39,7 +41,6 @@ final class File implements FileInterface
 
         $this->path = $path;
         $this->fileName = $fileName ?: \basename($path);
-        $this->contentType = $contentType;
     }
 
     public function getPath(): string

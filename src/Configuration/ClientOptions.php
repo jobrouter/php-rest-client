@@ -20,24 +20,13 @@ namespace Brotkrueml\JobRouterClient\Configuration;
  */
 final class ClientOptions
 {
-    private bool $allowRedirects;
-    private int $maxRedirects;
-    private int $timeout;
-    private bool $verify;
-    private ?string $proxy;
-
     public function __construct(
-        bool $allowRedirects = false,
-        int $maxRedirects = 5,
-        int $timeout = 0,
-        bool $verify = true,
-        ?string $proxy = null
+        private readonly bool $allowRedirects = false,
+        private readonly int $maxRedirects = 5,
+        private readonly int $timeout = 0,
+        private readonly bool $verify = true,
+        private readonly ?string $proxy = null
     ) {
-        $this->allowRedirects = $allowRedirects;
-        $this->maxRedirects = $maxRedirects;
-        $this->timeout = $timeout;
-        $this->verify = $verify;
-        $this->proxy = $proxy;
     }
 
     /**

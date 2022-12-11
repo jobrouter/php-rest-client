@@ -34,14 +34,10 @@ use Psr\Http\Message\ResponseInterface;
  */
 final class RestClient implements ClientInterface
 {
-    /**
-     * @readonly
-     */
-    private ClientConfiguration $configuration;
-    private Psr17Factory $psr17factory;
-    private Browser $browser;
-    private AuthorisationMiddleware $authorisationMiddleware;
-    private RouteContentTypeMapper $routeContentTypeMapper;
+    private readonly Psr17Factory $psr17factory;
+    private readonly Browser $browser;
+    private readonly AuthorisationMiddleware $authorisationMiddleware;
+    private readonly RouteContentTypeMapper $routeContentTypeMapper;
     private string $jobRouterVersion = '';
 
     /**
@@ -52,9 +48,9 @@ final class RestClient implements ClientInterface
      * @throws AuthenticationException
      * @throws HttpException
      */
-    public function __construct(ClientConfiguration $configuration)
-    {
-        $this->configuration = $configuration;
+    public function __construct(
+        private readonly ClientConfiguration $configuration
+    ) {
         $this->psr17factory = new Psr17Factory();
 
         $client = new Curl($this->psr17factory, $this->configuration->getClientOptions()->toArray());
@@ -195,7 +191,7 @@ final class RestClient implements ClientInterface
     /**
      * @param string|array<string, mixed> $jsonPayload
      */
-    private function sendJson(string $method, string $resource, $jsonPayload): ResponseInterface
+    private function sendJson(string $method, string $resource, string|array $jsonPayload): ResponseInterface
     {
         $request = $this->buildRequest($method, $resource);
         $request = $request->withHeader('content-type', 'application/json');

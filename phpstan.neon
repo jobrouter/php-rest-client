@@ -4,12 +4,10 @@ includes:
     - vendor/symplify/phpstan-rules/config/regex-rules.neon
 
 parameters:
-    phpVersion: 70400
+    phpVersion: 80100
     level: 8
     paths:
         - src
-    # This can be removed once PHP 8.0 is minimum requirement and union types are added
-    treatPhpDocTypesAsCertain: false
     ignoreErrors:
         - "#^Class has a static method must so must contains \"Static\" in its name$#"
 
