@@ -21,13 +21,13 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = u'JobRouter Client'
-copyright = u'2019-2022, Chris Müller'
+copyright = u'since 2019, Chris Müller'
 author = u'Chris Müller'
 
 # The short X.Y version
-version = u'1.4'
+version = u'2.0'
 # The full version, including alpha/beta/rc tags
-release = u'1.4.0'
+release = u'2.0.0-dev'
 
 
 # -- General configuration ---------------------------------------------------
