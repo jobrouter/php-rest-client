@@ -10,6 +10,10 @@ Model\\Incident
 
    Incident model class which collects the fields for a process instance start.
 
+   .. php:method:: __construct($step)
+
+      :param int $step: The step number (must be a positive integer).
+
    .. php:method:: addRowToSubTable($subTableName, $row)
 
       Add a row to a sub table.
@@ -66,7 +70,7 @@ Model\\Incident
 
       Retrieve the step number.
 
-      :returns ?int: The step number, or :php:`null` if not defined.
+      :returns int: The step number.
 
    .. php:method:: getStepEscalationDate()
 

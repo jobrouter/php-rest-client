@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Model;
 
 use Brotkrueml\JobRouterClient\Enumerations\Priority;
+use Brotkrueml\JobRouterClient\Exception\InvalidStepNumberException;
 use Brotkrueml\JobRouterClient\Model\Incident;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use PHPUnit\Framework\TestCase;
@@ -25,15 +26,26 @@ class IncidentTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->subject = new Incident();
+        $this->subject = new Incident(1);
     }
 
     /**
      * @test
      */
-    public function stepIsNullWhenNotSet(): void
+    public function stepIsCorrectlySetOnInstantiation(): void
     {
-        self::assertNull($this->subject->getStep());
+        self::assertSame(1, $this->subject->getStep());
+    }
+
+    /**
+     * @test
+     */
+    public function exceptionIsThrownOnInstantiationWhenStepNumberIsInvalid(): void
+    {
+        $this->expectException(InvalidStepNumberException::class);
+        $this->expectExceptionMessageMatches('#"0"#');
+
+        new Incident(0);
     }
 
     /**
@@ -133,6 +145,17 @@ class IncidentTest extends TestCase
 
         self::assertSame($this->subject, $actual);
         self::assertSame(42, $this->subject->getStep());
+    }
+
+    /**
+     * @test
+     */
+    public function setStepThrowsExceptionWhenStepNumberIsInvalid(): void
+    {
+        $this->expectException(InvalidStepNumberException::class);
+        $this->expectExceptionMessageMatches('#"0"#');
+
+        $this->subject->setStep(0);
     }
 
     /**

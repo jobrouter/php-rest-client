@@ -77,93 +77,104 @@ class IncidentsClientDecoratorTest extends TestCase
     public function dataProvider(): iterable
     {
         yield 'Given step' => [
-            (new Incident())->setStep(1),
+            new Incident(42),
             [
-                'step' => '1',
+                'step' => '42',
             ],
         ];
 
         yield 'Given initiator' => [
-            (new Incident())->setInitiator('some initiator'),
+            (new Incident(1))->setInitiator('some initiator'),
             [
+                'step' => '1',
                 'initiator' => 'some initiator',
             ],
         ];
 
         yield 'Given username' => [
-            (new Incident())->setUsername('some username'),
+            (new Incident(1))->setUsername('some username'),
             [
+                'step' => '1',
                 'username' => 'some username',
             ],
         ];
 
         yield 'Given jobfunction' => [
-            (new Incident())->setJobFunction('some jobfunction'),
+            (new Incident(1))->setJobFunction('some jobfunction'),
             [
+                'step' => '1',
                 'jobfunction' => 'some jobfunction',
             ],
         ];
 
         yield 'Given summary' => [
-            (new Incident())->setSummary('some summary'),
+            (new Incident(1))->setSummary('some summary'),
             [
+                'step' => '1',
                 'summary' => 'some summary',
             ],
         ];
 
         yield 'Given priority' => [
-            (new Incident())->setPriority(Priority::High),
+            (new Incident(1))->setPriority(Priority::High),
             [
+                'step' => '1',
                 'priority' => '3',
             ],
         ];
 
         yield 'Given pool' => [
-            (new Incident())->setPool(42),
+            (new Incident(1))->setPool(42),
             [
+                'step' => '1',
                 'pool' => '42',
             ],
         ];
 
         yield 'Given simulation is true' => [
-            (new Incident())->setSimulation(true),
+            (new Incident(1))->setSimulation(true),
             [
+                'step' => '1',
                 'simulation' => '1',
             ],
         ];
 
         yield 'Given simulation is false' => [
-            (new Incident())->setSimulation(false),
-            [],
+            (new Incident(1))->setSimulation(false),
+            [
+                'step' => '1',
+            ],
         ];
 
         yield 'Given step escalation date' => [
-            (new Incident())->setStepEscalationDate(
+            (new Incident(1))->setStepEscalationDate(
                 new \DateTimeImmutable(
                     '2020-01-30 12:34:56',
                     new \DateTimeZone('America/Chicago')
                 )
             ),
             [
+                'step' => '1',
                 'step_escalation_date' => '2020-01-30T12:34:56-06:00',
             ],
         ];
 
         yield 'Given incident escalation date' => [
-            (new Incident())->setIncidentEscalationDate(
+            (new Incident(1))->setIncidentEscalationDate(
                 new \DateTimeImmutable(
                     '2020-01-31 01:23:45',
                     new \DateTimeZone('Europe/Berlin')
                 )
             ),
             [
+                'step' => '1',
                 'incident_escalation_date' => '2020-01-31T01:23:45+01:00',
             ],
         ];
 
         $fileStub = $this->createStub(FileInterface::class);
         yield 'Given process table fields' => [
-            (new Incident())
+            (new Incident(1))
                 ->setProcessTableField('some field', 'some value')
                 ->setProcessTableField('another field', 'another value')
                 ->setProcessTableField('different field', 'different value')
@@ -172,6 +183,7 @@ class IncidentsClientDecoratorTest extends TestCase
                 ->setProcessTableField('boolean false field', false)
                 ->setProcessTableField('file field', $fileStub),
             [
+                'step' => '1',
                 'processtable[fields][0][name]' => 'some field',
                 'processtable[fields][0][value]' => 'some value',
                 'processtable[fields][1][name]' => 'another field',
@@ -190,7 +202,7 @@ class IncidentsClientDecoratorTest extends TestCase
         ];
 
         yield 'Given sub table fields' => [
-            (new Incident())
+            (new Incident(1))
                 ->setRowsForSubTable(
                     'some subtable',
                     [
@@ -216,6 +228,7 @@ class IncidentsClientDecoratorTest extends TestCase
                     ]
                 ),
             [
+                'step' => '1',
                 'subtables[0][name]' => 'some subtable',
                 'subtables[0][rows][0][fields][0][name]' => 'some string',
                 'subtables[0][rows][0][fields][0][value]' => 'some value 1',
@@ -250,7 +263,7 @@ class IncidentsClientDecoratorTest extends TestCase
             ->method('request')
             ->willReturn($responseStub);
 
-        $actual = $this->subject->request('GET', 'some/route', new Incident());
+        $actual = $this->subject->request('GET', 'some/route', new Incident(1));
 
         self::assertInstanceOf(ResponseInterface::class, $actual);
     }

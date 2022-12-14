@@ -15,14 +15,12 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Model;
 
 use Brotkrueml\JobRouterClient\Enumerations\Priority;
+use Brotkrueml\JobRouterClient\Exception\InvalidStepNumberException;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
 
 final class Incident
 {
-    /**
-     * @var positive-int|null
-     */
-    private ?int $step = null;
+    private int $step;
     private string $initiator = '';
     private string $username = '';
     private string $jobFunction = '';
@@ -44,16 +42,22 @@ final class Incident
      */
     private array $subTables = [];
 
-    public function getStep(): ?int
+    public function __construct(int $step)
+    {
+        $this->setStep($step);
+    }
+
+    public function getStep(): int
     {
         return $this->step;
     }
 
-    /**
-     * @param positive-int $step
-     */
     public function setStep(int $step): self
     {
+        if ($step <= 0) {
+            throw InvalidStepNumberException::forStepNumber($step);
+        }
+
         $this->step = $step;
 
         return $this;

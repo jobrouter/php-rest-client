@@ -9,6 +9,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 - Incident class accepts as a priority only a Priority enum
+- Incident class must be instantiated with a step number
+- Step number in Incident class must be an integer, null is not allowed anymore
 
 ### Removed
 - Compatibility with PHP < 8.1
