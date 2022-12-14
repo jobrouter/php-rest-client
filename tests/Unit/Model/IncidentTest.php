@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Model;
 
+use Brotkrueml\JobRouterClient\Enumerations\Priority;
 use Brotkrueml\JobRouterClient\Model\Incident;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use PHPUnit\Framework\TestCase;
@@ -70,9 +71,9 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
-    public function priorityIsNullWhenNotSet(): void
+    public function priorityIsNormalWhenNotExplicitlySet(): void
     {
-        self::assertNull($this->subject->getPriority());
+        self::assertSame(Priority::Normal, $this->subject->getPriority());
     }
 
     /**
@@ -183,48 +184,10 @@ class IncidentTest extends TestCase
      */
     public function setAndGetPriorityAreCorrectImplemented(): void
     {
-        $actual = $this->subject->setPriority(2);
+        $actual = $this->subject->setPriority(Priority::High);
 
         self::assertSame($this->subject, $actual);
-        self::assertSame(2, $this->subject->getPriority());
-    }
-
-    /**
-     * @test
-     */
-    public function setPriorityAcceptsOnlyAllowedRange(): void
-    {
-        $exception = null;
-        try {
-            $this->subject->setPriority(1);
-            $this->subject->setPriority(2);
-            $this->subject->setPriority(3);
-        } catch (\InvalidArgumentException $exception) {
-        }
-
-        self::assertNull($exception, 'Unexpected InvalidArgumentException');
-    }
-
-    /**
-     * @test
-     */
-    public function setPriorityThrowsExceptionWhenTooLow(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionCode(1578225130);
-
-        $this->subject->setPriority(0);
-    }
-
-    /**
-     * @test
-     */
-    public function setPriorityThrowsExceptionWhenTooHigh(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionCode(1578225130);
-
-        $this->subject->setPriority(4);
+        self::assertSame(Priority::High, $this->subject->getPriority());
     }
 
     /**

@@ -10,18 +10,6 @@ Model\\Incident
 
    Incident model class which collects the fields for a process instance start.
 
-   .. php:const:: const PRIORITY_HIGH = 3
-
-      The value of the high priority.
-
-   .. php:const:: const PRIORITY_LOW = 1
-
-      The value of the low priority.
-
-   .. php:const:: const PRIORITY_NORMAL = 2
-
-      The value of the default priority.
-
    .. php:method:: addRowToSubTable($subTableName, $row)
 
       Add a row to a sub table.
@@ -56,9 +44,9 @@ Model\\Incident
 
    .. php:method:: getPriority()
 
-      Retrieve the priority, or :php:`null` if not defined.
+      Retrieve the priority, see :ref:`api-priority`.
 
-      :returns ?int: The priority.
+      :returns \\Brotkrueml\\JobRouterClient\\Enumerations\\Priority: The priority.
 
    .. php:method:: getProcessTableField($name)
 
@@ -134,10 +122,9 @@ Model\\Incident
 
    .. php:method:: setPriority($priority)
 
-      Sets the priority (values 1-3 are allowed, you can use the PRIORITY
-      constants defined in this class).
+      Sets the priority, see :ref:`api-priority`
 
-      :param int $priority: The priority.
+      :param \\Brotkrueml\\JobRouterClient\\Enumerations\\Priority $priority: The priority.
       :returns self: An instance of itself.
 
    .. php:method:: setProcessTableField($name, $value)

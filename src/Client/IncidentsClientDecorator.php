@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Client;
 
+use Brotkrueml\JobRouterClient\Enumerations\Priority;
 use Brotkrueml\JobRouterClient\Exception\HttpException;
 use Brotkrueml\JobRouterClient\Model\Incident;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
@@ -66,8 +67,8 @@ final class IncidentsClientDecorator extends ClientDecorator
             $multipart['summary'] = $incident->getSummary();
         }
 
-        if (\is_int($incident->getPriority())) {
-            $multipart['priority'] = (string)$incident->getPriority();
+        if ($incident->getPriority() !== Priority::Normal) {
+            $multipart['priority'] = (string)$incident->getPriority()->value;
         }
 
         if (\is_int($incident->getPool())) {

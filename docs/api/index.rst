@@ -35,3 +35,9 @@ API
    incident
    file
    filestorage
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Enumerations
+
+   priority

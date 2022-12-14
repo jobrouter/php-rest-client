@@ -16,6 +16,7 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
 
 use Brotkrueml\JobRouterClient\Client\ClientInterface;
 use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
+use Brotkrueml\JobRouterClient\Enumerations\Priority;
 use Brotkrueml\JobRouterClient\Model\Incident;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -111,9 +112,9 @@ class IncidentsClientDecoratorTest extends TestCase
         ];
 
         yield 'Given priority' => [
-            (new Incident())->setPriority(2),
+            (new Incident())->setPriority(Priority::High),
             [
-                'priority' => '2',
+                'priority' => '3',
             ],
         ];
 

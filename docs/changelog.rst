@@ -11,6 +11,12 @@ to `Semantic Versioning <https://semver.org/spec/v2.0.0.html>`_.
 `Unreleased <https://github.com/brotkrueml/jobrouter-client/compare/v1.4.0...HEAD>`_
 ----------------------------------------------------------------------------------------
 
+Changed
+^^^^^^^
+
+
+* Incident class accepts as a priority only a Priority enum
+
 Removed
 ^^^^^^^
 

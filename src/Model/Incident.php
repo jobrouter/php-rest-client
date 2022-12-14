@@ -14,14 +14,11 @@ declare(strict_types=1);
 
 namespace Brotkrueml\JobRouterClient\Model;
 
+use Brotkrueml\JobRouterClient\Enumerations\Priority;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
 
 final class Incident
 {
-    public const PRIORITY_LOW = 1;
-    public const PRIORITY_NORMAL = 2;
-    public const PRIORITY_HIGH = 3;
-
     /**
      * @var positive-int|null
      */
@@ -30,10 +27,7 @@ final class Incident
     private string $username = '';
     private string $jobFunction = '';
     private string $summary = '';
-    /**
-     * @var int<1,3>|null
-     */
-    private ?int $priority = null;
+    private Priority $priority = Priority::Normal;
     /**
      * @var positive-int|null
      */
@@ -113,27 +107,13 @@ final class Incident
         return $this;
     }
 
-    public function getPriority(): ?int
+    public function getPriority(): Priority
     {
         return $this->priority;
     }
 
-    /**
-     * @param int<1,3> $priority
-     * @throws \InvalidArgumentException
-     */
-    public function setPriority(int $priority): self
+    public function setPriority(Priority $priority): self
     {
-        if ($priority < self::PRIORITY_LOW || $priority > self::PRIORITY_HIGH) { // @phpstan-ignore-line
-            throw new \InvalidArgumentException(
-                \sprintf(
-                    'proprity has to be an integer between 1 and 3, "%d" given',
-                    $priority
-                ),
-                1578225130
-            );
-        }
-
         $this->priority = $priority;
 
         return $this;

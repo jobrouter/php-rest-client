@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+- Incident class accepts as a priority only a Priority enum
+
 ### Removed
 - Compatibility with PHP < 8.1
 - Compatibility with JobRouter® < 2022.1
