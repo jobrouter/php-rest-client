@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Model;
 
 use Brotkrueml\JobRouterClient\Enumerations\Priority;
+use Brotkrueml\JobRouterClient\Exception\InvalidPoolNumberException;
 use Brotkrueml\JobRouterClient\Exception\InvalidStepNumberException;
 use Brotkrueml\JobRouterClient\Model\Incident;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
@@ -91,9 +92,9 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
-    public function poolIsNullWhenNotSet(): void
+    public function poolIs1WhenNotExplicitlySet(): void
     {
-        self::assertNull($this->subject->getPool());
+        self::assertSame(1, $this->subject->getPool());
     }
 
     /**
@@ -229,8 +230,8 @@ class IncidentTest extends TestCase
      */
     public function setPoolThrowsExceptionWhenZero(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionCode(1578228017);
+        $this->expectException(InvalidPoolNumberException::class);
+        $this->expectExceptionMessageMatches('#"0"#');
 
         $this->subject->setPool(0);
     }

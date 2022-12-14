@@ -45,11 +45,9 @@ final class IncidentsClientDecorator extends ClientDecorator
      */
     private function buildMultipart(Incident $incident): array
     {
-        $multipart = [];
-
-        if ($incident->getStep() > 0) {
-            $multipart['step'] = (string)$incident->getStep();
-        }
+        $multipart = [
+            'step' => (string)$incident->getStep(),
+        ];
 
         if ($incident->getInitiator() !== '') {
             $multipart['initiator'] = $incident->getInitiator();
@@ -71,7 +69,7 @@ final class IncidentsClientDecorator extends ClientDecorator
             $multipart['priority'] = (string)$incident->getPriority()->value;
         }
 
-        if (\is_int($incident->getPool())) {
+        if ($incident->getPool() > 1) {
             $multipart['pool'] = (string)$incident->getPool();
         }
 

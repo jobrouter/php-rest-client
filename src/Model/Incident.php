@@ -15,21 +15,21 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Model;
 
 use Brotkrueml\JobRouterClient\Enumerations\Priority;
+use Brotkrueml\JobRouterClient\Exception\InvalidPoolNumberException;
 use Brotkrueml\JobRouterClient\Exception\InvalidStepNumberException;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
 
 final class Incident
 {
+    private const DEFAULT_POOL = 1;
+
     private int $step;
     private string $initiator = '';
     private string $username = '';
     private string $jobFunction = '';
     private string $summary = '';
     private Priority $priority = Priority::Normal;
-    /**
-     * @var positive-int|null
-     */
-    private ?int $pool = null;
+    private int $pool = self::DEFAULT_POOL;
     private ?bool $simulation = null;
     private ?\DateTimeInterface $stepEscalationDate = null;
     private ?\DateTimeInterface $incidentEscalationDate = null;
@@ -52,6 +52,9 @@ final class Incident
         return $this->step;
     }
 
+    /**
+     * @throws InvalidStepNumberException
+     */
     public function setStep(int $step): self
     {
         if ($step <= 0) {
@@ -123,25 +126,18 @@ final class Incident
         return $this;
     }
 
-    public function getPool(): ?int
+    public function getPool(): int
     {
         return $this->pool;
     }
 
     /**
-     * @param positive-int $pool
-     * @throws \InvalidArgumentException
+     * @throws InvalidPoolNumberException
      */
     public function setPool(int $pool): self
     {
-        if ($pool < 1) { // @phpstan-ignore-line
-            throw new \InvalidArgumentException(
-                \sprintf(
-                    'pool must be a positive integer, "%d" given',
-                    $pool
-                ),
-                1578228017
-            );
+        if ($pool < 1) {
+            throw InvalidPoolNumberException::forPoolNumber($pool);
         }
 
         $this->pool = $pool;

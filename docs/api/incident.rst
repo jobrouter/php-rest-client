@@ -42,9 +42,9 @@ Model\\Incident
 
    .. php:method:: getPool()
 
-      Retrieve the pool number, or :php:`null` if not defined.
+      Retrieve the pool number.
 
-      :returns ?int: The pool number.
+      :returns int: The pool number.
 
    .. php:method:: getPriority()
 
