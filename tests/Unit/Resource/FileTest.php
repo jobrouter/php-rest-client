@@ -17,30 +17,23 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Resource;
 use Brotkrueml\JobRouterClient\Exception\InvalidResourceException;
 use Brotkrueml\JobRouterClient\Resource\File;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
-use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 
 class FileTest extends TestCase
 {
-    private vfsStreamDirectory $root;
-
-    protected function setUp(): void
-    {
-        $this->root = vfsStream::setup();
-    }
-
     /**
      * @test
      */
     public function classImplementsFileInterface(): void
     {
-        $path = $this->root->url() . '/some-file.txt';
+        $path = \tempnam('/tmp', 'jrc_');
         \touch($path);
 
         $subject = new File($path);
 
         self::assertInstanceOf(FileInterface::class, $subject);
+
+        \unlink($path);
     }
 
     /**
@@ -48,14 +41,16 @@ class FileTest extends TestCase
      */
     public function constructWithOnlyPathThenGettersAreImplementedCorrectly(): void
     {
-        $path = $this->root->url() . '/some-file.txt';
+        $path = \tempnam('/tmp', 'jrc_');
         \touch($path);
 
         $subject = new File($path);
 
         self::assertSame($path, $subject->getPath());
-        self::assertSame('some-file.txt', $subject->getFileName());
+        self::assertSame(\basename($path), $subject->getFileName());
         self::assertSame('', $subject->getContentType());
+
+        \unlink($path);
     }
 
     /**
@@ -63,7 +58,7 @@ class FileTest extends TestCase
      */
     public function constructWithAllArgumentsThenGettersAreImplementedCorrectly(): void
     {
-        $path = $this->root->url() . '/some-file.txt';
+        $path = \tempnam('/tmp', 'jrc_');
         \touch($path);
 
         $subject = new File($path, 'other-filename.txt', 'foo/bar');
@@ -71,6 +66,8 @@ class FileTest extends TestCase
         self::assertSame($path, $subject->getPath());
         self::assertSame('other-filename.txt', $subject->getFileName());
         self::assertSame('foo/bar', $subject->getContentType());
+
+        \unlink($path);
     }
 
     /**
@@ -80,9 +77,9 @@ class FileTest extends TestCase
     {
         $this->expectException(InvalidResourceException::class);
         $this->expectExceptionCode(1582273757);
-        $this->expectExceptionMessage('The file "vfs://root/not-existing-file.txt" does not exist or is not readable');
+        $this->expectExceptionMessage('The file "/tmp/not-existing-file.txt" does not exist or is not readable');
 
-        new File($this->root->url() . '/not-existing-file.txt');
+        new File('/tmp/not-existing-file.txt');
     }
 
     /**
@@ -90,18 +87,20 @@ class FileTest extends TestCase
      */
     public function constructWithOnlyPathThenToArrayIsImplementedCorrectly(): void
     {
-        $path = $this->root->url() . '/some-file.txt';
+        $path = \tempnam('/tmp', 'jrc_');
         \touch($path);
 
         $subject = new File($path);
 
         self::assertSame(
             [
-                'path' => 'vfs://root/some-file.txt',
-                'filename' => 'some-file.txt',
+                'path' => $path,
+                'filename' => \basename($path),
             ],
             $subject->toArray()
         );
+
+        \unlink($path);
     }
 
     /**
@@ -109,18 +108,20 @@ class FileTest extends TestCase
      */
     public function constructWithAllArgumentsThenToArrayIsImplementedCorrectly(): void
     {
-        $path = $this->root->url() . '/some-file.txt';
+        $path = \tempnam('/tmp', 'jrc_');
         \touch($path);
 
         $subject = new File($path, 'other-filename.txt', 'foo/bar');
 
         self::assertSame(
             [
-                'path' => 'vfs://root/some-file.txt',
+                'path' => $path,
                 'filename' => 'other-filename.txt',
                 'contentType' => 'foo/bar',
             ],
             $subject->toArray()
         );
+
+        \unlink($path);
     }
 }

@@ -23,8 +23,6 @@ use Brotkrueml\JobRouterClient\Exception\RestClientException;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use donatj\MockWebServer\MockWebServer;
 use donatj\MockWebServer\Response;
-use org\bovigo\vfs\vfsStream;
-use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 
 final class RestClientTest extends TestCase
@@ -33,7 +31,6 @@ final class RestClientTest extends TestCase
 
     private static ClientConfiguration $configuration;
     private static MockWebServer $server;
-    private vfsStreamDirectory $root;
 
     public static function setUpBeforeClass(): void
     {
@@ -50,11 +47,6 @@ final class RestClientTest extends TestCase
     public static function tearDownAfterClass(): void
     {
         self::$server->stop();
-    }
-
-    protected function setUp(): void
-    {
-        $this->root = vfsStream::setup();
     }
 
     /**
@@ -431,7 +423,7 @@ final class RestClientTest extends TestCase
 
         $restClient = new RestClient(self::$configuration);
 
-        $filePath = $this->root->url() . '/some-file.txt';
+        $filePath = \tempnam('/tmp', 'jrc_');
         \file_put_contents($filePath, 'foo');
 
         $formData = [
@@ -475,6 +467,8 @@ final class RestClientTest extends TestCase
         $files = $lastRequest->getFiles();
         self::assertArrayHasKey('processtable', $files);
         self::assertSame('bar.txt', $files['processtable']['name']['fields'][1]['value']);
+
+        \unlink($filePath);
     }
 
     /**
@@ -527,7 +521,7 @@ final class RestClientTest extends TestCase
 
         $restClient = new RestClient(self::$configuration);
 
-        $filePath = $this->root->url() . '/some-file.txt';
+        $filePath = \tempnam('/tmp', 'jrc_');
         \file_put_contents($filePath, 'foo');
 
         $fileMock = $this->createMock(FileInterface::class);
@@ -563,5 +557,7 @@ final class RestClientTest extends TestCase
         $files = $lastRequest->getFiles();
         self::assertArrayHasKey('processtable', $files);
         self::assertSame('foo.txt', $files['processtable']['name']['fields'][0]['value']);
+
+        \unlink($filePath);
     }
 }
