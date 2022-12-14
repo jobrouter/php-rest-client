@@ -8,6 +8,7 @@ use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
+use Rector\TypeDeclaration\Rector\FunctionLike\AddReturnTypeDeclarationFromYieldsRector;
 use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromAssignsRector;
 
 return static function (RectorConfig $rectorConfig): void {
@@ -38,6 +39,9 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->importShortClasses(false);
     $rectorConfig->skip([
         AddLiteralSeparatorToNumberRector::class,
+        AddReturnTypeDeclarationFromYieldsRector::class => [
+            __DIR__ . '/tests',
+        ],
         TypedPropertyFromAssignsRector::class => [
             __DIR__ . '/tests',
         ],

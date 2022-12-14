@@ -39,7 +39,7 @@
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "1.9.3",
         "phpunit/phpunit": "^9.5.23",
-        "rector/rector": "0.14.8",
+        "rector/rector": "0.15.1",
         "symplify/phpstan-rules": "^11.0"
     },
     "autoload": {
