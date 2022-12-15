@@ -100,9 +100,9 @@ class IncidentTest extends TestCase
     /**
      * @test
      */
-    public function simulationIsNullWhenNotSet(): void
+    public function simulationIsFalseOnInstantiation(): void
     {
-        self::assertNull($this->subject->isSimulation());
+        self::assertFalse($this->subject->isSimulation());
     }
 
     /**

@@ -26,6 +26,8 @@ API changes
       was an integer or null.
    -  The :php:`->getPool()` method now returns always an integer, previously it
       was an integer or null.
+   -  The :php:`->isSimulation()` method now returns always a boolean,
+      previously it was a boolean or null.
    -  The :php:`->setPriority()` method accepts only a :ref:`Priority
       <api-priority>` enum, previously it was an integer or null.
    -  The :php:`->getPriority()` method returns a :ref:`Priority

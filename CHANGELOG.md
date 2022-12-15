@@ -12,6 +12,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Incident class must be instantiated with a step number
 - Step number in Incident class is always an integer
 - Pool number in Incident class is always an integer
+- Simulation in Incident class is always a boolean
 
 ### Removed
 - Compatibility with PHP < 8.1

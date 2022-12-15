@@ -30,7 +30,7 @@ final class Incident
     private string $summary = '';
     private Priority $priority = Priority::Normal;
     private int $pool = self::DEFAULT_POOL;
-    private ?bool $simulation = null;
+    private bool $simulation = false;
     private ?\DateTimeInterface $stepEscalationDate = null;
     private ?\DateTimeInterface $incidentEscalationDate = null;
     /**
@@ -145,7 +145,7 @@ final class Incident
         return $this;
     }
 
-    public function isSimulation(): ?bool
+    public function isSimulation(): bool
     {
         return $this->simulation;
     }

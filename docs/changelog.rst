@@ -17,8 +17,9 @@ Changed
 
 * Incident class accepts as a priority only a Priority enum
 * Incident class must be instantiated with a step number
-* Step number in Incident class is now always an integer
-* Pool number in Incident class is now always an integer
+* Step number in Incident class is always an integer
+* Pool number in Incident class is always an integer
+* Simulation in Incident class is always a boolean
 
 Removed
 ^^^^^^^
