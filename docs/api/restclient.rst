@@ -23,6 +23,8 @@ Client\\RestClient
 
       Authenticate against the configured JobRouter system.
 
+      :returns Brotkrueml\\JobRouterClient\\Client\\RestClient: An instance of the class itself.
+
    .. php:method:: request($method, $resource, $data = [])
 
       :param string $method: The HTTP method (e.g. ``GET``, ``POST``, ``PUT``, ``PATCH``, ``DELETE``)

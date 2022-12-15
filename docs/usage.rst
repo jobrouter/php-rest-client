@@ -15,7 +15,7 @@ Usage
 Initialisation of the JobRouter Client
 ======================================
 
-::
+.. code-block:: php
 
    <?php
    use Brotkrueml\JobRouterClient\Client\RestClient;
@@ -31,8 +31,9 @@ Initialisation of the JobRouter Client
    );
    $configuration = $configuration->withLifetime(30);
 
+   $client = new RestClient($configuration);
    try {
-      $client = new RestClient($configuration);
+      $client->authenticate();
    } catch (ExceptionInterface $e) {
       echo $e->getCode() . "\n";
       echo $e->getMessage() . "\n";
@@ -51,7 +52,7 @@ Let's dig into the piece of code:
 #. Line 6: Require the autoloading file, so the classes are found and can be
    used.
 
-#. Lines 8-11: Define a :ref:`ClientConfiguration <api-clientconfiguration>`
+#. Lines 8-12: Define a :ref:`ClientConfiguration <api-clientconfiguration>`
    object with the base URL, the username and the password for your JobRouter®
    installation.
 
@@ -60,34 +61,28 @@ Let's dig into the piece of code:
    calling the method. As the configuration object is immutable, a new instance
    of the configuration is returned.
 
-#. Line 16: Now instantiate the :ref:`RestClient <api-restclient>` with the
-   configuration object. During the instantiation the client will authenticate
-   against the JobRouter® installation.
+#. Line 15: Now instantiate the :ref:`RestClient <api-restclient>` with the
+   configuration object.
 
-#. Line 17: As there can be errors during the initialisation - like a typo in
-   the base URL or wrong credentials, so embed the initialisation into a
-   :php:`try`/:php:`catch` block. The thrown exception is by default an
-   implementation of the :php:`ExceptionInterface`. The exception encapsulates
-   sometimes another exception, you'll get it with :php:`->getPrevious()`. Of
-   course, you can also catch by :php:`\Exception` or :php:`\Throwable`.
+#. Line 17: To authenticate against the configured JobRouter® installation the
+   :php:`authenticate()` method is called. As there can be errors during the
+   authentication like a typo in the base URL or wrong credentials, embed the
+   authenticate call into a :php:`try`/:php:`catch` block. The thrown exception
+   is by default an implementation of the :php:`ExceptionInterface`. The
+   exception encapsulates sometimes another exception, you will get it with
+   calling :php:`->getPrevious()` on the exception. Of course, you can also
+   catch by :php:`\Exception` or :php:`\Throwable`.
 
 After the initialisation part you can now request the needed data or store some
 data. You can make as many requests as you want, but keep in mind: When the
 lifetime of the token is exceeded you will get an authentication error.
-For now, you have to handle it on your own. If this happens, you can call
-at any time the :php:`authenticate()` method of the rest client::
-
-   <?php
-   // The JobRouter Client is already initialised
-
-   $client->authenticate();
-
-Call this also in advance to omit a timeout.
+If this happens, you can call at any time the :php:`authenticate()` method of
+the REST client again. You can call this also in advance to omit a timeout.
 
 
 .. _usage.get-jobrouter-version:
 
-Retrieve the JobRouter Version
+Retrieve the JobRouter version
 ==============================
 
 Sometimes it can be handy to know the JobRouter® version. The version number
@@ -97,6 +92,11 @@ can be retrieved with a :php:`RestClient` method::
    // The JobRouter Client is already initialised
 
    $client->getJobRouterVersion();
+
+.. note::
+   The version is only available after a successful authentication. Directly
+   after instantiation of the REST client the returned version is an empty
+   string.
 
 
 .. _usage.sending-requests:

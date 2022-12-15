@@ -15,6 +15,29 @@ now:
 -  PHP ≥ 8.1
 -  JobRouter® ≥ 2022.1
 
+
+REST client
+-----------
+
+On instantiation of the :ref:`RestClient <api-restclient>` class no
+authentication is performed automatically anymore. Call the
+:php:`->authenticate()` method manually before sending a request to the REST
+API.
+
+The :php:`->authenticate()` method now returns an instance to the class itself.
+This way, one can use a fluent interface:
+
+.. code-block:: php
+
+   $restClient = (new RestClient($configuration))->authenticate();
+
+   // or:
+
+   (new RestClient($configuration))
+      ->authenticate()
+      ->request($method, $resource);
+
+
 API changes
 -----------
 

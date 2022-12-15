@@ -45,7 +45,6 @@ final class RestClient implements ClientInterface
      *
      * @param ClientConfiguration $configuration The configuration
      *
-     * @throws AuthenticationException
      * @throws HttpException
      */
     public function __construct(
@@ -60,8 +59,6 @@ final class RestClient implements ClientInterface
         $this->browser->addMiddleware($this->authorisationMiddleware);
 
         $this->routeContentTypeMapper = new RouteContentTypeMapper();
-
-        $this->authenticate();
     }
 
     /**
@@ -70,7 +67,7 @@ final class RestClient implements ClientInterface
      * @throws AuthenticationException
      * @throws HttpException
      */
-    public function authenticate(): void
+    public function authenticate(): self
     {
         $this->authorisationMiddleware->resetToken();
 
@@ -103,6 +100,8 @@ final class RestClient implements ClientInterface
         }
 
         $this->authorisationMiddleware->setToken($content['tokens'][0]);
+
+        return $this;
     }
 
     private function detectJobRouterVersionFromResponse(ResponseInterface $response): void
@@ -217,6 +216,8 @@ final class RestClient implements ClientInterface
 
     /**
      * Get the version number of the JobRouter installation
+     * The version is available after calling the authenticate method,
+     * directly after instantiation an empty string is returned.
      */
     public function getJobRouterVersion(): string
     {

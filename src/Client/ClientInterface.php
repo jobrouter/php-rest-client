@@ -18,7 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 
 interface ClientInterface
 {
-    public function authenticate(): void;
+    public function authenticate(): self;
 
     /**
      * @param array<string,mixed>|ClientDecorator $data

@@ -23,9 +23,11 @@ abstract class ClientDecorator implements ClientInterface
     ) {
     }
 
-    public function authenticate(): void
+    public function authenticate(): self
     {
         $this->client->authenticate();
+
+        return $this;
     }
 
     public function request(string $method, string $resource, $data = []): ResponseInterface

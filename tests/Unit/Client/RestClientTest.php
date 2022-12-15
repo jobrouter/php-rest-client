@@ -57,6 +57,7 @@ final class RestClientTest extends TestCase
         $this->setResponseOfTokensPath();
 
         $restClient = new RestClient(self::$configuration);
+        $restClient->authenticate();
 
         self::assertInstanceOf(RestClient::class, $restClient);
 
@@ -98,7 +99,7 @@ final class RestClientTest extends TestCase
             new Response('not found', [], 404)
         );
 
-        new RestClient(self::$configuration);
+        (new RestClient(self::$configuration))->authenticate();
     }
 
     /**
@@ -118,7 +119,7 @@ final class RestClientTest extends TestCase
             new Response('invalid', [], 401)
         );
 
-        new RestClient(self::$configuration);
+        (new RestClient(self::$configuration))->authenticate();
     }
 
     /**
@@ -135,7 +136,20 @@ final class RestClientTest extends TestCase
             new Response('invalid', [], 200)
         );
 
-        new RestClient(self::$configuration);
+        (new RestClient(self::$configuration))->authenticate();
+    }
+
+    /**
+     * @test
+     */
+    public function authenticateReturnsObjectToRestClient(): void
+    {
+        $this->setResponseOfTokensPath();
+        $restClient = new RestClient(self::$configuration);
+
+        $actual = $restClient->authenticate();
+
+        self::assertSame($restClient, $actual);
     }
 
     /**
@@ -146,6 +160,7 @@ final class RestClientTest extends TestCase
         $this->setResponseOfTokensPath();
 
         $restClient = new RestClient(self::$configuration);
+        $restClient->authenticate();
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/some/route',
@@ -170,6 +185,7 @@ final class RestClientTest extends TestCase
         $this->setResponseOfTokensPath();
 
         $restClient = new RestClient(self::$configuration);
+        $restClient->authenticate();
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/some/route',
@@ -185,9 +201,19 @@ final class RestClientTest extends TestCase
     /**
      * @test
      */
+    public function jobRouterVersionBeforeAuthenticationIsEmptyString(): void
+    {
+        $restClient = new RestClient(self::$configuration);
+
+        self::assertSame('', $restClient->getJobRouterVersion());
+    }
+
+    /**
+     * @test
+     */
     public function jobRouterVersionIsDetected(): void
     {
-        $version = '5.0.9';
+        $version = '2022.4.0';
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/application/tokens',
@@ -201,6 +227,7 @@ final class RestClientTest extends TestCase
         );
 
         $restClient = new RestClient(self::$configuration);
+        $restClient->authenticate();
 
         self::assertSame($version, $restClient->getJobRouterVersion());
     }
@@ -228,7 +255,7 @@ final class RestClientTest extends TestCase
             )
         );
 
-        new RestClient(self::$configuration);
+        (new RestClient(self::$configuration))->authenticate();
     }
 
     /**
@@ -251,7 +278,7 @@ final class RestClientTest extends TestCase
             'fake_password'
         );
 
-        new RestClient($configuration);
+        (new RestClient($configuration))->authenticate();
     }
 
     /**
@@ -273,7 +300,7 @@ final class RestClientTest extends TestCase
             )
         );
 
-        new RestClient(self::$configuration);
+        (new RestClient(self::$configuration))->authenticate();
     }
 
     /**
@@ -284,6 +311,7 @@ final class RestClientTest extends TestCase
         $this->setResponseOfTokensPath();
 
         $restClient = new RestClient(self::$configuration);
+        $restClient->authenticate();
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/some/route',
@@ -307,6 +335,7 @@ final class RestClientTest extends TestCase
 
         $configuration = self::$configuration->withUserAgentAddition('AdditionToUserAgent');
         $restClient = new RestClient($configuration);
+        $restClient->authenticate();
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/some/route',
@@ -340,6 +369,7 @@ final class RestClientTest extends TestCase
         );
         $configuration = self::$configuration->withClientOptions($clientOptions);
         $restClient = new RestClient($configuration);
+        $restClient->authenticate();
 
         $restClient->request('GET', 'some/route');
     }
@@ -369,7 +399,7 @@ final class RestClientTest extends TestCase
             )
         );
 
-        new RestClient(self::$configuration);
+        (new RestClient(self::$configuration))->authenticate();
     }
 
     /**
@@ -400,7 +430,9 @@ final class RestClientTest extends TestCase
             )
         );
 
-        (new RestClient(self::$configuration))->request('GET', 'some/route');
+        $restClient = new RestClient(self::$configuration);
+        $restClient->authenticate();
+        $restClient->request('GET', 'some/route');
     }
 
     /**
@@ -422,6 +454,7 @@ final class RestClientTest extends TestCase
         );
 
         $restClient = new RestClient(self::$configuration);
+        $restClient->authenticate();
 
         $filePath = \tempnam('/tmp', 'jrc_');
         \file_put_contents($filePath, 'foo');
@@ -482,6 +515,7 @@ final class RestClientTest extends TestCase
 
         $this->setResponseOfTokensPath();
         $restClient = new RestClient(self::$configuration);
+        $restClient->authenticate();
 
         $restClient->request('POST', 'some/route', false);
     }
@@ -497,6 +531,7 @@ final class RestClientTest extends TestCase
 
         $this->setResponseOfTokensPath();
         $restClient = new RestClient(self::$configuration);
+        $restClient->authenticate();
 
         $restClient->request('POST', 'some/route', new \stdClass());
     }
@@ -520,6 +555,7 @@ final class RestClientTest extends TestCase
         );
 
         $restClient = new RestClient(self::$configuration);
+        $restClient->authenticate();
 
         $filePath = \tempnam('/tmp', 'jrc_');
         \file_put_contents($filePath, 'foo');
