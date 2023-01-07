@@ -30,16 +30,16 @@
     },
     "require-dev": {
         "brotkrueml/coding-standards": "~4.0.0",
-        "donatj/mock-webserver": "^2.4.1",
+        "donatj/mock-webserver": "^2.6",
         "ergebnis/composer-normalize": "~2.29.0",
         "infection/infection": "^0.26",
-        "maglnet/composer-require-checker": "^4.1",
+        "maglnet/composer-require-checker": "^4.5",
         "php-coveralls/php-coveralls": "^2.5",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan": "1.9.3",
+        "phpstan/extension-installer": "^1.2",
+        "phpstan/phpstan": "1.9.7",
         "phpunit/phpunit": "^9.5.23",
-        "rector/rector": "0.15.1",
-        "symplify/phpstan-rules": "^11.0",
+        "rector/rector": "0.15.2",
+        "symplify/phpstan-rules": "^11.1",
         "tomasvotruba/cognitive-complexity": "^0.0.5"
     },
     "autoload": {
