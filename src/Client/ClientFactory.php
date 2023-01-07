@@ -28,7 +28,7 @@ final class ClientFactory
         string $username,
         #[\SensitiveParameter]
         string $password,
-        int $lifetime = ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS
+        int $lifetime = ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS,
     ): RestClient {
         $configuration = new ClientConfiguration($baseUrl, $username, $password);
         if ($lifetime !== ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS) {
@@ -43,7 +43,7 @@ final class ClientFactory
         string $username,
         #[\SensitiveParameter]
         string $password,
-        int $lifetime = ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS
+        int $lifetime = ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS,
     ): IncidentsClientDecorator {
         return new IncidentsClientDecorator(static::createRestClient($baseUrl, $username, $password, $lifetime));
     }
@@ -53,7 +53,7 @@ final class ClientFactory
         string $username,
         #[\SensitiveParameter]
         string $password,
-        int $lifetime = ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS
+        int $lifetime = ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS,
     ): DocumentsClientDecorator {
         return new DocumentsClientDecorator(static::createRestClient($baseUrl, $username, $password, $lifetime));
     }

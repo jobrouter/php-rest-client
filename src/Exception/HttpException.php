@@ -27,7 +27,7 @@ final class HttpException extends \RuntimeException implements ExceptionInterfac
             'Redirect "%d" from "%s" to "%s" occurred',
             $statusCode,
             $resourceUrl,
-            $redirectUrl
+            $redirectUrl,
         );
 
         return new self($message, $statusCode);
@@ -40,12 +40,12 @@ final class HttpException extends \RuntimeException implements ExceptionInterfac
         int $statusCode,
         string $resourceUrl,
         string $error,
-        ClientExceptionInterface $e = null
+        ClientExceptionInterface $e = null,
     ): self {
         $message = \sprintf(
             'Error fetching resource "%s": %s',
             $resourceUrl,
-            $error
+            $error,
         );
 
         return new self($message, $statusCode, $e);

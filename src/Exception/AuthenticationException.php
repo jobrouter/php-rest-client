@@ -24,12 +24,12 @@ final class AuthenticationException extends \RuntimeException implements Excepti
     public static function fromFailedAuthentication(
         ClientConfiguration $configuration,
         int $code = 0,
-        \Exception $previous = null
+        \Exception $previous = null,
     ): self {
         $message = \sprintf(
             'Authentication failed for user "%s" on JobRouter base URL "%s"',
             $configuration->getUsername(),
-            $configuration->getJobRouterSystem()
+            $configuration->getJobRouterSystem(),
         );
 
         return new self($message, $code, $previous);

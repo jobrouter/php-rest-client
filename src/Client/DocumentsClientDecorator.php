@@ -77,7 +77,7 @@ final class DocumentsClientDecorator extends ClientDecorator
             '%sFields[%d][%s]',
             $type,
             $index,
-            $part
+            $part,
         );
     }
 

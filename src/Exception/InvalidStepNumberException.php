@@ -21,9 +21,9 @@ final class InvalidStepNumberException extends \DomainException implements Excep
         return new self(
             \sprintf(
                 'The given step number "%d" is invalid, it must be an integer greater than 0',
-                $stepNumber
+                $stepNumber,
             ),
-            1671041151
+            1671041151,
         );
     }
 }

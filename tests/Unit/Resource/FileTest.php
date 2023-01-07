@@ -97,7 +97,7 @@ class FileTest extends TestCase
                 'path' => $path,
                 'filename' => \basename($path),
             ],
-            $subject->toArray()
+            $subject->toArray(),
         );
 
         \unlink($path);
@@ -119,7 +119,7 @@ class FileTest extends TestCase
                 'filename' => 'other-filename.txt',
                 'contentType' => 'foo/bar',
             ],
-            $subject->toArray()
+            $subject->toArray(),
         );
 
         \unlink($path);

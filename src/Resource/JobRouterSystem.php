@@ -38,35 +38,35 @@ final class JobRouterSystem implements \Stringable
         if (! $this->isValidUrl($url)) {
             throw new InvalidUrlException(
                 \sprintf('Given baseUrl "%s" is not valid. It must consist of a scheme, the host and the path!', $url),
-                1565710531
+                1565710531,
             );
         }
 
         if (! $this->urlHasHttpProtocolScheme($url)) {
             throw new InvalidUrlException(
                 \sprintf('Given baseUrl "%s" must have a HTTP protocol scheme!', $url),
-                1586538201
+                1586538201,
             );
         }
 
         if ($this->urlHasQueryParameters($url)) {
             throw new InvalidUrlException(
                 \sprintf('Given baseUrl "%s" must not have query parameters!', $url),
-                1586538700
+                1586538700,
             );
         }
 
         if ($this->urlHasFragment($url)) {
             throw new InvalidUrlException(
                 \sprintf('Given baseUrl "%s" must not have a fragment!', $url),
-                1586539165
+                1586539165,
             );
         }
 
         if ($this->urlHasUserInfo($url)) {
             throw new InvalidUrlException(
                 \sprintf('Given baseUrl "%s" must not have a user info!', $url),
-                1586539334
+                1586539334,
             );
         }
     }
@@ -76,7 +76,7 @@ final class JobRouterSystem implements \Stringable
         return \filter_var(
             $url,
             \FILTER_VALIDATE_URL,
-            \FILTER_FLAG_PATH_REQUIRED
+            \FILTER_FLAG_PATH_REQUIRED,
         ) !== false;
     }
 

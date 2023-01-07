@@ -21,9 +21,9 @@ final class InvalidPoolNumberException extends \DomainException implements Excep
         return new self(
             \sprintf(
                 'The given pool number "%d" is invalid, it must be an integer greater than 0',
-                $poolNumber
+                $poolNumber,
             ),
-            1578228017
+            1578228017,
         );
     }
 }

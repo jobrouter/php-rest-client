@@ -25,7 +25,7 @@ final class ClientOptions
         private readonly int $maxRedirects = 5,
         private readonly int $timeout = 0,
         private readonly bool $verify = true,
-        private readonly ?string $proxy = null
+        private readonly ?string $proxy = null,
     ) {
     }
 

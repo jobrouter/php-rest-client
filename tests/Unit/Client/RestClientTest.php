@@ -40,7 +40,7 @@ final class RestClientTest extends TestCase
         self::$configuration = new ClientConfiguration(
             self::$server->getServerRoot() . '/',
             'fake_username',
-            'fake_password'
+            'fake_password',
         );
     }
 
@@ -77,8 +77,8 @@ final class RestClientTest extends TestCase
                 [
                     'content-type' => 'application/json',
                 ],
-                201
-            )
+                201,
+            ),
         );
     }
 
@@ -91,12 +91,12 @@ final class RestClientTest extends TestCase
         $this->expectExceptionCode(404);
         $this->expectExceptionMessage(\sprintf(
             'Error fetching resource "http://127.0.0.1:%d/api/rest/v2/application/tokens": not found',
-            self::$server->getPort()
+            self::$server->getPort(),
         ));
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/application/tokens',
-            new Response('not found', [], 404)
+            new Response('not found', [], 404),
         );
 
         (new RestClient(self::$configuration))->authenticate();
@@ -111,12 +111,12 @@ final class RestClientTest extends TestCase
         $this->expectExceptionCode(1577818398);
         $this->expectExceptionMessage(\sprintf(
             'Authentication failed for user "fake_username" on JobRouter base URL "http://127.0.0.1:%d/"',
-            self::$server->getPort()
+            self::$server->getPort(),
         ));
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/application/tokens',
-            new Response('invalid', [], 401)
+            new Response('invalid', [], 401),
         );
 
         (new RestClient(self::$configuration))->authenticate();
@@ -133,7 +133,7 @@ final class RestClientTest extends TestCase
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/application/tokens',
-            new Response('invalid', [], 200)
+            new Response('invalid', [], 200),
         );
 
         (new RestClient(self::$configuration))->authenticate();
@@ -164,7 +164,7 @@ final class RestClientTest extends TestCase
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/some/route',
-            new Response('The response of some/route')
+            new Response('The response of some/route'),
         );
 
         $response = $restClient->request('GET', '//some/route');
@@ -189,7 +189,7 @@ final class RestClientTest extends TestCase
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/some/route',
-            new Response('The response of some/route')
+            new Response('The response of some/route'),
         );
 
         $restClient->request('GET', '/some/route');
@@ -222,8 +222,8 @@ final class RestClientTest extends TestCase
                 [
                     'x-jobrouter-version' => $version,
                 ],
-                201
-            )
+                201,
+            ),
         );
 
         $restClient = new RestClient(self::$configuration);
@@ -241,7 +241,7 @@ final class RestClientTest extends TestCase
         $this->expectExceptionCode(307);
         $this->expectExceptionMessage(\sprintf(
             'Redirect "307" from "http://127.0.0.1:%d/api/rest/v2/application/tokens" to "https://example.org/redirect-destination.html" occurred',
-            self::$server->getPort()
+            self::$server->getPort(),
         ));
 
         self::$server->setResponseOfPath(
@@ -251,8 +251,8 @@ final class RestClientTest extends TestCase
                 [
                     'location' => 'https://example.org/redirect-destination.html',
                 ],
-                307
-            )
+                307,
+            ),
         );
 
         (new RestClient(self::$configuration))->authenticate();
@@ -269,13 +269,13 @@ final class RestClientTest extends TestCase
         $this->expectExceptionMessageMatches(\sprintf(
             '#Error fetching resource "http://127.0.0.1:%d/api/rest/v2/application/tokens": Failed to connect to 127.0.0.1 port %d#',
             $notConnectedPort,
-            $notConnectedPort
+            $notConnectedPort,
         ));
 
         $configuration = new ClientConfiguration(
             'http://' . self::$server->getHost() . ':' . $notConnectedPort . '/',
             'fake_username',
-            'fake_password'
+            'fake_password',
         );
 
         (new RestClient($configuration))->authenticate();
@@ -296,8 +296,8 @@ final class RestClientTest extends TestCase
                 [
                     'content-type' => 'application/json',
                 ],
-                201
-            )
+                201,
+            ),
         );
 
         (new RestClient(self::$configuration))->authenticate();
@@ -315,7 +315,7 @@ final class RestClientTest extends TestCase
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/some/route',
-            new Response('The response of some/route')
+            new Response('The response of some/route'),
         );
 
         $restClient->request('GET', 'some/route');
@@ -339,7 +339,7 @@ final class RestClientTest extends TestCase
 
         self::$server->setResponseOfPath(
             '/api/rest/v2/some/route',
-            new Response('The response of some/route')
+            new Response('The response of some/route'),
         );
 
         $restClient->request('GET', 'some/route');
@@ -365,7 +365,7 @@ final class RestClientTest extends TestCase
             5,
             0,
             true,
-            'http://not.existing.proxy.server/'
+            'http://not.existing.proxy.server/',
         );
         $configuration = self::$configuration->withClientOptions($clientOptions);
         $restClient = new RestClient($configuration);
@@ -382,7 +382,7 @@ final class RestClientTest extends TestCase
         $this->expectException(HttpException::class);
         $this->expectExceptionMessage(\sprintf(
             'Error fetching resource "http://127.0.0.1:%d/api/rest/v2/application/tokens": {"errors":["-": ["Some bad request"]]}',
-            self::$server->getPort()
+            self::$server->getPort(),
         ));
 
         self::$server->setResponseOfPath(
@@ -390,13 +390,13 @@ final class RestClientTest extends TestCase
             new Response(
                 \sprintf(
                     '{"errors":["-": ["%s"]]}',
-                    'Some bad request'
+                    'Some bad request',
                 ),
                 [
                     'content-type' => 'application/json',
                 ],
-                400
-            )
+                400,
+            ),
         );
 
         (new RestClient(self::$configuration))->authenticate();
@@ -411,7 +411,7 @@ final class RestClientTest extends TestCase
         $this->expectExceptionCode(404);
         $this->expectExceptionMessage(\sprintf(
             'Error fetching resource "http://127.0.0.1:%d/api/rest/v2/some/route": {"errors":{"-": ["Some error occured."]}}',
-            self::$server->getPort()
+            self::$server->getPort(),
         ));
 
         $this->setResponseOfTokensPath();
@@ -421,13 +421,13 @@ final class RestClientTest extends TestCase
             new Response(
                 \sprintf(
                     '{"errors":{"-": ["%s"]}}',
-                    'Some error occured.'
+                    'Some error occured.',
                 ),
                 [
                     'content-type' => 'application/json',
                 ],
-                404
-            )
+                404,
+            ),
         );
 
         $restClient = new RestClient(self::$configuration);
@@ -449,8 +449,8 @@ final class RestClientTest extends TestCase
                 [
                     'content-type' => 'application/json',
                 ],
-                200
-            )
+                200,
+            ),
         );
 
         $restClient = new RestClient(self::$configuration);
@@ -474,7 +474,7 @@ final class RestClientTest extends TestCase
         $response = $restClient->request(
             'POST',
             'application/incidents/test',
-            $formData
+            $formData,
         );
 
         self::assertSame(200, $response->getStatusCode());
@@ -550,8 +550,8 @@ final class RestClientTest extends TestCase
                 [
                     'content-type' => 'application/json',
                 ],
-                200
-            )
+                200,
+            ),
         );
 
         $restClient = new RestClient(self::$configuration);
@@ -579,7 +579,7 @@ final class RestClientTest extends TestCase
         $response = $restClient->request(
             'POST',
             'application/incidents/test',
-            $formData
+            $formData,
         );
 
         self::assertSame(200, $response->getStatusCode());

@@ -64,7 +64,7 @@ class IncidentsClientDecoratorTest extends TestCase
      */
     public function requestWithIncidentIsProcessedAsMultipartAndPassedToClient(
         Incident $incident,
-        array $withMultipart
+        array $withMultipart,
     ): void {
         $this->clientMock
             ->expects(self::once())
@@ -150,8 +150,8 @@ class IncidentsClientDecoratorTest extends TestCase
             (new Incident(1))->setStepEscalationDate(
                 new \DateTimeImmutable(
                     '2020-01-30 12:34:56',
-                    new \DateTimeZone('America/Chicago')
-                )
+                    new \DateTimeZone('America/Chicago'),
+                ),
             ),
             [
                 'step' => '1',
@@ -163,8 +163,8 @@ class IncidentsClientDecoratorTest extends TestCase
             (new Incident(1))->setIncidentEscalationDate(
                 new \DateTimeImmutable(
                     '2020-01-31 01:23:45',
-                    new \DateTimeZone('Europe/Berlin')
-                )
+                    new \DateTimeZone('Europe/Berlin'),
+                ),
             ),
             [
                 'step' => '1',
@@ -216,7 +216,7 @@ class IncidentsClientDecoratorTest extends TestCase
                             'some integer' => 234,
                             'some boolean' => false,
                         ],
-                    ]
+                    ],
                 )
                 ->setRowsForSubTable(
                     'other subtable',
@@ -225,7 +225,7 @@ class IncidentsClientDecoratorTest extends TestCase
                             'other name 1/1' => 'other value 1/1',
                             'other name 1/2' => 'other value 1/2',
                         ],
-                    ]
+                    ],
                 ),
             [
                 'step' => '1',

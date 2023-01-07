@@ -28,7 +28,7 @@ class ClientConfigurationTest extends TestCase
         $this->subject = new ClientConfiguration(
             'http://example.org/jobrouter/',
             'fake_username',
-            'fake_password'
+            'fake_password',
         );
     }
 
@@ -43,7 +43,7 @@ class ClientConfigurationTest extends TestCase
         new ClientConfiguration(
             'https://example.org/',
             '',
-            'fake_password'
+            'fake_password',
         );
     }
 
@@ -58,7 +58,7 @@ class ClientConfigurationTest extends TestCase
         new ClientConfiguration(
             'https://example.org/',
             'fake_username',
-            ''
+            '',
         );
     }
 

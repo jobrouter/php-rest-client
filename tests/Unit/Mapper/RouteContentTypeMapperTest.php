@@ -33,7 +33,7 @@ class RouteContentTypeMapperTest extends TestCase
     public function getRequestContentTypeForRouteReturnsCorrectContentType(
         string $method,
         string $resource,
-        string $expectedContentType
+        string $expectedContentType,
     ): void {
         $actual = $this->subject->getRequestContentTypeForRoute($method, $resource);
 
@@ -42,7 +42,7 @@ class RouteContentTypeMapperTest extends TestCase
 
     public function dataProvider(): iterable
     {
-        $handle = \fopen(__DIR__ . DIRECTORY_SEPARATOR . 'routes.txt', 'r');
+        $handle = \fopen(__DIR__ . \DIRECTORY_SEPARATOR . 'routes.txt', 'r');
 
         while (($line = \fgets($handle, 1024)) !== false) {
             $line = \trim($line);
@@ -60,7 +60,7 @@ class RouteContentTypeMapperTest extends TestCase
                 '%s %s returns %s',
                 $method,
                 $resource,
-                $contentType === '-' ? 'empty content type' : $contentType
+                $contentType === '-' ? 'empty content type' : $contentType,
             );
 
             yield $description => [

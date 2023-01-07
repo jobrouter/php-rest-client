@@ -48,7 +48,7 @@ final class ClientConfiguration
         string $baseUrl,
         string $username,
         #[\SensitiveParameter]
-        string $password
+        string $password,
     ) {
         $this->mustNotHaveEmptyUsername($username);
         $this->mustNotHaveEmptyPassword($password);
@@ -121,9 +121,9 @@ final class ClientConfiguration
                     'Lifetime value "%d" is not allowed! It has to be between "%d" and "%d"',
                     $lifetime,
                     self::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS,
-                    self::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS
+                    self::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS,
                 ),
-                1565710534
+                1565710534,
             );
         }
 

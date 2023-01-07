@@ -30,7 +30,7 @@ class ClientDecoratorTest extends TestCase
         $this->client = $this->createMock(ClientInterface::class);
         $this->subject = $this->getMockForAbstractClass(
             ClientDecorator::class,
-            [$this->client]
+            [$this->client],
         );
     }
 

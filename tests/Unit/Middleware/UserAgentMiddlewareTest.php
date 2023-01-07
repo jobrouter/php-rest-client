@@ -38,9 +38,9 @@ class UserAgentMiddlewareTest extends TestCase
         self::assertSame(
             \sprintf(
                 'JobRouterClient/%s (https://jobrouter-client.rtfd.io/)',
-                (new Version())->getVersion()
+                (new Version())->getVersion(),
             ),
-            $newRequest->getHeaderLine('User-Agent')
+            $newRequest->getHeaderLine('User-Agent'),
         );
     }
 
@@ -61,9 +61,9 @@ class UserAgentMiddlewareTest extends TestCase
         self::assertSame(
             \sprintf(
                 'JobRouterClient/%s (https://jobrouter-client.rtfd.io/) SomeConnector/1.2.3',
-                (new Version())->getVersion()
+                (new Version())->getVersion(),
             ),
-            $newRequest->getHeaderLine('User-Agent')
+            $newRequest->getHeaderLine('User-Agent'),
         );
     }
 }

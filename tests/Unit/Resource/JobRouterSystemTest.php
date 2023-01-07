@@ -85,7 +85,7 @@ class JobRouterSystemTest extends TestCase
     public function getResourceUrlReturnsApiUrlCorrectly(
         string $givenUrl,
         string $resourceToTest,
-        string $expectedUrl
+        string $expectedUrl,
     ): void {
         $subject = new JobRouterSystem($givenUrl);
 
@@ -114,7 +114,7 @@ class JobRouterSystemTest extends TestCase
     public function constructThrowsExceptionOnInvalidUrl(
         string $url,
         string $expectedExceptionMessage,
-        int $expectedExceptionCode
+        int $expectedExceptionCode,
     ): void {
         $this->expectException(InvalidUrlException::class);
         $this->expectExceptionMessage($expectedExceptionMessage);

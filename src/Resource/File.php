@@ -27,15 +27,15 @@ final class File implements FileInterface
     public function __construct(
         string $path,
         string $fileName = '',
-        private readonly string $contentType = ''
+        private readonly string $contentType = '',
     ) {
         if (! \file_exists($path)) {
             throw new InvalidResourceException(
                 \sprintf(
                     'The file "%s" does not exist or is not readable',
-                    $path
+                    $path,
                 ),
-                1582273757
+                1582273757,
             );
         }
 

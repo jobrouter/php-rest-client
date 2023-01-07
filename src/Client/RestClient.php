@@ -48,7 +48,7 @@ final class RestClient implements ClientInterface
      * @throws HttpException
      */
     public function __construct(
-        private readonly ClientConfiguration $configuration
+        private readonly ClientConfiguration $configuration,
     ) {
         $this->psr17factory = new Psr17Factory();
 
@@ -124,9 +124,9 @@ final class RestClient implements ClientInterface
             throw new RestClientException(
                 \sprintf(
                     'data must be an array, "%s" given',
-                    \get_debug_type($data)
+                    \get_debug_type($data),
                 ),
-                1578233543
+                1578233543,
             );
         }
 
@@ -146,7 +146,7 @@ final class RestClient implements ClientInterface
                 $e->getCode(),
                 $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
                 $e->getMessage(),
-                $e
+                $e,
             );
         }
 
@@ -155,14 +155,14 @@ final class RestClient implements ClientInterface
             throw HttpException::fromError(
                 $statusCode,
                 $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
-                $response->getBody()->getContents()
+                $response->getBody()->getContents(),
             );
         }
         if ($statusCode >= 300) {
             throw HttpException::fromRedirect(
                 $statusCode,
                 $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
-                $response->getHeaderLine('location')
+                $response->getHeaderLine('location'),
             );
         }
 
@@ -183,7 +183,7 @@ final class RestClient implements ClientInterface
         return $this->browser->submitForm(
             $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
             $multipart,
-            $method
+            $method,
         );
     }
 
@@ -210,7 +210,7 @@ final class RestClient implements ClientInterface
     {
         return $this->psr17factory->createRequest(
             $method,
-            $this->configuration->getJobRouterSystem()->getResourceUrl($resource)
+            $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
         );
     }
 

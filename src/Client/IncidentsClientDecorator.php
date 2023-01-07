@@ -86,11 +86,11 @@ final class IncidentsClientDecorator extends ClientDecorator
         }
 
         $multipartProcessTableFields = $this->buildProcessTableFieldsForMultipart(
-            $incident->getProcessTableFields()
+            $incident->getProcessTableFields(),
         );
 
         $multipartSubTables = $this->buildSubTablesForMultipart(
-            $incident->getSubTables()
+            $incident->getSubTables(),
         );
 
         return \array_merge($multipart, $multipartProcessTableFields, $multipartSubTables);
@@ -129,7 +129,7 @@ final class IncidentsClientDecorator extends ClientDecorator
         return \sprintf(
             'processtable[fields][%d][%s]',
             $index,
-            $part
+            $part,
         );
     }
 
@@ -174,7 +174,7 @@ final class IncidentsClientDecorator extends ClientDecorator
             $subTableIndex,
             $rowIndex,
             $columnIndex,
-            $part
+            $part,
         );
     }
 }

@@ -28,7 +28,7 @@ class AuthenticationExceptionTest extends TestCase
         $configuration = new ClientConfiguration(
             'http://example.org/',
             'fake_user',
-            'fake_pass'
+            'fake_pass',
         );
 
         $previous = new \RuntimeException();
@@ -38,7 +38,7 @@ class AuthenticationExceptionTest extends TestCase
         self::assertInstanceOf(AuthenticationException::class, $actual);
         self::assertSame(
             'Authentication failed for user "fake_user" on JobRouter base URL "http://example.org/"',
-            $actual->getMessage()
+            $actual->getMessage(),
         );
         self::assertSame(12345, $actual->getCode());
         self::assertSame($previous, $actual->getPrevious());
@@ -52,7 +52,7 @@ class AuthenticationExceptionTest extends TestCase
         $configuration = new ClientConfiguration(
             'http://example.org/',
             'fake_user',
-            'fake_pass'
+            'fake_pass',
         );
 
         $actual = AuthenticationException::fromFailedAuthentication($configuration);
@@ -60,7 +60,7 @@ class AuthenticationExceptionTest extends TestCase
         self::assertInstanceOf(AuthenticationException::class, $actual);
         self::assertSame(
             'Authentication failed for user "fake_user" on JobRouter base URL "http://example.org/"',
-            $actual->getMessage()
+            $actual->getMessage(),
         );
         self::assertSame(0, $actual->getCode());
         self::assertNull($actual->getPrevious());
