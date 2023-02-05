@@ -11,8 +11,6 @@ parameters:
     cognitive_complexity:
         class: 20
         function: 9
-    ignoreErrors:
-        - "#^Class has a static method must so must contains \"Static\" in its name$#"
 
 services:
     -
