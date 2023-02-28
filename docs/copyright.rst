@@ -6,7 +6,7 @@ Copyright
 
 .. code-block:: text
 
-   Copyright (c) 2019-2022 Chris Müller.
+   Copyright (c) 2019-2023 Chris Müller.
 
    This documentation is licensed under the CC BY-NC-SA 4.0 (Creative Commons)
    license.
