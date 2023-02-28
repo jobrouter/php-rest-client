@@ -30,14 +30,14 @@
     "require-dev": {
         "brotkrueml/coding-standards": "~4.0.0",
         "donatj/mock-webserver": "^2.6",
-        "ergebnis/composer-normalize": "~2.29.0",
+        "ergebnis/composer-normalize": "~2.30.2",
         "infection/infection": "^0.26",
         "maglnet/composer-require-checker": "^4.5",
         "php-coveralls/php-coveralls": "^2.5",
         "phpstan/extension-installer": "^1.2",
-        "phpstan/phpstan": "1.9.14",
+        "phpstan/phpstan": "1.10.3",
         "phpunit/phpunit": "^9.5.23",
-        "rector/rector": "0.15.12",
+        "rector/rector": "0.15.19",
         "symplify/phpstan-rules": "^11.2",
         "tomasvotruba/cognitive-complexity": "^0.0.5"
     },
