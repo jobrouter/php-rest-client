@@ -7,6 +7,11 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.0] - 2023-02-28
+
+### Added
+- Compatibility with JobRouter® 2023.1
+
 ### Changed
 - On instantiation of the RestClient no authentication is done automatically anymore
 - Incident class accepts as a priority only a Priority enum
@@ -69,7 +74,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 First stable release
 
 
-[Unreleased]: https://github.com/brotkrueml/jobrouter-client/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/brotkrueml/jobrouter-client/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/brotkrueml/jobrouter-client/compare/v1.4.0...v2.0.0
 [1.4.0]: https://github.com/brotkrueml/jobrouter-client/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/brotkrueml/jobrouter-client/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/brotkrueml/jobrouter-client/compare/v1.1.2...v1.2.0
