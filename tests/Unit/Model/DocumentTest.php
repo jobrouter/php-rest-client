@@ -17,6 +17,7 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Model;
 use Brotkrueml\JobRouterClient\Model\Document;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use Brotkrueml\JobRouterClient\Resource\FileStorage;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class DocumentTest extends TestCase
@@ -28,9 +29,7 @@ class DocumentTest extends TestCase
         $this->subject = new Document();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetIndexField(): void
     {
         self::assertCount(0, $this->subject->getIndexFields());
@@ -46,25 +45,19 @@ class DocumentTest extends TestCase
         self::assertSame('another value', $this->subject->getIndexField('anotherIndexField'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getIndexFieldReturnsNullWhenNotExisting(): void
     {
         self::assertNull($this->subject->getIndexField('notExisting'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setIndexFieldReturnsSelf(): void
     {
         self::assertSame($this->subject, $this->subject->setIndexField('someIndexField', 'some value'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetKeywordField(): void
     {
         self::assertCount(0, $this->subject->getKeywordFields());
@@ -80,25 +73,19 @@ class DocumentTest extends TestCase
         self::assertSame('another value', $this->subject->getKeywordField('anotherKeywordField'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getKeywordFieldReturnsNullWhenNotExisting(): void
     {
         self::assertNull($this->subject->getKeywordField('notExisting'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setKeywordFieldReturnsSelf(): void
     {
         self::assertSame($this->subject, $this->subject->setKeywordField('someKeywordField', 'some value'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetFiles(): void
     {
         self::assertCount(0, $this->subject->getFiles());
@@ -111,9 +98,7 @@ class DocumentTest extends TestCase
         self::assertTrue($actual->contains($fileStub));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setFiles(): void
     {
         $fileStorage = new FileStorage();
@@ -122,9 +107,7 @@ class DocumentTest extends TestCase
         self::assertSame($fileStorage, $this->subject->getFiles());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setFilesReturnsSelf(): void
     {
         self::assertSame($this->subject, $this->subject->setFiles(new FileStorage()));

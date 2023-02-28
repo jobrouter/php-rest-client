@@ -17,13 +17,12 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Middleware;
 use Brotkrueml\JobRouterClient\Information\Version;
 use Brotkrueml\JobRouterClient\Middleware\UserAgentMiddleware;
 use Nyholm\Psr7\Request;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class UserAgentMiddlewareTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function userAgentIsCorrectlyAddedToRequestHeader(): void
     {
         $request = new Request('GET', '/');
@@ -44,9 +43,7 @@ class UserAgentMiddlewareTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function userAgentIsCorrectlyAddedToRequestHeaderWithAdditionGiven(): void
     {
         $request = new Request('GET', '/');

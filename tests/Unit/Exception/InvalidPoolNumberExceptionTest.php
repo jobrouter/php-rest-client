@@ -15,13 +15,12 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Exception;
 
 use Brotkrueml\JobRouterClient\Exception\InvalidPoolNumberException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class InvalidPoolNumberExceptionTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function forPoolNumber(): void
     {
         $actual = InvalidPoolNumberException::forPoolNumber(0);

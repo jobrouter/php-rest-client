@@ -21,6 +21,7 @@ use Brotkrueml\JobRouterClient\Client\RestClient;
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use donatj\MockWebServer\MockWebServer;
 use donatj\MockWebServer\Response;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class ClientFactoryTest extends TestCase
@@ -54,9 +55,7 @@ final class ClientFactoryTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function clientFactoryCannotBeInstantiated(): void
     {
         $this->expectException(\Error::class);
@@ -64,9 +63,7 @@ final class ClientFactoryTest extends TestCase
         new ClientFactory();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createRestClientReturnsAnInstanceOfRestClientWithDefaultLifetimeCorrectly(): void
     {
         $reflector = new \ReflectionClass(RestClient::class);
@@ -92,9 +89,7 @@ final class ClientFactoryTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createRestClientReturnsAnInstanceOfRestClientWithAdjustedLifetimeCorrectly(): void
     {
         $reflector = new \ReflectionClass(RestClient::class);
@@ -118,9 +113,7 @@ final class ClientFactoryTest extends TestCase
         self::assertSame(42, $configurationProperty->getValue($client)->getLifetime());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createIncidentsClientDecoratorReturnsAnInstanceOfIncidentsClientDecoratorCorrectly(): void
     {
         $incidentsClientDecorator = ClientFactory::createIncidentsClientDecorator(
@@ -132,9 +125,7 @@ final class ClientFactoryTest extends TestCase
         self::assertInstanceOf(IncidentsClientDecorator::class, $incidentsClientDecorator);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createDocumentsClientDecoratorReturnsAnInstanceOfDocumentsClientDecoratorCorrectly(): void
     {
         $documentsClientDecorator = ClientFactory::createDocumentsClientDecorator(

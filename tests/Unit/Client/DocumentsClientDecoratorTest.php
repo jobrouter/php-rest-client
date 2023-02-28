@@ -18,6 +18,7 @@ use Brotkrueml\JobRouterClient\Client\ClientInterface;
 use Brotkrueml\JobRouterClient\Client\DocumentsClientDecorator;
 use Brotkrueml\JobRouterClient\Model\Document;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -34,9 +35,7 @@ class DocumentsClientDecoratorTest extends TestCase
         $this->subject = new DocumentsClientDecorator($this->clientMock);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function requestIsPassedUnchangedToClientIfArrayIsGivenAsDataAndReturnsInstanceOfResponseInterface(): void
     {
         $responseStub = $this->createStub(ResponseInterface::class);
@@ -56,9 +55,7 @@ class DocumentsClientDecoratorTest extends TestCase
         self::assertInstanceOf(ResponseInterface::class, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function requestWithDocumentIsProcessedAsMultipartAndPassedToClient(): void
     {
         $fileStub1 = $this->createStub(FileInterface::class);
@@ -93,9 +90,7 @@ class DocumentsClientDecoratorTest extends TestCase
         $this->subject->request('POST', 'some/route', $document);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function requestWithDocumentIsProcessedAndReturnsInstanceOfResponseInterface(): void
     {
         $responseStub = $this->createStub(ResponseInterface::class);
@@ -110,9 +105,7 @@ class DocumentsClientDecoratorTest extends TestCase
         self::assertInstanceOf(ResponseInterface::class, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function requestWithEmptyDocumentHasEmptyMultipart(): void
     {
         $this->clientMock

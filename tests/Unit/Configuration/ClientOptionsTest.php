@@ -15,13 +15,12 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Configuration;
 
 use Brotkrueml\JobRouterClient\Configuration\ClientOptions;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class ClientOptionsTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function toArrayReturnsArrayCorrectlyWithDefaultValues(): void
     {
         $subject = new ClientOptions();
@@ -36,9 +35,7 @@ final class ClientOptionsTest extends TestCase
         self::assertNull($actual['proxy']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function toArrayReturnsArrayCorrectlyWithGivenValues(): void
     {
         $subject = new ClientOptions(true, 10, 42, false, 'http://example.org/');

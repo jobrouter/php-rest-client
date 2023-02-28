@@ -17,13 +17,12 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Resource;
 use Brotkrueml\JobRouterClient\Exception\InvalidResourceException;
 use Brotkrueml\JobRouterClient\Resource\File;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class FileTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function classImplementsFileInterface(): void
     {
         $path = \tempnam('/tmp', 'jrc_');
@@ -36,9 +35,7 @@ class FileTest extends TestCase
         \unlink($path);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function constructWithOnlyPathThenGettersAreImplementedCorrectly(): void
     {
         $path = \tempnam('/tmp', 'jrc_');
@@ -53,9 +50,7 @@ class FileTest extends TestCase
         \unlink($path);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function constructWithAllArgumentsThenGettersAreImplementedCorrectly(): void
     {
         $path = \tempnam('/tmp', 'jrc_');
@@ -70,9 +65,7 @@ class FileTest extends TestCase
         \unlink($path);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function constructThrowsExceptionWhenGivenPathDoesNotExist(): void
     {
         $this->expectException(InvalidResourceException::class);
@@ -82,9 +75,7 @@ class FileTest extends TestCase
         new File('/tmp/not-existing-file.txt');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function constructWithOnlyPathThenToArrayIsImplementedCorrectly(): void
     {
         $path = \tempnam('/tmp', 'jrc_');
@@ -103,9 +94,7 @@ class FileTest extends TestCase
         \unlink($path);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function constructWithAllArgumentsThenToArrayIsImplementedCorrectly(): void
     {
         $path = \tempnam('/tmp', 'jrc_');

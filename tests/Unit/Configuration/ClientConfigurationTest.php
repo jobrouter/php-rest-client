@@ -17,6 +17,7 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Configuration;
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use Brotkrueml\JobRouterClient\Configuration\ClientOptions;
 use Brotkrueml\JobRouterClient\Exception\InvalidConfigurationException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class ClientConfigurationTest extends TestCase
@@ -32,9 +33,7 @@ class ClientConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function constructThrowsExceptionOnEmptyUsername(): void
     {
         $this->expectException(InvalidConfigurationException::class);
@@ -47,9 +46,7 @@ class ClientConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function constructThrowsExceptionOnEmptyPassword(): void
     {
         $this->expectException(InvalidConfigurationException::class);
@@ -62,9 +59,7 @@ class ClientConfigurationTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBaseUrlReturnsPreviouslySetBaseUrl(): void
     {
         $actual = $this->subject->getJobRouterSystem();
@@ -73,9 +68,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame($expected, (string)$actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getUsernameReturnsPreviouslySetUsername(): void
     {
         $actual = $this->subject->getUsername();
@@ -83,9 +76,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame('fake_username', $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getPasswordReturnsPreviouslySetPassword(): void
     {
         $actual = $this->subject->getPassword();
@@ -93,9 +84,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame('fake_password', $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getLifetimeReturnsTheDefaultLifetime(): void
     {
         $actual = $this->subject->getLifetime();
@@ -103,9 +92,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame(ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function withLifetimeGivesSameObjectBackWhenDefinedLifetimeIsIdentical(): void
     {
         $subject = $this->subject->withLifetime(42);
@@ -116,9 +103,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame($subject, $newSubject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function withLifetimeThrowsExceptionOnUnderrunMinimumAllowedLifetime(): void
     {
         $this->expectException(InvalidConfigurationException::class);
@@ -127,9 +112,7 @@ class ClientConfigurationTest extends TestCase
         $this->subject->withLifetime(-1);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function withLifetimeThrowsExceptionOnOverrunMaximumAllowedLifetime(): void
     {
         $this->expectException(InvalidConfigurationException::class);
@@ -138,9 +121,7 @@ class ClientConfigurationTest extends TestCase
         $this->subject->withLifetime(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS + 1);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function withMinimumAllowedLifetimeIsOkay(): void
     {
         $configuration = $this->subject->withLifetime(ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS);
@@ -150,9 +131,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame(ClientConfiguration::MINIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function withLifetimeInAllowedBoundsIsOkay(): void
     {
         $configuration = $this->subject->withLifetime(42);
@@ -162,9 +141,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame(42, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function withMaximumAllowedLifetimeIsOkay(): void
     {
         $configuration = $this->subject->withLifetime(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS);
@@ -174,9 +151,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame(ClientConfiguration::MAXIMUM_ALLOWED_TOKEN_LIFETIME_IN_SECONDS, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function withUserAgentAdditionReturnsCorrectInstances(): void
     {
         $subject = $this->subject->withUserAgentAddition('AdditionToUserAgent');
@@ -187,9 +162,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame($subject, $newSubject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getUserAgentAdditionReturnsEmptyStringWhenNotConfigured(): void
     {
         $actual = $this->subject->getUserAgentAddition();
@@ -197,9 +170,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame('', $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function withUserAgentAdditionSetsAdditionalUserAgentCorrectly(): void
     {
         $subject = $this->subject->withUserAgentAddition('SomeUserAgentAddition');
@@ -209,9 +180,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame('SomeUserAgentAddition', $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function withClientOptionsReturnsNewInstanceOfSubject(): void
     {
         $subject = $this->subject->withClientOptions(new ClientOptions());
@@ -219,9 +188,7 @@ class ClientConfigurationTest extends TestCase
         self::assertNotSame($subject, $this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getClientOptionsReturnsDefaultOptionsWhenNotConfigured(): void
     {
         $expectedOptions = (new ClientOptions())->toArray();
@@ -229,9 +196,7 @@ class ClientConfigurationTest extends TestCase
         self::assertSame($expectedOptions, $this->subject->getClientOptions()->toArray());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function withClientOptionsSetClientOptionsCorrectly(): void
     {
         $newClientOptions = new ClientOptions();

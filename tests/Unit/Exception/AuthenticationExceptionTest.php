@@ -16,13 +16,12 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Exception;
 
 use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class AuthenticationExceptionTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function fromFailedAuthenticationReturnsInstantiatedExceptionWithAllArgumentsCorrectly(): void
     {
         $configuration = new ClientConfiguration(
@@ -44,9 +43,7 @@ class AuthenticationExceptionTest extends TestCase
         self::assertSame($previous, $actual->getPrevious());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fromFailedAuthenticationReturnsInstantiatedExceptionWithOnlyRequiredArgumentsCorrectly(): void
     {
         $configuration = new ClientConfiguration(

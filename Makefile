@@ -19,7 +19,7 @@ cs: vendor
 
 .PHONY: mutation
 mutation: vendor
-	XDEBUG_MODE=coverage vendor/bin/infection --min-msi=87 --threads=4 --no-ansi
+	XDEBUG_MODE=coverage vendor/bin/infection --min-msi=100 --threads=4 --no-ansi
 
 .PHONY: phpstan
 phpstan: vendor
@@ -35,7 +35,7 @@ rector-dry: vendor
 
 .PHONY: tests
 tests: vendor
-	vendor/bin/phpunit --configuration=tests/phpunit.xml.dist
+	XDEBUG_MODE=coverage vendor/bin/phpunit --configuration=tests/phpunit.xml.dist
 
 vendor: composer.json composer.lock
 	composer validate

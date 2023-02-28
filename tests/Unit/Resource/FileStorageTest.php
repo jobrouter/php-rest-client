@@ -16,6 +16,7 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Resource;
 
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use Brotkrueml\JobRouterClient\Resource\FileStorage;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class FileStorageTest extends TestCase
@@ -27,26 +28,20 @@ class FileStorageTest extends TestCase
         $this->subject = new FileStorage();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function countMethodReturns0WhenNoFilesAreAttached(): void
     {
         self::assertSame(0, $this->subject->count());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fileStorageImplementsCountableInterface(): void
     {
         self::assertInstanceOf(\Countable::class, $this->subject);
         self::assertCount(0, $this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function attachAddsFilesToFileStorage(): void
     {
         $fileStub1 = $this->createStub(FileInterface::class);
@@ -62,9 +57,7 @@ class FileStorageTest extends TestCase
         self::assertCount(2, $this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function attachAddsTheSameFileOnlyOnceToFileStorage(): void
     {
         $fileStub = $this->createStub(FileInterface::class);
@@ -77,9 +70,7 @@ class FileStorageTest extends TestCase
         self::assertCount(1, $this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function detachRemovesAFileFromFileStorage(): void
     {
         $fileStub = $this->createStub(FileInterface::class);
@@ -91,25 +82,19 @@ class FileStorageTest extends TestCase
         self::assertCount(0, $this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function currentReturnsFalseWhenFileStorageIsEmpty(): void
     {
         self::assertFalse($this->subject->current());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function validReturnsFalseWhenFileStorageIsEmpty(): void
     {
         self::assertFalse($this->subject->valid());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fileStorageImplementsIteratorInterface(): void
     {
         self::assertInstanceOf(\Iterator::class, $this->subject);

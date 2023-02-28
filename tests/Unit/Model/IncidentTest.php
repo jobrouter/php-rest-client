@@ -19,6 +19,7 @@ use Brotkrueml\JobRouterClient\Exception\InvalidPoolNumberException;
 use Brotkrueml\JobRouterClient\Exception\InvalidStepNumberException;
 use Brotkrueml\JobRouterClient\Model\Incident;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class IncidentTest extends TestCase
@@ -30,17 +31,13 @@ class IncidentTest extends TestCase
         $this->subject = new Incident(1);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function stepIsCorrectlySetOnInstantiation(): void
     {
         self::assertSame(1, $this->subject->getStep());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function exceptionIsThrownOnInstantiationWhenStepNumberIsInvalid(): void
     {
         $this->expectException(InvalidStepNumberException::class);
@@ -49,97 +46,73 @@ class IncidentTest extends TestCase
         new Incident(0);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function initiatorIsAnEmptyStringWhenNotSet(): void
     {
         self::assertSame('', $this->subject->getInitiator());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function usernameIsAnEmptyStringWhenNotSet(): void
     {
         self::assertSame('', $this->subject->getUsername());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function jobFunctionIsAnEmptyStringWhenNotSet(): void
     {
         self::assertSame('', $this->subject->getJobFunction());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function summaryIsAnEmptyStringWhenNotSet(): void
     {
         self::assertSame('', $this->subject->getSummary());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function priorityIsNormalWhenNotExplicitlySet(): void
     {
         self::assertSame(Priority::Normal, $this->subject->getPriority());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function poolIs1WhenNotExplicitlySet(): void
     {
         self::assertSame(1, $this->subject->getPool());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function simulationIsFalseOnInstantiation(): void
     {
         self::assertFalse($this->subject->isSimulation());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function stepEscalationDateIsNullWhenNotSet(): void
     {
         self::assertNull($this->subject->getStepEscalationDate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function incidentEscalationDateIsNullWhenNotSet(): void
     {
         self::assertNull($this->subject->getIncidentEscalationDate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function processTableFieldsIsAnEmptyArrayWhenNotSet(): void
     {
         self::assertSame([], $this->subject->getProcessTableFields());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSubtablesIsAnEmptyArrayWhenNotSet(): void
     {
         self::assertSame([], $this->subject->getSubTables());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetStepAreCorrectImplemented(): void
     {
         $actual = $this->subject->setStep(42);
@@ -148,9 +121,7 @@ class IncidentTest extends TestCase
         self::assertSame(42, $this->subject->getStep());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setStepThrowsExceptionWhenStepNumberIsInvalid(): void
     {
         $this->expectException(InvalidStepNumberException::class);
@@ -159,9 +130,7 @@ class IncidentTest extends TestCase
         $this->subject->setStep(0);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetInitiatorAreCorrectImplemented(): void
     {
         $actual = $this->subject->setInitiator('some initiator');
@@ -170,9 +139,7 @@ class IncidentTest extends TestCase
         self::assertSame('some initiator', $this->subject->getInitiator());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetUsernameAreCorrectImplemented(): void
     {
         $actual = $this->subject->setUsername('some username');
@@ -181,9 +148,7 @@ class IncidentTest extends TestCase
         self::assertSame('some username', $this->subject->getUsername());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetJobFunctionAreCorrectImplemented(): void
     {
         $actual = $this->subject->setJobFunction('some jobfunction');
@@ -192,9 +157,7 @@ class IncidentTest extends TestCase
         self::assertSame('some jobfunction', $this->subject->getJobFunction());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetSummaryAreCorrectImplemented(): void
     {
         $actual = $this->subject->setSummary('some summary');
@@ -203,9 +166,7 @@ class IncidentTest extends TestCase
         self::assertSame('some summary', $this->subject->getSummary());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetPriorityAreCorrectImplemented(): void
     {
         $actual = $this->subject->setPriority(Priority::High);
@@ -214,9 +175,7 @@ class IncidentTest extends TestCase
         self::assertSame(Priority::High, $this->subject->getPriority());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetPoolAreCorrectImplemented(): void
     {
         $actual = $this->subject->setPool(123);
@@ -225,9 +184,7 @@ class IncidentTest extends TestCase
         self::assertSame(123, $this->subject->getPool());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setPoolThrowsExceptionWhenZero(): void
     {
         $this->expectException(InvalidPoolNumberException::class);
@@ -236,9 +193,7 @@ class IncidentTest extends TestCase
         $this->subject->setPool(0);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setPoolAcceptsOne(): void
     {
         $exception = null;
@@ -250,9 +205,7 @@ class IncidentTest extends TestCase
         self::assertNull($exception, 'Unexpected InvalidArgumentException');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndIsSimulationAreCorrectImplemented(): void
     {
         $actual = $this->subject->setSimulation(true);
@@ -265,9 +218,7 @@ class IncidentTest extends TestCase
         self::assertFalse($this->subject->isSimulation());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetStepEscalationDateAreCorrectImplemented(): void
     {
         $dateTime = new \DateTimeImmutable('2020-01-05T13:45:17+01:00');
@@ -278,9 +229,7 @@ class IncidentTest extends TestCase
         self::assertSame($dateTime, $this->subject->getStepEscalationDate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetIncidentEscalationDateAreCorrectImplemented(): void
     {
         $dateTime = new \DateTimeImmutable('2020-01-05T13:46:43+01:00');
@@ -291,9 +240,7 @@ class IncidentTest extends TestCase
         self::assertSame($dateTime, $this->subject->getIncidentEscalationDate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setProcessTableFieldReturnsInstanceOfItself(): void
     {
         $actual = $this->subject->setProcessTableField('some name', 'some value');
@@ -301,9 +248,7 @@ class IncidentTest extends TestCase
         self::assertSame($this->subject, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetProcessTableFieldAreCorrectImplementedForAStringValue(): void
     {
         $this->subject->setProcessTableField('some string', 'some value');
@@ -311,9 +256,7 @@ class IncidentTest extends TestCase
         self::assertSame('some value', $this->subject->getProcessTableField('some string'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetProcessTableFieldAreCorrectImplementedForAnIntegerValue(): void
     {
         $this->subject->setProcessTableField('some integer', 42);
@@ -321,9 +264,7 @@ class IncidentTest extends TestCase
         self::assertSame(42, $this->subject->getProcessTableField('some integer'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetProcessTableFieldAreCorrectImplementedForABooleanTrueValue(): void
     {
         $this->subject->setProcessTableField('some boolean', true);
@@ -331,9 +272,7 @@ class IncidentTest extends TestCase
         self::assertTrue($this->subject->getProcessTableField('some boolean'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetProcessTableFieldAreCorrectImplementedForABooleanFalseValue(): void
     {
         $this->subject->setProcessTableField('some boolean', false);
@@ -341,9 +280,7 @@ class IncidentTest extends TestCase
         self::assertFalse($this->subject->getProcessTableField('some boolean'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetProcessTableFieldAreImplementedCorrectlyForAFile(): void
     {
         $fileStub = $this->createStub(FileInterface::class);
@@ -354,9 +291,7 @@ class IncidentTest extends TestCase
         self::assertSame($fileStub, $this->subject->getProcessTableField('some name'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getProcessTableFieldsIsCorrectImplemented(): void
     {
         $this->subject
@@ -372,9 +307,7 @@ class IncidentTest extends TestCase
         self::assertSame($expected, $this->subject->getProcessTableFields());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAndGetRowsForSubTableIsCorrectImplemented(): void
     {
         $rows = [
@@ -394,9 +327,7 @@ class IncidentTest extends TestCase
         self::assertSame($rows, $this->subject->getRowsForSubTable('some subtable'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addRowToSubTableIsCorrectImplemented(): void
     {
         $row = [
@@ -410,9 +341,7 @@ class IncidentTest extends TestCase
         self::assertSame([$row], $this->subject->getRowsForSubTable('some subtable'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function appendingRowToSubTable(): void
     {
         $rows = [

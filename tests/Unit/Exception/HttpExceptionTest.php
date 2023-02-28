@@ -16,13 +16,12 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Exception;
 
 use Brotkrueml\JobRouterClient\Exception\HttpException;
 use Buzz\Exception\ClientException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class HttpExceptionTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function fromRedirectReturnsInstantiatedHttpExceptionCorrectly(): void
     {
         $actual = HttpException::fromRedirect(307, 'http://example.org/', 'http://example.com/some/path/');
@@ -33,9 +32,7 @@ class HttpExceptionTest extends TestCase
         self::assertNull($actual->getPrevious());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fromErrorReturnsInstantiatedHttpExceptionWithoutGivenPreviousExceptionCorrectly(): void
     {
         $actual = HttpException::fromError(501, 'http://example.org/', 'some error');
@@ -46,9 +43,7 @@ class HttpExceptionTest extends TestCase
         self::assertNull($actual->getPrevious());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fromErrorReturnsInstantiatedHttpExceptionWithGivenPreviousExceptionCorrectly(): void
     {
         $previous = new ClientException();

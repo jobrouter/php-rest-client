@@ -15,13 +15,12 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Exception;
 
 use Brotkrueml\JobRouterClient\Exception\InvalidStepNumberException;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class InvalidStepNumberExceptionTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function forStepNumber(): void
     {
         $actual = InvalidStepNumberException::forStepNumber(0);

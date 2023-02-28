@@ -23,6 +23,7 @@ use Brotkrueml\JobRouterClient\Exception\RestClientException;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use donatj\MockWebServer\MockWebServer;
 use donatj\MockWebServer\Response;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 final class RestClientTest extends TestCase
@@ -49,10 +50,11 @@ final class RestClientTest extends TestCase
         self::$server->stop();
     }
 
+    #[Test]
     /**
      * @test
      */
-    public function testTokensRouteIsCorrectlyCalled(): void
+    public function tokensRouteIsCorrectlyCalled(): void
     {
         $this->setResponseOfTokensPath();
 
@@ -82,9 +84,7 @@ final class RestClientTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function wrongTokensRouteThrowsHttpException(): void
     {
         $this->expectException(HttpException::class);
@@ -102,9 +102,7 @@ final class RestClientTest extends TestCase
         (new RestClient(self::$configuration))->authenticate();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function whenAuthenticationFailsAuthenticationExceptionIsThrown(): void
     {
         $this->expectException(AuthenticationException::class);
@@ -122,9 +120,7 @@ final class RestClientTest extends TestCase
         (new RestClient(self::$configuration))->authenticate();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function whenAuthenticationResponseIsMalformedAuthenticationExceptionIsThrown(): void
     {
         $this->expectException(AuthenticationException::class);
@@ -139,9 +135,7 @@ final class RestClientTest extends TestCase
         (new RestClient(self::$configuration))->authenticate();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function authenticateReturnsObjectToRestClient(): void
     {
         $this->setResponseOfTokensPath();
@@ -152,9 +146,7 @@ final class RestClientTest extends TestCase
         self::assertSame($restClient, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function requestIsCalledCorrectly(): void
     {
         $this->setResponseOfTokensPath();
@@ -177,9 +169,7 @@ final class RestClientTest extends TestCase
         self::assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['X-Jobrouter-Authorization']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function startingSlashFromGivenResourceIsTrimmed(): void
     {
         $this->setResponseOfTokensPath();
@@ -198,9 +188,7 @@ final class RestClientTest extends TestCase
         self::assertSame('/api/rest/v2/some/route', $requestResource);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function jobRouterVersionBeforeAuthenticationIsEmptyString(): void
     {
         $restClient = new RestClient(self::$configuration);
@@ -208,9 +196,7 @@ final class RestClientTest extends TestCase
         self::assertSame('', $restClient->getJobRouterVersion());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function jobRouterVersionIsDetected(): void
     {
         $version = '2022.4.0';
@@ -232,9 +218,7 @@ final class RestClientTest extends TestCase
         self::assertSame($version, $restClient->getJobRouterVersion());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function redirectThrowsHttpException(): void
     {
         $this->expectException(HttpException::class);
@@ -258,9 +242,7 @@ final class RestClientTest extends TestCase
         (new RestClient(self::$configuration))->authenticate();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function serverIsNotAvailableThrowsHttpException(): void
     {
         $notConnectedPort = self::$server->getPort() - 1;
@@ -281,9 +263,7 @@ final class RestClientTest extends TestCase
         (new RestClient($configuration))->authenticate();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function noTokenIsReturnedThrowsAuthenticationException(): void
     {
         $this->expectException(AuthenticationException::class);
@@ -303,9 +283,7 @@ final class RestClientTest extends TestCase
         (new RestClient(self::$configuration))->authenticate();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function defaultUserAgentIsSendCorrectly(): void
     {
         $this->setResponseOfTokensPath();
@@ -326,9 +304,7 @@ final class RestClientTest extends TestCase
         self::assertStringEndsWith(' (https://jobrouter-client.rtfd.io/)', $requestHeaders['User-Agent']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function appendedUserAgentIsSendCorrectly(): void
     {
         $this->setResponseOfTokensPath();
@@ -350,9 +326,7 @@ final class RestClientTest extends TestCase
         self::assertStringEndsWith(') AdditionToUserAgent', $requestHeaders['User-Agent']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function adjustedClientOptionsAreAssignedToClientCorrectly(): void
     {
         $this->expectException(HttpException::class);
@@ -374,9 +348,7 @@ final class RestClientTest extends TestCase
         $restClient->request('GET', 'some/route');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function errorMessageIsCorrectGivenWhenStatusCodeIs400(): void
     {
         $this->expectException(HttpException::class);
@@ -402,9 +374,7 @@ final class RestClientTest extends TestCase
         (new RestClient(self::$configuration))->authenticate();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function errorMessageIsCorrectGivenWhenRequestError(): void
     {
         $this->expectException(HttpException::class);
@@ -435,9 +405,7 @@ final class RestClientTest extends TestCase
         $restClient->request('GET', 'some/route');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function formDataIsCorrectlySend(): void
     {
         $this->setResponseOfTokensPath();
@@ -504,9 +472,7 @@ final class RestClientTest extends TestCase
         \unlink($filePath);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function requestWhenDataIsABooleanAnExceptionIsThrown(): void
     {
         $this->expectException(RestClientException::class);
@@ -520,9 +486,7 @@ final class RestClientTest extends TestCase
         $restClient->request('POST', 'some/route', false);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function requestWhenDataIsAClassAnExceptionIsThrown(): void
     {
         $this->expectException(RestClientException::class);
@@ -536,9 +500,7 @@ final class RestClientTest extends TestCase
         $restClient->request('POST', 'some/route', new \stdClass());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function requestUsingFileInterfaceIsHandledCorrectly(): void
     {
         $this->setResponseOfTokensPath();

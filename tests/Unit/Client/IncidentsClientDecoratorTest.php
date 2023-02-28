@@ -19,6 +19,8 @@ use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
 use Brotkrueml\JobRouterClient\Enumerations\Priority;
 use Brotkrueml\JobRouterClient\Model\Incident;
 use Brotkrueml\JobRouterClient\Resource\FileInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -35,9 +37,7 @@ class IncidentsClientDecoratorTest extends TestCase
         $this->subject = new IncidentsClientDecorator($this->clientMock);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function requestIsPassedUnchangedToClientIfArrayIsGivenAsDataAndReturnsInstanceOfResponseInterface(): void
     {
         $responseStub = $this->createStub(ResponseInterface::class);
@@ -58,10 +58,10 @@ class IncidentsClientDecoratorTest extends TestCase
     }
 
     /**
-     * @test
-     * @dataProvider dataProvider
      * @param array<string, mixed> $withMultipart
      */
+    #[DataProvider('dataProvider')]
+    #[Test]
     public function requestWithIncidentIsProcessedAsMultipartAndPassedToClient(
         Incident $incident,
         array $withMultipart,
@@ -74,7 +74,7 @@ class IncidentsClientDecoratorTest extends TestCase
         $this->subject->request('POST', 'some/route', $incident);
     }
 
-    public function dataProvider(): iterable
+    public static function dataProvider(): iterable
     {
         yield 'Given step' => [
             new Incident(42),
@@ -172,7 +172,12 @@ class IncidentsClientDecoratorTest extends TestCase
             ],
         ];
 
-        $fileStub = $this->createStub(FileInterface::class);
+        $fileStub = new class() implements FileInterface {
+            public function toArray(): array
+            {
+                return [];
+            }
+        };
         yield 'Given process table fields' => [
             (new Incident(1))
                 ->setProcessTableField('some field', 'some value')
@@ -251,9 +256,7 @@ class IncidentsClientDecoratorTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function requestWithIncidentIsProcessedAndReturnsInstanceOfResponseInterface(): void
     {
         $responseStub = $this->createStub(ResponseInterface::class);

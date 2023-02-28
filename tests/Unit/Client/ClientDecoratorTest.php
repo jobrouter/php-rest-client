@@ -16,6 +16,7 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
 
 use Brotkrueml\JobRouterClient\Client\ClientDecorator;
 use Brotkrueml\JobRouterClient\Client\ClientInterface;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -34,9 +35,7 @@ class ClientDecoratorTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function authenticateIsPassedToClient(): void
     {
         $this->client
@@ -46,9 +45,7 @@ class ClientDecoratorTest extends TestCase
         $this->subject->authenticate();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function requestIsPassedToClient(): void
     {
         $responseStub = $this->createStub(ResponseInterface::class);
@@ -64,9 +61,7 @@ class ClientDecoratorTest extends TestCase
         self::assertSame($responseStub, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getJobRouterVersionIsPassedToClient(): void
     {
         $this->client

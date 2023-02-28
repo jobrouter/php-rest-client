@@ -16,14 +16,14 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Resource;
 
 use Brotkrueml\JobRouterClient\Exception\InvalidUrlException;
 use Brotkrueml\JobRouterClient\Resource\JobRouterSystem;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class JobRouterSystemTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider dataProviderForGetBaseUrl
-     */
+    #[DataProvider('dataProviderForGetBaseUrl')]
+    #[Test]
     public function getBaseUrlReturnsBaseUrlCorrectly(string $urlToTest, string $expectedUrl): void
     {
         $subject = new JobRouterSystem($urlToTest);
@@ -31,7 +31,7 @@ class JobRouterSystemTest extends TestCase
         self::assertSame($expectedUrl, $subject->getBaseUrl());
     }
 
-    public function dataProviderForGetBaseUrl(): \Iterator
+    public static function dataProviderForGetBaseUrl(): \Iterator
     {
         yield 'Base URL with ending slash' => [
             'https://example.org/jobrouter/',
@@ -44,10 +44,8 @@ class JobRouterSystemTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider dataProviderForGetApiUrl
-     */
+    #[DataProvider('dataProviderForGetApiUrl')]
+    #[Test]
     public function getApiUrlReturnsApiUrlCorrectly(string $urlToTest, string $expectedUrl): void
     {
         $subject = new JobRouterSystem($urlToTest);
@@ -55,7 +53,7 @@ class JobRouterSystemTest extends TestCase
         self::assertSame($expectedUrl, $subject->getApiUrl());
     }
 
-    public function dataProviderForGetApiUrl(): \Iterator
+    public static function dataProviderForGetApiUrl(): \Iterator
     {
         yield 'Base URL with ending slash' => [
             'https://example.org/jobrouter/',
@@ -68,9 +66,7 @@ class JobRouterSystemTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function toStringReturnsBaseUrl(): void
     {
         $subject = new JobRouterSystem('https://example.org/foo/');
@@ -78,10 +74,8 @@ class JobRouterSystemTest extends TestCase
         self::assertSame('https://example.org/foo/', $subject->__toString());
     }
 
-    /**
-     * @test
-     * @dataProvider dataProviderForGetResourceUrl
-     */
+    #[DataProvider('dataProviderForGetResourceUrl')]
+    #[Test]
     public function getResourceUrlReturnsApiUrlCorrectly(
         string $givenUrl,
         string $resourceToTest,
@@ -92,7 +86,7 @@ class JobRouterSystemTest extends TestCase
         self::assertSame($expectedUrl, $subject->getResourceUrl($resourceToTest));
     }
 
-    public function dataProviderForGetResourceUrl(): \Iterator
+    public static function dataProviderForGetResourceUrl(): \Iterator
     {
         yield 'Resource with leading slash' => [
             'https://example.org/',
@@ -107,10 +101,8 @@ class JobRouterSystemTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider dataProviderForInvalidUrls
-     */
+    #[DataProvider('dataProviderForInvalidUrls')]
+    #[Test]
     public function constructThrowsExceptionOnInvalidUrl(
         string $url,
         string $expectedExceptionMessage,
@@ -123,7 +115,7 @@ class JobRouterSystemTest extends TestCase
         new JobRouterSystem($url);
     }
 
-    public function dataProviderForInvalidUrls(): \Iterator
+    public static function dataProviderForInvalidUrls(): \Iterator
     {
         yield 'Random string' => [
             'some random string',

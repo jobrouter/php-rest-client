@@ -15,6 +15,8 @@ declare(strict_types=1);
 namespace Brotkrueml\JobRouterClient\Tests\Unit\Mapper;
 
 use Brotkrueml\JobRouterClient\Mapper\RouteContentTypeMapper;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class RouteContentTypeMapperTest extends TestCase
@@ -26,10 +28,8 @@ class RouteContentTypeMapperTest extends TestCase
         $this->subject = new RouteContentTypeMapper();
     }
 
-    /**
-     * @test
-     * @dataProvider dataProvider
-     */
+    #[DataProvider('dataProvider')]
+    #[Test]
     public function getRequestContentTypeForRouteReturnsCorrectContentType(
         string $method,
         string $resource,
@@ -40,7 +40,7 @@ class RouteContentTypeMapperTest extends TestCase
         self::assertSame($expectedContentType, $actual);
     }
 
-    public function dataProvider(): iterable
+    public static function dataProvider(): iterable
     {
         $handle = \fopen(__DIR__ . \DIRECTORY_SEPARATOR . 'routes.txt', 'r');
 
@@ -55,7 +55,6 @@ class RouteContentTypeMapperTest extends TestCase
 
             [$resource, $method, $contentType] = \explode(' ', $line);
 
-            /** @noinspection PhpUnnecessaryLocalVariableInspection */
             $description = \sprintf(
                 '%s %s returns %s',
                 $method,

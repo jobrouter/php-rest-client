@@ -16,13 +16,12 @@ namespace Brotkrueml\JobRouterClient\Tests\Unit\Middleware;
 
 use Brotkrueml\JobRouterClient\Middleware\AuthorisationMiddleware;
 use Nyholm\Psr7\Request;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class AuthorisationMiddlewareTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function handleRequestSetsNoHeaderWhenNoTokenIsAvailable(): void
     {
         $request = new Request('GET', '/');
@@ -37,9 +36,7 @@ class AuthorisationMiddlewareTest extends TestCase
         self::assertEmpty($newRequest->getHeaderLine('X-Jobrouter-Authorization'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function handleRequestSetsHeaderCorrectlyWhenTokenIsSet(): void
     {
         $request = new Request('GET', '/');
@@ -55,9 +52,7 @@ class AuthorisationMiddlewareTest extends TestCase
         self::assertSame('Bearer some-token', $newRequest->getHeaderLine('X-Jobrouter-Authorization'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function handleRequestSetsNoHeaderWhenTokenIsSetAndAfterwardsReset(): void
     {
         $request = new Request('GET', '/');
