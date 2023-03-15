@@ -205,12 +205,6 @@ With the following request you can post a dataset to a JobData table::
 #. Lines 8-13: As third parameter of the :php:`request()` method the data is
    defines to sent with the request.
 
-.. important::
-
-   Prior to JobRouter® 5.0.8 you have to send all columns of a table for which
-   the user has access rights. Otherwise you will receive an error with status
-   code 422 (Unprocessable entity).
-
 
 .. _usage.starting-new-instance:
 
