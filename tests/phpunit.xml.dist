@@ -11,9 +11,6 @@
     testdox="true"
 >
     <coverage includeUncoveredFiles="false">
-        <include>
-            <directory suffix=".php">../src</directory>
-        </include>
         <report>
             <clover outputFile="../logs/clover.xml"/>
         </report>
@@ -27,4 +24,9 @@
     <php>
         <ini name="error_reporting" value="E_ALL"/>
     </php>
+    <source>
+        <include>
+            <directory>../src</directory>
+        </include>
+    </source>
 </phpunit>
