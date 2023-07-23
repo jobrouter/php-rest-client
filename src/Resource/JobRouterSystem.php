@@ -107,7 +107,7 @@ final class JobRouterSystem implements \Stringable
 
     public function getApiUrl(): string
     {
-        return $this->getBaseUrl() . static::API_ENDPOINT;
+        return $this->getBaseUrl() . self::API_ENDPOINT;
     }
 
     public function getResourceUrl(string $resource): string

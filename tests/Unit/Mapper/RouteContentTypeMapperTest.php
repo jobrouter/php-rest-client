@@ -46,7 +46,7 @@ class RouteContentTypeMapperTest extends TestCase
 
         while (($line = \fgets($handle, 1024)) !== false) {
             $line = \trim($line);
-            if (empty($line)) {
+            if ($line === '') {
                 continue;
             }
             if (\str_starts_with($line, '#')) {
