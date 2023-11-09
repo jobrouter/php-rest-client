@@ -1,7 +1,8 @@
 includes:
-    - vendor/symplify/phpstan-rules/config/array-rules.neon
-    - vendor/symplify/phpstan-rules/config/forbidden-static-rules.neon
     - vendor/symplify/phpstan-rules/config/regex-rules.neon
+
+rules:
+    - Symplify\PHPStanRules\Rules\NoReturnArrayVariableListRule
 
 parameters:
     phpVersion: 80100
