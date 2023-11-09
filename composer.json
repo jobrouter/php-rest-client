@@ -28,16 +28,16 @@
         "psr/http-message": "^1.0"
     },
     "require-dev": {
-        "brotkrueml/coding-standards": "~4.0.0",
-        "donatj/mock-webserver": "^2.6",
-        "ergebnis/composer-normalize": "~2.30.2",
+        "brotkrueml/coding-standards": "~5.0.0",
+        "donatj/mock-webserver": "^2.7",
+        "ergebnis/composer-normalize": "~2.39.0",
         "infection/infection": "^0.26.21",
         "maglnet/composer-require-checker": "^4.6",
         "php-coveralls/php-coveralls": "^2.6",
         "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan": "1.10.41",
-        "phpunit/phpunit": "^10.2",
-        "rector/rector": "0.17.6",
+        "phpunit/phpunit": "^10.4",
+        "rector/rector": "0.18.6",
         "symplify/phpstan-rules": "^12.4",
         "tomasvotruba/cognitive-complexity": "^0.2.2"
     },
