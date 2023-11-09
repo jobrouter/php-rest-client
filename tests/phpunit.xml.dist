@@ -8,7 +8,6 @@
     executionOrder="random"
     failOnWarning="true"
     failOnRisky="true"
-    testdox="true"
 >
     <coverage includeUncoveredFiles="false">
         <report>
