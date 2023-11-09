@@ -31,7 +31,7 @@
         "brotkrueml/coding-standards": "~5.0.0",
         "donatj/mock-webserver": "^2.7",
         "ergebnis/composer-normalize": "~2.39.0",
-        "infection/infection": "^0.26.21",
+        "infection/infection": "^0.27.8",
         "maglnet/composer-require-checker": "^4.6",
         "php-coveralls/php-coveralls": "^2.6",
         "phpstan/extension-installer": "^1.2",

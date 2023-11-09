@@ -90,7 +90,7 @@ final class RestClient implements ClientInterface
         $this->detectJobRouterVersionFromResponse($response);
 
         try {
-            $content = \json_decode($response->getBody()->getContents(), true, 512, \JSON_THROW_ON_ERROR);
+            $content = \json_decode($response->getBody()->getContents(), true, flags: \JSON_THROW_ON_ERROR);
         } catch (\JsonException $e) {
             throw new AuthenticationException('Authorisation response is malformed', 1612552955, $e);
         }
@@ -199,7 +199,7 @@ final class RestClient implements ClientInterface
             $jsonPayload = \json_encode($jsonPayload, \JSON_THROW_ON_ERROR);
         }
 
-        if (\is_string($jsonPayload) && $jsonPayload !== '') {
+        if ($jsonPayload !== '') {
             $request = $request->withBody($this->psr17factory->createStream($jsonPayload));
         }
 

@@ -63,7 +63,7 @@ final class RestClientTest extends TestCase
 
         self::assertInstanceOf(RestClient::class, $restClient);
 
-        $input = \json_decode(self::$server->getLastRequest()->getInput(), true, 512, \JSON_THROW_ON_ERROR);
+        $input = \json_decode(self::$server->getLastRequest()->getInput(), true, flags: \JSON_THROW_ON_ERROR);
 
         self::assertSame('fake_username', $input['username']);
         self::assertSame('fake_password', $input['password']);
@@ -346,6 +346,23 @@ final class RestClientTest extends TestCase
         $restClient->authenticate();
 
         $restClient->request('GET', 'some/route');
+    }
+
+    #[Test]
+    public function errorMessageIsCorrectGivenWhenStatusCodeIs300(): void
+    {
+        $this->expectException(HttpException::class);
+        $this->expectExceptionMessage(\sprintf(
+            'Redirect "300" from "http://127.0.0.1:%d/api/rest/v2/application/tokens" to "https://example.com/" occurred',
+            self::$server->getPort(),
+        ));
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/application/tokens',
+            new Response('', ['Location: https://example.com/'], 300),
+        );
+
+        (new RestClient(self::$configuration))->authenticate();
     }
 
     #[Test]

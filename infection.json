@@ -17,16 +17,6 @@
         "text": "logs/infection.log"
     },
     "mutators": {
-        "@default": true,
-        "DecrementInteger": {
-            "ignore": [
-                "Brotkrueml\\JobRouterClient\\Client\\RestClient::authenticate::111"
-            ]
-        },
-        "IncrementInteger": {
-            "ignore": [
-                "Brotkrueml\\JobRouterClient\\Client\\RestClient::authenticate::111"
-            ]
-        }
+        "@default": true
     }
 }
