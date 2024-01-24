@@ -10,9 +10,6 @@
         "configDir": "tests"
     },
     "logs": {
-        "stryker": {
-            "report": "main"
-        },
         "html": "logs/infection.html",
         "text": "logs/infection.log"
     },
