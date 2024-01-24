@@ -1,5 +1,22 @@
 # Upgrade
 
+## From version 2.0 to 3.0
+
+The namespace of the JobRouter REST Client classes have changed from
+
+```
+\Brotkrueml\JobRouterClient
+```
+
+to
+
+```
+\JobRouter\AddOn\RestClient
+```
+
+Easiest way to update your code to the new namespace is to use search/replace
+in your project.
+
 ## From version 1.x to 2.0
 
 With JobRouter REST Client 2.0 the minimum requirements have changed, supported are
