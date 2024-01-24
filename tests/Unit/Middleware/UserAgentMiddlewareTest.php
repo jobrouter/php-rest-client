@@ -3,19 +3,17 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the JobRouter Client.
- * https://github.com/brotkrueml/jobrouter-client
- *
- * Copyright (c) 2019-2023 Chris Müller
+ * This file is part of the JobRouter REST Client.
+ * https://github.com/jobrouter/php-rest-client
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\JobRouterClient\Tests\Unit\Middleware;
+namespace JobRouter\AddOn\RestClient\Tests\Unit\Middleware;
 
-use Brotkrueml\JobRouterClient\Information\Version;
-use Brotkrueml\JobRouterClient\Middleware\UserAgentMiddleware;
+use JobRouter\AddOn\RestClient\Information\Version;
+use JobRouter\AddOn\RestClient\Middleware\UserAgentMiddleware;
 use Nyholm\Psr7\Request;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;

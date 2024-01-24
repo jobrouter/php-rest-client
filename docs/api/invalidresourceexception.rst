@@ -6,7 +6,7 @@
 Exception\\InvalidResourceException
 ===================================
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Exception\InvalidResourceException
+.. php:class:: final class JobRouter\AddOn\RestClient\Exception\InvalidResourceException
 
    This exception is thrown when a resource is invalid, like a file which does
    not exist.

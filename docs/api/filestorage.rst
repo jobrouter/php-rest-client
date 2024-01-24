@@ -6,7 +6,7 @@
 Resource\\FileStorage
 =====================
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Resource\FileStorage
+.. php:class:: final class JobRouter\AddOn\RestClient\Resource\FileStorage
 
    A storage for :ref:`Brotkrueml\\JobRouterClient\\Resource\\File <api-file>` objects.
 
@@ -39,7 +39,7 @@ Usage Example
 ::
 
    <?php
-   use Brotkrueml\JobRouterClient\Resource\FileStorage;
+   use JobRouter\AddOn\RestClient\Resource\FileStorage;
 
    require_once 'vendor/autoload.php';
 

@@ -6,7 +6,7 @@
 Model\\Incident
 ===============
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Model\Incident
+.. php:class:: final class JobRouter\AddOn\RestClient\Model\Incident
 
    Incident model class which collects the fields for a process instance start.
 
@@ -189,8 +189,8 @@ Usage Example
 ::
 
    <?php
-   use Brotkrueml\JobRouterClient\Model\Incident;
-   use Brotkrueml\JobRouterClient\Resource\File;
+   use JobRouter\AddOn\RestClient\Model\Incident;
+   use JobRouter\AddOn\RestClient\Resource\File;
 
    require_once 'vendor/autoload.php';
 

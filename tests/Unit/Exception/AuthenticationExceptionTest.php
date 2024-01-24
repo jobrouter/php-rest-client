@@ -3,19 +3,17 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the JobRouter Client.
- * https://github.com/brotkrueml/jobrouter-client
- *
- * Copyright (c) 2019-2023 Chris Müller
+ * This file is part of the JobRouter REST Client.
+ * https://github.com/jobrouter/php-rest-client
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\JobRouterClient\Tests\Unit\Exception;
+namespace JobRouter\AddOn\RestClient\Tests\Unit\Exception;
 
-use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
+use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
+use JobRouter\AddOn\RestClient\Exception\AuthenticationException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

@@ -6,7 +6,7 @@
 Client\\ClientDecorator
 =======================
 
-.. php:class:: abstract class Brotkrueml\JobRouterClient\Client\ClientDecorator
+.. php:class:: abstract class JobRouter\AddOn\RestClient\Client\ClientDecorator
 
    :implements: :ref:`Brotkrueml\\JobRouterClient\\Client\\ClientInterface <api-clientinterface>`
 

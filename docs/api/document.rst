@@ -6,7 +6,7 @@
 Model\\Document
 ===============
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Model\Document
+.. php:class:: final class JobRouter\AddOn\RestClient\Model\Document
 
    Document model class which collects the data for the an archive document.
 
@@ -67,8 +67,8 @@ Usage Example
 ::
 
    <?php
-   use Brotkrueml\JobRouterClient\Model\Document;
-   use Brotkrueml\JobRouterClient\Resource\File;
+   use JobRouter\AddOn\RestClient\Model\Document;
+   use JobRouter\AddOn\RestClient\Resource\File;
 
    require_once 'vendor/autoload.php';
 

@@ -6,7 +6,7 @@
 Exception\\RestClientException
 ==============================
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Exception\RestClientException
+.. php:class:: final class JobRouter\AddOn\RestClient\Exception\RestClientException
 
    This exception is thrown if the REST client discovers an error, like the
    given data for a request is not processable.

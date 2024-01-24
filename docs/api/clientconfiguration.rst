@@ -6,7 +6,7 @@
 Configuration\\ClientConfiguration
 ==================================
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Configuration\ClientConfiguration
+.. php:class:: final class JobRouter\AddOn\RestClient\Configuration\ClientConfiguration
 
    Immutable value object that represents the configuration for a RestClient.
 
@@ -59,7 +59,7 @@ Usage Example
 ::
 
    <?php
-   use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
+   use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
 
    require_once 'vendor/autoload.php';
 

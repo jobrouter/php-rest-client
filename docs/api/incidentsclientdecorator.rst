@@ -6,7 +6,7 @@
 Client\\IncidentsClientDecorator
 ================================
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Exception\IncidentsClientDecorator
+.. php:class:: final class JobRouter\AddOn\RestClient\Exception\IncidentsClientDecorator
 
    :extends: :ref:`Brotkrueml\\JobRouterClient\\Client\\ClientDecorator <api-clientdecorator>`
 
@@ -41,11 +41,11 @@ Usage Example
 ::
 
    <?php
-   use Brotkrueml\JobRouterClient\Client\RestClient;
-   use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
-   use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-   use Brotkrueml\JobRouterClient\Model\Incident;
-   use Brotkrueml\JobRouterClient\Resource\File;
+   use JobRouter\AddOn\RestClient\Client\RestClient;
+   use JobRouter\AddOn\RestClient\Client\IncidentsClientDecorator;
+   use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
+   use JobRouter\AddOn\RestClient\Model\Incident;
+   use JobRouter\AddOn\RestClient\Resource\File;
 
    require_once 'vendor/autoload.php';
 

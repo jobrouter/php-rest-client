@@ -3,27 +3,25 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the JobRouter Client.
- * https://github.com/brotkrueml/jobrouter-client
- *
- * Copyright (c) 2019-2023 Chris Müller
+ * This file is part of the JobRouter REST Client.
+ * https://github.com/jobrouter/php-rest-client
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\JobRouterClient\Client;
+namespace JobRouter\AddOn\RestClient\Client;
 
-use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-use Brotkrueml\JobRouterClient\Exception\AuthenticationException;
-use Brotkrueml\JobRouterClient\Exception\HttpException;
-use Brotkrueml\JobRouterClient\Exception\RestClientException;
-use Brotkrueml\JobRouterClient\Mapper\RouteContentTypeMapper;
-use Brotkrueml\JobRouterClient\Middleware\AuthorisationMiddleware;
-use Brotkrueml\JobRouterClient\Middleware\UserAgentMiddleware;
-use Brotkrueml\JobRouterClient\Resource\FileInterface;
 use Buzz\Browser;
 use Buzz\Client\Curl;
+use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
+use JobRouter\AddOn\RestClient\Exception\AuthenticationException;
+use JobRouter\AddOn\RestClient\Exception\HttpException;
+use JobRouter\AddOn\RestClient\Exception\RestClientException;
+use JobRouter\AddOn\RestClient\Mapper\RouteContentTypeMapper;
+use JobRouter\AddOn\RestClient\Middleware\AuthorisationMiddleware;
+use JobRouter\AddOn\RestClient\Middleware\UserAgentMiddleware;
+use JobRouter\AddOn\RestClient\Resource\FileInterface;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;

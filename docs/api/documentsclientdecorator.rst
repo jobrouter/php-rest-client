@@ -6,7 +6,7 @@
 Client\\DocumentsClientDecorator
 ================================
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Client\DocumentsClientDecorator
+.. php:class:: final class JobRouter\AddOn\RestClient\Client\DocumentsClientDecorator
 
    :extends: :ref:`Brotkrueml\\JobRouterClient\\Client\\ClientDecorator <api-clientdecorator>`
 
@@ -41,11 +41,11 @@ Usage Example
 ::
 
    <?php
-   use Brotkrueml\JobRouterClient\Client\RestClient;
-   use Brotkrueml\JobRouterClient\Client\DocumentsClientDecorator;
-   use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-   use Brotkrueml\JobRouterClient\Model\Document;
-   use Brotkrueml\JobRouterClient\Resource\File;
+   use JobRouter\AddOn\RestClient\Client\RestClient;
+   use JobRouter\AddOn\RestClient\Client\DocumentsClientDecorator;
+   use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
+   use JobRouter\AddOn\RestClient\Model\Document;
+   use JobRouter\AddOn\RestClient\Resource\File;
 
    require_once 'vendor/autoload.php';
 

@@ -18,9 +18,9 @@ Initialisation of the JobRouter Client
 .. code-block:: php
 
    <?php
-   use Brotkrueml\JobRouterClient\Client\RestClient;
-   use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-   use Brotkrueml\JobRouterClient\Exception\ExceptionInterface;
+   use JobRouter\AddOn\RestClient\Client\RestClient;
+   use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
+   use JobRouter\AddOn\RestClient\Exception\ExceptionInterface;
 
    require_once 'vendor/autoload.php';
 
@@ -46,7 +46,7 @@ Initialisation of the JobRouter Client
 Let's dig into the piece of code:
 
 #. Lines 2-4: The JobRouter client library uses the namespace
-   :php:`Brotkrueml\JobRouterClient`, the :php:`uses` ease the using of the
+   :php:`JobRouter\AddOn\RestClient`, the :php:`uses` ease the using of the
    following classes.
 
 #. Line 6: Require the autoloading file, so the classes are found and can be
@@ -215,7 +215,7 @@ To start a new instance of a process you have to send the data as
 ``multipart/form-data`` instead of JSON like the previous examples::
 
    <?php
-   use Brotkrueml\JobRouterClient\Resource\File;
+   use JobRouter\AddOn\RestClient\Resource\File;
 
    // The JobRouter Client is already initialised
 
@@ -258,9 +258,9 @@ table and sub table stuff::
 
    <?php
    // Additional uses
-   use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
-   use Brotkrueml\JobRouterClient\Model\Incident;
-   use Brotkrueml\JobRouterClient\Resource\File;
+   use JobRouter\AddOn\RestClient\Client\IncidentsClientDecorator;
+   use JobRouter\AddOn\RestClient\Model\Incident;
+   use JobRouter\AddOn\RestClient\Resource\File;
 
    // The JobRouter Client is already initialised
 
@@ -315,7 +315,7 @@ Archiving a document is as easy as :ref:`starting an instance
 <usage.starting-new-instance>`::
 
    <?php
-   use Brotkrueml\JobRouterClient\Resource\File;
+   use JobRouter\AddOn\RestClient\Resource\File;
 
    // The JobRouter Client is already initialised
 
@@ -342,9 +342,9 @@ array::
 
    <?php
    // Additional uses
-   use Brotkrueml\JobRouterClient\Client\DocumentsClientDecorator;
-   use Brotkrueml\JobRouterClient\Model\Document;
-   use Brotkrueml\JobRouterClient\Resource\File;
+   use JobRouter\AddOn\RestClient\Client\DocumentsClientDecorator;
+   use JobRouter\AddOn\RestClient\Model\Document;
+   use JobRouter\AddOn\RestClient\Resource\File;
 
    // The JobRouter Client is already initialised
 
@@ -373,11 +373,11 @@ The decorators can be nested. This can be useful when, e.g., posting to a
 JobData table, then archiving a document and at last starting an instance::
 
    <?php
-   use Brotkrueml\JobRouterClient\Client\DocumentsClientDecorator;
-   use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
-   use Brotkrueml\JobRouterClient\Client\RestClient;
-   use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-   use Brotkrueml\JobRouterClient\Exception\ExceptionInterface;
+   use JobRouter\AddOn\RestClient\Client\DocumentsClientDecorator;
+   use JobRouter\AddOn\RestClient\Client\IncidentsClientDecorator;
+   use JobRouter\AddOn\RestClient\Client\RestClient;
+   use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
+   use JobRouter\AddOn\RestClient\Exception\ExceptionInterface;
 
    require_once 'vendor/autoload.php';
 
@@ -402,7 +402,7 @@ To simplify the instantiation of the different clients, you can use a
 can be created with::
 
    <?php
-   use Brotkrueml\JobRouterClient\Client\ClientFactory;
+   use JobRouter\AddOn\RestClient\Client\ClientFactory;
 
    $client = ClientFactory::createRestClient(
       'https://example.org/jobrouter/',
@@ -415,7 +415,7 @@ The decorators can also be instantiated with factory methods. This is useful
 when client nesting is not required::
 
    <?php
-   use Brotkrueml\JobRouterClient\Client\ClientFactory;
+   use JobRouter\AddOn\RestClient\Client\ClientFactory;
 
    $incidentsClientDecorator = ClientFactory::createIncidentsClientDecorator(
       'https://example.org/jobrouter/',

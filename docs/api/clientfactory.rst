@@ -6,7 +6,7 @@
 Client\\ClientFactory
 =====================
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Client\ClientFactory
+.. php:class:: final class JobRouter\AddOn\RestClient\Client\ClientFactory
 
    Factory for instantiating the rest client and the client decorators.
 

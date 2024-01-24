@@ -6,7 +6,7 @@
 Exception\\HttpException
 ========================
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Exception\HttpException
+.. php:class:: final class JobRouter\AddOn\RestClient\Exception\HttpException
 
    This exception is thrown if a HTTP status code is returned for a request
    which indicates an error.

@@ -3,20 +3,18 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the JobRouter Client.
- * https://github.com/brotkrueml/jobrouter-client
- *
- * Copyright (c) 2019-2023 Chris Müller
+ * This file is part of the JobRouter REST Client.
+ * https://github.com/jobrouter/php-rest-client
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\JobRouterClient\Tests\Unit\Configuration;
+namespace JobRouter\AddOn\RestClient\Tests\Unit\Configuration;
 
-use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-use Brotkrueml\JobRouterClient\Configuration\ClientOptions;
-use Brotkrueml\JobRouterClient\Exception\InvalidConfigurationException;
+use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
+use JobRouter\AddOn\RestClient\Configuration\ClientOptions;
+use JobRouter\AddOn\RestClient\Exception\InvalidConfigurationException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

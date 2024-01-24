@@ -6,6 +6,6 @@
 Resource\\FileInterface
 =======================
 
-.. php:class:: interface Brotkrueml\JobRouterClient\Resource\FileInterface
+.. php:class:: interface JobRouter\AddOn\RestClient\Resource\FileInterface
 
    Interface for a file.

@@ -6,7 +6,7 @@
 Client\\ClientInterface
 =======================
 
-.. php:class:: interface Brotkrueml\JobRouterClient\Client\ClientInterface
+.. php:class:: interface JobRouter\AddOn\RestClient\Client\ClientInterface
 
    Interface for a REST client.
 

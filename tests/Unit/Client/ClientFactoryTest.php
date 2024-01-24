@@ -3,24 +3,22 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the JobRouter Client.
- * https://github.com/brotkrueml/jobrouter-client
- *
- * Copyright (c) 2019-2023 Chris Müller
+ * This file is part of the JobRouter REST Client.
+ * https://github.com/jobrouter/php-rest-client
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
+namespace JobRouter\AddOn\RestClient\Tests\Unit\Client;
 
-use Brotkrueml\JobRouterClient\Client\ClientFactory;
-use Brotkrueml\JobRouterClient\Client\DocumentsClientDecorator;
-use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
-use Brotkrueml\JobRouterClient\Client\RestClient;
-use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
 use donatj\MockWebServer\MockWebServer;
 use donatj\MockWebServer\Response;
+use JobRouter\AddOn\RestClient\Client\ClientFactory;
+use JobRouter\AddOn\RestClient\Client\DocumentsClientDecorator;
+use JobRouter\AddOn\RestClient\Client\IncidentsClientDecorator;
+use JobRouter\AddOn\RestClient\Client\RestClient;
+use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

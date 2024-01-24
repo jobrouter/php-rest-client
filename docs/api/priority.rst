@@ -6,7 +6,7 @@
 Enumerations\\Priority
 ======================
 
-.. php:class:: enum Brotkrueml\JobRouterClient\Enumerations\Priority
+.. php:class:: enum JobRouter\AddOn\RestClient\Enumerations\Priority
 
    Priority enumeration to be used in :ref:`Incident class <api-incident>`.
 

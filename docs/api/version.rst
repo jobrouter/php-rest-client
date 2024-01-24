@@ -6,7 +6,7 @@
 Information\\Version
 ====================
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Information\Version
+.. php:class:: final class JobRouter\AddOn\RestClient\Information\Version
 
    Version information.
 

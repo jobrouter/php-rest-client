@@ -6,7 +6,7 @@
 Client\\RestClient
 ==================
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Client\RestClient
+.. php:class:: final class JobRouter\AddOn\RestClient\Client\RestClient
 
    :implements: :ref:`Brotkrueml\\JobRouterClient\\Client\\ClientInterface <api-clientinterface>`
 
@@ -43,8 +43,8 @@ Usage Example
 ::
 
    <?php
-   use Brotkrueml\JobRouterClient\Client\RestClient;
-   use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
+   use JobRouter\AddOn\RestClient\Client\RestClient;
+   use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
 
    require_once 'vendor/autoload.php';
 

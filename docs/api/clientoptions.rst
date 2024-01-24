@@ -6,7 +6,7 @@
 Configuration\\ClientOptions
 ============================
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Configuration\ClientOptions
+.. php:class:: final class JobRouter\AddOn\RestClient\Configuration\ClientOptions
 
    Immutable value object that represents the client options which is assigned
    to a :ref:`client configuration <api-clientconfiguration>`.
@@ -27,8 +27,8 @@ Usage Example
 ::
 
    <?php
-   use Brotkrueml\JobRouterClient\Configuration\ClientConfiguration;
-   use Brotkrueml\JobRouterClient\Configuration\ClientOptions;
+   use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
+   use JobRouter\AddOn\RestClient\Configuration\ClientOptions;
 
    require_once 'vendor/autoload.php';
 

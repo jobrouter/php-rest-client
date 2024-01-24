@@ -6,7 +6,7 @@
 Resource\\File
 ==============
 
-.. php:class:: final class Brotkrueml\JobRouterClient\Resource\File
+.. php:class:: final class JobRouter\AddOn\RestClient\Resource\File
 
    Value object that represents a file.
 
@@ -41,7 +41,7 @@ Usage Example
 ::
 
    <?php
-   use Brotkrueml\JobRouterClient\Resource\File;
+   use JobRouter\AddOn\RestClient\Resource\File;
 
    require_once 'vendor/autoload.php';
 

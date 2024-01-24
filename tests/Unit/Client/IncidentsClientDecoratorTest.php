@@ -3,22 +3,20 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the JobRouter Client.
- * https://github.com/brotkrueml/jobrouter-client
- *
- * Copyright (c) 2019-2023 Chris Müller
+ * This file is part of the JobRouter REST Client.
+ * https://github.com/jobrouter/php-rest-client
  *
  * For the full copyright and license information, please view the
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Brotkrueml\JobRouterClient\Tests\Unit\Client;
+namespace JobRouter\AddOn\RestClient\Tests\Unit\Client;
 
-use Brotkrueml\JobRouterClient\Client\ClientInterface;
-use Brotkrueml\JobRouterClient\Client\IncidentsClientDecorator;
-use Brotkrueml\JobRouterClient\Enumerations\Priority;
-use Brotkrueml\JobRouterClient\Model\Incident;
-use Brotkrueml\JobRouterClient\Resource\FileInterface;
+use JobRouter\AddOn\RestClient\Client\ClientInterface;
+use JobRouter\AddOn\RestClient\Client\IncidentsClientDecorator;
+use JobRouter\AddOn\RestClient\Enumerations\Priority;
+use JobRouter\AddOn\RestClient\Model\Incident;
+use JobRouter\AddOn\RestClient\Resource\FileInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
