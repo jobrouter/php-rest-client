@@ -1,7 +1,5 @@
 .idea
 .phpunit.cache
-.scannerwork
 composer.lock
-docs/_build/
 logs/
 vendor/

@@ -91,15 +91,6 @@ jobs:
       - name: Check coding standards
         run: |
           vendor/bin/ecs check --no-progress-bar
-      - name: Generate code coverage
-        run: |
-          make code-coverage
-      - name: Send code coverage report to coveralls.io
-        run: |
-          vendor/bin/php-coveralls -v
-        env:
-          COVERALLS_RUN_LOCALLY: 1
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       - name: Run mutation tests
         run: |
           make mutation
