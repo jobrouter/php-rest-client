@@ -12,6 +12,4 @@ declare(strict_types=1);
 
 namespace JobRouter\AddOn\RestClient\Exception;
 
-final class InvalidUrlException extends \RuntimeException implements ExceptionInterface
-{
-}
+final class InvalidUrlException extends \RuntimeException implements ExceptionInterface {}

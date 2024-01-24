@@ -28,7 +28,7 @@
         "psr/http-message": "^1.1 || ^2.0"
     },
     "require-dev": {
-        "brotkrueml/coding-standards": "~5.0.0",
+        "brotkrueml/coding-standards": "~5.1.0",
         "donatj/mock-webserver": "^2.7",
         "ergebnis/composer-normalize": "~2.39.0",
         "infection/infection": "^0.27.8",

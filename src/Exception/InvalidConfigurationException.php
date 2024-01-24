@@ -12,6 +12,4 @@ declare(strict_types=1);
 
 namespace JobRouter\AddOn\RestClient\Exception;
 
-final class InvalidConfigurationException extends \RuntimeException implements ExceptionInterface
-{
-}
+final class InvalidConfigurationException extends \RuntimeException implements ExceptionInterface {}

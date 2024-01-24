@@ -12,6 +12,4 @@ declare(strict_types=1);
 
 namespace JobRouter\AddOn\RestClient\Exception;
 
-interface ExceptionInterface extends \Throwable
-{
-}
+interface ExceptionInterface extends \Throwable {}

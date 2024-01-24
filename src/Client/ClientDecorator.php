@@ -18,8 +18,7 @@ abstract class ClientDecorator implements ClientInterface
 {
     public function __construct(
         protected readonly ClientInterface $client,
-    ) {
-    }
+    ) {}
 
     public function authenticate(): self
     {
