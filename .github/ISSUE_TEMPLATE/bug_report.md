@@ -22,10 +22,10 @@ If applicable, add screenshots and/or code snippets to help explain your problem
 
 ### Environment
 
-- JobRouter Client version: [e.g. 1.1.0]
-- JobRouter version: [e.g. 5.2.0]
+- JobRouter REST Client version: [e.g. 3.0.0]
+- JobRouter version: [e.g. 2023.1.2]
 - Is your TYPO3 installation set up with Composer (Composer Mode): [yes, no]
-- OS: [e.g. OSX 10.13.4, Windows 10, Debian 11]
+- OS: [e.g. OSX 10.13.4, Windows 11, Debian 12]
 
 ### Possible Solution
 
