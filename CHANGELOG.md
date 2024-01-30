@@ -80,13 +80,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 First stable release
 
 
-[Unreleased]: https://github.com/brotkrueml/jobrouter-client/compare/v2.0.0...HEAD
-[2.0.0]: https://github.com/brotkrueml/jobrouter-client/compare/v1.4.0...v2.0.0
-[1.4.0]: https://github.com/brotkrueml/jobrouter-client/compare/v1.3.0...v1.4.0
-[1.3.0]: https://github.com/brotkrueml/jobrouter-client/compare/v1.2.0...v1.3.0
-[1.2.0]: https://github.com/brotkrueml/jobrouter-client/compare/v1.1.2...v1.2.0
-[1.1.2]: https://github.com/brotkrueml/jobrouter-client/compare/v1.1.1...v1.1.2
-[1.1.1]: https://github.com/brotkrueml/jobrouter-client/compare/v1.1.0...v1.1.1
-[1.1.0]: https://github.com/brotkrueml/jobrouter-client/compare/v1.0.1...v1.1.0
-[1.0.1]: https://github.com/brotkrueml/jobrouter-client/compare/v1.0.0...v1.0.1
-[1.0.0]: https://github.com/brotkrueml/jobrouter-client/releases/tag/v1.0.0
+[Unreleased]: https://github.com/jobrouter/php-rest-client/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/jobrouter/php-rest-client/compare/v1.4.0...v2.0.0
+[1.4.0]: https://github.com/jobrouter/php-rest-client/compare/v1.3.0...v1.4.0
+[1.3.0]: https://github.com/jobrouter/php-rest-client/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/jobrouter/php-rest-client/compare/v1.1.2...v1.2.0
+[1.1.2]: https://github.com/jobrouter/php-rest-client/compare/v1.1.1...v1.1.2
+[1.1.1]: https://github.com/jobrouter/php-rest-client/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/jobrouter/php-rest-client/compare/v1.0.1...v1.1.0
+[1.0.1]: https://github.com/jobrouter/php-rest-client/compare/v1.0.0...v1.0.1
+[1.0.0]: https://github.com/jobrouter/php-rest-client/releases/tag/v1.0.0

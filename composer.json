@@ -1,5 +1,5 @@
 {
-    "name": "brotkrueml/jobrouter-client",
+    "name": "jobrouter/rest-client",
     "description": "Rest client for the JobRouter® digitalisation platform",
     "license": "GPL-2.0-or-later",
     "type": "library",
@@ -14,8 +14,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/brotkrueml/jobrouter-client/issues",
-        "source": "https://github.com/brotkrueml/jobrouter-client",
+        "issues": "https://github.com/jobrouter/rest-client/issues",
+        "source": "https://github.com/jobrouter/rest-client",
         "docs": "https://jobrouter-client.readthedocs.io/"
     },
     "require": {

@@ -36,7 +36,7 @@ composer require jobrouter/rest-client
 **Note:** The JobRouter REST Client *before* version 3.0 uses another dependency:
 
 ```shell
-composer require brotkrueml/jobrouter-client
+composer require jobrouter/rest-client
 ```
 
 This is the preferred way: You can track new releases of the JobRouter REST Client
@@ -55,13 +55,13 @@ It is advised to check the integrity of the package:
 ### Linux
 
 ```shell
-sha256sum -c jobrouter-client-\ |release|\ .tar.gz.sha256.txt
+sha256sum -c jobrouter-rest-client-\ |release|\ .tar.gz.sha256.txt
 ```
 
 It should output:
 
 ```text
-jobrouter-client-<version>.tar.gz: OK
+jobrouter-rest-client-<version>.tar.gz: OK
 ```
 
 
@@ -72,7 +72,7 @@ Windows is shipped with the
 program. You can check the hash of the file with:
 
 ```shell
-CertUtil -hashfile jobrouter-client-<version>.zip sha256
+CertUtil -hashfile jobrouter-rest-client-<version>.zip sha256
 ```
 
 and compare it with the hash value in the corresponding
