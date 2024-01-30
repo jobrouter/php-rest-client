@@ -3,27 +3,22 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Core\ValueObject\PhpVersion;
 use Rector\Php74\Rector\LNumber\AddLiteralSeparatorToNumberRector;
-use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
-use Rector\PHPUnit\Set\PHPUnitLevelSetList;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Set\ValueObject\SetList;
-use Rector\TypeDeclaration\Rector\FunctionLike\AddReturnTypeDeclarationFromYieldsRector;
-use Rector\TypeDeclaration\Rector\Property\TypedPropertyFromAssignsRector;
+use Rector\ValueObject\PhpVersion;
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->phpVersion(PhpVersion::PHP_81);
 
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_81,
+        PHPUnitSetList::PHPUNIT_100,
         SetList::CODE_QUALITY,
         SetList::DEAD_CODE,
         SetList::EARLY_RETURN,
         SetList::TYPE_DECLARATION,
-        PHPUnitLevelSetList::UP_TO_PHPUNIT_100,
-        PHPUnitSetList::PHPUNIT_CODE_QUALITY,
     ]);
 
     $rectorConfig->autoloadPaths([
@@ -37,12 +32,5 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->importShortClasses(false);
     $rectorConfig->skip([
         AddLiteralSeparatorToNumberRector::class,
-        AddReturnTypeDeclarationFromYieldsRector::class => [
-            __DIR__ . '/tests',
-        ],
-        PreferPHPUnitThisCallRector::class,
-        TypedPropertyFromAssignsRector::class => [
-            __DIR__ . '/tests',
-        ],
     ]);
 };
