@@ -14,8 +14,11 @@ to
 \JobRouter\AddOn\RestClient
 ```
 
-Easiest way to update your code to the new namespace is to use search/replace
+The easiest way to update your code to the new namespace is to use search/replace
 in your project.
+
+The package name (used in `composer.json`) has changed from `brotkrueml/jobrouter-client`
+to `jobrouter/rest-client`.
 
 ## From version 1.x to 2.0
 
