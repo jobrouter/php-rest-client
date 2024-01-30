@@ -9,4 +9,5 @@ documents. This JobRouter Client eases the access to the REST API.
 
 [Documentation](https://github.com/jobrouter/php-rest-client/blob/main/docs/index.md) |
 [Changelog](https://github.com/jobrouter/php-rest-client/blob/main/CHANGELOG.md) |
+[Issue Tracker](https://github.com/jobrouter/php-rest-client/issues) |
 [JobRouter® Marketplace](https://marketplace.jobrouter.com/en/product/jobrouter-client/)

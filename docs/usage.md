@@ -11,6 +11,9 @@
   * [Nesting of client decorators](#nesting-of-client-decorators)
   * [Using a factory to create a client](#using-a-factory-to-create-a-client)
 
+> If you find a bug or want to propose a feature, please use the
+> [issue tracker on GitHub](https://github.com/jobrouter/php-rest-client/issues).
+
 ## Initialisation
 
 ```php
