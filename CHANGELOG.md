@@ -9,6 +9,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 - Compatibility with PHP 8.3
+- Compatibility with JobRouter® 2024.1
 
 ### Changed
 - Namespace from `Brotkrueml\JobRouterClient` to `JobRouter\AddOn\RestClient`
