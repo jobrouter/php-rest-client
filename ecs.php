@@ -1,6 +1,7 @@
 <?php
 
 declare (strict_types=1);
+use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
 
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
@@ -19,7 +20,7 @@ HEADER;
         __DIR__ . '/src',
         __DIR__ . '/tests',
     ]);
-    $config->ruleWithConfiguration(\PhpCsFixer\Fixer\Comment\HeaderCommentFixer::class, [
+    $config->ruleWithConfiguration(HeaderCommentFixer::class, [
         'comment_type' => 'comment',
         'header' => $header,
         'separate' => 'both',

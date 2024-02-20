@@ -43,7 +43,7 @@ final class ClientFactory
         string $password,
         int $lifetime = ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS,
     ): IncidentsClientDecorator {
-        return new IncidentsClientDecorator(static::createRestClient($baseUrl, $username, $password, $lifetime));
+        return new IncidentsClientDecorator(self::createRestClient($baseUrl, $username, $password, $lifetime));
     }
 
     public static function createDocumentsClientDecorator(
@@ -53,6 +53,6 @@ final class ClientFactory
         string $password,
         int $lifetime = ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS,
     ): DocumentsClientDecorator {
-        return new DocumentsClientDecorator(static::createRestClient($baseUrl, $username, $password, $lifetime));
+        return new DocumentsClientDecorator(self::createRestClient($baseUrl, $username, $password, $lifetime));
     }
 }
