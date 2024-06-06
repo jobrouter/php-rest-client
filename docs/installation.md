@@ -55,7 +55,7 @@ It is advised to check the integrity of the package:
 ### Linux
 
 ```shell
-sha256sum -c jobrouter-rest-client-\ |release|\ .tar.gz.sha256.txt
+sha256sum -c jobrouter-rest-client-<version>.tar.gz.sha256.txt
 ```
 
 It should output:
