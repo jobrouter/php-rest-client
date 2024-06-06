@@ -10,3 +10,13 @@ documents. This JobRouter Client eases the access to the REST API.
 [Changelog](https://github.com/jobrouter/php-rest-client/blob/main/CHANGELOG.md) |
 [Issue Tracker](https://github.com/jobrouter/php-rest-client/issues) |
 [JobRouter® Marketplace](https://marketplace.jobrouter.com/en/product/jobrouter-client/)
+
+## Versions and support
+
+| Latest release | Updates will contain                                   |
+|----------------|--------------------------------------------------------|
+| 3.x            | Features, bug and security fixes                       |
+| 2.x            | Bug and security fixes, end of life expected: Dec 2024 |
+| 1.x            | End of life                                            |
+
+For compatibility with PHP and JobRouter versions see [Installation](docs/installation.md#version-matrix).
