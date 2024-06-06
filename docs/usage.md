@@ -77,7 +77,7 @@ can be retrieved with a `RestClient` method::
 
 ```php
 <?php
-// The JobRouter Client is already initialised
+// The JobRouter REST Client is already initialised
 
 $client->getJobRouterVersion();
 ```
@@ -94,7 +94,7 @@ JobRouter® REST API:
 
 ```php
 <?php
-// The JobRouter Client is already initialised
+// The JobRouter REST Client is already initialised
 
 $response = $client->request(
     $method,
@@ -122,7 +122,7 @@ assume the client is already initialised, like in the
 
 ```php
 <?php
-// The JobRouter Client is already initialised
+// The JobRouter REST Client is already initialised
 
 try {
     // With the request()` method we'll send a request to the JobRouter®
@@ -154,7 +154,7 @@ With the following request you can post a dataset to a JobData table:
 
 ```php
 <?php
-// The JobRouter Client is already initialised
+// The JobRouter REST Client is already initialised
 
 try {
     // As we add a new dataset we have to use the POST method.
@@ -188,12 +188,12 @@ optional: You can overwrite the file name and specify a content type.
 <?php
 use JobRouter\AddOn\RestClient\Resource\File;
 
-// The JobRouter Client is already initialised
+// The JobRouter REST Client is already initialised
 
 // Define instance data
 $multipart = [
     'step' => '1',
-    'summary' => 'Instance started via JobRouter Client',
+    'summary' => 'Instance started via JobRouter REST Client',
     'processtable[fields][0][name]' => 'INVOICENR',
     'processtable[fields][0][value]' => 'IN02984',
     'processtable[fields][1][name]' => 'INVOICE_FILE',
@@ -228,7 +228,7 @@ use JobRouter\AddOn\RestClient\Client\IncidentsClientDecorator;
 use JobRouter\AddOn\RestClient\Model\Incident;
 use JobRouter\AddOn\RestClient\Resource\File;
 
-// The JobRouter Client is already initialised
+// The JobRouter REST Client is already initialised
 
 // Create an object instance of the Incident model and use the
 // available setters to assign the necessary data.
@@ -273,7 +273,7 @@ try {
 <?php
 use JobRouter\AddOn\RestClient\Resource\File;
 
-// The JobRouter Client is already initialised
+// The JobRouter REST Client is already initialised
 
 // Define document data
 $documentContentAndMetaData = [
@@ -303,7 +303,7 @@ use JobRouter\AddOn\RestClient\Client\DocumentsClientDecorator;
 use JobRouter\AddOn\RestClient\Model\Document;
 use JobRouter\AddOn\RestClient\Resource\File;
 
-// The JobRouter Client is already initialised
+// The JobRouter REST Client is already initialised
 
 $document = (new Document())
     ->setIndexField('INVOICENR', 'IN02984')
