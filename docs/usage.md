@@ -232,8 +232,8 @@ use JobRouter\AddOn\RestClient\Resource\File;
 
 // Create an object instance of the Incident model and use the
 // available setters to assign the necessary data.
-$incident = (new Incident())
-    ->setStep(1)
+// The step number has to be passed to the constructor
+$incident = (new Incident(1))
     ->setSummary('Instance started via IncidentsClientDecorator')
     ->setProcessTableField('INVOICENR', 'IN02984')
     ->setProcessTableField(
