@@ -17,7 +17,7 @@ namespace JobRouter\AddOn\RestClient\Information;
  */
 final class Version
 {
-    private const VERSION = '3.0.0';
+    private const VERSION = '3.1.0-dev';
 
     public function getVersion(): string
     {
