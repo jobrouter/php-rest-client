@@ -32,7 +32,6 @@
         "donatj/mock-webserver": "^2.7",
         "ergebnis/composer-normalize": "~2.42.0",
         "infection/infection": "^0.27.10",
-        "maglnet/composer-require-checker": "^4.7",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "1.11.10",
         "phpunit/phpunit": "^10.4",

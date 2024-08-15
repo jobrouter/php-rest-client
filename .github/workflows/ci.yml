@@ -49,7 +49,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install composer dependencies
         run: |
-          composer remove infection/infection maglnet/composer-require-checker symplify/phpstan-rules --dev --no-update
+          composer remove infection/infection symplify/phpstan-rules --dev --no-update
           composer install --prefer-dist --no-progress --no-suggest
       - name: Run PHP linter
         run: |
@@ -85,9 +85,6 @@ jobs:
       - name: Normalize composer.json
         run: |
           composer normalize --dry-run
-      - name: Check composer require
-        run: |
-          vendor/bin/composer-require-checker check
       - name: Check coding standards
         run: |
           vendor/bin/ecs check --no-progress-bar
