@@ -30,11 +30,11 @@
     "require-dev": {
         "brotkrueml/coding-standards": "~5.1.0",
         "donatj/mock-webserver": "^2.7",
-        "ergebnis/composer-normalize": "~2.42.0",
-        "infection/infection": "^0.27.10",
+        "ergebnis/composer-normalize": "~2.43.0",
+        "infection/infection": "^0.29.6",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "1.11.10",
-        "phpunit/phpunit": "^10.4",
+        "phpunit/phpunit": "^10.5",
         "rector/rector": "1.2.3",
         "symplify/phpstan-rules": "^13.0",
         "tomasvotruba/cognitive-complexity": "^0.2.3"
