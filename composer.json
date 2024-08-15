@@ -36,7 +36,7 @@
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "1.11.10",
         "phpunit/phpunit": "^10.4",
-        "rector/rector": "1.0.1",
+        "rector/rector": "1.2.3",
         "symplify/phpstan-rules": "^13.0",
         "tomasvotruba/cognitive-complexity": "^0.2.3"
     },
