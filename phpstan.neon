@@ -19,11 +19,12 @@ services:
         tags: [phpstan.rules.rule]
         arguments:
             forbiddenFunctions:
-                - eval
-                - dump
-                - die
                 - compact
+                - die
+                - dump
+                - eval
                 - var_dump
+                - var_export
     -
         class: Symplify\PHPStanRules\Rules\ForbiddenNodeRule
         tags: [phpstan.rules.rule]
