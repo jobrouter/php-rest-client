@@ -299,7 +299,7 @@ final class RestClientTest extends TestCase
 
         self::assertArrayHasKey('User-Agent', $requestHeaders);
         self::assertStringStartsWith('JobRouterClient/', $requestHeaders['User-Agent']);
-        self::assertStringEndsWith(' (https://jobrouter-client.rtfd.io/)', $requestHeaders['User-Agent']);
+        self::assertStringEndsWith(' (https://github.com/jobrouter/php-rest-client)', $requestHeaders['User-Agent']);
     }
 
     #[Test]

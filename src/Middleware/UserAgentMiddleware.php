@@ -22,7 +22,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class UserAgentMiddleware implements MiddlewareInterface
 {
-    private const USER_AGENT_TEMPLATE = 'JobRouterClient/%s (https://jobrouter-client.rtfd.io/) %s';
+    private const USER_AGENT_TEMPLATE = 'JobRouterClient/%s (https://github.com/jobrouter/php-rest-client) %s';
 
     private readonly string $userAgent;
 
