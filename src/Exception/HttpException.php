@@ -38,7 +38,7 @@ final class HttpException extends \RuntimeException implements ExceptionInterfac
         int $statusCode,
         string $resourceUrl,
         string $error,
-        ClientExceptionInterface $e = null,
+        ?ClientExceptionInterface $e = null,
     ): self {
         $message = \sprintf(
             'Error fetching resource "%s": %s',
