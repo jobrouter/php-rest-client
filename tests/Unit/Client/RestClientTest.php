@@ -49,9 +49,6 @@ final class RestClientTest extends TestCase
     }
 
     #[Test]
-    /**
-     * @test
-     */
     public function tokensRouteIsCorrectlyCalled(): void
     {
         $this->setResponseOfTokensPath();
@@ -160,7 +157,7 @@ final class RestClientTest extends TestCase
         $response = $restClient->request('GET', '//some/route');
 
         $responseContent = $response->getBody()->getContents();
-        $requestHeaders = self::$server->getLastRequest()->getHeaders();
+        $requestHeaders = self::$server->getLastRequest()?->getHeaders() ?? [];
 
         self::assertSame('The response of some/route', $responseContent);
         self::assertArrayHasKey('X-Jobrouter-Authorization', $requestHeaders);
@@ -181,7 +178,7 @@ final class RestClientTest extends TestCase
         );
 
         $restClient->request('GET', '/some/route');
-        $requestResource = self::$server->getLastRequest()->getParsedUri()['path'];
+        $requestResource = self::$server->getLastRequest()?->getParsedUri()['path'] ?? '';
 
         self::assertSame('/api/rest/v2/some/route', $requestResource);
     }
@@ -247,7 +244,7 @@ final class RestClientTest extends TestCase
 
         $this->expectException(HttpException::class);
         $this->expectExceptionMessageMatches(\sprintf(
-            '#Error fetching resource "http://127.0.0.1:%d/api/rest/v2/application/tokens": Failed to connect to 127.0.0.1 port %d#',
+            '#Error fetching resource "http://127.0.0.1:%d/api/rest/v2/application/tokens": cURL error 7: Failed to connect to 127.0.0.1 port %d#',
             $notConnectedPort,
             $notConnectedPort,
         ));
@@ -295,7 +292,7 @@ final class RestClientTest extends TestCase
         );
 
         $restClient->request('GET', 'some/route');
-        $requestHeaders = self::$server->getLastRequest()->getHeaders();
+        $requestHeaders = self::$server?->getLastRequest()->getHeaders() ?? [];
 
         self::assertArrayHasKey('User-Agent', $requestHeaders);
         self::assertStringStartsWith('JobRouterClient/', $requestHeaders['User-Agent']);
@@ -317,7 +314,7 @@ final class RestClientTest extends TestCase
         );
 
         $restClient->request('GET', 'some/route');
-        $requestHeaders = self::$server->getLastRequest()->getHeaders();
+        $requestHeaders = self::$server->getLastRequest()?->getHeaders() ?? [];
 
         self::assertArrayHasKey('User-Agent', $requestHeaders);
         self::assertStringStartsWith('JobRouterClient/', $requestHeaders['User-Agent']);
@@ -327,17 +324,14 @@ final class RestClientTest extends TestCase
     #[Test]
     public function adjustedClientOptionsAreAssignedToClientCorrectly(): void
     {
+        // We are testing a proxy server which should not respond, therefore an exception
         $this->expectException(HttpException::class);
-        $this->expectExceptionMessageMatches('/Could not resolve proxy: not\.existing\.proxy\.server/');
+        $this->expectExceptionMessageMatches('/Failed to connect to 127.0.0.1 port 9999/');
 
         $this->setResponseOfTokensPath();
 
         $clientOptions = new ClientOptions(
-            false,
-            5,
-            0,
-            true,
-            'http://not.existing.proxy.server/',
+            proxy: 'http://127.0.0.1:9999/',
         );
         $configuration = self::$configuration->withClientOptions($clientOptions);
         $restClient = new RestClient($configuration);
@@ -468,7 +462,7 @@ final class RestClientTest extends TestCase
         self::assertArrayHasKey('X-Jobrouter-Authorization', $requestHeaders);
         self::assertSame('Bearer ' . self::TEST_TOKEN, $requestHeaders['X-Jobrouter-Authorization']);
         self::assertArrayHasKey('Content-Type', $requestHeaders);
-        self::assertStringStartsWith('multipart/form-data; boundary="', $requestHeaders['Content-Type']);
+        self::assertStringStartsWith('multipart/form-data; boundary=', $requestHeaders['Content-Type']);
 
         $post = $lastRequest->getPost();
         self::assertArrayHasKey('step', $post);

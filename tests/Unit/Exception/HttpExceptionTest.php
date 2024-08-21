@@ -12,10 +12,10 @@ declare(strict_types=1);
 
 namespace JobRouter\AddOn\RestClient\Tests\Unit\Exception;
 
-use Buzz\Exception\ClientException;
 use JobRouter\AddOn\RestClient\Exception\HttpException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Client\ClientExceptionInterface;
 
 class HttpExceptionTest extends TestCase
 {
@@ -26,7 +26,10 @@ class HttpExceptionTest extends TestCase
 
         self::assertInstanceOf(HttpException::class, $actual);
         self::assertSame(307, $actual->getCode());
-        self::assertSame('Redirect "307" from "http://example.org/" to "http://example.com/some/path/" occurred', $actual->getMessage());
+        self::assertSame(
+            'Redirect "307" from "http://example.org/" to "http://example.com/some/path/" occurred',
+            $actual->getMessage(),
+        );
         self::assertNull($actual->getPrevious());
     }
 
@@ -44,7 +47,7 @@ class HttpExceptionTest extends TestCase
     #[Test]
     public function fromErrorReturnsInstantiatedHttpExceptionWithGivenPreviousExceptionCorrectly(): void
     {
-        $previous = new ClientException();
+        $previous = new class() extends \RuntimeException implements ClientExceptionInterface {};
 
         $actual = HttpException::fromError(418, 'http://example.net/', 'another error', $previous);
 

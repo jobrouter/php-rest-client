@@ -12,40 +12,37 @@ declare(strict_types=1);
 
 namespace JobRouter\AddOn\RestClient\Middleware;
 
-use Buzz\Middleware\MiddlewareInterface;
+use GuzzleHttp\Promise\PromiseInterface;
 use JobRouter\AddOn\RestClient\Information\Version;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * @internal
  */
-class UserAgentMiddleware implements MiddlewareInterface
+class UserAgentMiddleware
 {
     private const USER_AGENT_TEMPLATE = 'JobRouterClient/%s (https://github.com/jobrouter/php-rest-client) %s';
 
-    private readonly string $userAgent;
-
-    public function __construct(string $userAgentAddition = '')
+    public function __invoke(string $userAgentAddition): callable
     {
-        $this->userAgent = \rtrim(
+        $userAgent = $this->compileUserAgent($userAgentAddition);
+
+        return static fn(callable $handler): callable =>
+            static function (RequestInterface $request, array $options) use ($handler, $userAgent): PromiseInterface {
+                $request = $request->withHeader('User-Agent', $userAgent);
+
+                return $handler($request, $options);
+            };
+    }
+
+    private function compileUserAgent(string $userAgentAddition): string
+    {
+        return \rtrim(
             \sprintf(
                 self::USER_AGENT_TEMPLATE,
                 (new Version())->getVersion(),
                 $userAgentAddition,
             ),
         );
-    }
-
-    public function handleRequest(RequestInterface $request, callable $next): ?RequestInterface
-    {
-        $request = $request->withHeader('User-Agent', $this->userAgent);
-
-        return $next($request);
-    }
-
-    public function handleResponse(RequestInterface $request, ResponseInterface $response, callable $next): ?ResponseInterface
-    {
-        return $next($request, $response);
     }
 }

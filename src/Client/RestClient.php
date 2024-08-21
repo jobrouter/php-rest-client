@@ -12,49 +12,52 @@ declare(strict_types=1);
 
 namespace JobRouter\AddOn\RestClient\Client;
 
-use Buzz\Browser;
-use Buzz\Client\Curl;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Handler\CurlHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Utils;
 use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
 use JobRouter\AddOn\RestClient\Exception\AuthenticationException;
 use JobRouter\AddOn\RestClient\Exception\HttpException;
 use JobRouter\AddOn\RestClient\Exception\RestClientException;
+use JobRouter\AddOn\RestClient\Mapper\MultipartFormDataMapper;
 use JobRouter\AddOn\RestClient\Mapper\RouteContentTypeMapper;
 use JobRouter\AddOn\RestClient\Middleware\AuthorisationMiddleware;
 use JobRouter\AddOn\RestClient\Middleware\UserAgentMiddleware;
 use JobRouter\AddOn\RestClient\Resource\FileInterface;
-use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * RestClient for handling HTTP requests
+ * RestClient for handling HTTP requests to a JobRouter instance
  */
 final class RestClient implements ClientInterface
 {
-    private readonly Psr17Factory $psr17factory;
-    private readonly Browser $browser;
-    private readonly AuthorisationMiddleware $authorisationMiddleware;
+    private readonly Client $client;
     private readonly RouteContentTypeMapper $routeContentTypeMapper;
     private string $jobRouterVersion = '';
+    private string $authorisationToken = '';
 
-    /**
-     * Creates a RestClient instance, already authenticated against the JobRouter system
-     *
-     * @param ClientConfiguration $configuration The configuration
-     *
-     * @throws HttpException
-     */
     public function __construct(
         private readonly ClientConfiguration $configuration,
     ) {
-        $this->psr17factory = new Psr17Factory();
+        $stack = HandlerStack::create();
+        $stack->setHandler(new CurlHandler());
+        $stack->push((new UserAgentMiddleware())($this->configuration->getUserAgentAddition()));
+        $stack->push((new AuthorisationMiddleware())($this->authorisationToken));
 
-        $client = new Curl($this->psr17factory, $this->configuration->getClientOptions()->toArray());
-        $this->browser = new Browser($client, $this->psr17factory);
-        $this->browser->addMiddleware(new UserAgentMiddleware($this->configuration->getUserAgentAddition()));
-        $this->authorisationMiddleware = new AuthorisationMiddleware();
-        $this->browser->addMiddleware($this->authorisationMiddleware);
+        $options = [
+            ...$this->configuration->getClientOptions()->toArray(),
+            ...[
+                'base_uri' => $configuration->getJobRouterSystem()->getBaseUrl(),
+                'handler' => $stack,
+                'synchronous' => true,
+            ],
+        ];
+        $this->client = new Client($options);
 
         $this->routeContentTypeMapper = new RouteContentTypeMapper();
     }
@@ -67,7 +70,7 @@ final class RestClient implements ClientInterface
      */
     public function authenticate(): self
     {
-        $this->authorisationMiddleware->resetToken();
+        $this->authorisationToken = '';
 
         $options = [
             'username' => $this->configuration->getUsername(),
@@ -97,7 +100,7 @@ final class RestClient implements ClientInterface
             throw new AuthenticationException('Token is unavailable', 1570222016);
         }
 
-        $this->authorisationMiddleware->setToken($content['tokens'][0]);
+        $this->authorisationToken = $content['tokens'][0];
 
         return $this;
     }
@@ -137,7 +140,7 @@ final class RestClient implements ClientInterface
             } elseif ($contentType === 'application/json') {
                 $response = $this->sendJson($method, $resource, $data);
             } else {
-                $response = $this->browser->sendRequest($this->buildRequest($method, $resource));
+                $response = $this->client->sendRequest($this->buildRequest($method, $resource));
             }
         } catch (ClientExceptionInterface $e) {
             throw HttpException::fromError(
@@ -168,21 +171,17 @@ final class RestClient implements ClientInterface
     }
 
     /**
-     * @param array<string, string|int|bool|FileInterface|array<string|int,mixed>> $multipart
+     * @param array<string, string|int|float|bool|FileInterface|array{path: non-empty-string, filename?: string, contentType?: string}> $data
+     * @throws GuzzleException
      */
-    private function sendForm(string $method, string $resource, array $multipart): ResponseInterface
+    private function sendForm(string $method, string $resource, array $data): ResponseInterface
     {
-        \array_walk($multipart, static function (&$value): void {
-            if ($value instanceof FileInterface) {
-                $value = $value->toArray();
-            }
-        });
+        $multipart = (new MultipartFormDataMapper())->map($data);
+        $request = $this->buildRequest($method, $resource);
 
-        return $this->browser->submitForm(
-            $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
-            $multipart,
-            $method,
-        );
+        return $this->client->send($request, [
+            'multipart' => $multipart,
+        ]);
     }
 
     /**
@@ -198,18 +197,15 @@ final class RestClient implements ClientInterface
         }
 
         if ($jsonPayload !== '') {
-            $request = $request->withBody($this->psr17factory->createStream($jsonPayload));
+            $request = $request->withBody(Utils::streamFor($jsonPayload));
         }
 
-        return $this->browser->sendRequest($request);
+        return $this->client->sendRequest($request);
     }
 
     private function buildRequest(string $method, string $resource): RequestInterface
     {
-        return $this->psr17factory->createRequest(
-            $method,
-            $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
-        );
+        return new Request($method, $this->configuration->getJobRouterSystem()->getResourceUrl($resource));
     }
 
     /**

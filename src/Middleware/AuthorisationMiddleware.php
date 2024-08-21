@@ -12,40 +12,26 @@ declare(strict_types=1);
 
 namespace JobRouter\AddOn\RestClient\Middleware;
 
-use Buzz\Middleware\MiddlewareInterface;
+use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * @internal
  */
-class AuthorisationMiddleware implements MiddlewareInterface
+class AuthorisationMiddleware
 {
-    private ?string $token = null;
-
-    public function setToken(
+    public function __invoke(
         #[\SensitiveParameter]
-        string $token,
-    ): void {
-        $this->token = $token;
-    }
+        string &$token,
+    ): callable {
+        return static function (callable $handler) use (&$token): callable {
+            return static function (RequestInterface $request, array $options) use ($handler, &$token): PromiseInterface {
+                if ($token !== '') {
+                    $request = $request->withHeader('X-Jobrouter-Authorization', 'Bearer ' . $token);
+                }
 
-    public function resetToken(): void
-    {
-        $this->token = null;
-    }
-
-    public function handleRequest(RequestInterface $request, callable $next): ?RequestInterface
-    {
-        if ($this->token) {
-            $request = $request->withHeader('X-Jobrouter-Authorization', 'Bearer ' . $this->token);
-        }
-
-        return $next($request);
-    }
-
-    public function handleResponse(RequestInterface $request, ResponseInterface $response, callable $next): ?ResponseInterface
-    {
-        return $next($request, $response);
+                return $handler($request, $options);
+            };
+        };
     }
 }

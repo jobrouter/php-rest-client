@@ -25,9 +25,8 @@ final class ClientOptionsTest extends TestCase
 
         $actual = $subject->toArray();
 
-        self::assertCount(5, $actual);
+        self::assertCount(4, $actual);
         self::assertFalse($actual['allow_redirects']);
-        self::assertSame(5, $actual['max_redirects']);
         self::assertSame(0, $actual['timeout']);
         self::assertTrue($actual['verify']);
         self::assertNull($actual['proxy']);
@@ -40,9 +39,10 @@ final class ClientOptionsTest extends TestCase
 
         $actual = $subject->toArray();
 
-        self::assertCount(5, $actual);
-        self::assertTrue($actual['allow_redirects']);
-        self::assertSame(10, $actual['max_redirects']);
+        self::assertCount(4, $actual);
+        self::assertSame([
+            'max' => 10,
+        ], $actual['allow_redirects']);
         self::assertSame(42, $actual['timeout']);
         self::assertFalse($actual['verify']);
         self::assertSame('http://example.org/', $actual['proxy']);
