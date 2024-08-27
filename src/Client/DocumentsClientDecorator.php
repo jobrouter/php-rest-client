@@ -47,7 +47,6 @@ final class DocumentsClientDecorator extends ClientDecorator
         $multipartKeywordFields = $this->buildFieldsForMultipart('keyword', $document->getKeywordFields());
         $multipartFiles = $this->buildFilesForMultipart($document->getFiles());
 
-        // @phpstan-ignore-next-line Use value object over return of values
         return [...$multipartIndexFields, ...$multipartKeywordFields, ...$multipartFiles];
     }
 

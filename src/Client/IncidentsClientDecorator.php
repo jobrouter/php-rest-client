@@ -91,7 +91,6 @@ final class IncidentsClientDecorator extends ClientDecorator
             $incident->getSubTables(),
         );
 
-        // @phpstan-ignore-next-line Use value object over return of values
         return [...$multipart, ...$multipartProcessTableFields, ...$multipartSubTables];
     }
 
