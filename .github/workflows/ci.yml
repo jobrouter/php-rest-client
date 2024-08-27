@@ -27,6 +27,7 @@ jobs:
           - '8.1'
           - '8.2'
           - '8.3'
+          - '8.4'
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -49,14 +50,14 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install composer dependencies
         run: |
-          composer remove infection/infection symplify/phpstan-rules --dev --no-update
+          composer remove infection/infection symplify/phpstan-rules ergebnis/composer-normalize --dev --no-update
           composer install --prefer-dist --no-progress --no-suggest
       - name: Run PHP linter
         run: |
           find . -type f -name '*.php' ! -path "./vendor/*" -print0 | xargs -0 -n1 -P4 php -l -n | (! grep -v "No syntax errors detected" )
       - name: Run unit tests
         run: |
-          make tests
+          vendor/bin/phpunit --configuration=tests/phpunit.xml.dist
   code-quality:
     name: Code Quality
     runs-on: ubuntu-latest
