@@ -44,7 +44,7 @@ final class IncidentsClientDecorator extends ClientDecorator
     private function buildMultipart(Incident $incident): array
     {
         $multipart = [
-            'step' => (string)$incident->getStep(),
+            'step' => (string) $incident->getStep(),
         ];
 
         if ($incident->getInitiator() !== '') {
@@ -64,15 +64,15 @@ final class IncidentsClientDecorator extends ClientDecorator
         }
 
         if ($incident->getPriority() !== Priority::Normal) {
-            $multipart['priority'] = (string)$incident->getPriority()->value;
+            $multipart['priority'] = (string) $incident->getPriority()->value;
         }
 
         if ($incident->getPool() > 1) {
-            $multipart['pool'] = (string)$incident->getPool();
+            $multipart['pool'] = (string) $incident->getPool();
         }
 
         if ($incident->isSimulation()) {
-            $multipart['simulation'] = (string)$incident->isSimulation();
+            $multipart['simulation'] = (string) $incident->isSimulation();
         }
 
         if ($incident->getStepEscalationDate() instanceof \DateTimeInterface) {
@@ -117,10 +117,10 @@ final class IncidentsClientDecorator extends ClientDecorator
     private function prepareFieldValue(bool|int|string|FileInterface $value): string|FileInterface
     {
         if (\is_bool($value)) {
-            $value = (int)$value;
+            $value = (int) $value;
         }
 
-        return $value instanceof FileInterface ? $value : (string)$value;
+        return $value instanceof FileInterface ? $value : (string) $value;
     }
 
     private function getProcessTableFieldKey(int $index, string $part): string

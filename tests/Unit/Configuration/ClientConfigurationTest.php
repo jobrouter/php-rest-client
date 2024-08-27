@@ -63,7 +63,7 @@ class ClientConfigurationTest extends TestCase
         $actual = $this->subject->getJobRouterSystem();
         $expected = 'http://example.org/jobrouter/';
 
-        self::assertSame($expected, (string)$actual);
+        self::assertSame($expected, (string) $actual);
     }
 
     #[Test]

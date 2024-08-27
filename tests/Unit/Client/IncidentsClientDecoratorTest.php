@@ -170,7 +170,7 @@ class IncidentsClientDecoratorTest extends TestCase
             ],
         ];
 
-        $fileStub = new class() implements FileInterface {
+        $fileStub = new class implements FileInterface {
             public function toArray(): array
             {
                 return [];

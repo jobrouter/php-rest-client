@@ -57,7 +57,7 @@ final class MultipartFormDataMapper
             // @phpstan-ignore-next-line Use value object over return of values
             return [
                 'name' => $name,
-                'contents' => (string)$value,
+                'contents' => (string) $value,
             ];
         }, \array_keys($data), \array_values($data));
     }

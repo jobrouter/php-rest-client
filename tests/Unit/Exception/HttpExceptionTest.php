@@ -47,7 +47,7 @@ class HttpExceptionTest extends TestCase
     #[Test]
     public function fromErrorReturnsInstantiatedHttpExceptionWithGivenPreviousExceptionCorrectly(): void
     {
-        $previous = new class() extends \RuntimeException implements ClientExceptionInterface {};
+        $previous = new class extends \RuntimeException implements ClientExceptionInterface {};
 
         $actual = HttpException::fromError(418, 'http://example.net/', 'another error', $previous);
 
