@@ -21,9 +21,11 @@ use JobRouter\AddOn\RestClient\Exception\AuthenticationException;
 use JobRouter\AddOn\RestClient\Exception\HttpException;
 use JobRouter\AddOn\RestClient\Exception\RestClientException;
 use JobRouter\AddOn\RestClient\Resource\FileInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
+#[CoversClass(RestClient::class)]
 final class RestClientTest extends TestCase
 {
     private const TEST_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqYXQiOjE1NzAyMjAwNzIsImp0aSI6IjhWMGtaSzJ5RzRxdGlhbjdGbGZTNUhPTGZaeGtZXC9obG1SVEV2VXIxVmwwPSIsImlzcyI6IkpvYlJvdXRlciIsIm5iZiI6MTU3MDIyMDA3MiwiZXhwIjoxNTcwMjIwMTAyLCJkYXRhIjp7InVzZXJuYW1lIjoicmVzdCJ9fQ.cbAyj36f9MhAwOMzlTEheRkHhuuIEOeb1Uy8i0KfUhU';
@@ -566,5 +568,42 @@ final class RestClientTest extends TestCase
         self::assertSame('foo.txt', $files['processtable']['name']['fields'][0]['value']);
 
         \unlink($filePath);
+    }
+
+    #[Test]
+    public function callAuthenticateWithActivatedNtlmThrowsException(): void
+    {
+        $this->expectException(AuthenticationException::class);
+        $this->expectExceptionCode(1724833066);
+
+        $configuration = new ClientConfiguration(
+            self::$server->getServerRoot() . '/',
+            useNtlm: true,
+        );
+
+        $restClient = new RestClient($configuration);
+        $restClient->authenticate();
+    }
+
+    #[Test]
+    public function ntlmHeaderIsSetWhenNtlmIsActivated(): void
+    {
+        $configuration = new ClientConfiguration(
+            self::$server->getServerRoot() . '/',
+            useNtlm: true,
+        );
+        $restClient = new RestClient($configuration);
+
+        self::$server->setResponseOfPath(
+            '/api/rest/v2/some/route',
+            new Response('The response of some/route'),
+        );
+
+        $restClient->request('GET', '/some/route');
+        $requestHeaders = self::$server->getLastRequest()?->getHeaders() ?? [];
+
+        self::assertArrayNotHasKey('X-Jobrouter-Authorization', $requestHeaders);
+        self::assertArrayHasKey('Authorization', $requestHeaders);
+        self::assertSame('NTLM TlRMTVNTUAABAAAABoIIAAAAAAAAAAAAAAAAAAAAAAA=', $requestHeaders['Authorization']);
     }
 }

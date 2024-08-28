@@ -38,16 +38,22 @@ final class RestClient implements ClientInterface
 {
     private readonly Client $client;
     private readonly RouteContentTypeMapper $routeContentTypeMapper;
+    private readonly bool $useNtlm;
     private string $jobRouterVersion = '';
     private string $authorisationToken = '';
 
     public function __construct(
         private readonly ClientConfiguration $configuration,
     ) {
+        $this->useNtlm = $this->configuration->getUseNtlm();
+
         $stack = HandlerStack::create();
+        // CurlHandler is necessary to use NTLM
         $stack->setHandler(new CurlHandler());
         $stack->push((new UserAgentMiddleware())($this->configuration->getUserAgentAddition()));
-        $stack->push((new AuthorisationMiddleware())($this->authorisationToken));
+        if (! $this->useNtlm) {
+            $stack->push((new AuthorisationMiddleware())($this->authorisationToken));
+        }
 
         $options = [
             ...$this->configuration->getClientOptions()->toArray(),
@@ -57,6 +63,10 @@ final class RestClient implements ClientInterface
                 'synchronous' => true,
             ],
         ];
+        if ($this->useNtlm) {
+            $options['auth'] = ['', '', 'ntlm'];
+        }
+
         $this->client = new Client($options);
 
         $this->routeContentTypeMapper = new RouteContentTypeMapper();
@@ -70,6 +80,10 @@ final class RestClient implements ClientInterface
      */
     public function authenticate(): self
     {
+        if ($this->useNtlm) {
+            throw AuthenticationException::fromActivatedNtlm();
+        }
+
         $this->authorisationToken = '';
 
         $options = [

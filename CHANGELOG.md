@@ -7,6 +7,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Compatibility with PHP 8.4
+- NTLM authorization
+
 ### Changed
 - Switch to Guzzle
 

@@ -14,10 +14,12 @@ namespace JobRouter\AddOn\RestClient\Tests\Unit\Exception;
 
 use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
 use JobRouter\AddOn\RestClient\Exception\AuthenticationException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-class AuthenticationExceptionTest extends TestCase
+#[CoversClass(AuthenticationException::class)]
+final class AuthenticationExceptionTest extends TestCase
 {
     #[Test]
     public function fromFailedAuthenticationReturnsInstantiatedExceptionWithAllArgumentsCorrectly(): void
@@ -59,5 +61,18 @@ class AuthenticationExceptionTest extends TestCase
         );
         self::assertSame(0, $actual->getCode());
         self::assertNull($actual->getPrevious());
+    }
+
+    #[Test]
+    public function fromActivatedNtlm(): void
+    {
+        $actual = AuthenticationException::fromActivatedNtlm();
+
+        self::assertInstanceOf(AuthenticationException::class, $actual);
+        self::assertSame(
+            'The authenticate() method must not be used, as NTLM is activated',
+            $actual->getMessage(),
+        );
+        self::assertSame(1724833066, $actual->getCode());
     }
 }

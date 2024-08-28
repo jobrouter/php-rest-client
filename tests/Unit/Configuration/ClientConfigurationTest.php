@@ -15,10 +15,12 @@ namespace JobRouter\AddOn\RestClient\Tests\Unit\Configuration;
 use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
 use JobRouter\AddOn\RestClient\Configuration\ClientOptions;
 use JobRouter\AddOn\RestClient\Exception\InvalidConfigurationException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-class ClientConfigurationTest extends TestCase
+#[CoversClass(ClientConfiguration::class)]
+final class ClientConfigurationTest extends TestCase
 {
     private ClientConfiguration $subject;
 
@@ -80,6 +82,27 @@ class ClientConfigurationTest extends TestCase
         $actual = $this->subject->getPassword();
 
         self::assertSame('fake_password', $actual);
+    }
+
+    #[Test]
+    public function getUseNtlmReturnsFalseWhenNotSetExplicitly(): void
+    {
+        $actual = $this->subject->getUseNtlm();
+
+        self::assertFalse($actual);
+    }
+
+    #[Test]
+    public function getUseNtlmReturnsPreviouslySetValue(): void
+    {
+        $subject = new ClientConfiguration(
+            'https://example.org/',
+            useNtlm: true,
+        );
+
+        $actual = $subject->getUseNtlm();
+
+        self::assertTrue($actual);
     }
 
     #[Test]

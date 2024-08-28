@@ -1,6 +1,7 @@
 # Usage
 
 * [Initialisation](#initialisation)
+  * [NTLM authorisation](#ntlm-authorisation)
 * [Retrieve the JobRouter version](#retrieve-the-jobrouter-version)
 * [Sending requests](#sending-requests)
 * [Examples](#examples)
@@ -43,10 +44,10 @@ $configuration = $configuration->withLifetime(30);
 $client = new RestClient($configuration);
 
 try {
-// To authenticate against the configured JobRouter® installation the
-// authenticate() method is called. As there can be errors during the
-// authentication like a typo in the base URL or wrong credentials, embed the
-// authenticate call into a try/catch block.
+    // To authenticate against the configured JobRouter® installation the
+    // authenticate() method is called. As there can be errors during the
+    // authentication like a typo in the base URL or wrong credentials, embed the
+    // authenticate call into a try/catch block.
     $client->authenticate();
 } catch (ExceptionInterface $e) {
     // The thrown exception is by default an implementation of the
@@ -69,6 +70,32 @@ lifetime of the token is exceeded you will get an authentication error.
 If this happens, you can call at any time the `authenticate()` method of
 the REST client again. You can call this also in advance to omit a timeout.
 
+### NTLM authorisation
+
+Instead of configuring a combination of username/password like above, you can also use
+NTLM authorisation on a Windows machine.
+
+```php
+<?php
+use JobRouter\AddOn\RestClient\Client\RestClient;
+use JobRouter\AddOn\RestClient\Configuration\ClientConfiguration;
+use JobRouter\AddOn\RestClient\Exception\ExceptionInterface;
+
+require_once 'vendor/autoload.php';
+
+$configuration = new ClientConfiguration(
+    'https://example.org/jobrouter/',
+    useNtlm: true,
+);
+
+$client = new RestClient($configuration);
+
+// Do NOT call the authenticate() method, as with NTLM the user is authenticated
+// automatically!
+```
+
+> Have a look into the JobRouter Administration manual on how to configure
+> JobRouter REST API with NTLM.
 
 ## Retrieve the JobRouter version
 

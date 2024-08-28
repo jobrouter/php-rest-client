@@ -28,6 +28,7 @@ final class ClientConfiguration
     private readonly JobRouterSystem $jobRouterSystem;
     private readonly string $username;
     private readonly string $password;
+    private readonly bool $useNtlm;
     private int $lifetime = self::DEFAULT_TOKEN_LIFETIME_IN_SECONDS;
     private string $userAgentAddition = '';
     private ClientOptions $clientOptions;
@@ -44,28 +45,38 @@ final class ClientConfiguration
      */
     public function __construct(
         string $baseUrl,
-        string $username,
+        string $username = '',
         #[\SensitiveParameter]
-        string $password,
+        string $password = '',
+        bool $useNtlm = false,
     ) {
-        $this->mustNotHaveEmptyUsername($username);
-        $this->mustNotHaveEmptyPassword($password);
+        $this->mustNotHaveEmptyUsername($username, $useNtlm);
+        $this->mustNotHaveEmptyPassword($password, $useNtlm);
 
         $this->jobRouterSystem = new JobRouterSystem($baseUrl);
         $this->username = $username;
         $this->password = $password;
+        $this->useNtlm = $useNtlm;
         $this->clientOptions = new ClientOptions();
     }
 
-    private function mustNotHaveEmptyUsername(string $username): void
+    private function mustNotHaveEmptyUsername(string $username, bool $useNtlm): void
     {
+        if ($useNtlm) {
+            return;
+        }
+
         if ($username === '') {
             throw new InvalidConfigurationException('Username must not be empty!', 1565710532);
         }
     }
 
-    private function mustNotHaveEmptyPassword(string $password): void
+    private function mustNotHaveEmptyPassword(string $password, bool $useNtlm): void
     {
+        if ($useNtlm) {
+            return;
+        }
+
         if ($password === '') {
             throw new InvalidConfigurationException('Password must not be empty!', 1565710533);
         }
@@ -93,6 +104,14 @@ final class ClientConfiguration
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    /**
+     * @internal
+     */
+    public function getUseNtlm(): bool
+    {
+        return $this->useNtlm;
     }
 
     /**

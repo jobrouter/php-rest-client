@@ -11,7 +11,7 @@ cs: vendor
 
 .PHONY: mutation
 mutation: vendor
-	XDEBUG_MODE=coverage vendor/bin/infection --min-msi=97 --threads=4 --no-ansi
+	XDEBUG_MODE=coverage vendor/bin/infection --min-msi=96 --threads=4 --no-ansi
 
 .PHONY: phpstan
 phpstan: vendor

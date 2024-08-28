@@ -32,4 +32,15 @@ final class AuthenticationException extends \RuntimeException implements Excepti
 
         return new self($message, $code, $previous);
     }
+
+    /**
+     * @internal
+     */
+    public static function fromActivatedNtlm(): self
+    {
+        return new self(
+            'The authenticate() method must not be used, as NTLM is activated',
+            1724833066,
+        );
+    }
 }
