@@ -7,6 +7,12 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [3.1.0] - 2024-10-01
+
+### Added
+- Compatibility with PHP 8.4
+- Compatibility with JobRouter® 2024.3
+
 ### Changed
 - Switch to Guzzle
 
@@ -86,7 +92,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 First stable release
 
 
-[Unreleased]: https://github.com/jobrouter/php-rest-client/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/jobrouter/php-rest-client/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/jobrouter/php-rest-client/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/jobrouter/php-rest-client/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/jobrouter/php-rest-client/compare/v1.4.0...v2.0.0
 [1.4.0]: https://github.com/jobrouter/php-rest-client/compare/v1.3.0...v1.4.0
