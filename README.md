@@ -13,10 +13,10 @@ documents. This JobRouter REST Client eases the access to the REST API.
 
 ## Versions and support
 
-| Latest release | Updates will contain                                   |
-|----------------|--------------------------------------------------------|
-| 3.x            | Features, bug and security fixes                       |
-| 2.x            | Bug and security fixes, end of life expected: Dec 2024 |
-| 1.x            | End of life                                            |
+| Latest release | Updates will contain             |
+|----------------|----------------------------------|
+| 3.x            | Features, bug and security fixes |
+| 2.x            | End of live (since Dec 2024)     |
+| 1.x            | End of life (since Dec 2023)     |
 
 For compatibility with PHP and JobRouter versions see [Installation](docs/installation.md#version-matrix).
