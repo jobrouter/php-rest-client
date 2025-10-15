@@ -36,7 +36,7 @@ class DocumentsClientDecoratorTest extends TestCase
     #[Test]
     public function requestIsPassedUnchangedToClientIfArrayIsGivenAsDataAndReturnsInstanceOfResponseInterface(): void
     {
-        $responseStub = $this->createStub(ResponseInterface::class);
+        $responseStub = self::createStub(ResponseInterface::class);
 
         $this->clientMock
             ->expects(self::once())
@@ -56,8 +56,8 @@ class DocumentsClientDecoratorTest extends TestCase
     #[Test]
     public function requestWithDocumentIsProcessedAsMultipartAndPassedToClient(): void
     {
-        $fileStub1 = $this->createStub(FileInterface::class);
-        $fileStub2 = $this->createStub(FileInterface::class);
+        $fileStub1 = self::createStub(FileInterface::class);
+        $fileStub2 = self::createStub(FileInterface::class);
 
         $document = (new Document())
             ->setIndexField('someIndexField', 'some index value')
@@ -91,7 +91,7 @@ class DocumentsClientDecoratorTest extends TestCase
     #[Test]
     public function requestWithDocumentIsProcessedAndReturnsInstanceOfResponseInterface(): void
     {
-        $responseStub = $this->createStub(ResponseInterface::class);
+        $responseStub = self::createStub(ResponseInterface::class);
 
         $this->clientMock
             ->expects(self::once())

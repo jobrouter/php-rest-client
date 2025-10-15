@@ -42,13 +42,13 @@ class FileStorageTest extends TestCase
     #[Test]
     public function attachAddsFilesToFileStorage(): void
     {
-        $fileStub1 = $this->createStub(FileInterface::class);
+        $fileStub1 = self::createStub(FileInterface::class);
         $this->subject->attach($fileStub1);
 
         self::assertTrue($this->subject->contains($fileStub1));
         self::assertCount(1, $this->subject);
 
-        $fileStub2 = $this->createStub(FileInterface::class);
+        $fileStub2 = self::createStub(FileInterface::class);
         $this->subject->attach($fileStub2);
 
         self::assertTrue($this->subject->contains($fileStub2));
@@ -58,7 +58,7 @@ class FileStorageTest extends TestCase
     #[Test]
     public function attachAddsTheSameFileOnlyOnceToFileStorage(): void
     {
-        $fileStub = $this->createStub(FileInterface::class);
+        $fileStub = self::createStub(FileInterface::class);
         $this->subject->attach($fileStub);
 
         self::assertCount(1, $this->subject);
@@ -71,7 +71,7 @@ class FileStorageTest extends TestCase
     #[Test]
     public function detachRemovesAFileFromFileStorage(): void
     {
-        $fileStub = $this->createStub(FileInterface::class);
+        $fileStub = self::createStub(FileInterface::class);
         $this->subject->attach($fileStub);
 
         $this->subject->detach($fileStub);
@@ -97,9 +97,9 @@ class FileStorageTest extends TestCase
     {
         self::assertInstanceOf(\Iterator::class, $this->subject);
 
-        $fileStub1 = $this->createStub(FileInterface::class);
-        $fileStub2 = $this->createStub(FileInterface::class);
-        $fileStub3 = $this->createStub(FileInterface::class);
+        $fileStub1 = self::createStub(FileInterface::class);
+        $fileStub2 = self::createStub(FileInterface::class);
+        $fileStub3 = self::createStub(FileInterface::class);
         $this->subject->attach($fileStub1);
         $this->subject->attach($fileStub2);
         $this->subject->attach($fileStub3);

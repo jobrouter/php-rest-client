@@ -281,7 +281,7 @@ class IncidentTest extends TestCase
     #[Test]
     public function setAndGetProcessTableFieldAreImplementedCorrectlyForAFile(): void
     {
-        $fileStub = $this->createStub(FileInterface::class);
+        $fileStub = self::createStub(FileInterface::class);
 
         $actual = $this->subject->setProcessTableField('some name', $fileStub);
 

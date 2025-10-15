@@ -88,7 +88,7 @@ class DocumentTest extends TestCase
     {
         self::assertCount(0, $this->subject->getFiles());
 
-        $fileStub = $this->createStub(FileInterface::class);
+        $fileStub = self::createStub(FileInterface::class);
         $this->subject->addFile($fileStub);
 
         $actual = $this->subject->getFiles();

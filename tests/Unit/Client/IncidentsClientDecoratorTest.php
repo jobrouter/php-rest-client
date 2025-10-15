@@ -38,7 +38,7 @@ class IncidentsClientDecoratorTest extends TestCase
     #[Test]
     public function requestIsPassedUnchangedToClientIfArrayIsGivenAsDataAndReturnsInstanceOfResponseInterface(): void
     {
-        $responseStub = $this->createStub(ResponseInterface::class);
+        $responseStub = self::createStub(ResponseInterface::class);
 
         $this->clientMock
             ->expects(self::once())
@@ -257,7 +257,7 @@ class IncidentsClientDecoratorTest extends TestCase
     #[Test]
     public function requestWithIncidentIsProcessedAndReturnsInstanceOfResponseInterface(): void
     {
-        $responseStub = $this->createStub(ResponseInterface::class);
+        $responseStub = self::createStub(ResponseInterface::class);
 
         $this->clientMock
             ->expects(self::once())

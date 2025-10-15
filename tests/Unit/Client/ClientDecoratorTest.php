@@ -43,7 +43,7 @@ class ClientDecoratorTest extends TestCase
     #[Test]
     public function requestIsPassedToClient(): void
     {
-        $responseStub = $this->createStub(ResponseInterface::class);
+        $responseStub = self::createStub(ResponseInterface::class);
 
         $this->client
             ->expects(self::once())
