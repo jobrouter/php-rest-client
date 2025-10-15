@@ -29,7 +29,6 @@ final class MultipartFormDataMapper
                 $value = $value->toArray();
             }
             if (\is_array($value)) {
-                // @phpstan-ignore-next-line  Offset 'path' always exists and is not nullable.
                 if (! isset($value['path'])) {
                     throw FileNotFoundException::fromEmptyPath();
                 }
@@ -54,7 +53,6 @@ final class MultipartFormDataMapper
                 return $multipart;
             }
 
-            // @phpstan-ignore-next-line Use value object over return of values
             return [
                 'name' => $name,
                 'contents' => (string) $value,

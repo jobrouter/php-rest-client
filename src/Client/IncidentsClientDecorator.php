@@ -96,7 +96,7 @@ final class IncidentsClientDecorator extends ClientDecorator
 
     /**
      * @param array<string, mixed> $processTableFields
-     * @return array<string, string|FileInterface>>
+     * @return array<string, string|FileInterface>
      */
     private function buildProcessTableFieldsForMultipart(array $processTableFields): array
     {

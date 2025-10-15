@@ -41,9 +41,6 @@ final class ClientOptions
             'max' => $this->maxRedirects,
         ] : false;
 
-        /**
-         * @phpstan-ignore-next-line Use value object over return of values
-         */
         return [
             'allow_redirects' => $allowRedirects,
             'timeout' => $this->timeout,

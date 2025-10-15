@@ -1,14 +1,9 @@
-includes:
-    - vendor/symplify/phpstan-rules/config/regex-rules.neon
-
-rules:
-    - Symplify\PHPStanRules\Rules\NoReturnArrayVariableListRule
-
 parameters:
     phpVersion: 80100
     level: 8
     paths:
         - src
+    treatPhpDocTypesAsCertain: false
     cognitive_complexity:
         class: 20
         function: 9
