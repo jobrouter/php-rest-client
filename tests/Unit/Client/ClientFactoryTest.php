@@ -66,7 +66,6 @@ final class ClientFactoryTest extends TestCase
     {
         $reflector = new \ReflectionClass(RestClient::class);
         $configurationProperty = $reflector->getProperty('configuration');
-        $configurationProperty->setAccessible(true);
 
         $client = ClientFactory::createRestClient(
             self::$server->getServerRoot() . '/',
@@ -92,7 +91,6 @@ final class ClientFactoryTest extends TestCase
     {
         $reflector = new \ReflectionClass(RestClient::class);
         $configurationProperty = $reflector->getProperty('configuration');
-        $configurationProperty->setAccessible(true);
 
         $client = ClientFactory::createRestClient(
             self::$server->getServerRoot() . '/',
