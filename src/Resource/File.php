@@ -17,15 +17,15 @@ use JobRouter\AddOn\RestClient\Exception\InvalidResourceException;
 /**
  * Value object that represents a file
  */
-final class File implements FileInterface
+final readonly class File implements FileInterface
 {
-    private readonly string $path;
-    private readonly string $fileName;
+    private string $path;
+    private string $fileName;
 
     public function __construct(
         string $path,
         string $fileName = '',
-        private readonly string $contentType = '',
+        private string $contentType = '',
     ) {
         if (! \file_exists($path)) {
             throw new InvalidResourceException(

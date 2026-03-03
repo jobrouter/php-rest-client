@@ -16,14 +16,14 @@ namespace JobRouter\AddOn\RestClient\Configuration;
  * Value object with available client options which can be defined
  * @see https://docs.guzzlephp.org/en/stable/request-options.html
  */
-final class ClientOptions
+final readonly class ClientOptions
 {
     public function __construct(
-        private readonly bool $allowRedirects = false,
-        private readonly int $maxRedirects = 5,
-        private readonly int|float $timeout = 0,
-        private readonly bool $verify = true,
-        private readonly ?string $proxy = null,
+        private bool $allowRedirects = false,
+        private int $maxRedirects = 5,
+        private int|float $timeout = 0,
+        private bool $verify = true,
+        private ?string $proxy = null,
     ) {}
 
     /**

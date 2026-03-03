@@ -18,11 +18,11 @@ use JobRouter\AddOn\RestClient\Exception\InvalidUrlException;
  * Value object that represents a JobRouter system
  * @internal
  */
-final class JobRouterSystem implements \Stringable
+final readonly class JobRouterSystem implements \Stringable
 {
     private const API_ENDPOINT = 'api/rest/v2/';
 
-    private readonly string $baseUrl;
+    private string $baseUrl;
 
     public function __construct(string $baseUrl)
     {
