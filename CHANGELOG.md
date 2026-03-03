@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [3.2.0] - 2026-03-04
+
 ### Removed
 - Compatibility with PHP 8.2
 
@@ -95,7 +97,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 First stable release
 
 
-[Unreleased]: https://github.com/jobrouter/php-rest-client/compare/v3.1.0...HEAD
+[Unreleased]: https://github.com/jobrouter/php-rest-client/compare/v3.2.0...HEAD
+[3.2.0]: https://github.com/jobrouter/php-rest-client/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/jobrouter/php-rest-client/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/jobrouter/php-rest-client/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/jobrouter/php-rest-client/compare/v1.4.0...v2.0.0
