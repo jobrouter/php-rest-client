@@ -34,6 +34,9 @@ jobs:
           - '8.3'
           - '8.4'
           - '8.5'
+        dependencies:
+          - "lowest"
+          - "highest"
     steps:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -55,10 +58,16 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
-      - name: Install composer dependencies
+      - name: Install composer dependencies (lowest)
+        if: matrix.dependencies == 'lowest'
         run: |
           composer remove infection/infection symplify/phpstan-rules ergebnis/composer-normalize tomasvotruba/cognitive-complexity --dev --no-update
-          composer install --prefer-dist --no-progress --no-suggest
+          composer update --prefer-dist --prefer-lowest --no-progress --no-suggest
+      - name: Install composer dependencies (highest)
+        if: matrix.dependencies == 'highest'
+        run: |
+          composer remove infection/infection symplify/phpstan-rules ergebnis/composer-normalize tomasvotruba/cognitive-complexity --dev --no-update
+          composer update --prefer-dist --no-progress --no-suggest
       - name: Run PHP linter
         run: |
           find . -type f -name '*.php' ! -path "./vendor/*" -print0 | xargs -0 -n1 -P4 php -l -n | (! grep -v "No syntax errors detected" )
