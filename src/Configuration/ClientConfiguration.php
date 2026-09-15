@@ -131,9 +131,6 @@ final class ClientConfiguration
         return $new;
     }
 
-    /**
-     * Gets the lifetime
-     */
     public function getLifetime(): int
     {
         return $this->lifetime;

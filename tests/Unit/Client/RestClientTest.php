@@ -156,7 +156,8 @@ final class RestClientTest extends TestCase
 
         $response = $restClient->request('GET', '//some/route');
 
-        $responseContent = $response->getBody()->getContents();
+        $responseContent = $response->getBody()
+            ->getContents();
         $requestHeaders = self::$server->getLastRequest()?->getHeaders() ?? [];
 
         self::assertSame('The response of some/route', $responseContent);

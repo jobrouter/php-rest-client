@@ -76,13 +76,16 @@ final class ClientFactoryTest extends TestCase
         self::assertInstanceOf(RestClient::class, $client);
         self::assertSame(
             self::$server->getServerRoot() . '/',
-            $configurationProperty->getValue($client)->getJobRouterSystem()->getBaseUrl(),
+            $configurationProperty->getValue($client)
+                ->getJobRouterSystem()
+                ->getBaseUrl(),
         );
         self::assertSame('fake_username', $configurationProperty->getValue($client)->getUsername());
         self::assertSame('fake_password', $configurationProperty->getValue($client)->getPassword());
         self::assertSame(
             ClientConfiguration::DEFAULT_TOKEN_LIFETIME_IN_SECONDS,
-            $configurationProperty->getValue($client)->getLifetime(),
+            $configurationProperty->getValue($client)
+                ->getLifetime(),
         );
     }
 
@@ -102,7 +105,9 @@ final class ClientFactoryTest extends TestCase
         self::assertInstanceOf(RestClient::class, $client);
         self::assertSame(
             self::$server->getServerRoot() . '/',
-            $configurationProperty->getValue($client)->getJobRouterSystem()->getBaseUrl(),
+            $configurationProperty->getValue($client)
+                ->getJobRouterSystem()
+                ->getBaseUrl(),
         );
         self::assertSame('fake_username', $configurationProperty->getValue($client)->getUsername());
         self::assertSame('fake_password', $configurationProperty->getValue($client)->getPassword());

@@ -27,12 +27,11 @@ class UserAgentMiddleware
     {
         $userAgent = $this->compileUserAgent($userAgentAddition);
 
-        return static fn(callable $handler): callable
-            => static function (RequestInterface $request, array $options) use ($handler, $userAgent): PromiseInterface {
-                $request = $request->withHeader('User-Agent', $userAgent);
+        return static fn(callable $handler): callable => static function (RequestInterface $request, array $options) use ($handler, $userAgent): PromiseInterface {
+            $request = $request->withHeader('User-Agent', $userAgent);
 
-                return $handler($request, $options);
-            };
+            return $handler($request, $options);
+        };
     }
 
     private function compileUserAgent(string $userAgentAddition): string

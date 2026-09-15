@@ -50,9 +50,11 @@ final class RestClient implements ClientInterface
         $stack->push((new AuthorisationMiddleware())($this->authorisationToken));
 
         $options = [
-            ...$this->configuration->getClientOptions()->toArray(),
+            ...$this->configuration->getClientOptions()
+                ->toArray(),
             ...[
-                'base_uri' => $configuration->getJobRouterSystem()->getBaseUrl(),
+                'base_uri' => $configuration->getJobRouterSystem()
+                    ->getBaseUrl(),
                 'handler' => $stack,
                 'synchronous' => true,
             ],
@@ -145,7 +147,8 @@ final class RestClient implements ClientInterface
         } catch (ClientExceptionInterface $e) {
             throw HttpException::fromError(
                 $e->getCode(),
-                $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
+                $this->configuration->getJobRouterSystem()
+                    ->getResourceUrl($resource),
                 $e->getMessage(),
                 $e,
             );
@@ -155,14 +158,17 @@ final class RestClient implements ClientInterface
         if ($statusCode >= 400) {
             throw HttpException::fromError(
                 $statusCode,
-                $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
-                $response->getBody()->getContents(),
+                $this->configuration->getJobRouterSystem()
+                    ->getResourceUrl($resource),
+                $response->getBody()
+                    ->getContents(),
             );
         }
         if ($statusCode >= 300) {
             throw HttpException::fromRedirect(
                 $statusCode,
-                $this->configuration->getJobRouterSystem()->getResourceUrl($resource),
+                $this->configuration->getJobRouterSystem()
+                    ->getResourceUrl($resource),
                 $response->getHeaderLine('location'),
             );
         }
