@@ -87,7 +87,6 @@ final class DocumentsClientDecorator extends ClientDecorator
 
         $index = 0;
         foreach ($files as $file) {
-            /** @var FileInterface $file */
             $multipartFiles[\sprintf('files[%d]', $index)] = $file;
             $index++;
         }

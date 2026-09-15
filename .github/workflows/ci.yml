@@ -50,7 +50,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install composer dependencies
         run: |
-          composer remove infection/infection symplify/phpstan-rules ergebnis/composer-normalize --dev --no-update
+          composer remove infection/infection symplify/phpstan-rules ergebnis/composer-normalize tomasvotruba/cognitive-complexity --dev --no-update
           composer install --prefer-dist --no-progress --no-suggest
       - name: Run PHP linter
         run: |
