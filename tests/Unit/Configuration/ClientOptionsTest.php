@@ -29,7 +29,7 @@ final class ClientOptionsTest extends TestCase
         self::assertFalse($actual['allow_redirects']);
         self::assertSame(0, $actual['timeout']);
         self::assertTrue($actual['verify']);
-        self::assertNull($actual['proxy']);
+        self::assertSame('', $actual['proxy']);
     }
 
     #[Test]

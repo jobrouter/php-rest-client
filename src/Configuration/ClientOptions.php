@@ -32,7 +32,7 @@ final readonly class ClientOptions
      *     allow_redirects?: bool|array{max: int},
      *     timeout: int|float,
      *     verify: bool,
-     *     proxy: string|null
+     *     proxy: string
      * }
      */
     public function toArray(): array
@@ -45,7 +45,7 @@ final readonly class ClientOptions
             'allow_redirects' => $allowRedirects,
             'timeout' => $this->timeout,
             'verify' => $this->verify,
-            'proxy' => $this->proxy,
+            'proxy' => $this->proxy ?? '',
         ];
     }
 }

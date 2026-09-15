@@ -7,6 +7,9 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- Compatibility with Guzzle 8
+
 ## [3.2.0] - 2026-03-04
 
 ### Removed
