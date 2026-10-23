@@ -138,8 +138,6 @@ final class ClientConfiguration
 
     /**
      * Returns an instance with the specified user agent addition which will be appended to the original one
-     *
-     * @param string $userAgentAddition User agent addition
      */
     public function withUserAgentAddition(string $userAgentAddition): self
     {
