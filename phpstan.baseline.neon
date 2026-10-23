@@ -1,0 +1,7 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Cognitive complexity for "JobRouter\\AddOn\\RestClient\\Mapper\\MultipartFormDataMapper\:\:map\(\)" is 16, keep it under 9$#'
+			identifier: complexity.functionLike
+			count: 1
+			path: src/Mapper/MultipartFormDataMapper.php
